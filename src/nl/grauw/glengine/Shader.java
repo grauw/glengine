@@ -1,0 +1,65 @@
+package nl.grauw.glengine;
+
+import static android.opengl.GLES20.*;
+
+public abstract class Shader {
+	
+	int handle;
+	
+	private Shader(int type) {
+		handle = glCreateShader(type);
+		
+		if (handle == 0)
+			throw new Error("Failed to create shader.");
+	}
+	
+	@Override
+	protected void finalize() throws Throwable {
+		glDeleteShader(handle);
+	}
+	
+	public void load(String source) {
+		setSource(source);
+		compile();
+		
+		if (!getCompileStatus()) {
+			throw new RuntimeException("Failed to compile shader.\n" + getInfoLog());
+		}
+	}
+	
+	public void setSource(String source) {
+		glShaderSource(handle, source);
+	}
+	
+	public void compile() {
+		glCompileShader(handle);
+	}
+	
+	// XXX: rename to hasCompiled()?
+	public boolean getCompileStatus() {
+		return getShaderiv(GL_COMPILE_STATUS) == GL_TRUE;
+	}
+	
+	public String getInfoLog() {
+		return glGetShaderInfoLog(handle);
+	}
+	
+	private int getShaderiv(int parameter) {
+		int[] params = new int[1];
+		glGetShaderiv(handle, parameter, params, 0);
+		return params[0];
+	}
+	
+	public static class VertexShader extends Shader {
+		public VertexShader() {
+			super(GL_VERTEX_SHADER);
+		}
+	}
+	
+	public static class FragmentShader extends Shader {
+		public FragmentShader() {
+			super(GL_FRAGMENT_SHADER);
+		}
+	}
+	
+}
