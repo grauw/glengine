@@ -1,15 +1,33 @@
 package nl.grauw.hellotriangle;
 
+import java.nio.FloatBuffer;
+
 import javax.microedition.khronos.egl.EGLConfig;
 
 import nl.grauw.glengine.GLEngineRenderer;
 import nl.grauw.glengine.gl.Context;
+import nl.grauw.glengine.gl.Context.PrimitiveType;
+import nl.grauw.glengine.gl.Program;
+import nl.grauw.glengine.gl.Shader.FragmentShader;
+import nl.grauw.glengine.gl.Shader.VertexShader;
 
 public class GameRenderer extends GLEngineRenderer {
+	
+	Program program;
 	
 	@Override
 	public void onDrawFrame(Context gl) {
 		gl.clear(true, false, false);
+		
+		FloatBuffer vertices = Context.createFloatBuffer(new float[] {
+			 0.0f,  0.5f, 0.0f,
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f
+		});
+		
+		gl.setVertexAttribPointer(0, 3, 0, vertices);
+		gl.enableVertexAttribArray(0);
+		gl.drawArrays(PrimitiveType.TRIANGLES, 0, 3);
 	}
 
 	@Override
@@ -19,7 +37,23 @@ public class GameRenderer extends GLEngineRenderer {
 
 	@Override
 	public void onSurfaceCreated(Context gl, EGLConfig config) {
-		gl.setClearColor(1, 0, 0, 1);
+		VertexShader vertexShader = new VertexShader();
+		vertexShader.setSource("attribute vec4 position; void main() { gl_Position = position; }");
+		vertexShader.compile();
+		
+		FragmentShader fragmentShader = new FragmentShader();
+		fragmentShader.setSource("precision mediump float; void main() { gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); }");
+		fragmentShader.compile();
+		
+		program = new Program();
+		program.attachShader(vertexShader);
+		program.attachShader(fragmentShader);
+		program.bindAttribLocation(0, "position");
+		program.link();
+
+		gl.useProgram(program);
+		
+		gl.setClearColor(0, 0, 0.5f, 1);
 	}
 
 }
