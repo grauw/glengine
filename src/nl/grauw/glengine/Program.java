@@ -7,7 +7,7 @@ import nl.grauw.glengine.Shader.VertexShader;
 
 public class Program {
 	
-	private int handle;
+	int handle;
 	private VertexShader vertexShader = null;
 	private FragmentShader fragmentShader = null;
 	
@@ -64,7 +64,39 @@ public class Program {
 	}
 	
 	public void bindAttribLocation(int index, String name) {
+		// TODO: if (isMatrix ? index >= getMaxVertexAttributes() - 3 : getMaxVertexAttributes()) throw ...
 		glBindAttribLocation(handle, index, name);
+	}
+	
+	public void link() {
+		glLinkProgram(handle);
+		
+		if (!getLinkStatus()) {
+			throw new RuntimeException("Failed to link program.\n" + getInfoLog());
+		}
+	}
+	
+	// XXX: rename to isLinked()?
+	public boolean getLinkStatus() {
+		return getProgramiv(GL_LINK_STATUS) == GL_TRUE;
+	}
+	
+	private String getInfoLog() {
+		return glGetProgramInfoLog(handle);
+	}
+
+	public void validate() {
+		glValidateProgram(handle);
+	}
+	
+	public boolean getValidateStatus() {
+		return getProgramiv(GL_VALIDATE_STATUS) == GL_TRUE;
+	}
+	
+	private int getProgramiv(int parameter) {
+		int[] params = new int[1];
+		glGetProgramiv(handle, parameter, params, 0);
+		return params[0];
 	}
 	
 }

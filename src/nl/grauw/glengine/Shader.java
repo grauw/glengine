@@ -21,10 +21,6 @@ public abstract class Shader {
 	public void load(String source) {
 		setSource(source);
 		compile();
-		
-		if (!getCompileStatus()) {
-			throw new RuntimeException("Failed to compile shader.\n" + getInfoLog());
-		}
 	}
 	
 	public void setSource(String source) {
@@ -33,9 +29,13 @@ public abstract class Shader {
 	
 	public void compile() {
 		glCompileShader(handle);
+		
+		if (!getCompileStatus()) {
+			throw new RuntimeException("Failed to compile shader.\n" + getInfoLog());
+		}
 	}
 	
-	// XXX: rename to hasCompiled()?
+	// XXX: rename to isCompiled()?
 	public boolean getCompileStatus() {
 		return getShaderiv(GL_COMPILE_STATUS) == GL_TRUE;
 	}
