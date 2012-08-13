@@ -1,4 +1,4 @@
-package nl.grauw.glengine;
+package nl.grauw.glengine.gl;
 
 import static android.opengl.GLES20.*;
 

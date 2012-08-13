@@ -1,9 +1,9 @@
-package nl.grauw.glengine;
+package nl.grauw.glengine.gl;
 
 import static android.opengl.GLES20.*;
 
-import nl.grauw.glengine.Shader.FragmentShader;
-import nl.grauw.glengine.Shader.VertexShader;
+import nl.grauw.glengine.gl.Shader.FragmentShader;
+import nl.grauw.glengine.gl.Shader.VertexShader;
 
 public class Program {
 	

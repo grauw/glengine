@@ -2,8 +2,8 @@ package nl.grauw.hellotriangle;
 
 import javax.microedition.khronos.egl.EGLConfig;
 
-import nl.grauw.glengine.Context;
 import nl.grauw.glengine.GLEngineRenderer;
+import nl.grauw.glengine.gl.Context;
 
 public class GameRenderer extends GLEngineRenderer {
 	

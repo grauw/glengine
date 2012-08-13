@@ -3,6 +3,8 @@ package nl.grauw.glengine;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import nl.grauw.glengine.gl.Context;
+
 import android.opengl.GLSurfaceView.Renderer;
 
 public abstract class GLEngineRenderer implements Renderer {
