@@ -35,8 +35,14 @@ public class CapabilitiesLogger {
 		maxViewportDimsObject.put("width", gl.getMaxViewportDims().getWidth());
 		maxViewportDimsObject.put("height", gl.getMaxViewportDims().getHeight());
 		capabilities.put("maxViewportDims", maxViewportDimsObject);
-		capabilities.put("numCompressedTextureFormats", gl.getNumCompressedTextureFormats());
-		capabilities.put("numShaderBinaryFormats", gl.getNumShaderBinaryFormats());
+		JSONArray compressedTextureFormats = new JSONArray();
+		for (int format : gl.getCompressedTextureFormats())
+			compressedTextureFormats.put(format);
+		capabilities.put("compressedTextureFormats", compressedTextureFormats);
+		JSONArray shaderBinaryFormats = new JSONArray();
+		for (int format : gl.getShaderBinaryFormats())
+			shaderBinaryFormats.put(format);
+		capabilities.put("shaderBinaryFormats", shaderBinaryFormats);
 	}
 	
 	public JSONObject getCapabilitiesJSON()

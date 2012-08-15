@@ -30,8 +30,8 @@ public class Context {
 	private final int maxVertexTextureImageUnits;
 	private final int maxVertexUniformVectors;
 	private final Size maxViewportDims;
-	private final int numCompressedTextureFormats;
-	private final int numShaderBinaryFormats;
+	private final int[] compressedTextureFormats;
+	private final int[] shaderBinaryFormats;
 	
 	public Context() {
 		vendor = glGetString(GL_VENDOR);
@@ -55,8 +55,11 @@ public class Context {
 		glGetIntegerv(GL_MAX_VIEWPORT_DIMS, maxViewportDimsArray, 0);
 		maxViewportDims = new Size(maxViewportDimsArray[0], maxViewportDimsArray[1]);
 		
-		numCompressedTextureFormats = getOneIntegerv(GL_NUM_COMPRESSED_TEXTURE_FORMATS);
-		numShaderBinaryFormats = getOneIntegerv(GL_NUM_SHADER_BINARY_FORMATS);
+		compressedTextureFormats = new int[getOneIntegerv(GL_NUM_COMPRESSED_TEXTURE_FORMATS)];
+		glGetIntegerv(GL_COMPRESSED_TEXTURE_FORMATS, compressedTextureFormats, 0);
+		
+		shaderBinaryFormats = new int[getOneIntegerv(GL_NUM_SHADER_BINARY_FORMATS)];
+		glGetIntegerv(GL_SHADER_BINARY_FORMATS, shaderBinaryFormats, 0);
 	}
 	
 	public String getVendor() {
@@ -123,12 +126,12 @@ public class Context {
 		return maxViewportDims;
 	}
 	
-	public int getNumCompressedTextureFormats() {
-		return numCompressedTextureFormats;
+	public int[] getCompressedTextureFormats() {
+		return compressedTextureFormats.clone();
 	}
 	
-	public int getNumShaderBinaryFormats() {
-		return numShaderBinaryFormats;
+	public int[] getShaderBinaryFormats() {
+		return shaderBinaryFormats.clone();
 	}
 	
 	private int getOneIntegerv(int parameter) {
