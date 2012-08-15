@@ -56,6 +56,8 @@ public class GameRenderer extends GLEngineRenderer {
 		program.bindAttribLocation(5, "position");
 		program.link();
 		
+		context.releaseShaderCompiler();
+		
 		context.setClearColor(0, 0, 0.5f, 1);
 	}
 
