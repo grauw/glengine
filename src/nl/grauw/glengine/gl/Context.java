@@ -229,8 +229,8 @@ public class Context {
 		TRIANGLE_FAN(GL_TRIANGLE_FAN),
 		TRIANGLES(GL_TRIANGLES);
 		
-		int type;
-		private PrimitiveType(int type) {
+		final int type;
+		private PrimitiveType(final int type) {
 			this.type = type;
 		}
 	}
