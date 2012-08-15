@@ -1,4 +1,4 @@
-package nl.grauw.hellotriangle;
+package nl.grauw.glengine.testactivity;
 
 import java.nio.FloatBuffer;
 
@@ -12,7 +12,7 @@ import nl.grauw.glengine.gl.Shader.FragmentShader;
 import nl.grauw.glengine.gl.Shader.VertexShader;
 import nl.grauw.glengine.gl.Utils;
 
-public class GameRenderer extends GLEngineRenderer {
+public class TestRenderer extends GLEngineRenderer {
 	
 	Program program;
 	

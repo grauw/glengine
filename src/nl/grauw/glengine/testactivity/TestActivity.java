@@ -1,19 +1,19 @@
-package nl.grauw.hellotriangle;
+package nl.grauw.glengine.testactivity;
 
-import nl.grauw.hellotriangle.GameSurfaceView;
+import nl.grauw.glengine.testactivity.TestSurfaceView;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class GameActivity extends Activity {
+public class TestActivity extends Activity {
 
-	private GameSurfaceView gameView;
+	private TestSurfaceView gameView;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-		gameView = new GameSurfaceView(this);
+		gameView = new TestSurfaceView(this);
 		setContentView(gameView);
 		
 		// XXX: is this necessary?
