@@ -4,7 +4,7 @@ import static android.opengl.GLES20.*;
 
 public abstract class Shader {
 	
-	int handle;
+	final int handle;
 	
 	private Shader(int type) {
 		handle = glCreateShader(type);

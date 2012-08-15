@@ -16,8 +16,8 @@ import nl.grauw.glengine.gl.Variable.VariableType;
 
 public class Program {
 	
-	private Context gl;
-	int handle;
+	private final Context gl;
+	final int handle;
 	
 	private VertexShader vertexShader = null;
 	private FragmentShader fragmentShader = null;
