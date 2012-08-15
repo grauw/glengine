@@ -1,6 +1,11 @@
 package nl.grauw.glengine.gl;
 
 import static android.opengl.GLES20.*;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 import android.util.Log;
 
 import nl.grauw.glengine.gl.Shader.FragmentShader;
@@ -11,8 +16,8 @@ public class Program {
 	int handle;
 	private VertexShader vertexShader = null;
 	private FragmentShader fragmentShader = null;
-	private Variable[] activeAttributes = {};
-	private Variable[] activeUniforms = {};
+	private Map<String, Variable> activeAttributes = Collections.emptyMap();
+	private Map<String, Variable> activeUniforms = Collections.emptyMap();
 	
 	public Program() {
 		handle = glCreateProgram();
@@ -98,15 +103,12 @@ public class Program {
 		return getProgramiv(GL_VALIDATE_STATUS) == GL_TRUE;
 	}
 	
-	public Variable[] getActiveAttributes() {
-		return activeAttributes.clone();
+	public Map<String, Variable> getActiveAttributes() {
+		return Collections.unmodifiableMap(activeAttributes);
 	}
 	
 	public Variable getAttribute(String name) {
-		for (Variable attribute : activeAttributes)
-			if (name.equals(attribute.getName()))
-				return attribute;
-		return null;
+		return activeAttributes.get(name);
 	}
 	
 	public void updateActiveAttributes() {
@@ -117,24 +119,21 @@ public class Program {
 		int[] typeBuffer = new int[1];
 		byte[] nameBuffer = new byte[maxNameLength];
 		
-		activeAttributes = new Variable[count];
+		activeAttributes = new HashMap<String, Variable>(count);
 		for (int index = 0; index < count; index++) {
 			glGetActiveAttrib(handle, index, maxNameLength, nameLengthBuffer, 0, sizeBuffer, 0, typeBuffer, 0, nameBuffer, 0);
 			String name = new String(nameBuffer, 0, nameLengthBuffer[0]);
 			int location = glGetAttribLocation(handle, name);
-			activeAttributes[index] = new Variable(location, name, sizeBuffer[0], typeBuffer[0]);
+			activeAttributes.put(name, new Variable(location, name, sizeBuffer[0], typeBuffer[0]));
 		}
 	}
 	
-	public Variable[] getActiveUniforms() {
-		return activeUniforms.clone();
+	public Map<String, Variable> getActiveUniforms() {
+		return Collections.unmodifiableMap(activeUniforms);
 	}
 	
 	public Variable getUniform(String name) {
-		for (Variable uniform : activeUniforms)
-			if (name.equals(uniform.getName()))
-				return uniform;
-		return null;
+		return activeUniforms.get(name);
 	}
 	
 	public void updateActiveUniforms() {
@@ -145,12 +144,12 @@ public class Program {
 		int[] typeBuffer = new int[1];
 		byte[] nameBuffer = new byte[maxNameLength];
 		
-		activeUniforms = new Variable[count];
+		activeUniforms = new HashMap<String, Variable>(count);
 		for (int index = 0; index < count; index++) {
 			glGetActiveUniform(handle, index, maxNameLength, nameLengthBuffer, 0, sizeBuffer, 0, typeBuffer, 0, nameBuffer, 0);
 			String name = new String(nameBuffer, 0, nameLengthBuffer[0]);
 			int location = glGetUniformLocation(handle, name);
-			activeUniforms[index] = new Variable(location, name, sizeBuffer[0], typeBuffer[0]);
+			activeUniforms.put(name, new Variable(location, name, sizeBuffer[0], typeBuffer[0]));
 		}
 	}
 	
