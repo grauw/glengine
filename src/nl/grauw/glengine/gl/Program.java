@@ -156,6 +156,22 @@ public class Program {
 		}
 	}
 	
+	public void setUniformValue(String uniformName, float x) {
+		setUniformValue(getUniform(uniformName), x);
+	}
+	
+	public void setUniformValue(String uniformName, float x, float y) {
+		setUniformValue(getUniform(uniformName), x, y);
+	}
+	
+	public void setUniformValue(String uniformName, float x, float y, float z) {
+		setUniformValue(getUniform(uniformName), x, y, z);
+	}
+	
+	public void setUniformValue(String uniformName, float x, float y, float z, float w) {
+		setUniformValue(getUniform(uniformName), x, y, z, w);
+	}
+	
 	public void setUniformValue(Uniform uniform, float x) {
 		checkCurrentProgram();
 		glUniform1f(uniform.getLocation(), x);

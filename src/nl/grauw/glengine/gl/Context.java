@@ -181,6 +181,18 @@ public class Context {
 		return currentProgram;
 	}
 	
+	public void setVertexAttribPointer(String attributeName, int size, int stride, FloatBuffer buffer) {
+		setVertexAttribPointer(currentProgram.getAttribute(attributeName), size, stride, buffer);
+	}
+	
+	public void setVertexAttribPointer(String attributeName, int size, int stride, boolean normalized, ByteBuffer buffer) {
+		setVertexAttribPointer(currentProgram.getAttribute(attributeName), size, stride, normalized, buffer);
+	}
+	
+	public void setVertexAttribPointer(String attributeName, int size, int stride, boolean normalized, ShortBuffer buffer) {
+		setVertexAttribPointer(currentProgram.getAttribute(attributeName), size, stride, normalized, buffer);
+	}
+	
 	public void setVertexAttribPointer(Attribute attribute, int size, int stride, FloatBuffer buffer) {
 		setVertexAttribPointer(attribute.getLocation(), size, stride, buffer);
 	}
@@ -203,6 +215,14 @@ public class Context {
 	
 	public void setVertexAttribPointer(int index, int size, int stride, boolean normalized, ShortBuffer buffer) {
 		glVertexAttribPointer(index, size, GL_SHORT, normalized, stride, buffer);
+	}
+	
+	public void enableVertexAttribArray(String attributeName) {
+		enableVertexAttribArray(currentProgram.getAttribute(attributeName));
+	}
+	
+	public void disableVertexAttribArray(String attributeName) {
+		disableVertexAttribArray(currentProgram.getAttribute(attributeName));
 	}
 	
 	public void enableVertexAttribArray(Attribute attribute) {
