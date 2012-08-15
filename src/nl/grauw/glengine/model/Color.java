@@ -13,15 +13,15 @@ public final class Color {
 	public static final Color YELLOW = new Color(1, 1, 0);
 	public static final Color WHITE = new Color(1, 1, 1);
 	
-	public Color(float r, float g, float b) {
-		this(r, g, b, 1);
+	public Color(final float red, final float green, final float blue) {
+		this(red, green, blue, 1);
 	}
 	
-	public Color(float r, float g, float b, float a) {
-		this.red = r;
-		this.green = g;
-		this.blue = b;
-		this.alpha = a;
+	public Color(final float red, final float green, final float blue, final float alpha) {
+		this.red = red;
+		this.green = green;
+		this.blue = blue;
+		this.alpha = alpha;
 	}
 	
 	public float getRed() {
@@ -44,7 +44,7 @@ public final class Color {
 		return darker(0.5f);
 	}
 	
-	public Color darker(float percentage) {
+	public Color darker(final float percentage) {
 		if (percentage <= 0f || percentage >= 1f)
 			throw new RuntimeException("Percentage must be between 0 and 1.");
 		
@@ -55,7 +55,7 @@ public final class Color {
 		return lighter(0.5f);
 	}
 	
-	public Color lighter(float percentage) {
+	public Color lighter(final float percentage) {
 		if (percentage <= 0f || percentage >= 1f)
 			throw new RuntimeException("Percentage must be between 0 and 1.");
 		
