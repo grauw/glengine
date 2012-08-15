@@ -26,8 +26,8 @@ public class GameRenderer extends GLEngineRenderer {
 			 0.5f, -0.5f, 0.0f
 		});
 		
-		gl.setVertexAttribPointer(0, 3, 0, vertices);
-		gl.enableVertexAttribArray(0);
+		gl.setVertexAttribPointer(5, 3, 0, vertices);
+		gl.enableVertexAttribArray(5);
 		gl.setUniformValue(program.getUniform("color").getLocation(), 1, 0, 0, 1);
 		
 		gl.drawArrays(PrimitiveType.TRIANGLES, 0, 3);
@@ -51,7 +51,7 @@ public class GameRenderer extends GLEngineRenderer {
 		program = new Program();
 		program.attachShader(vertexShader);
 		program.attachShader(fragmentShader);
-		program.bindAttribLocation(0, "position");
+		program.bindAttribLocation(5, "position");
 		program.link();
 
 		gl.useProgram(program);
