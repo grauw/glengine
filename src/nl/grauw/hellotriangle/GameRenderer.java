@@ -26,6 +26,7 @@ public class GameRenderer extends GLEngineRenderer {
 			 0.5f, -0.5f, 0.0f
 		});
 		
+		gl.useProgram(program);
 		gl.setVertexAttribPointer(5, 3, 0, vertices);
 		gl.enableVertexAttribArray(5);
 		gl.setUniformValue(program.getUniform("color").getLocation(), 1, 0, 0, 1);
@@ -53,8 +54,6 @@ public class GameRenderer extends GLEngineRenderer {
 		program.attachShader(fragmentShader);
 		program.bindAttribLocation(5, "position");
 		program.link();
-
-		gl.useProgram(program);
 		
 		gl.setClearColor(0, 0, 0.5f, 1);
 	}
