@@ -31,10 +31,10 @@ public class CapabilitiesLogger {
 		capabilities.put("maxVertexAttribs", gl.getMaxVertexAttribs());
 		capabilities.put("maxVertexTextureImageUnits", gl.getMaxVertexTextureImageUnits());
 		capabilities.put("maxVertexUniformVectors", gl.getMaxVertexUniformVectors());
-		JSONObject maxViewportDimsObject = new JSONObject();
-		maxViewportDimsObject.put("width", gl.getMaxViewportDims().getWidth());
-		maxViewportDimsObject.put("height", gl.getMaxViewportDims().getHeight());
-		capabilities.put("maxViewportDims", maxViewportDimsObject);
+		JSONObject maxViewportDims = new JSONObject();
+		maxViewportDims.put("width", gl.getMaxViewportDims().getWidth());
+		maxViewportDims.put("height", gl.getMaxViewportDims().getHeight());
+		capabilities.put("maxViewportDims", maxViewportDims);
 		JSONArray compressedTextureFormats = new JSONArray();
 		for (int format : gl.getCompressedTextureFormats())
 			compressedTextureFormats.put(format);
