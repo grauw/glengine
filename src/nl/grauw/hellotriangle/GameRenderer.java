@@ -29,7 +29,8 @@ public class GameRenderer extends GLEngineRenderer {
 		gl.useProgram(program);
 		gl.setVertexAttribPointer(program.getAttribute("position").getLocation(), 3, 0, vertices);
 		gl.enableVertexAttribArray(program.getAttribute("position").getLocation());
-		program.setUniformValue(program.getUniform("color"), 1, 0, 0, 1);
+		program.setUniformValue(program.getUniform("color.color"), 1, 0, 0, 1);
+		program.setUniformValue(program.getUniform("color.multiplier"), 1);
 		
 		gl.drawArrays(PrimitiveType.TRIANGLES, 0, 3);
 	}
@@ -46,7 +47,7 @@ public class GameRenderer extends GLEngineRenderer {
 		vertexShader.compile();
 		
 		FragmentShader fragmentShader = new FragmentShader();
-		fragmentShader.setSource("precision mediump float; uniform vec4 color; void main() { gl_FragColor = color; }");
+		fragmentShader.setSource("precision mediump float; struct test { vec4[2] color; float multiplier; }; uniform test color; void main() { gl_FragColor = (color.color[0] + color.color[1]) * color.multiplier; }");
 		fragmentShader.compile();
 		
 		program = new Program(gl);
