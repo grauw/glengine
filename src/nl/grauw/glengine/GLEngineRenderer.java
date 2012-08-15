@@ -9,33 +9,33 @@ import android.opengl.GLSurfaceView.Renderer;
 
 public abstract class GLEngineRenderer implements Renderer {
 
-	private Context gl;
+	private Context context;
 	
 	@Override
-	public void onDrawFrame(GL10 gl10) {
-		if (gl == null)
+	public void onDrawFrame(GL10 gl) {
+		if (context == null)
 			throw new RuntimeException("GLEngine context not available.");
-		onDrawFrame(gl);
+		onDrawFrame(context);
 	}
 	
-	abstract public void onDrawFrame(Context gl);
+	abstract public void onDrawFrame(Context context);
 	
 	@Override
-	public void onSurfaceChanged(GL10 gl10, int width, int height) {
-		if (gl == null)
+	public void onSurfaceChanged(GL10 gl, int width, int height) {
+		if (context == null)
 			throw new RuntimeException("GLEngine context not available.");
-		onSurfaceChanged(gl, width, height);
+		onSurfaceChanged(context, width, height);
 	}
 	
-	abstract public void onSurfaceChanged(Context gl, int width, int height);
+	abstract public void onSurfaceChanged(Context context, int width, int height);
 	
 	@Override
-	public void onSurfaceCreated(GL10 gl10, EGLConfig config) {
-		gl = new Context();
-		CapabilitiesLogger.log(gl);
-		onSurfaceCreated(gl, config);
+	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+		context = new Context();
+		CapabilitiesLogger.log(context);
+		onSurfaceCreated(context, config);
 	}
 	
-	abstract public void onSurfaceCreated(Context gl, EGLConfig config);
+	abstract public void onSurfaceCreated(Context context, EGLConfig config);
 	
 }

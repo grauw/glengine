@@ -17,8 +17,8 @@ public class GameRenderer extends GLEngineRenderer {
 	Program program;
 	
 	@Override
-	public void onDrawFrame(Context gl) {
-		gl.clear(true, false, false);
+	public void onDrawFrame(Context context) {
+		context.clear(true, false, false);
 		
 		FloatBuffer vertices = Utils.createFloatBuffer(new float[] {
 			 0.0f,  0.5f, 0.0f,
@@ -26,22 +26,22 @@ public class GameRenderer extends GLEngineRenderer {
 			 0.5f, -0.5f, 0.0f
 		});
 		
-		gl.useProgram(program);
-		gl.setVertexAttribPointer("position", 3, 0, vertices);
-		gl.enableVertexAttribArray("position");
+		context.useProgram(program);
+		context.setVertexAttribPointer("position", 3, 0, vertices);
+		context.enableVertexAttribArray("position");
 		program.setUniformValue("color.color", 1, 0, 0, 1);
 		program.setUniformValue("color.multiplier", 1);
 		
-		gl.drawArrays(PrimitiveType.TRIANGLES, 0, 3);
+		context.drawArrays(PrimitiveType.TRIANGLES, 0, 3);
 	}
 
 	@Override
-	public void onSurfaceChanged(Context gl, int width, int height) {
-		gl.setViewport(0, 0, width, height);
+	public void onSurfaceChanged(Context context, int width, int height) {
+		context.setViewport(0, 0, width, height);
 	}
 
 	@Override
-	public void onSurfaceCreated(Context gl, EGLConfig config) {
+	public void onSurfaceCreated(Context context, EGLConfig config) {
 		VertexShader vertexShader = new VertexShader();
 		vertexShader.setSource("attribute vec4 position; void main() { gl_Position = position; }");
 		vertexShader.compile();
@@ -50,13 +50,13 @@ public class GameRenderer extends GLEngineRenderer {
 		fragmentShader.setSource("precision mediump float; struct test { vec4[2] color; float multiplier; }; uniform test color; void main() { gl_FragColor = (color.color[0] + color.color[1]) * color.multiplier; }");
 		fragmentShader.compile();
 		
-		program = new Program(gl);
+		program = new Program(context);
 		program.attachShader(vertexShader);
 		program.attachShader(fragmentShader);
 		program.bindAttribLocation(5, "position");
 		program.link();
 		
-		gl.setClearColor(0, 0, 0.5f, 1);
+		context.setClearColor(0, 0, 0.5f, 1);
 	}
 
 }

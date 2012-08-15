@@ -14,33 +14,33 @@ public class CapabilitiesLogger {
 	
 	JSONObject capabilities;
 	
-	public CapabilitiesLogger(Context gl) throws JSONException {
+	public CapabilitiesLogger(Context context) throws JSONException {
 		capabilities = new JSONObject();
-		capabilities.put("vendor", gl.getVendor());
-		capabilities.put("renderer", gl.getRenderer());
-		capabilities.put("version", gl.getVersion());
-		capabilities.put("shadingLanguageVersion", gl.getShadingLanguageVersion());
-		capabilities.put("extensions", new JSONArray(Arrays.asList(gl.getExtensions())));
-		capabilities.put("maxCombinedTextureImageUnits", gl.getMaxCombinedTextureImageUnits());
-		capabilities.put("maxCubeMapTextureSize", gl.getMaxCubeMapTextureSize());
-		capabilities.put("maxFragmentUniformVectors", gl.getMaxFragmentUniformVectors());
-		capabilities.put("maxRenderBufferSize", gl.getMaxRenderBufferSize());
-		capabilities.put("maxTextureImageUnits", gl.getMaxTextureImageUnits());
-		capabilities.put("maxTextureSize", gl.getMaxTextureSize());
-		capabilities.put("maxVaryingVectors", gl.getMaxVaryingVectors());
-		capabilities.put("maxVertexAttribs", gl.getMaxVertexAttribs());
-		capabilities.put("maxVertexTextureImageUnits", gl.getMaxVertexTextureImageUnits());
-		capabilities.put("maxVertexUniformVectors", gl.getMaxVertexUniformVectors());
+		capabilities.put("vendor", context.getVendor());
+		capabilities.put("renderer", context.getRenderer());
+		capabilities.put("version", context.getVersion());
+		capabilities.put("shadingLanguageVersion", context.getShadingLanguageVersion());
+		capabilities.put("extensions", new JSONArray(Arrays.asList(context.getExtensions())));
+		capabilities.put("maxCombinedTextureImageUnits", context.getMaxCombinedTextureImageUnits());
+		capabilities.put("maxCubeMapTextureSize", context.getMaxCubeMapTextureSize());
+		capabilities.put("maxFragmentUniformVectors", context.getMaxFragmentUniformVectors());
+		capabilities.put("maxRenderBufferSize", context.getMaxRenderBufferSize());
+		capabilities.put("maxTextureImageUnits", context.getMaxTextureImageUnits());
+		capabilities.put("maxTextureSize", context.getMaxTextureSize());
+		capabilities.put("maxVaryingVectors", context.getMaxVaryingVectors());
+		capabilities.put("maxVertexAttribs", context.getMaxVertexAttribs());
+		capabilities.put("maxVertexTextureImageUnits", context.getMaxVertexTextureImageUnits());
+		capabilities.put("maxVertexUniformVectors", context.getMaxVertexUniformVectors());
 		JSONObject maxViewportDims = new JSONObject();
-		maxViewportDims.put("width", gl.getMaxViewportDims().getWidth());
-		maxViewportDims.put("height", gl.getMaxViewportDims().getHeight());
+		maxViewportDims.put("width", context.getMaxViewportDims().getWidth());
+		maxViewportDims.put("height", context.getMaxViewportDims().getHeight());
 		capabilities.put("maxViewportDims", maxViewportDims);
 		JSONArray compressedTextureFormats = new JSONArray();
-		for (int format : gl.getCompressedTextureFormats())
+		for (int format : context.getCompressedTextureFormats())
 			compressedTextureFormats.put(format);
 		capabilities.put("compressedTextureFormats", compressedTextureFormats);
 		JSONArray shaderBinaryFormats = new JSONArray();
-		for (int format : gl.getShaderBinaryFormats())
+		for (int format : context.getShaderBinaryFormats())
 			shaderBinaryFormats.put(format);
 		capabilities.put("shaderBinaryFormats", shaderBinaryFormats);
 	}
@@ -54,9 +54,9 @@ public class CapabilitiesLogger {
 		Log.i("GLEngine", capabilities.toString(4));
 	}
 	
-	public static void log(Context gl) {
+	public static void log(Context context) {
 		try {
-			new CapabilitiesLogger(gl).log();
+			new CapabilitiesLogger(context).log();
 		} catch (JSONException e) {
 			Log.e("GLEngine", e.getMessage(), e);
 		}

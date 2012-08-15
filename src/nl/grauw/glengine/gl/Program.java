@@ -14,7 +14,7 @@ import nl.grauw.glengine.gl.Variable.VariableType;
 
 public class Program {
 	
-	private final Context gl;
+	private final Context context;
 	final int handle;
 	
 	private VertexShader vertexShader = null;
@@ -22,8 +22,8 @@ public class Program {
 	private Map<String, Attribute> activeAttributes = Collections.emptyMap();
 	private Map<String, Uniform> activeUniforms = Collections.emptyMap();
 	
-	public Program(Context gl) {
-		this.gl = gl;
+	public Program(Context context) {
+		this.context = context;
 		handle = glCreateProgram();
 		
 		if (handle == 0)
@@ -193,7 +193,7 @@ public class Program {
 	}
 	
 	private void checkCurrentProgram() {
-		if (gl.getCurrentProgram() != this)
+		if (context.getCurrentProgram() != this)
 			throw new RuntimeException("Must be current program to set uniform variable.");
 	}
 	
