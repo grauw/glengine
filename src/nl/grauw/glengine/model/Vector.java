@@ -2,11 +2,11 @@ package nl.grauw.glengine.model;
 
 public class Vector {
 	
-	private float x, y, z;
+	private final float x, y, z;
 	
 	public static final Vector ZERO = new Vector(0, 0, 0);
 	
-	public Vector(float x, float y, float z) {
+	public Vector(final float x, final float y, final float z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -28,15 +28,15 @@ public class Vector {
 		return (float)Math.sqrt(x * x + y * y + z * z);
 	}
 	
-	public Vector add(Vector other) {
+	public Vector add(final Vector other) {
 		return new Vector(x + other.x, y + other.y, z + other.z);
 	}
 	
-	public Vector subtract(Vector other) {
+	public Vector subtract(final Vector other) {
 		return new Vector(x - other.x, y - other.y, z - other.z);
 	}
 	
-	public Vector scale(float scalar) {
+	public Vector scale(final float scalar) {
 		return new Vector(x * scalar, y * scalar, z * scalar);
 	}
 	
@@ -47,7 +47,7 @@ public class Vector {
 		return new Vector(x / length, y / length, z / length);
 	}
 	
-	public Vector cross(Vector other) {
+	public Vector cross(final Vector other) {
 		return new Vector(
 				y * other.z - z * other.y,
 				z * other.x - x * other.z,
@@ -55,7 +55,7 @@ public class Vector {
 			);
 	}
 	
-	public Vector normalizedCross(Vector other) {
+	public Vector normalizedCross(final Vector other) {
 		float x = this.y * other.z - this.z * other.y;
 		float y = this.z * other.x - this.x * other.z;
 		float z = this.x * other.y - this.y * other.x;

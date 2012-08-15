@@ -2,16 +2,16 @@ package nl.grauw.glengine.model;
 
 public class Color {
 	
-	private float red, green, blue, alpha;
+	private final float red, green, blue, alpha;
 	
-	public static Color BLACK = new Color(0, 0, 0);
-	public static Color RED = new Color(1, 0, 0);
-	public static Color GREEN = new Color(0, 1, 0);
-	public static Color BLUE = new Color(0, 0, 1);
-	public static Color CYAN = new Color(0, 1, 1);
-	public static Color MAGENTA = new Color(1, 0, 1);
-	public static Color YELLOW = new Color(1, 1, 0);
-	public static Color WHITE = new Color(1, 1, 1);
+	public static final Color BLACK = new Color(0, 0, 0);
+	public static final Color RED = new Color(1, 0, 0);
+	public static final Color GREEN = new Color(0, 1, 0);
+	public static final Color BLUE = new Color(0, 0, 1);
+	public static final Color CYAN = new Color(0, 1, 1);
+	public static final Color MAGENTA = new Color(1, 0, 1);
+	public static final Color YELLOW = new Color(1, 1, 0);
+	public static final Color WHITE = new Color(1, 1, 1);
 	
 	public Color(float r, float g, float b) {
 		this(r, g, b, 1);

@@ -2,15 +2,13 @@ package nl.grauw.glengine.model;
 
 public class Size {
 	
-	private float width;
-	private float height;
-	private float depth;
+	private final float width, height, depth;
 	
-	public Size(float width, float height) {
+	public Size(final float width, final float height) {
 		this(width, height, 0);
 	}
 	
-	public Size(float width, float height, float depth) {
+	public Size(final float width, final float height, final float depth) {
 		this.width = width;
 		this.height = height;
 		this.depth = depth;
