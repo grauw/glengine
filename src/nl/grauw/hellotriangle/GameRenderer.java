@@ -10,6 +10,7 @@ import nl.grauw.glengine.gl.Context.PrimitiveType;
 import nl.grauw.glengine.gl.Program;
 import nl.grauw.glengine.gl.Shader.FragmentShader;
 import nl.grauw.glengine.gl.Shader.VertexShader;
+import nl.grauw.glengine.gl.Utils;
 
 public class GameRenderer extends GLEngineRenderer {
 	
@@ -19,7 +20,7 @@ public class GameRenderer extends GLEngineRenderer {
 	public void onDrawFrame(Context gl) {
 		gl.clear(true, false, false);
 		
-		FloatBuffer vertices = Context.createFloatBuffer(new float[] {
+		FloatBuffer vertices = Utils.createFloatBuffer(new float[] {
 			 0.0f,  0.5f, 0.0f,
 			-0.5f, -0.5f, 0.0f,
 			 0.5f, -0.5f, 0.0f
