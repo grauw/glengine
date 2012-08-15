@@ -102,10 +102,10 @@ public class Program {
 		return getProgramiv(GL_LINK_STATUS) == GL_TRUE;
 	}
 	
-	private String getInfoLog() {
+	public String getInfoLog() {
 		return glGetProgramInfoLog(handle);
 	}
-
+	
 	public void validate() {
 		glValidateProgram(handle);
 	}
@@ -122,7 +122,7 @@ public class Program {
 		return activeAttributes.get(name);
 	}
 	
-	public void updateActiveAttributes() {
+	private void updateActiveAttributes() {
 		int count = getProgramiv(GL_ACTIVE_ATTRIBUTES);
 		int maxNameLength = getProgramiv(GL_ACTIVE_ATTRIBUTE_MAX_LENGTH);
 		int[] nameLengthBuffer = new int[1];
@@ -147,7 +147,7 @@ public class Program {
 		return activeUniforms.get(name);
 	}
 	
-	public void updateActiveUniforms() {
+	private void updateActiveUniforms() {
 		int count = getProgramiv(GL_ACTIVE_UNIFORMS);
 		int maxNameLength = getProgramiv(GL_ACTIVE_UNIFORM_MAX_LENGTH);
 		int[] nameLengthBuffer = new int[1];
