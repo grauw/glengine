@@ -1,6 +1,6 @@
 package nl.grauw.glengine.model;
 
-public class Size {
+public final class Size {
 	
 	private final float width, height, depth;
 	

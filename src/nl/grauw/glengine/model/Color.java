@@ -1,6 +1,6 @@
 package nl.grauw.glengine.model;
 
-public class Color {
+public final class Color {
 	
 	private final float red, green, blue, alpha;
 	

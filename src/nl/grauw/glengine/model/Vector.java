@@ -1,6 +1,6 @@
 package nl.grauw.glengine.model;
 
-public class Vector {
+public final class Vector {
 	
 	private final float x, y, z;
 	
