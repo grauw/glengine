@@ -10,6 +10,7 @@ import android.util.Log;
 
 import nl.grauw.glengine.gl.Shader.FragmentShader;
 import nl.grauw.glengine.gl.Shader.VertexShader;
+import nl.grauw.glengine.gl.Variable.VariableType;
 
 public class Program {
 	
@@ -124,7 +125,7 @@ public class Program {
 			glGetActiveAttrib(handle, index, maxNameLength, nameLengthBuffer, 0, sizeBuffer, 0, typeBuffer, 0, nameBuffer, 0);
 			String name = new String(nameBuffer, 0, nameLengthBuffer[0]);
 			int location = glGetAttribLocation(handle, name);
-			activeAttributes.put(name, new Variable(location, name, sizeBuffer[0], typeBuffer[0]));
+			activeAttributes.put(name, new Variable(location, name, sizeBuffer[0], VariableType.getById(typeBuffer[0])));
 		}
 	}
 	
@@ -149,7 +150,7 @@ public class Program {
 			glGetActiveUniform(handle, index, maxNameLength, nameLengthBuffer, 0, sizeBuffer, 0, typeBuffer, 0, nameBuffer, 0);
 			String name = new String(nameBuffer, 0, nameLengthBuffer[0]);
 			int location = glGetUniformLocation(handle, name);
-			activeUniforms.put(name, new Variable(location, name, sizeBuffer[0], typeBuffer[0]));
+			activeUniforms.put(name, new Variable(location, name, sizeBuffer[0], VariableType.getById(typeBuffer[0])));
 		}
 	}
 	
