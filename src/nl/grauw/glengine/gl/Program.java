@@ -1,6 +1,7 @@
 package nl.grauw.glengine.gl;
 
 import static android.opengl.GLES20.*;
+import android.util.Log;
 
 import nl.grauw.glengine.gl.Shader.FragmentShader;
 import nl.grauw.glengine.gl.Shader.VertexShader;
@@ -10,6 +11,8 @@ public class Program {
 	int handle;
 	private VertexShader vertexShader = null;
 	private FragmentShader fragmentShader = null;
+	private Variable[] activeAttributes = {};
+	private Variable[] activeUniforms = {};
 	
 	public Program() {
 		handle = glCreateProgram();
@@ -73,6 +76,9 @@ public class Program {
 		if (!getLinkStatus()) {
 			throw new RuntimeException("Failed to link program.\n" + getInfoLog());
 		}
+		
+		updateActiveAttributes();
+		updateActiveUniforms();
 	}
 	
 	// XXX: rename to isLinked()?
@@ -90,6 +96,62 @@ public class Program {
 	
 	public boolean getValidateStatus() {
 		return getProgramiv(GL_VALIDATE_STATUS) == GL_TRUE;
+	}
+	
+	public Variable[] getActiveAttributes() {
+		return activeAttributes.clone();
+	}
+	
+	public Variable getAttribute(String name) {
+		for (Variable attribute : activeAttributes)
+			if (name.equals(attribute.getName()))
+				return attribute;
+		return null;
+	}
+	
+	public void updateActiveAttributes() {
+		int count = getProgramiv(GL_ACTIVE_ATTRIBUTES);
+		int maxNameLength = getProgramiv(GL_ACTIVE_ATTRIBUTE_MAX_LENGTH);
+		int[] nameLengthBuffer = new int[1];
+		int[] sizeBuffer = new int[1];
+		int[] typeBuffer = new int[1];
+		byte[] nameBuffer = new byte[maxNameLength];
+		
+		activeAttributes = new Variable[count];
+		for (int index = 0; index < count; index++) {
+			glGetActiveAttrib(handle, index, maxNameLength, nameLengthBuffer, 0, sizeBuffer, 0, typeBuffer, 0, nameBuffer, 0);
+			String name = new String(nameBuffer, 0, nameLengthBuffer[0]);
+			int location = glGetAttribLocation(handle, name);
+			activeAttributes[index] = new Variable(location, name, sizeBuffer[0], typeBuffer[0]);
+		}
+	}
+	
+	public Variable[] getActiveUniforms() {
+		return activeUniforms.clone();
+	}
+	
+	public Variable getUniform(String name) {
+		for (Variable uniform : activeUniforms)
+			if (name.equals(uniform.getName()))
+				return uniform;
+		return null;
+	}
+	
+	public void updateActiveUniforms() {
+		int count = getProgramiv(GL_ACTIVE_UNIFORMS);
+		int maxNameLength = getProgramiv(GL_ACTIVE_UNIFORM_MAX_LENGTH);
+		int[] nameLengthBuffer = new int[1];
+		int[] sizeBuffer = new int[1];
+		int[] typeBuffer = new int[1];
+		byte[] nameBuffer = new byte[maxNameLength];
+		
+		activeUniforms = new Variable[count];
+		for (int index = 0; index < count; index++) {
+			glGetActiveUniform(handle, index, maxNameLength, nameLengthBuffer, 0, sizeBuffer, 0, typeBuffer, 0, nameBuffer, 0);
+			String name = new String(nameBuffer, 0, nameLengthBuffer[0]);
+			int location = glGetUniformLocation(handle, name);
+			activeUniforms[index] = new Variable(location, name, sizeBuffer[0], typeBuffer[0]);
+		}
 	}
 	
 	private int getProgramiv(int parameter) {
