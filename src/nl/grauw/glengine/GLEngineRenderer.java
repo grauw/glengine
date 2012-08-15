@@ -32,6 +32,7 @@ public abstract class GLEngineRenderer implements Renderer {
 	@Override
 	public void onSurfaceCreated(GL10 gl10, EGLConfig config) {
 		gl = new Context();
+		CapabilitiesLogger.log(gl);
 		onSurfaceCreated(gl, config);
 	}
 	
