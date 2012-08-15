@@ -14,13 +14,16 @@ import nl.grauw.glengine.gl.Variable.VariableType;
 
 public class Program {
 	
+	private Context gl;
 	int handle;
+	
 	private VertexShader vertexShader = null;
 	private FragmentShader fragmentShader = null;
 	private Map<String, Variable> activeAttributes = Collections.emptyMap();
 	private Map<String, Variable> activeUniforms = Collections.emptyMap();
 	
-	public Program() {
+	public Program(Context gl) {
+		this.gl = gl;
 		handle = glCreateProgram();
 		
 		if (handle == 0)
@@ -85,6 +88,11 @@ public class Program {
 		
 		updateActiveAttributes();
 		updateActiveUniforms();
+		
+		for (Variable v : activeAttributes.values())
+			Log.d("GGG", "Attribute: " + v.getName() + ", size: " + v.getSize() + ", type: " + v.getType() + ", location: " + v.getLocation());
+		for (Variable v : activeUniforms.values())
+			Log.d("GGG", "Uniform: " + v.getName() + ", size: " + v.getSize() + ", type: " + v.getType() + ", location: " + v.getLocation());
 	}
 	
 	// XXX: rename to isLinked()?
@@ -152,6 +160,31 @@ public class Program {
 			int location = glGetUniformLocation(handle, name);
 			activeUniforms.put(name, new Variable(location, name, sizeBuffer[0], VariableType.getById(typeBuffer[0])));
 		}
+	}
+	
+	public void setUniformValue(int location, float x) {
+		checkCurrentProgram();
+		glUniform1f(location, x);
+	}
+	
+	public void setUniformValue(int location, float x, float y) {
+		checkCurrentProgram();
+		glUniform2f(location, x, y);
+	}
+	
+	public void setUniformValue(int location, float x, float y, float z) {
+		checkCurrentProgram();
+		glUniform3f(location, x, y, z);
+	}
+	
+	public void setUniformValue(int location, float x, float y, float z, float w) {
+		checkCurrentProgram();
+		glUniform4f(location, x, y, z, w);
+	}
+	
+	private void checkCurrentProgram() {
+		if (gl.getCurrentProgram() != this)
+			throw new Error("Must be current program to set uniform variable.");
 	}
 	
 	private int getProgramiv(int parameter) {
