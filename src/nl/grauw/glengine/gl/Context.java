@@ -217,7 +217,7 @@ public class Context {
 	}
 	
 	public void drawArrays(PrimitiveType type, int first, int count) {
-		glDrawArrays(type.type, first, count);
+		glDrawArrays(type.id, first, count);
 	}
 	
 	public enum PrimitiveType {
@@ -229,9 +229,9 @@ public class Context {
 		TRIANGLE_FAN(GL_TRIANGLE_FAN),
 		TRIANGLES(GL_TRIANGLES);
 		
-		final int type;
-		private PrimitiveType(final int type) {
-			this.type = type;
+		final int id;
+		private PrimitiveType(final int id) {
+			this.id = id;
 		}
 	}
 	
