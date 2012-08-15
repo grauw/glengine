@@ -5,14 +5,14 @@ import static android.opengl.GLES20.*;
 /**
  * A shader variable (e.g. a vertex attribute or uniform).
  */
-public class Variable {
+public abstract class Variable {
 	
 	private final int location;
 	private final String name;
 	private final int size;
 	private final VariableType type;
 	
-	public Variable(int location, String name, int size, VariableType type) {
+	private Variable(int location, String name, int size, VariableType type) {
 		this.location = location;
 		this.name = name;
 		this.size = size;
@@ -65,6 +65,22 @@ public class Variable {
 					return type;
 			return null;
 		}
+	}
+	
+	public static class Attribute extends Variable {
+		
+		public Attribute(int location, String name, int size, VariableType type) {
+			super(location, name, size, type);
+		}
+		
+	}
+	
+	public static class Uniform extends Variable {
+		
+		public Uniform(int location, String name, int size, VariableType type) {
+			super(location, name, size, type);
+		}
+		
 	}
 	
 }

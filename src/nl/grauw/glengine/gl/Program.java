@@ -10,6 +10,8 @@ import android.util.Log;
 
 import nl.grauw.glengine.gl.Shader.FragmentShader;
 import nl.grauw.glengine.gl.Shader.VertexShader;
+import nl.grauw.glengine.gl.Variable.Attribute;
+import nl.grauw.glengine.gl.Variable.Uniform;
 import nl.grauw.glengine.gl.Variable.VariableType;
 
 public class Program {
@@ -19,8 +21,8 @@ public class Program {
 	
 	private VertexShader vertexShader = null;
 	private FragmentShader fragmentShader = null;
-	private Map<String, Variable> activeAttributes = Collections.emptyMap();
-	private Map<String, Variable> activeUniforms = Collections.emptyMap();
+	private Map<String, Attribute> activeAttributes = Collections.emptyMap();
+	private Map<String, Uniform> activeUniforms = Collections.emptyMap();
 	
 	public Program(Context gl) {
 		this.gl = gl;
@@ -89,10 +91,10 @@ public class Program {
 		updateActiveAttributes();
 		updateActiveUniforms();
 		
-		for (Variable v : activeAttributes.values())
-			Log.d("GGG", "Attribute: " + v.getName() + ", size: " + v.getSize() + ", type: " + v.getType() + ", location: " + v.getLocation());
-		for (Variable v : activeUniforms.values())
-			Log.d("GGG", "Uniform: " + v.getName() + ", size: " + v.getSize() + ", type: " + v.getType() + ", location: " + v.getLocation());
+		for (Attribute a : activeAttributes.values())
+			Log.d("GGG", "Attribute: " + a.getName() + ", size: " + a.getSize() + ", type: " + a.getType() + ", location: " + a.getLocation());
+		for (Uniform u : activeUniforms.values())
+			Log.d("GGG", "Uniform: " + u.getName() + ", size: " + u.getSize() + ", type: " + u.getType() + ", location: " + u.getLocation());
 	}
 	
 	// XXX: rename to isLinked()?
@@ -112,11 +114,11 @@ public class Program {
 		return getProgramiv(GL_VALIDATE_STATUS) == GL_TRUE;
 	}
 	
-	public Map<String, Variable> getActiveAttributes() {
+	public Map<String, Attribute> getActiveAttributes() {
 		return Collections.unmodifiableMap(activeAttributes);
 	}
 	
-	public Variable getAttribute(String name) {
+	public Attribute getAttribute(String name) {
 		return activeAttributes.get(name);
 	}
 	
@@ -128,20 +130,20 @@ public class Program {
 		int[] typeBuffer = new int[1];
 		byte[] nameBuffer = new byte[maxNameLength];
 		
-		activeAttributes = new HashMap<String, Variable>(count);
+		activeAttributes = new HashMap<String, Attribute>(count);
 		for (int index = 0; index < count; index++) {
 			glGetActiveAttrib(handle, index, maxNameLength, nameLengthBuffer, 0, sizeBuffer, 0, typeBuffer, 0, nameBuffer, 0);
 			String name = new String(nameBuffer, 0, nameLengthBuffer[0]);
 			int location = glGetAttribLocation(handle, name);
-			activeAttributes.put(name, new Variable(location, name, sizeBuffer[0], VariableType.getById(typeBuffer[0])));
+			activeAttributes.put(name, new Attribute(location, name, sizeBuffer[0], VariableType.getById(typeBuffer[0])));
 		}
 	}
 	
-	public Map<String, Variable> getActiveUniforms() {
+	public Map<String, Uniform> getActiveUniforms() {
 		return Collections.unmodifiableMap(activeUniforms);
 	}
 	
-	public Variable getUniform(String name) {
+	public Uniform getUniform(String name) {
 		return activeUniforms.get(name);
 	}
 	
@@ -153,31 +155,31 @@ public class Program {
 		int[] typeBuffer = new int[1];
 		byte[] nameBuffer = new byte[maxNameLength];
 		
-		activeUniforms = new HashMap<String, Variable>(count);
+		activeUniforms = new HashMap<String, Uniform>(count);
 		for (int index = 0; index < count; index++) {
 			glGetActiveUniform(handle, index, maxNameLength, nameLengthBuffer, 0, sizeBuffer, 0, typeBuffer, 0, nameBuffer, 0);
 			String name = new String(nameBuffer, 0, nameLengthBuffer[0]);
 			int location = glGetUniformLocation(handle, name);
-			activeUniforms.put(name, new Variable(location, name, sizeBuffer[0], VariableType.getById(typeBuffer[0])));
+			activeUniforms.put(name, new Uniform(location, name, sizeBuffer[0], VariableType.getById(typeBuffer[0])));
 		}
 	}
 	
-	public void setUniformValue(Variable uniform, float x) {
+	public void setUniformValue(Uniform uniform, float x) {
 		checkCurrentProgram();
 		glUniform1f(uniform.getLocation(), x);
 	}
 	
-	public void setUniformValue(Variable uniform, float x, float y) {
+	public void setUniformValue(Uniform uniform, float x, float y) {
 		checkCurrentProgram();
 		glUniform2f(uniform.getLocation(), x, y);
 	}
 	
-	public void setUniformValue(Variable uniform, float x, float y, float z) {
+	public void setUniformValue(Uniform uniform, float x, float y, float z) {
 		checkCurrentProgram();
 		glUniform3f(uniform.getLocation(), x, y, z);
 	}
 	
-	public void setUniformValue(Variable uniform, float x, float y, float z, float w) {
+	public void setUniformValue(Uniform uniform, float x, float y, float z, float w) {
 		checkCurrentProgram();
 		glUniform4f(uniform.getLocation(), x, y, z, w);
 	}
