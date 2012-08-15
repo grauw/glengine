@@ -27,8 +27,8 @@ public class GameRenderer extends GLEngineRenderer {
 		});
 		
 		gl.useProgram(program);
-		gl.setVertexAttribPointer(program.getAttribute("position").getLocation(), 3, 0, vertices);
-		gl.enableVertexAttribArray(program.getAttribute("position").getLocation());
+		gl.setVertexAttribPointer(program.getAttribute("position"), 3, 0, vertices);
+		gl.enableVertexAttribArray(program.getAttribute("position"));
 		program.setUniformValue(program.getUniform("color.color"), 1, 0, 0, 1);
 		program.setUniformValue(program.getUniform("color.multiplier"), 1);
 		

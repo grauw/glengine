@@ -6,6 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
+import nl.grauw.glengine.gl.Variable.Attribute;
 import nl.grauw.glengine.model.Color;
 import nl.grauw.glengine.model.Size;
 
@@ -180,6 +181,18 @@ public class Context {
 		return currentProgram;
 	}
 	
+	public void setVertexAttribPointer(Attribute attribute, int size, int stride, FloatBuffer buffer) {
+		setVertexAttribPointer(attribute.getLocation(), size, stride, buffer);
+	}
+	
+	public void setVertexAttribPointer(Attribute attribute, int size, int stride, boolean normalized, ByteBuffer buffer) {
+		setVertexAttribPointer(attribute.getLocation(), size, stride, normalized, buffer);
+	}
+	
+	public void setVertexAttribPointer(Attribute attribute, int size, int stride, boolean normalized, ShortBuffer buffer) {
+		setVertexAttribPointer(attribute.getLocation(), size, stride, normalized, buffer);
+	}
+	
 	public void setVertexAttribPointer(int index, int size, int stride, FloatBuffer buffer) {
 		glVertexAttribPointer(index, size, GL_FLOAT, false, stride, buffer);
 	}
@@ -190,6 +203,14 @@ public class Context {
 	
 	public void setVertexAttribPointer(int index, int size, int stride, boolean normalized, ShortBuffer buffer) {
 		glVertexAttribPointer(index, size, GL_SHORT, normalized, stride, buffer);
+	}
+	
+	public void enableVertexAttribArray(Attribute attribute) {
+		enableVertexAttribArray(attribute.getLocation());
+	}
+	
+	public void disableVertexAttribArray(Attribute attribute) {
+		disableVertexAttribArray(attribute.getLocation());
 	}
 	
 	public void enableVertexAttribArray(int index) {
