@@ -27,7 +27,7 @@ public class Program {
 		handle = glCreateProgram();
 		
 		if (handle == 0)
-			throw new Error("Failed to create program.");
+			throw new RuntimeException("Failed to create program.");
 	}
 	
 	protected void delete() {
@@ -184,7 +184,7 @@ public class Program {
 	
 	private void checkCurrentProgram() {
 		if (gl.getCurrentProgram() != this)
-			throw new Error("Must be current program to set uniform variable.");
+			throw new RuntimeException("Must be current program to set uniform variable.");
 	}
 	
 	private int getProgramiv(int parameter) {

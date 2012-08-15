@@ -10,7 +10,7 @@ public abstract class Shader {
 		handle = glCreateShader(type);
 		
 		if (handle == 0)
-			throw new Error("Failed to create shader.");
+			throw new RuntimeException("Failed to create shader.");
 	}
 	
 	protected void delete() {
