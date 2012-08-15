@@ -29,7 +29,7 @@ public class GameRenderer extends GLEngineRenderer {
 		gl.useProgram(program);
 		gl.setVertexAttribPointer(program.getAttribute("position").getLocation(), 3, 0, vertices);
 		gl.enableVertexAttribArray(program.getAttribute("position").getLocation());
-		program.setUniformValue(program.getUniform("color").getLocation(), 1, 0, 0, 1);
+		program.setUniformValue(program.getUniform("color"), 1, 0, 0, 1);
 		
 		gl.drawArrays(PrimitiveType.TRIANGLES, 0, 3);
 	}

@@ -162,24 +162,24 @@ public class Program {
 		}
 	}
 	
-	public void setUniformValue(int location, float x) {
+	public void setUniformValue(Variable uniform, float x) {
 		checkCurrentProgram();
-		glUniform1f(location, x);
+		glUniform1f(uniform.getLocation(), x);
 	}
 	
-	public void setUniformValue(int location, float x, float y) {
+	public void setUniformValue(Variable uniform, float x, float y) {
 		checkCurrentProgram();
-		glUniform2f(location, x, y);
+		glUniform2f(uniform.getLocation(), x, y);
 	}
 	
-	public void setUniformValue(int location, float x, float y, float z) {
+	public void setUniformValue(Variable uniform, float x, float y, float z) {
 		checkCurrentProgram();
-		glUniform3f(location, x, y, z);
+		glUniform3f(uniform.getLocation(), x, y, z);
 	}
 	
-	public void setUniformValue(int location, float x, float y, float z, float w) {
+	public void setUniformValue(Variable uniform, float x, float y, float z, float w) {
 		checkCurrentProgram();
-		glUniform4f(location, x, y, z, w);
+		glUniform4f(uniform.getLocation(), x, y, z, w);
 	}
 	
 	private void checkCurrentProgram() {
