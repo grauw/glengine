@@ -13,7 +13,6 @@ public class GameSurfaceView extends GLSurfaceView {
 		renderer = new GameRenderer();
 		
 		setEGLContextClientVersion(2);
-		setEGLConfigChooser(8, 8, 8, 8, 8, 0);
 		
 		setRenderer(renderer);
 	}
