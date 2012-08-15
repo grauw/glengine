@@ -192,6 +192,22 @@ public class Context {
 		glVertexAttribPointer(index, size, GL_SHORT, normalized, stride, buffer);
 	}
 	
+	public void setUniformValue(int index, float x) {
+		glUniform1f(index, x);
+	}
+	
+	public void setUniformValue(int index, float x, float y) {
+		glUniform2f(index, x, y);
+	}
+	
+	public void setUniformValue(int index, float x, float y, float z) {
+		glUniform3f(index, x, y, z);
+	}
+	
+	public void setUniformValue(int index, float x, float y, float z, float w) {
+		glUniform4f(index, x, y, z, w);
+	}
+	
 	public void enableVertexAttribArray(int index) {
 		glEnableVertexAttribArray(index);
 	}
