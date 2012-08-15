@@ -13,8 +13,7 @@ public abstract class Shader {
 			throw new Error("Failed to create shader.");
 	}
 	
-	@Override
-	protected void finalize() throws Throwable {
+	protected void delete() {
 		glDeleteShader(handle);
 	}
 	

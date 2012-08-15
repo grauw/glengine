@@ -18,8 +18,7 @@ public class Program {
 			throw new Error("Failed to create program.");
 	}
 	
-	@Override
-	protected void finalize() throws Throwable {
+	protected void delete() {
 		glDeleteProgram(handle);
 	}
 	
