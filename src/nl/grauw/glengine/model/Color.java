@@ -40,6 +40,10 @@ public final class Color {
 		return alpha;
 	}
 	
+	public float getLuminance() {
+		return (red + green + blue) / 3;
+	}
+	
 	public Color darker() {
 		return darker(0.5f);
 	}
