@@ -6,8 +6,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.util.Log;
-
 import nl.grauw.glengine.gl.Shader.FragmentShader;
 import nl.grauw.glengine.gl.Shader.VertexShader;
 import nl.grauw.glengine.gl.Variable.Attribute;
@@ -77,7 +75,6 @@ public class Program {
 	}
 	
 	public void bindAttribLocation(int index, String name) {
-		// TODO: if (isMatrix ? index >= getMaxVertexAttributes() - 3 : getMaxVertexAttributes()) throw ...
 		glBindAttribLocation(handle, index, name);
 	}
 	
@@ -90,11 +87,6 @@ public class Program {
 		
 		updateActiveAttributes();
 		updateActiveUniforms();
-		
-		for (Attribute a : activeAttributes.values())
-			Log.d("GGG", "Attribute: " + a.getName() + ", size: " + a.getSize() + ", type: " + a.getType() + ", location: " + a.getLocation());
-		for (Uniform u : activeUniforms.values())
-			Log.d("GGG", "Uniform: " + u.getName() + ", size: " + u.getSize() + ", type: " + u.getType() + ", location: " + u.getLocation());
 	}
 	
 	// XXX: rename to isLinked()?
