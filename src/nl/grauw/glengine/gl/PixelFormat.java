@@ -20,4 +20,10 @@ public enum PixelFormat {
 				return format;
 		throw new GLEngineException("Unrecognised color read format.");
 	}
+	
+	public void checkDataType(PixelDataType type) {
+		if ((type == PixelDataType.UNSIGNED_SHORT_5_6_5 && this != PixelFormat.RGB) ||
+			((type == PixelDataType.UNSIGNED_SHORT_4_4_4_4 || type == PixelDataType.UNSIGNED_SHORT_5_5_5_1) && this != PixelFormat.RGBA))
+			throw new GLEngineException("Invalid format/type combination: %s %s.", this, type);
+	}
 }

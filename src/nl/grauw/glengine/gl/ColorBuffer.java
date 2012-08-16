@@ -51,9 +51,7 @@ public class ColorBuffer {
 	public void readPixels(int x, int y, int width, int height, PixelFormat format, PixelDataType type, Buffer pixels) {
 		if (format == PixelFormat.LUMINANCE || format == PixelFormat.LUMINANCE_ALPHA)
 			throw new GLEngineException("Unsupported format %s.", format);
-		if ((type == PixelDataType.UNSIGNED_SHORT_5_6_5 && format != PixelFormat.RGB) ||
-			((type == PixelDataType.UNSIGNED_SHORT_4_4_4_4 || type == PixelDataType.UNSIGNED_SHORT_5_5_5_1) && format != PixelFormat.RGBA))
-			throw new GLEngineException("Invalid format/type combination: %s %s.", format, type);
+		format.checkDataType(type);
 		glReadPixels(x, y, width, height, format.id, type.id, pixels);
 	}
 	
