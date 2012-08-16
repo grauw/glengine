@@ -36,17 +36,11 @@ public abstract class Shader {
 	
 	// XXX: rename to isCompiled()?
 	public boolean getCompileStatus() {
-		return getShaderiv(GL_COMPILE_STATUS) == GL_TRUE;
+		return Utils.glGetShaderInteger(handle, GL_COMPILE_STATUS) == GL_TRUE;
 	}
 	
 	public String getInfoLog() {
 		return glGetShaderInfoLog(handle);
-	}
-	
-	private int getShaderiv(int parameter) {
-		int[] params = new int[1];
-		glGetShaderiv(handle, parameter, params, 0);
-		return params[0];
 	}
 	
 	public static class VertexShader extends Shader {

@@ -22,6 +22,24 @@ public class Utils {
 	}
 	
 	/**
+	 * A one-liner program integer get call that reuses the buffer.
+	 * Note: may only be called from the OpenGL thread.
+	 */
+	public static int glGetProgramInteger(int handle, int parameter) {
+		glGetProgramiv(handle, parameter, ONE_INT_BUFFER);
+		return ONE_INT_BUFFER.get(0);
+	}
+	
+	/**
+	 * A one-liner shader integer get call that reuses the buffer.
+	 * Note: may only be called from the OpenGL thread.
+	 */
+	public static int glGetShaderInteger(int handle, int parameter) {
+		glGetShaderiv(handle, parameter, ONE_INT_BUFFER);
+		return ONE_INT_BUFFER.get(0);
+	}
+	
+	/**
 	 * Allocate a native byte buffer suitable for GL.
 	 */
 	public static ByteBuffer createByteBuffer(int size) {

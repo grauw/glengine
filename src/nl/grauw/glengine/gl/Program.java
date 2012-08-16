@@ -91,7 +91,7 @@ public class Program {
 	
 	// XXX: rename to isLinked()?
 	public boolean getLinkStatus() {
-		return getProgramiv(GL_LINK_STATUS) == GL_TRUE;
+		return Utils.glGetProgramInteger(handle, GL_LINK_STATUS) == GL_TRUE;
 	}
 	
 	public String getInfoLog() {
@@ -103,7 +103,7 @@ public class Program {
 	}
 	
 	public boolean getValidateStatus() {
-		return getProgramiv(GL_VALIDATE_STATUS) == GL_TRUE;
+		return Utils.glGetProgramInteger(handle, GL_VALIDATE_STATUS) == GL_TRUE;
 	}
 	
 	public Map<String, Attribute> getActiveAttributes() {
@@ -115,8 +115,8 @@ public class Program {
 	}
 	
 	private void updateActiveAttributes() {
-		int count = getProgramiv(GL_ACTIVE_ATTRIBUTES);
-		int maxNameLength = getProgramiv(GL_ACTIVE_ATTRIBUTE_MAX_LENGTH);
+		int count = Utils.glGetProgramInteger(handle, GL_ACTIVE_ATTRIBUTES);
+		int maxNameLength = Utils.glGetProgramInteger(handle, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH);
 		int[] nameLengthBuffer = new int[1];
 		int[] sizeBuffer = new int[1];
 		int[] typeBuffer = new int[1];
@@ -140,8 +140,8 @@ public class Program {
 	}
 	
 	private void updateActiveUniforms() {
-		int count = getProgramiv(GL_ACTIVE_UNIFORMS);
-		int maxNameLength = getProgramiv(GL_ACTIVE_UNIFORM_MAX_LENGTH);
+		int count = Utils.glGetProgramInteger(handle, GL_ACTIVE_UNIFORMS);
+		int maxNameLength = Utils.glGetProgramInteger(handle, GL_ACTIVE_UNIFORM_MAX_LENGTH);
 		int[] nameLengthBuffer = new int[1];
 		int[] sizeBuffer = new int[1];
 		int[] typeBuffer = new int[1];
@@ -195,12 +195,6 @@ public class Program {
 	private void checkCurrentProgram() {
 		if (context.getCurrentProgram() != this)
 			throw new RuntimeException("Must be current program to set uniform variable.");
-	}
-	
-	private int getProgramiv(int parameter) {
-		int[] params = new int[1];
-		glGetProgramiv(handle, parameter, params, 0);
-		return params[0];
 	}
 	
 }
