@@ -2,7 +2,7 @@ package nl.grauw.glengine.model;
 
 import android.util.FloatMath;
 
-public final class Vector {
+public class Vector {
 	
 	private final float x, y, z;
 	

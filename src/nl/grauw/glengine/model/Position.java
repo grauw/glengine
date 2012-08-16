@@ -1,6 +1,6 @@
 package nl.grauw.glengine.model;
 
-public final class Position {
+public class Position {
 	
 	private final float x, y, z;
 	

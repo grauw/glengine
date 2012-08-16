@@ -1,6 +1,6 @@
 package nl.grauw.glengine.model;
 
-public final class Vertex {
+public class Vertex {
 	
 	private final Position position;
 	private final Color color;
