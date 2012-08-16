@@ -55,16 +55,16 @@ public class StencilBuffer {
 		return backWriteMask;
 	}
 	
-	public void setStencilFunction(CompareFunction function, int ref, int mask) {
-		glStencilFunc(function.id, ref, mask);
+	public void setStencilFunction(CompareFunction function, int reference, int mask) {
+		glStencilFunc(function.id, reference, mask);
 	}
 	
-	public void setFrontFunction(CompareFunction function, int ref, int mask) {
-		glStencilFuncSeparate(GL_FRONT, function.id, ref, mask);
+	public void setFrontFunction(CompareFunction function, int reference, int mask) {
+		glStencilFuncSeparate(GL_FRONT, function.id, reference, mask);
 	}
 	
-	public void setBackFunction(CompareFunction function, int ref, int mask) {
-		glStencilFuncSeparate(GL_BACK, function.id, ref, mask);
+	public void setBackFunction(CompareFunction function, int reference, int mask) {
+		glStencilFuncSeparate(GL_BACK, function.id, reference, mask);
 	}
 	
 	public void setOperator(StencilOperator stencilFail, StencilOperator depthFail, StencilOperator pass) {
