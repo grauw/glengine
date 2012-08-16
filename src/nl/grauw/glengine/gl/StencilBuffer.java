@@ -5,9 +5,9 @@ import static android.opengl.GLES20.*;
 public class StencilBuffer {
 	
 	private final int stencilBits;
+	private int clearStencil = 0;
 	private int frontMask = -1;
 	private int backMask = -1;
-	private int clearStencil = 0;
 	
 	public StencilBuffer() {
 		int[] params = new int[4];
@@ -17,6 +17,19 @@ public class StencilBuffer {
 	
 	public int getStencilBits() {
 		return stencilBits;
+	}
+	
+	public void setClearStencil(int stencil) {
+		glClearStencil(stencil);
+		clearStencil = stencil;
+	}
+	
+	public int getClearStencil() {
+		return clearStencil;
+	}
+	
+	public void clear() {
+		glClear(GL_STENCIL_BUFFER_BIT);
 	}
 	
 	public void setMask(int mask) {
@@ -40,19 +53,6 @@ public class StencilBuffer {
 	
 	public int getBackMask() {
 		return backMask;
-	}
-	
-	public void setClearStencil(int stencil) {
-		glClearStencil(stencil);
-		clearStencil = stencil;
-	}
-	
-	public int getClearStencil() {
-		return clearStencil;
-	}
-	
-	public void clear() {
-		glClear(GL_STENCIL_BUFFER_BIT);
 	}
 	
 	public void setStencilFunction(CompareFunction function, int ref, int mask) {

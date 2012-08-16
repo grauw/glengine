@@ -5,8 +5,8 @@ import static android.opengl.GLES20.*;
 public class DepthBuffer {
 	
 	private final int depthBits;
-	private boolean mask = true;
 	private float clearDepth = 1;
+	private boolean mask = true;
 	
 	public DepthBuffer() {
 		int[] params = new int[4];
@@ -16,15 +16,6 @@ public class DepthBuffer {
 	
 	public int getDepthBits() {
 		return depthBits;
-	}
-	
-	public void setMask(boolean writeEnabled) {
-		glDepthMask(writeEnabled);
-		mask = writeEnabled;
-	}
-	
-	public boolean getMask() {
-		return mask;
 	}
 	
 	public void setClearDepth(float depth) {
@@ -38,6 +29,15 @@ public class DepthBuffer {
 	
 	public void clear() {
 		glClear(GL_DEPTH_BUFFER_BIT);
+	}
+	
+	public void setMask(boolean writeEnabled) {
+		glDepthMask(writeEnabled);
+		mask = writeEnabled;
+	}
+	
+	public boolean getMask() {
+		return mask;
 	}
 	
 	public void setDepthFunction(CompareFunction function) {

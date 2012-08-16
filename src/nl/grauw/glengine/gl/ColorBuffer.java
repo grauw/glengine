@@ -9,11 +9,11 @@ public class ColorBuffer {
 	private final int greenBits;
 	private final int blueBits;
 	private final int alphaBits;
+	Color clearColor = new Color(0, 0, 0, 0);
 	private boolean redMask = true;
 	private boolean greenMask = true;
 	private boolean blueMask = true;
 	private boolean alphaMask = true;
-	Color clearColor = new Color(0, 0, 0, 0);
 	
 	public ColorBuffer() {
 		int[] params = new int[4];
@@ -43,6 +43,23 @@ public class ColorBuffer {
 		return alphaBits;
 	}
 	
+	public void setClearColor(float red, float green, float blue, float alpha) {
+		setClearColor(new Color(red, green, blue, alpha));
+	}
+	
+	public void setClearColor(Color color) {
+		glClearColor(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+		clearColor = color;
+	}
+	
+	public Color getClearColor() {
+		return clearColor;
+	}
+	
+	public void clear() {
+		glClear(GL_COLOR_BUFFER_BIT);
+	}
+	
 	public void setMask(boolean red, boolean green, boolean blue, boolean alpha) {
 		glColorMask(red, green, blue, alpha);
 		redMask = red;
@@ -65,23 +82,6 @@ public class ColorBuffer {
 	
 	public boolean getAlphaMask() {
 		return alphaMask;
-	}
-	
-	public void setClearColor(float red, float green, float blue, float alpha) {
-		setClearColor(new Color(red, green, blue, alpha));
-	}
-	
-	public void setClearColor(Color color) {
-		glClearColor(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
-		clearColor = color;
-	}
-	
-	public Color getClearColor() {
-		return clearColor;
-	}
-	
-	public void clear() {
-		glClear(GL_COLOR_BUFFER_BIT);
 	}
 	
 }
