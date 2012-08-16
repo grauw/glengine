@@ -149,45 +149,6 @@ public class ColorBuffer {
 		glSampleCoverage(value, invert);
 	}
 	
-	public enum PixelFormat {
-		ALPHA(GL_ALPHA),
-		RGB(GL_RGB),
-		RGBA(GL_RGBA),
-		LUMINANCE(GL_LUMINANCE),
-		LUMINANCE_ALPHA(GL_LUMINANCE_ALPHA);
-		
-		final int id;
-		private PixelFormat(final int id) {
-			this.id = id;
-		}
-		
-		public static PixelFormat getById(final int id) {
-			for (PixelFormat format : values())
-				if (format.id == id)
-					return format;
-			throw new RuntimeException("Unrecognised color read format.");
-		}
-	}
-	
-	public enum PixelDataType {
-		UNSIGNED_BYTE(GL_UNSIGNED_BYTE),
-		UNSIGNED_SHORT_5_6_5(GL_UNSIGNED_SHORT_5_6_5),
-		UNSIGNED_SHORT_4_4_4_4(GL_UNSIGNED_SHORT_4_4_4_4),
-		UNSIGNED_SHORT_5_5_5_1(GL_UNSIGNED_SHORT_5_5_5_1);
-		
-		final int id;
-		private PixelDataType(final int id) {
-			this.id = id;
-		}
-		
-		public static PixelDataType getById(final int id) {
-			for (PixelDataType type : values())
-				if (type.id == id)
-					return type;
-			throw new RuntimeException("Unrecognised color read type.");
-		}
-	}
-	
 	public enum BlendCoefficient {
 		ZERO(GL_ZERO),
 		ONE(GL_ONE),
