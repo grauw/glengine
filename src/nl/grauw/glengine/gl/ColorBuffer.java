@@ -1,6 +1,9 @@
 package nl.grauw.glengine.gl;
 
 import static android.opengl.GLES20.*;
+
+import java.nio.Buffer;
+
 import nl.grauw.glengine.model.Color;
 
 public class ColorBuffer {
@@ -43,6 +46,18 @@ public class ColorBuffer {
 	
 	public void clear() {
 		glClear(GL_COLOR_BUFFER_BIT);
+	}
+	
+	public void readPixels(int x, int y, int width, int height, ColorReadFormat format, ColorReadType type, Buffer pixels) {
+		glReadPixels(x, y, width, height, format.id, type.id, pixels);
+	}
+	
+	public ColorReadFormat getImplementationColorReadFormat() {
+		return ColorReadFormat.getById(Utils.glGetInteger(GL_IMPLEMENTATION_COLOR_READ_FORMAT));
+	}
+	
+	public ColorReadType getImplementationColorReadType() {
+		return ColorReadType.getById(Utils.glGetInteger(GL_IMPLEMENTATION_COLOR_READ_TYPE));
 	}
 	
 	public void setWriteMask(boolean red, boolean green, boolean blue, boolean alpha) {
@@ -127,6 +142,43 @@ public class ColorBuffer {
 	
 	public void setSampleCoverage(float value, boolean invert) {
 		glSampleCoverage(value, invert);
+	}
+	
+	public enum ColorReadFormat {
+		ALPHA(GL_ALPHA),
+		RGB(GL_RGB),
+		RGBA(GL_RGBA);
+		
+		final int id;
+		private ColorReadFormat(final int id) {
+			this.id = id;
+		}
+		
+		public static ColorReadFormat getById(final int id) {
+			for (ColorReadFormat format : values())
+				if (format.id == id)
+					return format;
+			throw new RuntimeException("Unrecognised color read format.");
+		}
+	}
+	
+	public enum ColorReadType {
+		UNSIGNED_BYTE(GL_UNSIGNED_BYTE),
+		UNSIGNED_SHORT_5_6_5(GL_UNSIGNED_SHORT_5_6_5),
+		UNSIGNED_SHORT_4_4_4_4(GL_UNSIGNED_SHORT_4_4_4_4),
+		UNSIGNED_SHORT_5_5_5_1(GL_UNSIGNED_SHORT_5_5_5_1);
+		
+		final int id;
+		private ColorReadType(final int id) {
+			this.id = id;
+		}
+		
+		public static ColorReadType getById(final int id) {
+			for (ColorReadType type : values())
+				if (type.id == id)
+					return type;
+			throw new RuntimeException("Unrecognised color read type.");
+		}
 	}
 	
 	public enum BlendCoefficient {
