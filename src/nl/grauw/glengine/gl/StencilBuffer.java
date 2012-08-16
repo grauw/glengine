@@ -55,18 +55,18 @@ public class StencilBuffer {
 		glClear(GL_STENCIL_BUFFER_BIT);
 	}
 	
-	public void setStencilFunction(StencilFunction function, int ref, int mask) {
+	public void setStencilFunction(CompareFunction function, int ref, int mask) {
 		glStencilFunc(function.id, ref, mask);
 	}
 	
-	public void setFrontStencilFunction(StencilFunction function, int ref, int mask) {
+	public void setFrontStencilFunction(CompareFunction function, int ref, int mask) {
 		glStencilFuncSeparate(GL_FRONT, function.id, ref, mask);
 	}
 	
-	public void setBackStencilFunction(StencilFunction function, int ref, int mask) {
+	public void setBackStencilFunction(CompareFunction function, int ref, int mask) {
 		glStencilFuncSeparate(GL_BACK, function.id, ref, mask);
 	}
-
+	
 	public void setStencilOperator(StencilOperator stencilFail, StencilOperator depthFail, StencilOperator pass) {
 		glStencilOp(stencilFail.id, depthFail.id, pass.id);
 	}
@@ -77,22 +77,6 @@ public class StencilBuffer {
 	
 	public void setBackStencilOperator(StencilOperator stencilFail, StencilOperator depthFail, StencilOperator pass) {
 		glStencilOpSeparate(GL_BACK, stencilFail.id, depthFail.id, pass.id);
-	}
-	
-	public enum StencilFunction {
-		EQUAL(GL_EQUAL),
-		NOTEQUAL(GL_NOTEQUAL),
-		LESS(GL_LESS),
-		GREATER(GL_GREATER),
-		LESSEQUAL(GL_LEQUAL),
-		GREATEREQUAL(GL_GEQUAL),
-		ALWAYS(GL_ALWAYS),
-		NEVER(GL_NEVER);
-		
-		final int id;
-		private StencilFunction(final int id) {
-			this.id = id;
-		}
 	}
 	
 	public enum StencilOperator {
