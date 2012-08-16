@@ -8,7 +8,7 @@ public class DepthBuffer {
 	private float clearDepth = 1;
 	private float rangeNear = 0;
 	private float rangeFar = 1;
-	private boolean mask = true;
+	private boolean writeMask = true;
 	private CompareFunction function = CompareFunction.LESS;
 	
 	public DepthBuffer() {
@@ -48,13 +48,13 @@ public class DepthBuffer {
 		return rangeFar;
 	}
 	
-	public void setMask(boolean writeEnabled) {
-		glDepthMask(writeEnabled);
-		mask = writeEnabled;
+	public void setWriteMask(boolean mask) {
+		glDepthMask(mask);
+		writeMask = mask;
 	}
 	
-	public boolean getMask() {
-		return mask;
+	public boolean getWriteMask() {
+		return writeMask;
 	}
 	
 	public void setFunction(CompareFunction function) {

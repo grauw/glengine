@@ -6,8 +6,8 @@ public class StencilBuffer {
 	
 	private final int stencilBits;
 	private int clearStencil = 0;
-	private int frontMask = -1;
-	private int backMask = -1;
+	private int frontWriteMask = -1;
+	private int backWriteMask = -1;
 	
 	public StencilBuffer() {
 		int[] params = new int[4];
@@ -32,27 +32,27 @@ public class StencilBuffer {
 		glClear(GL_STENCIL_BUFFER_BIT);
 	}
 	
-	public void setMask(int mask) {
+	public void setWriteMask(int mask) {
 		glStencilMask(mask);
-		frontMask = backMask = mask;
+		frontWriteMask = backWriteMask = mask;
 	}
 	
-	public void setFrontMask(int mask) {
+	public void setFrontWriteMask(int mask) {
 		glStencilMaskSeparate(GL_FRONT, mask);
-		frontMask = mask;
+		frontWriteMask = mask;
 	}
 	
-	public void setBackMask(int mask) {
+	public void setBackWriteMask(int mask) {
 		glStencilMaskSeparate(GL_BACK, mask);
-		backMask = mask;
+		backWriteMask = mask;
 	}
 	
 	public int getFrontMask() {
-		return frontMask;
+		return frontWriteMask;
 	}
 	
 	public int getBackMask() {
-		return backMask;
+		return backWriteMask;
 	}
 	
 	public void setStencilFunction(CompareFunction function, int ref, int mask) {

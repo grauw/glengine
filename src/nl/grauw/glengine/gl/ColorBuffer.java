@@ -10,10 +10,10 @@ public class ColorBuffer {
 	private final int blueBits;
 	private final int alphaBits;
 	Color clearColor = new Color(0, 0, 0, 0);
-	private boolean redMask = true;
-	private boolean greenMask = true;
-	private boolean blueMask = true;
-	private boolean alphaMask = true;
+	private boolean redWriteMask = true;
+	private boolean greenWriteMask = true;
+	private boolean blueWriteMask = true;
+	private boolean alphaWriteMask = true;
 	
 	public ColorBuffer() {
 		int[] params = new int[4];
@@ -60,28 +60,28 @@ public class ColorBuffer {
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 	
-	public void setMask(boolean red, boolean green, boolean blue, boolean alpha) {
+	public void setWriteMask(boolean red, boolean green, boolean blue, boolean alpha) {
 		glColorMask(red, green, blue, alpha);
-		redMask = red;
-		greenMask = green;
-		blueMask = blue;
-		alphaMask = alpha;
+		redWriteMask = red;
+		greenWriteMask = green;
+		blueWriteMask = blue;
+		alphaWriteMask = alpha;
 	}
 	
-	public boolean getRedMask() {
-		return redMask;
+	public boolean getRedWriteMask() {
+		return redWriteMask;
 	}
 	
-	public boolean getGreenMask() {
-		return greenMask;
+	public boolean getGreenWriteMask() {
+		return greenWriteMask;
 	}
 	
-	public boolean getBlueMask() {
-		return blueMask;
+	public boolean getBlueWriteMask() {
+		return blueWriteMask;
 	}
 	
-	public boolean getAlphaMask() {
-		return alphaMask;
+	public boolean getAlphaWriteMask() {
+		return alphaWriteMask;
 	}
 	
 }
