@@ -84,4 +84,20 @@ public class ColorBuffer {
 		return alphaWriteMask;
 	}
 	
+	public void enableBlend() {
+		glEnable(GL_BLEND);
+	}
+	
+	public void disableBlend() {
+		glDisable(GL_BLEND);
+	}
+	
+	public void enableDither() {
+		glEnable(GL_DITHER);
+	}
+	
+	public void disableDither() {
+		glDisable(GL_DITHER);
+	}
+	
 }

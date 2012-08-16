@@ -55,6 +55,14 @@ public class StencilBuffer {
 		return backWriteMask;
 	}
 	
+	public void enableStencilTest() {
+		glEnable(GL_STENCIL_TEST);
+	}
+	
+	public void disableStencilTest() {
+		glDisable(GL_STENCIL_TEST);
+	}
+	
 	public void setStencilFunction(CompareFunction function, int reference, int mask) {
 		glStencilFunc(function.id, reference, mask);
 	}

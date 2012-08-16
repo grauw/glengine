@@ -57,6 +57,14 @@ public class DepthBuffer {
 		return writeMask;
 	}
 	
+	public void enableDepthTest() {
+		glEnable(GL_DEPTH_TEST);
+	}
+	
+	public void disableDepthTest() {
+		glDisable(GL_DEPTH_TEST);
+	}
+	
 	public void setFunction(CompareFunction function) {
 		glDepthFunc(function.id);
 		this.function = function;
