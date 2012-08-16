@@ -14,7 +14,7 @@ public class Utils {
 	
 	/**
 	 * A one-liner integer get call that reuses the buffer.
-	 * Note: may only be called from the OpenGL thread.
+	 * Note: may only be called on the OpenGL thread.
 	 */
 	public static int glGetInteger(int parameter) {
 		glGetIntegerv(parameter, ONE_INT_BUFFER);
@@ -23,7 +23,7 @@ public class Utils {
 	
 	/**
 	 * A one-liner program integer get call that reuses the buffer.
-	 * Note: may only be called from the OpenGL thread.
+	 * Note: may only be called on the OpenGL thread.
 	 */
 	public static int glGetProgramInteger(int handle, int parameter) {
 		glGetProgramiv(handle, parameter, ONE_INT_BUFFER);
@@ -32,7 +32,7 @@ public class Utils {
 	
 	/**
 	 * A one-liner shader integer get call that reuses the buffer.
-	 * Note: may only be called from the OpenGL thread.
+	 * Note: may only be called on the OpenGL thread.
 	 */
 	public static int glGetShaderInteger(int handle, int parameter) {
 		glGetShaderiv(handle, parameter, ONE_INT_BUFFER);
