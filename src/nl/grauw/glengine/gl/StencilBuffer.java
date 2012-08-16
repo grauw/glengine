@@ -59,23 +59,23 @@ public class StencilBuffer {
 		glStencilFunc(function.id, ref, mask);
 	}
 	
-	public void setFrontStencilFunction(CompareFunction function, int ref, int mask) {
+	public void setFrontFunction(CompareFunction function, int ref, int mask) {
 		glStencilFuncSeparate(GL_FRONT, function.id, ref, mask);
 	}
 	
-	public void setBackStencilFunction(CompareFunction function, int ref, int mask) {
+	public void setBackFunction(CompareFunction function, int ref, int mask) {
 		glStencilFuncSeparate(GL_BACK, function.id, ref, mask);
 	}
 	
-	public void setStencilOperator(StencilOperator stencilFail, StencilOperator depthFail, StencilOperator pass) {
+	public void setOperator(StencilOperator stencilFail, StencilOperator depthFail, StencilOperator pass) {
 		glStencilOp(stencilFail.id, depthFail.id, pass.id);
 	}
 	
-	public void setFrontStencilOperator(StencilOperator stencilFail, StencilOperator depthFail, StencilOperator pass) {
+	public void setFrontOperator(StencilOperator stencilFail, StencilOperator depthFail, StencilOperator pass) {
 		glStencilOpSeparate(GL_FRONT, stencilFail.id, depthFail.id, pass.id);
 	}
 	
-	public void setBackStencilOperator(StencilOperator stencilFail, StencilOperator depthFail, StencilOperator pass) {
+	public void setBackOperator(StencilOperator stencilFail, StencilOperator depthFail, StencilOperator pass) {
 		glStencilOpSeparate(GL_BACK, stencilFail.id, depthFail.id, pass.id);
 	}
 	

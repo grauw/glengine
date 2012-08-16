@@ -40,7 +40,7 @@ public class DepthBuffer {
 		return mask;
 	}
 	
-	public void setDepthFunction(CompareFunction function) {
+	public void setFunction(CompareFunction function) {
 		glDepthFunc(function.id);
 	}
 	
