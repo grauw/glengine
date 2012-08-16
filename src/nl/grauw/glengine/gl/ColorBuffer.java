@@ -38,12 +38,12 @@ public class ColorBuffer {
 		return alphaBits;
 	}
 	
-	public void setClearColor(float red, float green, float blue, float alpha) {
-		setClearColor(new Color(red, green, blue, alpha));
+	public void setClearColor(Color color) {
+		setClearColor(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
 	}
 	
-	public void setClearColor(Color color) {
-		glClearColor(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+	public void setClearColor(float red, float green, float blue, float alpha) {
+		glClearColor(red, green, blue, alpha);
 	}
 	
 	public void clear() {
