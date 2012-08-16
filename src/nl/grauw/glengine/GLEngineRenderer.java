@@ -16,6 +16,8 @@ public abstract class GLEngineRenderer implements Renderer {
 		if (context == null)
 			throw new RuntimeException("GLEngine context not available.");
 		onDrawFrame(context);
+		
+		context.checkError();
 	}
 	
 	abstract public void onDrawFrame(Context context);
@@ -25,6 +27,8 @@ public abstract class GLEngineRenderer implements Renderer {
 		if (context == null)
 			throw new RuntimeException("GLEngine context not available.");
 		onSurfaceChanged(context, width, height);
+		
+		context.checkError();
 	}
 	
 	abstract public void onSurfaceChanged(Context context, int width, int height);
@@ -34,6 +38,8 @@ public abstract class GLEngineRenderer implements Renderer {
 		context = new Context();
 		CapabilitiesLogger.log(context);
 		onSurfaceCreated(context, config);
+		
+		context.checkError();
 	}
 	
 	abstract public void onSurfaceCreated(Context context, EGLConfig config);
