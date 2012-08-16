@@ -63,7 +63,7 @@ public abstract class Variable {
 			for (VariableType type : values())
 				if (type.id == id)
 					return type;
-			return null;
+			throw new Error("Unrecognised variable type.");
 		}
 	}
 	
