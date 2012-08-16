@@ -112,6 +112,14 @@ public class ColorBuffer {
 		glBlendEquationSeparate(modeRGB.id, modeAlpha.id);
 	}
 	
+	public void setBlendColor(Color color) {
+		setBlendColor(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+	}
+	
+	public void setBlendColor(float red, float green, float blue, float alpha) {
+		glBlendColor(red, green, blue, alpha);
+	}
+	
 	public void enableDither() {
 		glEnable(GL_DITHER);
 	}
