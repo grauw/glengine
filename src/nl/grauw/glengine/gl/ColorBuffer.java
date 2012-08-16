@@ -1,0 +1,87 @@
+package nl.grauw.glengine.gl;
+
+import static android.opengl.GLES20.*;
+import nl.grauw.glengine.model.Color;
+
+public class ColorBuffer {
+	
+	private final int redBits;
+	private final int greenBits;
+	private final int blueBits;
+	private final int alphaBits;
+	private boolean redMask = true;
+	private boolean greenMask = true;
+	private boolean blueMask = true;
+	private boolean alphaMask = true;
+	Color clearColor = new Color(0, 0, 0, 0);
+	
+	public ColorBuffer() {
+		int[] params = new int[4];
+		glGetIntegerv(GL_RED_BITS, params, 0);
+		redBits = params[0];
+		glGetIntegerv(GL_GREEN_BITS, params, 0);
+		greenBits = params[0];
+		glGetIntegerv(GL_BLUE_BITS, params, 0);
+		blueBits = params[0];
+		glGetIntegerv(GL_ALPHA_BITS, params, 0);
+		alphaBits = params[0];
+	}
+	
+	public int getRedBits() {
+		return redBits;
+	}
+	
+	public int getGreenBits() {
+		return greenBits;
+	}
+	
+	public int getBlueBits() {
+		return blueBits;
+	}
+	
+	public int getAlphaBits() {
+		return alphaBits;
+	}
+	
+	public void setMask(boolean red, boolean green, boolean blue, boolean alpha) {
+		glColorMask(red, green, blue, alpha);
+		redMask = red;
+		greenMask = green;
+		blueMask = blue;
+		alphaMask = alpha;
+	}
+	
+	public boolean getRedMask() {
+		return redMask;
+	}
+	
+	public boolean getGreenMask() {
+		return greenMask;
+	}
+	
+	public boolean getBlueMask() {
+		return blueMask;
+	}
+	
+	public boolean getAlphaMask() {
+		return alphaMask;
+	}
+	
+	public void setClearColor(float red, float green, float blue, float alpha) {
+		setClearColor(new Color(red, green, blue, alpha));
+	}
+	
+	public void setClearColor(Color color) {
+		glClearColor(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+		clearColor = color;
+	}
+	
+	public Color getClearColor() {
+		return clearColor;
+	}
+	
+	public void clear() {
+		glClear(GL_COLOR_BUFFER_BIT);
+	}
+	
+}

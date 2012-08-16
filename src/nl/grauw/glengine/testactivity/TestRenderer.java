@@ -18,7 +18,8 @@ public class TestRenderer extends GLEngineRenderer {
 	
 	@Override
 	public void onDrawFrame(Context context) {
-		context.clear(true, false, false);
+		context.getColorBuffer().clear();
+//		context.clear(true, false, false);  // use when clearing multiple buffers
 		
 		FloatBuffer vertices = Utils.createFloatBuffer(new float[] {
 			 0.0f,  0.5f, 0.0f,
@@ -58,7 +59,7 @@ public class TestRenderer extends GLEngineRenderer {
 		
 		context.releaseShaderCompiler();
 		
-		context.setClearColor(0, 0, 0.5f, 1);
+		context.getColorBuffer().setClearColor(0, 0, 0.5f, 1);
 	}
 
 }

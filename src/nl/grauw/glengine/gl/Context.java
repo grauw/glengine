@@ -7,12 +7,14 @@ import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
 import nl.grauw.glengine.gl.Variable.Attribute;
-import nl.grauw.glengine.model.Color;
 import nl.grauw.glengine.model.Size;
 
 public class Context {
 	
 	private Program currentProgram = null;
+	private final ColorBuffer colorBuffer = new ColorBuffer();
+	private final DepthBuffer depthBuffer = new DepthBuffer();
+	private final StencilBuffer stencilBuffer = new StencilBuffer();
 	
 	private final String vendor;
 	private final String renderer;
@@ -144,20 +146,16 @@ public class Context {
 		glReleaseShaderCompiler();
 	}
 	
-	public void setClearColor(Color color) {
-		glClearColor(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+	public ColorBuffer getColorBuffer() {
+		return colorBuffer;
 	}
 	
-	public void setClearColor(float red, float green, float blue, float alpha) {
-		glClearColor(red, green, blue, alpha);
-	}
-
-	public void setClearDepth(float depth) {
-		glClearDepthf(depth);
+	public DepthBuffer getDepthBuffer() {
+		return depthBuffer;
 	}
 	
-	public void setClearStencil(int stencil) {
-		glClearStencil(stencil);
+	public StencilBuffer getStencilBuffer() {
+		return stencilBuffer;
 	}
 	
 	public void clear(boolean colorBuffer, boolean depthBuffer, boolean stencilBuffer) {
