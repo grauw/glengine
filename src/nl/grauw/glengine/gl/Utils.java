@@ -16,8 +16,8 @@ public class Utils {
 	 * A one-liner integer get call that reuses the buffer.
 	 * Note: may only be called from the OpenGL thread.
 	 */
-	public static int glGetInteger(int type) {
-		glGetIntegerv(type, ONE_INT_BUFFER);
+	public static int glGetInteger(int parameter) {
+		glGetIntegerv(parameter, ONE_INT_BUFFER);
 		return ONE_INT_BUFFER.get(0);
 	}
 	
