@@ -4,6 +4,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 import nl.grauw.glengine.gl.Context;
+import nl.grauw.glengine.gl.GLEngineException;
 
 import android.opengl.GLSurfaceView.Renderer;
 
@@ -14,7 +15,7 @@ public abstract class GLEngineRenderer implements Renderer {
 	@Override
 	public void onDrawFrame(GL10 gl) {
 		if (context == null)
-			throw new RuntimeException("GLEngine context not available.");
+			throw new GLEngineException("GLEngine context not available.");
 		onDrawFrame(context);
 		
 		context.checkError();
@@ -25,7 +26,7 @@ public abstract class GLEngineRenderer implements Renderer {
 	@Override
 	public void onSurfaceChanged(GL10 gl, int width, int height) {
 		if (context == null)
-			throw new RuntimeException("GLEngine context not available.");
+			throw new GLEngineException("GLEngine context not available.");
 		onSurfaceChanged(context, width, height);
 		
 		context.checkError();

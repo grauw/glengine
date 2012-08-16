@@ -17,6 +17,6 @@ public enum PixelDataType {
 		for (PixelDataType type : values())
 			if (type.id == id)
 				return type;
-		throw new RuntimeException("Unrecognised color read type.");
+		throw new GLEngineException("Unrecognised color read type.");
 	}
 }

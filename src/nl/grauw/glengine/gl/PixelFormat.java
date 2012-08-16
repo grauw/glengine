@@ -18,6 +18,6 @@ public enum PixelFormat {
 		for (PixelFormat format : values())
 			if (format.id == id)
 				return format;
-		throw new RuntimeException("Unrecognised color read format.");
+		throw new GLEngineException("Unrecognised color read format.");
 	}
 }

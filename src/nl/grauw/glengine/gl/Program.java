@@ -27,7 +27,7 @@ public class Program {
 		handle = glCreateProgram();
 		
 		if (handle == 0)
-			throw new RuntimeException("Failed to create program.");
+			throw new GLEngineException("Failed to create program.");
 	}
 	
 	protected void delete() {
@@ -44,7 +44,7 @@ public class Program {
 	
 	public void attachShader(VertexShader shader) {
 		if (vertexShader != null)
-			throw new RuntimeException("A vertex shader was already attached.");
+			throw new GLEngineException("A vertex shader was already attached.");
 		
 		glAttachShader(handle, shader.handle);
 		vertexShader = shader;
@@ -52,7 +52,7 @@ public class Program {
 	
 	public void attachShader(FragmentShader shader) {
 		if (fragmentShader != null)
-			throw new RuntimeException("A fragment shader was already attached.");
+			throw new GLEngineException("A fragment shader was already attached.");
 		
 		glAttachShader(handle, shader.handle);
 		fragmentShader = shader;
@@ -60,7 +60,7 @@ public class Program {
 	
 	public void detachShader(VertexShader shader) {
 		if (vertexShader != shader)
-			throw new RuntimeException("Shader is not attached to this program.");
+			throw new GLEngineException("Shader is not attached to this program.");
 		
 		glDetachShader(handle, shader.handle);
 		vertexShader = null;
@@ -68,7 +68,7 @@ public class Program {
 	
 	public void detachShader(FragmentShader shader) {
 		if (fragmentShader != shader)
-			throw new RuntimeException("Shader is not attached to this program.");
+			throw new GLEngineException("Shader is not attached to this program.");
 		
 		glDetachShader(handle, shader.handle);
 		fragmentShader = null;
@@ -82,7 +82,7 @@ public class Program {
 		glLinkProgram(handle);
 		
 		if (!getLinkStatus()) {
-			throw new RuntimeException("Failed to link program.\n" + getInfoLog());
+			throw new GLEngineException("Failed to link program.\n%s", getInfoLog());
 		}
 		
 		updateActiveAttributes();
@@ -194,7 +194,7 @@ public class Program {
 	
 	private void checkCurrentProgram() {
 		if (context.getCurrentProgram() != this)
-			throw new RuntimeException("Must be current program to set uniform variable.");
+			throw new GLEngineException("Must be current program to set uniform variable.");
 	}
 	
 }

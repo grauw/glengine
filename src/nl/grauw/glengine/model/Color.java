@@ -1,5 +1,7 @@
 package nl.grauw.glengine.model;
 
+import nl.grauw.glengine.gl.GLEngineException;
+
 public class Color {
 	
 	private final float red, green, blue, alpha;
@@ -50,7 +52,7 @@ public class Color {
 	
 	public Color darker(final float percentage) {
 		if (percentage <= 0f || percentage >= 1f)
-			throw new RuntimeException("Percentage must be between 0 and 1.");
+			throw new GLEngineException("Percentage must be between 0 and 1.");
 		
 		return new Color(red * percentage, green * percentage, blue * percentage, alpha);
 	}
@@ -61,7 +63,7 @@ public class Color {
 	
 	public Color lighter(final float percentage) {
 		if (percentage <= 0f || percentage >= 1f)
-			throw new RuntimeException("Percentage must be between 0 and 1.");
+			throw new GLEngineException("Percentage must be between 0 and 1.");
 		
 		return new Color(1f - (1f - red) * percentage, 1f - (1f - green) * percentage, 1f - (1f - blue) * percentage, alpha);
 	}

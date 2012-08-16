@@ -50,10 +50,10 @@ public class ColorBuffer {
 	
 	public void readPixels(int x, int y, int width, int height, PixelFormat format, PixelDataType type, Buffer pixels) {
 		if (format == PixelFormat.LUMINANCE || format == PixelFormat.LUMINANCE_ALPHA)
-			throw new RuntimeException("Unsupported format " + format + ".");
+			throw new GLEngineException("Unsupported format %s.", format);
 		if ((type == PixelDataType.UNSIGNED_SHORT_5_6_5 && format != PixelFormat.RGB) ||
 			((type == PixelDataType.UNSIGNED_SHORT_4_4_4_4 || type == PixelDataType.UNSIGNED_SHORT_5_5_5_1) && format != PixelFormat.RGBA))
-			throw new RuntimeException("Invalid format/type combination: " + format + " " + type + ".");
+			throw new GLEngineException("Invalid format/type combination: %s %s.", format, type);
 		glReadPixels(x, y, width, height, format.id, type.id, pixels);
 	}
 	
@@ -83,13 +83,13 @@ public class ColorBuffer {
 	
 	public void setBlendFunction(BlendCoefficient srcFactor, BlendCoefficient dstFactor) {
 		if (dstFactor == BlendCoefficient.SRC_ALPHA_SATURATE)
-			throw new RuntimeException("Unsupported destination blending factor: " + dstFactor);
+			throw new GLEngineException("Unsupported destination blending factor: %s.", dstFactor);
 		glBlendFunc(srcFactor.id, dstFactor.id);
 	}
 	
 	public void setBlendFunction(BlendCoefficient srcRGB, BlendCoefficient dstRGB, BlendCoefficient srcAlpha, BlendCoefficient dstAlpha) {
 		if (dstRGB == BlendCoefficient.SRC_ALPHA_SATURATE || dstAlpha == BlendCoefficient.SRC_ALPHA_SATURATE)
-			throw new RuntimeException("Unsupported destination blending factor: " + BlendCoefficient.SRC_ALPHA_SATURATE);
+			throw new GLEngineException("Unsupported destination blending factor: %s.", BlendCoefficient.SRC_ALPHA_SATURATE);
 		glBlendFuncSeparate(srcRGB.id, dstRGB.id, srcAlpha.id, dstAlpha.id);
 	}
 	

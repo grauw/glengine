@@ -63,7 +63,7 @@ public abstract class Variable {
 			for (VariableType type : values())
 				if (type.id == id)
 					return type;
-			throw new Error("Unrecognised variable type.");
+			throw new GLEngineException("Unrecognised variable type.");
 		}
 	}
 	

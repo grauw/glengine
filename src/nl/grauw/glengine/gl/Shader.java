@@ -10,7 +10,7 @@ public abstract class Shader {
 		handle = glCreateShader(type);
 		
 		if (handle == 0)
-			throw new RuntimeException("Failed to create shader.");
+			throw new GLEngineException("Failed to create shader.");
 	}
 	
 	protected void delete() {
@@ -30,7 +30,7 @@ public abstract class Shader {
 		glCompileShader(handle);
 		
 		if (!getCompileStatus()) {
-			throw new RuntimeException("Failed to compile shader.\n" + getInfoLog());
+			throw new GLEngineException("Failed to compile shader.\n%s", getInfoLog());
 		}
 	}
 	

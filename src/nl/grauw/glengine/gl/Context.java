@@ -6,6 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
+import nl.grauw.glengine.gl.GLEngineException.OpenGLException;
 import nl.grauw.glengine.gl.Variable.Attribute;
 import nl.grauw.glengine.model.Size;
 
@@ -259,17 +260,17 @@ public class Context {
 			case GL_NO_ERROR:
 				return;
 			case GL_INVALID_ENUM:
-				throw new RuntimeException("OpenGL error: Invalid enum.");
+				throw new OpenGLException("Invalid enum.");
 			case GL_INVALID_VALUE:
-				throw new RuntimeException("OpenGL error: Invalid value.");
+				throw new OpenGLException("Invalid value.");
 			case GL_INVALID_OPERATION:
-				throw new RuntimeException("OpenGL error: Invalid operation.");
+				throw new OpenGLException("Invalid operation.");
 			case GL_INVALID_FRAMEBUFFER_OPERATION:
-				throw new RuntimeException("OpenGL error: Invalid framebuffer operation.");
+				throw new OpenGLException("Invalid framebuffer operation.");
 			case GL_OUT_OF_MEMORY:
-				throw new RuntimeException("OpenGL error: Invalid out of memory.");
+				throw new OpenGLException("Invalid out of memory.");
 			default:
-				throw new RuntimeException("OpenGL error: Unrecognised error " + flag + ".");
+				throw new OpenGLException("Unrecognised error %s.", flag);
 		}
 	}
 	
