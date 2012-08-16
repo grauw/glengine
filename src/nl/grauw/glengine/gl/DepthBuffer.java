@@ -40,4 +40,8 @@ public class DepthBuffer {
 		glClear(GL_DEPTH_BUFFER_BIT);
 	}
 	
+	public void setDepthFunction(CompareFunction function) {
+		glDepthFunc(function.id);
+	}
+	
 }
