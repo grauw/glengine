@@ -92,12 +92,66 @@ public class ColorBuffer {
 		glDisable(GL_BLEND);
 	}
 	
+	public void setBlendFunction(BlendCoefficient srcFactor, BlendCoefficient dstFactor) {
+		if (dstFactor == BlendCoefficient.SRC_ALPHA_SATURATE)
+			throw new RuntimeException("Unsupported destination blending factor: " + dstFactor);
+		glBlendFunc(srcFactor.id, dstFactor.id);
+	}
+	
+	public void setBlendFunction(BlendCoefficient srcRGB, BlendCoefficient dstRGB, BlendCoefficient srcAlpha, BlendCoefficient dstAlpha) {
+		if (dstRGB == BlendCoefficient.SRC_ALPHA_SATURATE || dstAlpha == BlendCoefficient.SRC_ALPHA_SATURATE)
+			throw new RuntimeException("Unsupported destination blending factor: " + BlendCoefficient.SRC_ALPHA_SATURATE);
+		glBlendFuncSeparate(srcRGB.id, dstRGB.id, srcAlpha.id, dstAlpha.id);
+	}
+	
+	public void setBlendEquation(BlendEquation mode) {
+		glBlendEquation(mode.id);
+	}
+	
+	public void setBlendEquation(BlendEquation modeRGB, BlendEquation modeAlpha) {
+		glBlendEquationSeparate(modeRGB.id, modeAlpha.id);
+	}
+	
 	public void enableDither() {
 		glEnable(GL_DITHER);
 	}
 	
 	public void disableDither() {
 		glDisable(GL_DITHER);
+	}
+	
+	public enum BlendCoefficient {
+		ZERO(GL_ZERO),
+		ONE(GL_ONE),
+		SRC_COLOR(GL_SRC_COLOR),
+		ONE_MINUS_SRC_COLOR(GL_ONE_MINUS_SRC_COLOR),
+		SRC_ALPHA(GL_SRC_ALPHA),
+		ONE_MINUS_SRC_ALPHA(GL_ONE_MINUS_SRC_ALPHA),
+		DST_COLOR(GL_DST_COLOR),
+		ONE_MINUS_DST_COLOR(GL_ONE_MINUS_DST_COLOR),
+		DST_ALPHA(GL_DST_ALPHA),
+		ONE_MINUS_DST_ALPHA(GL_ONE_MINUS_DST_ALPHA),
+		CONSTANT_COLOR(GL_CONSTANT_COLOR),
+		ONE_MINUS_CONSTANT_COLOR(GL_ONE_MINUS_CONSTANT_COLOR),
+		CONSTANT_ALPHA(GL_CONSTANT_ALPHA),
+		ONE_MINUS_CONSTANT_ALPHA(GL_ONE_MINUS_CONSTANT_ALPHA),
+		SRC_ALPHA_SATURATE(GL_SRC_ALPHA_SATURATE);
+		
+		final int id;
+		private BlendCoefficient(final int id) {
+			this.id = id;
+		}
+	}
+	
+	public enum BlendEquation {
+		ADD(GL_FUNC_ADD),
+		SUBTRACT(GL_FUNC_SUBTRACT),
+		REVERSE_SUBTRACT(GL_FUNC_REVERSE_SUBTRACT);
+		
+		final int id;
+		private BlendEquation(final int id) {
+			this.id = id;
+		}
 	}
 	
 }
