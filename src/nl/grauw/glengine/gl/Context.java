@@ -178,6 +178,10 @@ public class Context {
 		glDisable(GL_SCISSOR_TEST);
 	}
 	
+	public boolean isScissorTestEnabled() {
+		return glIsEnabled(GL_SCISSOR_TEST);
+	}
+	
 	public void setScissor(int x, int y, int width, int height) {
 		glScissor(x, y, width, height);
 	}

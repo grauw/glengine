@@ -44,6 +44,10 @@ public class StencilBuffer {
 		glDisable(GL_STENCIL_TEST);
 	}
 	
+	public boolean isStencilTestEnabled() {
+		return glIsEnabled(GL_STENCIL_TEST);
+	}
+	
 	public void setStencilFunction(CompareFunction function, int reference, int mask) {
 		glStencilFunc(function.id, reference, mask);
 	}

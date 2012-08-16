@@ -62,6 +62,10 @@ public class ColorBuffer {
 		glDisable(GL_BLEND);
 	}
 	
+	public boolean isBlendEnabled() {
+		return glIsEnabled(GL_BLEND);
+	}
+	
 	public void setBlendFunction(BlendCoefficient srcFactor, BlendCoefficient dstFactor) {
 		if (dstFactor == BlendCoefficient.SRC_ALPHA_SATURATE)
 			throw new RuntimeException("Unsupported destination blending factor: " + dstFactor);
@@ -98,6 +102,10 @@ public class ColorBuffer {
 		glDisable(GL_DITHER);
 	}
 	
+	public boolean isDitherEnabled() {
+		return glIsEnabled(GL_DITHER);
+	}
+	
 	public void enableSampleAlphaToCoverage() {
 		glEnable(GL_SAMPLE_ALPHA_TO_COVERAGE);
 	}
@@ -106,12 +114,20 @@ public class ColorBuffer {
 		glDisable(GL_SAMPLE_ALPHA_TO_COVERAGE);
 	}
 	
+	public boolean isSampleAlphaToCoverageEnabled() {
+		return glIsEnabled(GL_SAMPLE_ALPHA_TO_COVERAGE);
+	}
+	
 	public void enableSampleCoverage() {
 		glEnable(GL_SAMPLE_COVERAGE);
 	}
 	
 	public void disableSampleCoverage() {
 		glDisable(GL_SAMPLE_COVERAGE);
+	}
+	
+	public boolean isSampleCoverageEnabled() {
+		return glIsEnabled(GL_SAMPLE_COVERAGE);
 	}
 	
 	public void setSampleCoverage(float value, boolean invert) {

@@ -40,6 +40,10 @@ public class DepthBuffer {
 		glDisable(GL_DEPTH_TEST);
 	}
 	
+	public boolean isDepthTestEnabled() {
+		return glIsEnabled(GL_DEPTH_TEST);
+	}
+	
 	public void setFunction(CompareFunction function) {
 		glDepthFunc(function.id);
 	}
