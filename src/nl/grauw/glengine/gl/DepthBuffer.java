@@ -5,11 +5,6 @@ import static android.opengl.GLES20.*;
 public class DepthBuffer {
 	
 	private final int depthBits;
-	private float clearDepth = 1;
-	private float rangeNear = 0;
-	private float rangeFar = 1;
-	private boolean writeMask = true;
-	private CompareFunction function = CompareFunction.LESS;
 	
 	public DepthBuffer() {
 		int[] params = new int[4];
@@ -23,11 +18,6 @@ public class DepthBuffer {
 	
 	public void setClearDepth(float depth) {
 		glClearDepthf(depth);
-		clearDepth = depth;
-	}
-	
-	public float getClearDepth() {
-		return clearDepth;
 	}
 	
 	public void clear() {
@@ -36,25 +26,10 @@ public class DepthBuffer {
 	
 	public void setRange(float near, float far) {
 		glDepthRangef(near, far);
-		rangeNear = near;
-		rangeFar = far;
-	}
-	
-	public float getRangeNear() {
-		return rangeNear;
-	}
-	
-	public float getRangeFar() {
-		return rangeFar;
 	}
 	
 	public void setWriteMask(boolean mask) {
 		glDepthMask(mask);
-		writeMask = mask;
-	}
-	
-	public boolean getWriteMask() {
-		return writeMask;
 	}
 	
 	public void enableDepthTest() {
@@ -67,11 +42,6 @@ public class DepthBuffer {
 	
 	public void setFunction(CompareFunction function) {
 		glDepthFunc(function.id);
-		this.function = function;
-	}
-	
-	public CompareFunction getFunction() {
-		return function;
 	}
 	
 }

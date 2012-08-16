@@ -9,11 +9,6 @@ public class ColorBuffer {
 	private final int greenBits;
 	private final int blueBits;
 	private final int alphaBits;
-	Color clearColor = new Color(0, 0, 0, 0);
-	private boolean redWriteMask = true;
-	private boolean greenWriteMask = true;
-	private boolean blueWriteMask = true;
-	private boolean alphaWriteMask = true;
 	
 	public ColorBuffer() {
 		int[] params = new int[4];
@@ -49,11 +44,6 @@ public class ColorBuffer {
 	
 	public void setClearColor(Color color) {
 		glClearColor(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
-		clearColor = color;
-	}
-	
-	public Color getClearColor() {
-		return clearColor;
 	}
 	
 	public void clear() {
@@ -62,26 +52,6 @@ public class ColorBuffer {
 	
 	public void setWriteMask(boolean red, boolean green, boolean blue, boolean alpha) {
 		glColorMask(red, green, blue, alpha);
-		redWriteMask = red;
-		greenWriteMask = green;
-		blueWriteMask = blue;
-		alphaWriteMask = alpha;
-	}
-	
-	public boolean getRedWriteMask() {
-		return redWriteMask;
-	}
-	
-	public boolean getGreenWriteMask() {
-		return greenWriteMask;
-	}
-	
-	public boolean getBlueWriteMask() {
-		return blueWriteMask;
-	}
-	
-	public boolean getAlphaWriteMask() {
-		return alphaWriteMask;
 	}
 	
 	public void enableBlend() {
