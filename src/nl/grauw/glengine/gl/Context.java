@@ -253,6 +253,26 @@ public class Context {
 		glDrawArrays(type.id, first, count);
 	}
 	
+	public void checkError() {
+		int flag = glGetError();
+		switch (flag) {
+			case GL_NO_ERROR:
+				return;
+			case GL_INVALID_ENUM:
+				throw new RuntimeException("OpenGL error: Invalid enum.");
+			case GL_INVALID_VALUE:
+				throw new RuntimeException("OpenGL error: Invalid value.");
+			case GL_INVALID_OPERATION:
+				throw new RuntimeException("OpenGL error: Invalid operation.");
+			case GL_INVALID_FRAMEBUFFER_OPERATION:
+				throw new RuntimeException("OpenGL error: Invalid framebuffer operation.");
+			case GL_OUT_OF_MEMORY:
+				throw new RuntimeException("OpenGL error: Invalid out of memory.");
+			default:
+				throw new RuntimeException("OpenGL error: Unrecognised error " + flag + ".");
+		}
+	}
+	
 	public enum PrimitiveType {
 		POINTS(GL_POINTS),
 		LINE_STRIP(GL_LINE_STRIP),
