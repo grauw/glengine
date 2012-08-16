@@ -49,6 +49,9 @@ public class ColorBuffer {
 	}
 	
 	public void readPixels(int x, int y, int width, int height, ColorReadFormat format, ColorReadType type, Buffer pixels) {
+		if ((type == ColorReadType.UNSIGNED_SHORT_5_6_5 && format != ColorReadFormat.RGB) ||
+			((type == ColorReadType.UNSIGNED_SHORT_4_4_4_4 || type == ColorReadType.UNSIGNED_SHORT_5_5_5_1) && format != ColorReadFormat.RGBA))
+			throw new RuntimeException("Invalid format/type combination: " + format + " " + type + ".");
 		glReadPixels(x, y, width, height, format.id, type.id, pixels);
 	}
 	
