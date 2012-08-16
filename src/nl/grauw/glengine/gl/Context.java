@@ -170,6 +170,18 @@ public class Context {
 		glViewport(x, y, width, height);
 	}
 	
+	public void enableScissorTest() {
+		glEnable(GL_SCISSOR_TEST);
+	}
+	
+	public void disableScissorTest() {
+		glDisable(GL_SCISSOR_TEST);
+	}
+	
+	public void setScissor(int x, int y, int width, int height) {
+		glScissor(x, y, width, height);
+	}
+	
 	public void useProgram(Program program) {
 		glUseProgram(program.handle);
 		currentProgram = program;
