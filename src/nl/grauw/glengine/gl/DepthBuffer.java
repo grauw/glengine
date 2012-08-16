@@ -6,6 +6,8 @@ public class DepthBuffer {
 	
 	private final int depthBits;
 	private float clearDepth = 1;
+	private float rangeNear = 0;
+	private float rangeFar = 1;
 	private boolean mask = true;
 	private CompareFunction function = CompareFunction.LESS;
 	
@@ -30,6 +32,20 @@ public class DepthBuffer {
 	
 	public void clear() {
 		glClear(GL_DEPTH_BUFFER_BIT);
+	}
+	
+	public void setRange(float near, float far) {
+		glDepthRangef(near, far);
+		rangeNear = near;
+		rangeFar = far;
+	}
+	
+	public float getRangeNear() {
+		return rangeNear;
+	}
+	
+	public float getRangeFar() {
+		return rangeFar;
 	}
 	
 	public void setMask(boolean writeEnabled) {
