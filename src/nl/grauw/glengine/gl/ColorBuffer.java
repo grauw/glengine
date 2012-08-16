@@ -49,6 +49,8 @@ public class ColorBuffer {
 	}
 	
 	public void readPixels(int x, int y, int width, int height, PixelFormat format, PixelDataType type, Buffer pixels) {
+		if (format == PixelFormat.LUMINANCE || format == PixelFormat.LUMINANCE_ALPHA)
+			throw new RuntimeException("Unsupported format " + format + ".");
 		if ((type == PixelDataType.UNSIGNED_SHORT_5_6_5 && format != PixelFormat.RGB) ||
 			((type == PixelDataType.UNSIGNED_SHORT_4_4_4_4 || type == PixelDataType.UNSIGNED_SHORT_5_5_5_1) && format != PixelFormat.RGBA))
 			throw new RuntimeException("Invalid format/type combination: " + format + " " + type + ".");
@@ -150,7 +152,9 @@ public class ColorBuffer {
 	public enum PixelFormat {
 		ALPHA(GL_ALPHA),
 		RGB(GL_RGB),
-		RGBA(GL_RGBA);
+		RGBA(GL_RGBA),
+		LUMINANCE(GL_LUMINANCE),
+		LUMINANCE_ALPHA(GL_LUMINANCE_ALPHA);
 		
 		final int id;
 		private PixelFormat(final int id) {
