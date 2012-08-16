@@ -7,6 +7,7 @@ public class DepthBuffer {
 	private final int depthBits;
 	private float clearDepth = 1;
 	private boolean mask = true;
+	private CompareFunction function = CompareFunction.LESS;
 	
 	public DepthBuffer() {
 		int[] params = new int[4];
@@ -42,6 +43,11 @@ public class DepthBuffer {
 	
 	public void setFunction(CompareFunction function) {
 		glDepthFunc(function.id);
+		this.function = function;
+	}
+	
+	public CompareFunction getFunction() {
+		return function;
 	}
 	
 }
