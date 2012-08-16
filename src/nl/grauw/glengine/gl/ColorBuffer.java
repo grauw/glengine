@@ -48,19 +48,19 @@ public class ColorBuffer {
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 	
-	public void readPixels(int x, int y, int width, int height, ColorReadFormat format, ColorReadType type, Buffer pixels) {
-		if ((type == ColorReadType.UNSIGNED_SHORT_5_6_5 && format != ColorReadFormat.RGB) ||
-			((type == ColorReadType.UNSIGNED_SHORT_4_4_4_4 || type == ColorReadType.UNSIGNED_SHORT_5_5_5_1) && format != ColorReadFormat.RGBA))
+	public void readPixels(int x, int y, int width, int height, PixelFormat format, PixelDataType type, Buffer pixels) {
+		if ((type == PixelDataType.UNSIGNED_SHORT_5_6_5 && format != PixelFormat.RGB) ||
+			((type == PixelDataType.UNSIGNED_SHORT_4_4_4_4 || type == PixelDataType.UNSIGNED_SHORT_5_5_5_1) && format != PixelFormat.RGBA))
 			throw new RuntimeException("Invalid format/type combination: " + format + " " + type + ".");
 		glReadPixels(x, y, width, height, format.id, type.id, pixels);
 	}
 	
-	public ColorReadFormat getImplementationColorReadFormat() {
-		return ColorReadFormat.getById(Utils.glGetInteger(GL_IMPLEMENTATION_COLOR_READ_FORMAT));
+	public PixelFormat getImplementationColorReadFormat() {
+		return PixelFormat.getById(Utils.glGetInteger(GL_IMPLEMENTATION_COLOR_READ_FORMAT));
 	}
 	
-	public ColorReadType getImplementationColorReadType() {
-		return ColorReadType.getById(Utils.glGetInteger(GL_IMPLEMENTATION_COLOR_READ_TYPE));
+	public PixelDataType getImplementationColorReadType() {
+		return PixelDataType.getById(Utils.glGetInteger(GL_IMPLEMENTATION_COLOR_READ_TYPE));
 	}
 	
 	public void setWriteMask(boolean red, boolean green, boolean blue, boolean alpha) {
@@ -147,37 +147,37 @@ public class ColorBuffer {
 		glSampleCoverage(value, invert);
 	}
 	
-	public enum ColorReadFormat {
+	public enum PixelFormat {
 		ALPHA(GL_ALPHA),
 		RGB(GL_RGB),
 		RGBA(GL_RGBA);
 		
 		final int id;
-		private ColorReadFormat(final int id) {
+		private PixelFormat(final int id) {
 			this.id = id;
 		}
 		
-		public static ColorReadFormat getById(final int id) {
-			for (ColorReadFormat format : values())
+		public static PixelFormat getById(final int id) {
+			for (PixelFormat format : values())
 				if (format.id == id)
 					return format;
 			throw new RuntimeException("Unrecognised color read format.");
 		}
 	}
 	
-	public enum ColorReadType {
+	public enum PixelDataType {
 		UNSIGNED_BYTE(GL_UNSIGNED_BYTE),
 		UNSIGNED_SHORT_5_6_5(GL_UNSIGNED_SHORT_5_6_5),
 		UNSIGNED_SHORT_4_4_4_4(GL_UNSIGNED_SHORT_4_4_4_4),
 		UNSIGNED_SHORT_5_5_5_1(GL_UNSIGNED_SHORT_5_5_5_1);
 		
 		final int id;
-		private ColorReadType(final int id) {
+		private PixelDataType(final int id) {
 			this.id = id;
 		}
 		
-		public static ColorReadType getById(final int id) {
-			for (ColorReadType type : values())
+		public static PixelDataType getById(final int id) {
+			for (PixelDataType type : values())
 				if (type.id == id)
 					return type;
 			throw new RuntimeException("Unrecognised color read type.");
