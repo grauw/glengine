@@ -98,6 +98,26 @@ public class ColorBuffer {
 		glDisable(GL_DITHER);
 	}
 	
+	public void enableSampleAlphaToCoverage() {
+		glEnable(GL_SAMPLE_ALPHA_TO_COVERAGE);
+	}
+	
+	public void disableSampleAlphaToCoverage() {
+		glDisable(GL_SAMPLE_ALPHA_TO_COVERAGE);
+	}
+	
+	public void enableSampleCoverage() {
+		glEnable(GL_SAMPLE_COVERAGE);
+	}
+	
+	public void disableSampleCoverage() {
+		glDisable(GL_SAMPLE_COVERAGE);
+	}
+	
+	public void setSampleCoverage(float value, boolean invert) {
+		glSampleCoverage(value, invert);
+	}
+	
 	public enum BlendCoefficient {
 		ZERO(GL_ZERO),
 		ONE(GL_ONE),
