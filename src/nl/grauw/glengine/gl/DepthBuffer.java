@@ -7,9 +7,7 @@ public class DepthBuffer {
 	private final int depthBits;
 	
 	public DepthBuffer() {
-		int[] params = new int[4];
-		glGetIntegerv(GL_DEPTH_BITS, params, 0);
-		depthBits = params[0];
+		depthBits = Utils.glGetInteger(GL_DEPTH_BITS);
 	}
 	
 	public int getDepthBits() {

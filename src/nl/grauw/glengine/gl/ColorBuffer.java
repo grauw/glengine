@@ -11,15 +11,10 @@ public class ColorBuffer {
 	private final int alphaBits;
 	
 	public ColorBuffer() {
-		int[] params = new int[4];
-		glGetIntegerv(GL_RED_BITS, params, 0);
-		redBits = params[0];
-		glGetIntegerv(GL_GREEN_BITS, params, 0);
-		greenBits = params[0];
-		glGetIntegerv(GL_BLUE_BITS, params, 0);
-		blueBits = params[0];
-		glGetIntegerv(GL_ALPHA_BITS, params, 0);
-		alphaBits = params[0];
+		redBits = Utils.glGetInteger(GL_RED_BITS);
+		greenBits = Utils.glGetInteger(GL_GREEN_BITS);
+		blueBits = Utils.glGetInteger(GL_BLUE_BITS);
+		alphaBits = Utils.glGetInteger(GL_ALPHA_BITS);
 	}
 	
 	public int getRedBits() {

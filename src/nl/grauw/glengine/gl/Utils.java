@@ -1,5 +1,7 @@
 package nl.grauw.glengine.gl;
 
+import static android.opengl.GLES20.*;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -7,6 +9,17 @@ import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 
 public class Utils {
+	
+	public static IntBuffer ONE_INT_BUFFER = createIntBuffer(1);
+	
+	/**
+	 * A one-liner integer get call that reuses the buffer.
+	 * Note: may only be called from the OpenGL thread.
+	 */
+	public static int glGetInteger(int type) {
+		glGetIntegerv(type, ONE_INT_BUFFER);
+		return ONE_INT_BUFFER.get(0);
+	}
 	
 	/**
 	 * Allocate a native byte buffer suitable for GL.
