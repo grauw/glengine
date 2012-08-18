@@ -6,6 +6,7 @@ import java.nio.FloatBuffer;
 import javax.microedition.khronos.egl.EGLConfig;
 
 import android.graphics.Bitmap;
+import android.os.SystemClock;
 
 import nl.grauw.glengine.GLEngineRenderer;
 import nl.grauw.glengine.gl.Context;
@@ -52,7 +53,7 @@ public class TestRenderer extends GLEngineRenderer {
 		context.setVertexAttribPointer("texCoord", 2, 0, texCoords);
 		context.enableVertexAttribArray("texCoord");
 		program.setUniformValue("color.color", 1, 0, 0, 1);
-		program.setUniformValue("color.multiplier", 0.5f);
+		program.setUniformValue("time", SystemClock.uptimeMillis() / 1000f);
 		program.setUniformValue("texture", context.getActiveTextureUnit());
 		
 		context.drawArrays(PrimitiveType.TRIANGLES, 0, 3);
@@ -82,13 +83,14 @@ public class TestRenderer extends GLEngineRenderer {
 			"precision mediump float;" +
 			"struct test {" +
 			"    vec4[2] color;" +
-			"    float multiplier;" +
 			"};" +
+			"uniform float time;" +
 			"uniform test color;" +
 			"varying vec2 v_texCoord;" +
 			"uniform sampler2D texture;" +
 			"void main() {" +
-			"    gl_FragColor = mix(texture2D(texture, v_texCoord), (color.color[0] + color.color[1]), color.multiplier);" +
+			"    float mixValue = sin(time) / 2.8 + 0.5;" +
+			"    gl_FragColor = mix(texture2D(texture, v_texCoord), (color.color[0] + color.color[1]), mixValue);" +
 			"}"
 		);
 		fragmentShader.compile();
