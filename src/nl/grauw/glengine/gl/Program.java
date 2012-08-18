@@ -126,6 +126,8 @@ public class Program {
 		for (int index = 0; index < count; index++) {
 			glGetActiveAttrib(handle, index, maxNameLength, nameLengthBuffer, 0, sizeBuffer, 0, typeBuffer, 0, nameBuffer, 0);
 			String name = new String(nameBuffer, 0, nameLengthBuffer[0]);
+			if (sizeBuffer[0] > 1 && name.endsWith("[0]"))
+				name = name.substring(0, name.length() - 3);
 			int location = glGetAttribLocation(handle, name);
 			activeAttributes.put(name, new Attribute(location, name, sizeBuffer[0], VariableType.getById(typeBuffer[0])));
 		}
@@ -151,6 +153,8 @@ public class Program {
 		for (int index = 0; index < count; index++) {
 			glGetActiveUniform(handle, index, maxNameLength, nameLengthBuffer, 0, sizeBuffer, 0, typeBuffer, 0, nameBuffer, 0);
 			String name = new String(nameBuffer, 0, nameLengthBuffer[0]);
+			if (sizeBuffer[0] > 1 && name.endsWith("[0]"))
+				name = name.substring(0, name.length() - 3);
 			int location = glGetUniformLocation(handle, name);
 			activeUniforms.put(name, new Uniform(location, name, sizeBuffer[0], VariableType.getById(typeBuffer[0])));
 		}
