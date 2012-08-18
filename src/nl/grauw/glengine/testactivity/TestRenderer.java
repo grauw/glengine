@@ -88,8 +88,7 @@ public class TestRenderer extends GLEngineRenderer {
 			"varying vec2 v_texCoord;" +
 			"uniform sampler2D texture;" +
 			"void main() {" +
-			"    gl_FragColor = texture2D(texture, v_texCoord) * (1.0 - color.multiplier)" +
-			"                 + (color.color[0] + color.color[1]) * color.multiplier;" +
+			"    gl_FragColor = mix(texture2D(texture, v_texCoord), (color.color[0] + color.color[1]), color.multiplier);" +
 			"}"
 		);
 		fragmentShader.compile();
