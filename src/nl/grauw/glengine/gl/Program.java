@@ -192,6 +192,15 @@ public class Program {
 		glUniform4f(uniform.getLocation(), x, y, z, w);
 	}
 	
+	public void setUniformValue(String uniformName, TextureUnit unit) {
+		setUniformValue(getUniform(uniformName), unit);
+	}
+	
+	public void setUniformValue(Uniform uniform, TextureUnit unit) {
+		checkCurrentProgram();
+		glUniform1i(uniform.getLocation(), unit.getIndex());
+	}
+	
 	private void checkCurrentProgram() {
 		if (context.getCurrentProgram() != this)
 			throw new GLEngineException("Must be current program to set uniform variable.");

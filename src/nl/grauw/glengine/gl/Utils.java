@@ -39,6 +39,11 @@ public class Utils {
 		return ONE_INT_BUFFER.get(0);
 	}
 	
+	static int glGenTexture() {
+		glGenTextures(1, Utils.ONE_INT_BUFFER);
+		return Utils.ONE_INT_BUFFER.get(0);
+	}
+	
 	/**
 	 * Allocate a native byte buffer suitable for GL.
 	 */

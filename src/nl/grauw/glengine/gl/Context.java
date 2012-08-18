@@ -13,6 +13,8 @@ import nl.grauw.glengine.model.Size;
 public class Context {
 	
 	private Program currentProgram = null;
+	private TextureUnit activeTextureUnit = null;
+	
 	private final ColorBuffer colorBuffer = new ColorBuffer();
 	private final DepthBuffer depthBuffer = new DepthBuffer();
 	private final StencilBuffer stencilBuffer = new StencilBuffer();
@@ -35,6 +37,7 @@ public class Context {
 	private final Size maxViewportDims;
 	private final int[] compressedTextureFormats;
 	private final int[] shaderBinaryFormats;
+	private final TextureUnit[] textureUnits;
 	
 	public Context() {
 		vendor = glGetString(GL_VENDOR);
@@ -63,6 +66,11 @@ public class Context {
 		
 		shaderBinaryFormats = new int[Utils.glGetInteger(GL_NUM_SHADER_BINARY_FORMATS)];
 		glGetIntegerv(GL_SHADER_BINARY_FORMATS, shaderBinaryFormats, 0);
+		
+		textureUnits = new TextureUnit[maxCombinedTextureImageUnits];
+		for (int i = 0; i < maxCombinedTextureImageUnits; i++)
+			textureUnits[i] = new TextureUnit(this, i);
+		activeTextureUnit = textureUnits[0];
 	}
 	
 	public String getVendor() {
@@ -188,6 +196,25 @@ public class Context {
 	
 	public Program getCurrentProgram() {
 		return currentProgram;
+	}
+	
+	public TextureUnit getTextureUnit(int index) {
+		if (index < 0 || index >= textureUnits.length)
+			throw new Error("Texture unit index out of bounds.");
+		return textureUnits[index];
+	}
+	
+	public void setActiveTextureUnit(int index) {
+		setActiveTextureUnit(getTextureUnit(index));
+	}
+	
+	public void setActiveTextureUnit(TextureUnit textureUnit) {
+		glActiveTexture(GL_TEXTURE0 + textureUnit.getIndex());
+		activeTextureUnit = textureUnit;
+	}
+	
+	public TextureUnit getActiveTextureUnit() {
+		return activeTextureUnit;
 	}
 	
 	public void setVertexAttribPointer(String attributeName, int size, int stride, FloatBuffer buffer) {
