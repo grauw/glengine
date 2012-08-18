@@ -19,4 +19,11 @@ public enum PixelDataType {
 				return type;
 		throw new GLEngineException("Unrecognised color read type.");
 	}
+	
+	public int getBytesPerPixel(PixelFormat format) {
+		if (this == UNSIGNED_BYTE)
+			return format.getChannels();
+		else
+			return 2;
+	}
 }
