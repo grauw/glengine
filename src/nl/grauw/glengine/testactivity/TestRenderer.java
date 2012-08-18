@@ -25,9 +25,11 @@ public class TestRenderer extends GLEngineRenderer {
 	
 	private Program program;
 	private final Bitmap textureBitmap;
+	private final long startTime;
 	
 	public TestRenderer(Bitmap textureImage) {
 		this.textureBitmap = textureImage;
+		startTime = SystemClock.uptimeMillis();
 	}
 	
 	@Override
@@ -53,7 +55,7 @@ public class TestRenderer extends GLEngineRenderer {
 		context.setVertexAttribPointer("texCoord", 2, 0, texCoords);
 		context.enableVertexAttribArray("texCoord");
 		program.setUniformValue("color.color", 1, 0, 0, 1);
-		program.setUniformValue("time", SystemClock.uptimeMillis() / 1000f);
+		program.setUniformValue("time", (SystemClock.uptimeMillis() - startTime) / 1000f);
 		program.setUniformValue("texture", context.getActiveTextureUnit());
 		
 		context.drawArrays(PrimitiveType.TRIANGLES, 0, 3);
