@@ -44,11 +44,26 @@ public class TestRenderer extends GLEngineRenderer {
 	@Override
 	public void onSurfaceCreated(Context context, EGLConfig config) {
 		VertexShader vertexShader = new VertexShader();
-		vertexShader.setSource("attribute vec4 position; void main() { gl_Position = position; }");
+		vertexShader.setSource(
+			"attribute vec4 position;" +
+			"void main() {" +
+			"    gl_Position = position;" +
+			"}"
+		);
 		vertexShader.compile();
 		
 		FragmentShader fragmentShader = new FragmentShader();
-		fragmentShader.setSource("precision mediump float; struct test { vec4[2] color; float multiplier; }; uniform test color; void main() { gl_FragColor = (color.color[0] + color.color[1]) * color.multiplier; }");
+		fragmentShader.setSource(
+			"precision mediump float;" +
+			"struct test {" +
+			"    vec4[2] color;" +
+			"    float multiplier;" +
+			"};" +
+			"uniform test color;" +
+			"void main() {" +
+			"    gl_FragColor = (color.color[0] + color.color[1]) * color.multiplier;" +
+			"}"
+		);
 		fragmentShader.compile();
 		
 		program = new Program(context);
