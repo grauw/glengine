@@ -82,7 +82,7 @@ public class TestRenderer extends GLEngineRenderer {
 		fragmentShader.setSource(
 			"precision mediump float;" +
 			"struct test {" +
-			"    vec4[2] color;" +
+			"    vec4 color[2];" +
 			"};" +
 			"uniform float time;" +
 			"uniform test color;" +
