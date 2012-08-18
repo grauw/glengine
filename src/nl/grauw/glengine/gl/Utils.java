@@ -10,13 +10,13 @@ import java.nio.ShortBuffer;
 
 public class Utils {
 	
-	public static IntBuffer ONE_INT_BUFFER = createIntBuffer(1);
+	static IntBuffer ONE_INT_BUFFER = createIntBuffer(1);
 	
 	/**
 	 * A one-liner integer get call that reuses the buffer.
 	 * Note: may only be called on the OpenGL thread.
 	 */
-	public static int glGetInteger(int parameter) {
+	static int glGetInteger(int parameter) {
 		glGetIntegerv(parameter, ONE_INT_BUFFER);
 		return ONE_INT_BUFFER.get(0);
 	}
@@ -25,7 +25,7 @@ public class Utils {
 	 * A one-liner program integer get call that reuses the buffer.
 	 * Note: may only be called on the OpenGL thread.
 	 */
-	public static int glGetProgramInteger(int handle, int parameter) {
+	static int glGetProgramInteger(int handle, int parameter) {
 		glGetProgramiv(handle, parameter, ONE_INT_BUFFER);
 		return ONE_INT_BUFFER.get(0);
 	}
@@ -34,7 +34,7 @@ public class Utils {
 	 * A one-liner shader integer get call that reuses the buffer.
 	 * Note: may only be called on the OpenGL thread.
 	 */
-	public static int glGetShaderInteger(int handle, int parameter) {
+	static int glGetShaderInteger(int handle, int parameter) {
 		glGetShaderiv(handle, parameter, ONE_INT_BUFFER);
 		return ONE_INT_BUFFER.get(0);
 	}
