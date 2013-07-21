@@ -55,7 +55,7 @@ public class TestRenderer extends GLEngineRenderer {
 		context.setVertexAttribPointer("texCoord", 2, 0, texCoords);
 		context.enableVertexAttribArray("texCoord");
 		program.setUniformValue("color.color", 1, 0, 0, 1);
-		program.setUniformValue("time", (SystemClock.uptimeMillis() - startTime) / 1000f);
+		program.setUniformValue("sinTime", (float)Math.sin((SystemClock.uptimeMillis() - startTime) / 1000f));
 		program.setUniformValue("texture", context.getActiveTextureUnit());
 		
 		context.drawArrays(PrimitiveType.TRIANGLES, 0, 3);
@@ -86,12 +86,12 @@ public class TestRenderer extends GLEngineRenderer {
 			"struct test {" +
 			"    vec4 color[2];" +
 			"};" +
-			"uniform float time;" +
+			"uniform float sinTime;" +
 			"uniform test color;" +
 			"varying vec2 v_texCoord;" +
 			"uniform sampler2D texture;" +
 			"void main() {" +
-			"    float mixValue = sin(time) / 2.8 + 0.5;" +
+			"    float mixValue = sinTime / 2.8 + 0.5;" +
 			"    gl_FragColor = mix(texture2D(texture, v_texCoord), (color.color[0] + color.color[1]), mixValue);" +
 			"}"
 		);
