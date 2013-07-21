@@ -1,7 +1,5 @@
 package nl.grauw.glengine.model;
 
-import android.util.FloatMath;
-
 public class Vector {
 	
 	private final float x, y, z;
@@ -27,7 +25,7 @@ public class Vector {
 	}
 	
 	public float getLength() {
-		return FloatMath.sqrt(x * x + y * y + z * z);
+		return (float)Math.sqrt(x * x + y * y + z * z);
 	}
 	
 	public Vector add(final Vector other) {
@@ -43,7 +41,7 @@ public class Vector {
 	}
 	
 	public Vector normalize() {
-		float length = FloatMath.sqrt(x * x + y * y + z * z);
+		float length = (float)Math.sqrt(x * x + y * y + z * z);
 		if (length == 0)
 			return ZERO;
 		return new Vector(x / length, y / length, z / length);
@@ -61,7 +59,7 @@ public class Vector {
 		float x = this.y * other.z - this.z * other.y;
 		float y = this.z * other.x - this.x * other.z;
 		float z = this.x * other.y - this.y * other.x;
-		float length = FloatMath.sqrt(x * x + y * y + z * z);
+		float length = (float)Math.sqrt(x * x + y * y + z * z);
 		if (length == 0)
 			return ZERO;
 		return new Vector(x / length, y / length, z / length);
