@@ -46,7 +46,7 @@ public class TextureCubeMap extends Texture {
 		POSITIVE_Z(GL_TEXTURE_CUBE_MAP_POSITIVE_Z),
 		NEGATIVE_Z(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
 		
-		final int id;
+		private final int id;
 		private CubeFace(final int id) {
 			this.id = id;
 		}
