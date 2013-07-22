@@ -79,14 +79,4 @@ public class Vector {
 		);
 	}
 	
-	public Vector normalizedCross(final Vector other) {
-		float x = this.y * other.z - this.z * other.y;
-		float y = this.z * other.x - this.x * other.z;
-		float z = this.x * other.y - this.y * other.x;
-		float length = (float)Math.sqrt(x * x + y * y + z * z);
-		if (length == 0)
-			return ZERO;
-		return new Vector(x / length, y / length, z / length);
-	}
-	
 }
