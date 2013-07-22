@@ -55,6 +55,10 @@ public class Vector {
 			);
 	}
 	
+	public float dot(final Vector other) {
+		return x * other.x + y * other.y + z * other.z;
+	}
+	
 	public Vector normalizedCross(final Vector other) {
 		float x = this.y * other.z - this.z * other.y;
 		float y = this.z * other.x - this.x * other.z;
