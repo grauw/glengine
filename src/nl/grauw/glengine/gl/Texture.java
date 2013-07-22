@@ -3,6 +3,9 @@ package nl.grauw.glengine.gl;
 import static android.opengl.GLES20.*;
 
 import java.nio.Buffer;
+import java.nio.ByteBuffer;
+
+import android.graphics.Bitmap;
 
 public abstract class Texture {
 	
@@ -55,6 +58,23 @@ public abstract class Texture {
 			throw new GLEngineException("Pixel buffer too small.");
 		checkIsBound();
 		glTexImage2D(target, level, format.id, width, height, 0, format.id, dataType.id, pixels);
+	}
+	
+	protected void setImage(int target, int level, Bitmap bitmap) {
+		int byteCount = bitmap.getWidth() * bitmap.getHeight() * (bitmap.getConfig() == Bitmap.Config.ARGB_8888 ? 4 : 2);
+		ByteBuffer textureBuffer = Utils.createByteBuffer(byteCount);
+		bitmap.copyPixelsToBuffer(textureBuffer);
+		textureBuffer.position(0);
+		
+		setImage(
+			target,
+			level,
+			bitmap.getWidth(),
+			bitmap.getHeight(),
+			bitmap.getConfig() == Bitmap.Config.RGB_565 ? PixelFormat.RGB : PixelFormat.RGBA,
+			bitmap.getConfig() == Bitmap.Config.RGB_565 ? PixelDataType.UNSIGNED_SHORT_5_6_5 : PixelDataType.UNSIGNED_BYTE,
+			textureBuffer
+		);
 	}
 	
 	protected void setSubImage(int target, int level, int xOffset, int yOffset, int width, int height,

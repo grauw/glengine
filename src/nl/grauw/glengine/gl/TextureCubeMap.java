@@ -4,6 +4,8 @@ import static android.opengl.GLES20.*;
 
 import java.nio.Buffer;
 
+import android.graphics.Bitmap;
+
 public class TextureCubeMap extends Texture {
 	
 	public TextureCubeMap(Context context) {
@@ -23,6 +25,10 @@ public class TextureCubeMap extends Texture {
 	public void setImage(CubeFace target, int level, int width, int height,
 			PixelFormat format, PixelDataType dataType, Buffer pixels) {
 		super.setImage(target.id, level, width, height, format, dataType, pixels);
+	}
+	
+	public void setImage(CubeFace target, int level, Bitmap bitmap) {
+		super.setImage(target.id, level, bitmap);
 	}
 	
 	public void setSubImage(CubeFace target, int level, int xOffset, int yOffset, int width, int height,

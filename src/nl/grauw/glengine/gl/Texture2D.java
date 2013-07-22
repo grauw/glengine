@@ -4,6 +4,8 @@ import static android.opengl.GLES20.*;
 
 import java.nio.Buffer;
 
+import android.graphics.Bitmap;
+
 public class Texture2D extends Texture {
 	
 	public Texture2D(Context context) {
@@ -22,6 +24,10 @@ public class Texture2D extends Texture {
 	
 	public void setImage(int level, int width, int height, PixelFormat format, PixelDataType dataType, Buffer pixels) {
 		super.setImage(GL_TEXTURE_2D, level, width, height, format, dataType, pixels);
+	}
+	
+	public void setImage(int level, Bitmap bitmap) {
+		super.setImage(GL_TEXTURE_2D, level, bitmap);
 	}
 	
 	public void setSubImage(int level, int xOffset, int yOffset, int width, int height,
