@@ -36,7 +36,11 @@ public class Vector {
 		return new Vector(x - other.x, y - other.y, z - other.z);
 	}
 	
-	public Vector scale(final float scalar) {
+	public Vector multiply(final Vector other) {
+		return new Vector(x * other.x, y * other.y, z * other.z);
+	}
+	
+	public Vector multiply(final float scalar) {
 		return new Vector(x * scalar, y * scalar, z * scalar);
 	}
 	
