@@ -53,10 +53,10 @@ public class Vector {
 	
 	public Vector cross(final Vector other) {
 		return new Vector(
-				y * other.z - z * other.y,
-				z * other.x - x * other.z,
-				x * other.y - y * other.x
-			);
+			y * other.z - z * other.y,
+			z * other.x - x * other.z,
+			x * other.y - y * other.x
+		);
 	}
 	
 	public float dot(final Vector other) {
