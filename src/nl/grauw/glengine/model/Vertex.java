@@ -2,15 +2,15 @@ package nl.grauw.glengine.model;
 
 public class Vertex {
 	
-	private final Position position;
+	private final Point position;
 	private final Color color;
 	private final Vector normal;
 	
-	public Vertex(final Position position, final Color color) {
+	public Vertex(final Point position, final Color color) {
 		this(position, color, Vector.ZERO);
 	}
 	
-	public Vertex(final Position position, final Color color, final Vector normal) {
+	public Vertex(final Point position, final Color color, final Vector normal) {
 		this.position = position;
 		this.color = color;
 		this.normal = normal;
@@ -20,7 +20,7 @@ public class Vertex {
 		return color;
 	}
 	
-	public Position getPosition() {
+	public Point getPosition() {
 		return position;
 	}
 	

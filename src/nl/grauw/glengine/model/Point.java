@@ -1,10 +1,10 @@
 package nl.grauw.glengine.model;
 
-public class Position {
+public class Point {
 	
 	private final float x, y, z;
 	
-	public Position(final float x, final float y, final float z) {
+	public Point(final float x, final float y, final float z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
