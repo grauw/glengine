@@ -63,6 +63,22 @@ public class Vector {
 		return x * other.x + y * other.y + z * other.z;
 	}
 	
+	public Vector interpolate(final Vector other, final Vector weight) {
+		return new Vector(
+			x + (other.x - x) * weight.x,
+			y + (other.y - y) * weight.y,
+			z + (other.z - z) * weight.z
+		);
+	}
+	
+	public Vector interpolate(final Vector other, final float weight) {
+		return new Vector(
+			x + (other.x - x) * weight,
+			y + (other.y - y) * weight,
+			z + (other.z - z) * weight
+		);
+	}
+	
 	public Vector normalizedCross(final Vector other) {
 		float x = this.y * other.z - this.z * other.y;
 		float y = this.z * other.x - this.x * other.z;
