@@ -11,9 +11,6 @@ public class Material {
 	private String vertexSource;
 	private String fragmentSource;
 	
-	VertexShader vertexShader;
-	FragmentShader fragmentShader;
-	
 	private Program program;
 	
 	public Material(String vertexSource, String fragmentSource) {
@@ -25,11 +22,11 @@ public class Material {
 	}
 	
 	public void compile(Context context) {
-		vertexShader = new VertexShader();
+		VertexShader vertexShader = new VertexShader();
 		vertexShader.setSource(vertexSource);
 		vertexShader.compile();
 		
-		fragmentShader = new FragmentShader();
+		FragmentShader fragmentShader = new FragmentShader();
 		fragmentShader.setSource(fragmentSource);
 		fragmentShader.compile();
 		
