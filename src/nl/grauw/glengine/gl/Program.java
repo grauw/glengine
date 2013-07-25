@@ -11,6 +11,7 @@ import nl.grauw.glengine.gl.Shader.VertexShader;
 import nl.grauw.glengine.gl.Variable.Attribute;
 import nl.grauw.glengine.gl.Variable.Uniform;
 import nl.grauw.glengine.gl.Variable.VariableType;
+import nl.grauw.glengine.model.Matrix;
 
 public class Program {
 	
@@ -194,6 +195,31 @@ public class Program {
 	public void setUniformValue(Uniform uniform, float x, float y, float z, float w) {
 		checkCurrentProgram();
 		glUniform4f(uniform.getLocation(), x, y, z, w);
+	}
+	
+	public void setUniformValue(String uniformName, Matrix matrix) {
+		setUniformValue(getUniform(uniformName), matrix);
+	}
+	
+	public void setUniformValue(Uniform uniform, Matrix matrix) {
+		checkCurrentProgram();
+		float[] elements = matrix.toArray();
+		if (matrix.getColumns() == 4 && matrix.getRows() == 4)
+			glUniformMatrix4fv(uniform.getLocation(), 1, false, elements, 0);
+		else if (matrix.getColumns() == 3 && matrix.getRows() == 3)
+			glUniformMatrix3fv(uniform.getLocation(), 1, false, elements, 0);
+		else if (matrix.getColumns() == 2 && matrix.getRows() == 2)
+			glUniformMatrix2fv(uniform.getLocation(), 1, false, elements, 0);
+		else if (elements.length == 4)
+			glUniform4f(uniform.getLocation(), elements[0], elements[1], elements[2], elements[3]);
+		else if (elements.length == 3)
+			glUniform3f(uniform.getLocation(), elements[0], elements[1], elements[2]);
+		else if (elements.length == 2)
+			glUniform2f(uniform.getLocation(), elements[0], elements[1]);
+		else if (elements.length == 1)
+			glUniform1f(uniform.getLocation(), elements[0]);
+		else
+			throw new GLEngineException("Unsupported matrix dimensions.");
 	}
 	
 	public void setUniformValue(String uniformName, TextureUnit unit) {
