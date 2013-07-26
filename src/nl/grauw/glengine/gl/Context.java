@@ -2,6 +2,7 @@ package nl.grauw.glengine.gl;
 
 import static android.opengl.GLES20.*;
 
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
@@ -306,6 +307,27 @@ public class Context {
 	
 	public void drawArrays(PrimitiveType type, int first, int count) {
 		glDrawArrays(type.id, first, count);
+	}
+	
+	public void drawElements(PrimitiveType type, Buffer buffer) {
+		drawElements(type, buffer.capacity(), buffer);
+	}
+	
+	public void drawElements(PrimitiveType type, int count, Buffer buffer) {
+		if (buffer instanceof ByteBuffer)
+			drawElements(type, count, (ByteBuffer)buffer);
+		else if (buffer instanceof ShortBuffer)
+			drawElements(type, count, (ByteBuffer)buffer);
+		else
+			throw new GLEngineException("Buffer type not supported.");
+	}
+	
+	public void drawElements(PrimitiveType type, int count, ByteBuffer buffer) {
+		glDrawElements(type.id, count, GL_UNSIGNED_BYTE, buffer);
+	}
+	
+	public void drawElements(PrimitiveType type, int count, ShortBuffer buffer) {
+		glDrawElements(type.id, count, GL_UNSIGNED_SHORT, buffer);
 	}
 	
 	public void checkError() {
