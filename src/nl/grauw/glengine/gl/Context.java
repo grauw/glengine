@@ -10,6 +10,9 @@ import nl.grauw.glengine.gl.GLEngineException.OpenGLException;
 import nl.grauw.glengine.gl.Variable.Attribute;
 import nl.grauw.glengine.model.Size;
 
+/**
+ * GL wrapper class that boxes some sense into OpenGL :).
+ */
 public class Context {
 	
 	private Program currentProgram = null;
@@ -183,6 +186,30 @@ public class Context {
 	
 	public boolean isScissorTestEnabled() {
 		return glIsEnabled(GL_SCISSOR_TEST);
+	}
+	
+	public void enableDepthTest() {
+		glEnable(GL_DEPTH_TEST);
+	}
+	
+	public void disableDepthTest() {
+		glDisable(GL_DEPTH_TEST);
+	}
+	
+	public boolean isDepthTestEnabled() {
+		return glIsEnabled(GL_DEPTH_TEST);
+	}
+	
+	public void enableFaceCulling() {
+		glEnable(GL_CULL_FACE);
+	}
+	
+	public void disableFaceCulling() {
+		glDisable(GL_CULL_FACE);
+	}
+	
+	public boolean isFaceCullingEnabled() {
+		return glIsEnabled(GL_CULL_FACE);
 	}
 	
 	public void setScissor(int x, int y, int width, int height) {
