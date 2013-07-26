@@ -6,6 +6,8 @@ import nl.grauw.glengine.gl.GLEngineException;
 
 public class Matrix {
 	
+	public static final Identity IDENTITY = new Identity();
+	
 	private int columns;
 	private int rows;
 	private float[] elements;
