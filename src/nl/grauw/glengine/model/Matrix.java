@@ -183,4 +183,21 @@ public class Matrix {
 		
 	}
 	
+	public static class OrthographicProjection extends Matrix {
+		
+		public OrthographicProjection(float width, float height, float near, float far) {
+			this(width / -2f, width / 2f, height / -2f, height / 2f, near, far);
+		}
+		
+		public OrthographicProjection(float left, float right, float bottom, float top, float near, float far) {
+			super(4, 4,
+				2 / (right - left), 0, 0, 0,
+				0, 2 / (top - bottom), 0, 0,
+				0, 0, 2 / (near - far), 0,
+				(right + left) / (left - right), (top + bottom) / (bottom - top), (far + near) / (near - far), 1
+			);
+		}
+		
+	}
+	
 }
