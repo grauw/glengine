@@ -8,9 +8,9 @@ public class Matrix {
 	
 	public static final Identity IDENTITY = new Identity();
 	
-	protected int columns;
-	protected int rows;
-	private float[] elements;
+	protected final int columns;
+	protected final int rows;
+	private final float[] elements;
 	
 	/** Elements must be specified in column-major order. */
 	public Matrix(int columns, int rows, float... elements) {
