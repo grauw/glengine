@@ -166,13 +166,13 @@ public class Matrix {
 		
 	}
 	
-	public static class Projection extends Matrix {
+	public static class PerspectiveProjection extends Matrix {
 		
-		public Projection(float width, float height, float near, float far) {
+		public PerspectiveProjection(float width, float height, float near, float far) {
 			this(width / -2f, width / 2f, height / -2f, height / 2f, near, far);
 		}
 		
-		public Projection(float left, float right, float bottom, float top, float near, float far) {
+		public PerspectiveProjection(float left, float right, float bottom, float top, float near, float far) {
 			super(4, 4,
 				(2 * near) / (right - left), 0, 0, 0,
 				0, (2 * near) / (top - bottom), 0, 0,
