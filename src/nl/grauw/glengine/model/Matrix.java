@@ -116,19 +116,15 @@ public class Matrix {
 	
 	public static class Rotation extends Matrix {
 		
-		public Rotation(Quaternion quaternion) {
-			this(quaternion.getX(), quaternion.getY(), quaternion.getZ(), quaternion.getW());
+		public Rotation(float x, float y, float z, float angle) {
+			this(new Quaternion(x, y, z, angle));
 		}
 		
-		/**
-		 * Using a quaternion.
-		 * 
-		 * @param qx x * sin(angle / 2)
-		 * @param qy y * sin(angle / 2)
-		 * @param qz z * sin(angle / 2)
-		 * @param qw cos(angle / 2)
-		 **/
-		public Rotation(float qx, float qy, float qz, float qw) {
+		public Rotation(Quaternion quaternion) {
+			this(quaternion, quaternion.getX(), quaternion.getY(), quaternion.getZ(), quaternion.getW());
+		}
+		
+		private Rotation(Quaternion quaternion, float qx, float qy, float qz, float qw) {
 			this(2 * qx * qx, 2 * qx * qy, 2 * qx * qz, 2 * qx * qw, 2 * qy * qy, 2 * qy * qz, 2 * qy * qw, 2 * qz * qz, 2 * qz * qw);
 		}
 		
@@ -139,18 +135,6 @@ public class Matrix {
 				qxz + qyw, qyz - qxw, 1 - qxx - qyy, 0,
 				0, 0, 0, 1
 			);
-		}
-		
-	}
-	
-	public static class AxisRotation extends Rotation {
-		
-		public AxisRotation(float x, float y, float z, float angle) {
-			this(x, y, z, (float)Math.sin(angle / 2), (float)Math.cos(angle / 2));
-		}
-		
-		private AxisRotation(float x, float y, float z, float sinAngle2, float cosAngle2) {
-			super(x * sinAngle2, y * sinAngle2, z * sinAngle2, cosAngle2);
 		}
 		
 	}
