@@ -73,4 +73,100 @@ public class Matrix {
 		return new Matrix(other.columns, rows, product);
 	}
 	
+	public static class Identity extends Matrix {
+		
+		public Identity() {
+			super(4, 4, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+		}
+		
+	}
+	
+	public static class Translation extends Matrix {
+		
+		public Translation(float x, float y, float z) {
+			super(4, 4, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, x, y, z, 1);
+		}
+		
+	}
+	
+	public static class Scale extends Matrix {
+		
+		public Scale(float x, float y, float z) {
+			super(4, 4, x, 0, 0, 0, 0, y, 0, 0, 0, 0, z, 0, 0, 0, 0, 1);
+		}
+		
+	}
+	
+	public static class Rotation extends Matrix {
+		
+		/**
+		 * Using a quaternion.
+		 * 
+		 * @param qx x * sin(angle / 2)
+		 * @param qy y * sin(angle / 2)
+		 * @param qz z * sin(angle / 2)
+		 * @param qw cos(angle / 2)
+		 **/
+		public Rotation(float qx, float qy, float qz, float qw) {
+			this(2 * qx * qx, 2 * qx * qy, 2 * qx * qz, 2 * qx * qw, 2 * qy * qy, 2 * qy * qz, 2 * qy * qw, 2 * qz * qz, 2 * qz * qw);
+		}
+		
+		private Rotation(float qxx, float qxy, float qxz, float qxw, float qyy, float qyz, float qyw, float qzz, float qzw) {
+			super(4, 4,
+				1 - qyy - qzz, qxy + qzw, qxz - qyw, 0,
+				qxy - qzw, 1 - qxx - qzz, qyz + qxw, 0,
+				qxz + qyw, qyz - qxw, 1 - qxx - qyy, 0,
+				0, 0, 0, 1
+			);
+		}
+		
+	}
+	
+	public static class AxisRotation extends Rotation {
+		
+		public AxisRotation(float x, float y, float z, float angle) {
+			this(x, y, z, (float)Math.sin(angle / 2), (float)Math.cos(angle / 2));
+		}
+		
+		private AxisRotation(float x, float y, float z, float sinAngle2, float cosAngle2) {
+			super(x * sinAngle2, y * sinAngle2, z * sinAngle2, cosAngle2);
+		}
+		
+	}
+	
+	public static class XRotation extends Matrix {
+		
+		public XRotation(float angle) {
+			super(4, 4, 1, 0, 0, 0, 0, (float)Math.cos(angle), (float)Math.sin(angle), 0,
+				0, -(float)Math.sin(angle), (float)Math.cos(angle), 0, 0, 0, 0, 1);
+		}
+		
+	}
+	
+	public static class YRotation extends Matrix {
+		
+		public YRotation(float angle) {
+			super(4, 4, (float)Math.cos(angle), 0, -(float)Math.sin(angle), 0, 0, 1, 0, 0,
+				(float)Math.sin(angle), 0, (float)Math.cos(angle), 0, 0, 0, 0, 1);
+		}
+		
+	}
+	
+	public static class ZRotation extends Matrix {
+		
+		public ZRotation(float angle) {
+			super(4, 4, (float)Math.cos(angle), (float)Math.sin(angle), 0, 0,
+				-(float)Math.sin(angle), (float)Math.cos(angle), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+		}
+		
+	}
+	
+	public static class Projection extends Matrix {
+		
+		public Projection(float width, float height, float near, float far) {
+			super(4, 4, width, 0, 0, 0, 0, height, 0, 0, 0, 0, far / (near - far), -1, 0, 0, near * far / (near - far), 0);
+		}
+		
+	}
+	
 }
