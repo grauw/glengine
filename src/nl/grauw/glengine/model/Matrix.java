@@ -116,6 +116,10 @@ public class Matrix {
 	
 	public static class Rotation extends Matrix {
 		
+		public Rotation(Quaternion quaternion) {
+			this(quaternion.getX(), quaternion.getY(), quaternion.getZ(), quaternion.getW());
+		}
+		
 		/**
 		 * Using a quaternion.
 		 * 
