@@ -39,9 +39,12 @@ public class Matrix {
 		return elements[column * rows + row];
 	}
 	
-	/** Returns matrix elements array in column-major order. */
+	/**
+	 * Returns matrix elements array in column-major order.
+	 * Warning: do not modify this array.
+	 **/
 	public float[] toArray() {
-		return elements.clone();
+		return elements;
 	}
 	
 	public boolean equals(Matrix other) {
