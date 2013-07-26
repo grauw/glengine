@@ -43,7 +43,7 @@ public class Matrix {
 	 * Returns matrix elements array in column-major order.
 	 * Warning: do not modify this array.
 	 **/
-	public float[] toArray() {
+	public float[] getElements() {
 		return elements;
 	}
 	

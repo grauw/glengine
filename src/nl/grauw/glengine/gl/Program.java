@@ -203,7 +203,7 @@ public class Program {
 	
 	public void setUniformValue(Uniform uniform, Matrix matrix) {
 		checkCurrentProgram();
-		float[] elements = matrix.toArray();
+		float[] elements = matrix.getElements();
 		if (matrix.getColumns() == 4 && matrix.getRows() == 4)
 			glUniformMatrix4fv(uniform.getLocation(), 1, false, elements, 0);
 		else if (matrix.getColumns() == 3 && matrix.getRows() == 3)
