@@ -8,8 +8,8 @@ public class Matrix {
 	
 	public static final Identity IDENTITY = new Identity();
 	
-	private int columns;
-	private int rows;
+	protected int columns;
+	protected int rows;
 	private float[] elements;
 	
 	/** Elements must be specified in column-major order. */
@@ -79,6 +79,18 @@ public class Matrix {
 		
 		public Identity() {
 			super(4, 4, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+		}
+		
+		@Override
+		public Matrix transpose() {
+			return this;
+		}
+		
+		@Override
+		public Matrix multiply(Matrix other) {
+			if (other.rows != columns)
+				throw new GLEngineException("Incompatible matrices for multiplication.");
+			return other;
 		}
 		
 	}
