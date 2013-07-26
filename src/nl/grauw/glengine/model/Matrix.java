@@ -169,7 +169,16 @@ public class Matrix {
 	public static class Projection extends Matrix {
 		
 		public Projection(float width, float height, float near, float far) {
-			super(4, 4, width, 0, 0, 0, 0, height, 0, 0, 0, 0, far / (near - far), -1, 0, 0, near * far / (near - far), 0);
+			this(width / -2f, width / 2f, height / -2f, height / 2f, near, far);
+		}
+		
+		public Projection(float left, float right, float bottom, float top, float near, float far) {
+			super(4, 4,
+				(2 * near) / (right - left), 0, 0, 0,
+				0, (2 * near) / (top - bottom), 0, 0,
+				(right + left) / (right - left), (top + bottom) / (top - bottom), (far + near) / (near - far), -1,
+				0, 0, 2 * near * far / (near - far), 0
+			);
 		}
 		
 	}
