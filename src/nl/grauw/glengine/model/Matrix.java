@@ -32,7 +32,7 @@ public class Matrix {
 		return rows;
 	}
 	
-	public float getValue(int column, int row) {
+	public float getElement(int column, int row) {
 		if (column < 0 || column >= columns || row < 0 || row >= rows)
 			throw new GLEngineException("Column or row index out of bounds.");
 		
