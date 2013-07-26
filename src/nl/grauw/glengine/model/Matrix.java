@@ -17,7 +17,7 @@ public class Matrix {
 		if (columns < 1 || rows < 1)
 			throw new GLEngineException("Matrix must have at least 1 column and 1 row.");
 		if (elements.length != columns * rows)
-			throw new GLEngineException("Data length does not match matrix size");
+			throw new GLEngineException("Number of elements does not match matrix size.");
 		
 		this.columns = columns;
 		this.rows = rows;
