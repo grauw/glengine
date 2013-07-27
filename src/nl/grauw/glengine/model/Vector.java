@@ -4,7 +4,8 @@ public class Vector {
 	
 	private final float x, y, z;
 	
-	public static final Vector ZERO = new Vector(0, 0, 0);
+	public static final Vector ZERO = new Zero();
+	public static final Vector ONE = new One();
 	
 	public Vector(final float x, final float y, final float z) {
 		this.x = x;
@@ -29,18 +30,28 @@ public class Vector {
 	}
 	
 	public Vector add(final Vector other) {
+		if (other == ZERO)
+			return this;
 		return new Vector(x + other.x, y + other.y, z + other.z);
 	}
 	
 	public Vector subtract(final Vector other) {
+		if (other == ZERO)
+			return this;
 		return new Vector(x - other.x, y - other.y, z - other.z);
 	}
 	
 	public Vector multiply(final Vector other) {
+		if (other == ONE)
+			return this;
+		if (other == ZERO)
+			return ZERO;
 		return new Vector(x * other.x, y * other.y, z * other.z);
 	}
 	
 	public Vector multiply(final float scalar) {
+		if (scalar == 1)
+			return this;
 		return new Vector(x * scalar, y * scalar, z * scalar);
 	}
 	
@@ -77,6 +88,37 @@ public class Vector {
 			y + (other.y - y) * weight,
 			z + (other.z - z) * weight
 		);
+	}
+	
+	private static final class Zero extends Vector {
+		
+		public Zero() {
+			super(0, 0, 0);
+		}
+		
+		@Override
+		public Vector add(Vector other) {
+			return other;
+		}
+		
+		@Override
+		public Vector multiply(Vector other) {
+			return this;
+		}
+		
+	}
+	
+	private static final class One extends Vector {
+		
+		public One() {
+			super(1, 1, 1);
+		}
+		
+		@Override
+		public Vector multiply(Vector other) {
+			return other;
+		}
+		
 	}
 	
 }
