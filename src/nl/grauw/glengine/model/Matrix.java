@@ -104,12 +104,20 @@ public class Matrix {
 			super(4, 4, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, x, y, z, 1);
 		}
 		
+		public Translation(Vector vector) {
+			this(vector.getX(), vector.getY(), vector.getZ());
+		}
+		
 	}
 	
 	public static class Scale extends Matrix {
 		
 		public Scale(float x, float y, float z) {
 			super(4, 4, x, 0, 0, 0, 0, y, 0, 0, 0, 0, z, 0, 0, 0, 0, 1);
+		}
+		
+		public Scale(Vector vector) {
+			this(vector.getX(), vector.getY(), vector.getZ());
 		}
 		
 	}
