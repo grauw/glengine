@@ -55,6 +55,27 @@ public class Quaternion {
 		
 	}
 	
+	public static class EulerXYZ extends Quaternion {
+		
+		public EulerXYZ(float x, float y, float z) {
+			this(
+				(float)Math.sin(x / 2), (float)Math.cos(x / 2),
+				(float)Math.sin(y / 2), (float)Math.cos(y / 2),
+				(float)Math.sin(z / 2), (float)Math.cos(z / 2)
+			);
+		}
+		
+		private EulerXYZ(float sx, float cx, float sy, float cy, float sz, float cz) {
+			super(
+				sx * cy * cz + sx * cy * sz,
+				cx * sy * cz - cx * sy * sz,
+				sx * sy * sz + sx * sy * cz,
+				cx * cy * cz - cx * cy * sz
+			);
+		}
+		
+	}
+	
 	private static final class Identity extends Quaternion {
 		
 		public Identity() {
