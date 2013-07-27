@@ -70,9 +70,8 @@ public class Matrix {
 		for (int column = 0; column < other.columns; column++) {
 			for (int row = 0; row < rows; row++) {
 				float sum = elements[row] * other.elements[column * other.rows];
-				for (int i = 1; i < columns; i++) {
+				for (int i = 1; i < columns; i++)
 					sum += elements[i * rows + row] * other.elements[column * other.rows + i];
-				}
 				product[column * rows + row] = sum;
 			}
 		}
