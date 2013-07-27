@@ -32,6 +32,20 @@ public class Quaternion {
 		return w;
 	}
 	
+	public float getMagnitude() {
+		return (float)Math.sqrt(x * x + y * y + z * z + w * w);
+	}
+	
+	public Quaternion normalize() {
+		float magnitude = getMagnitude();
+		return new Quaternion(x / magnitude, y / magnitude, z / magnitude, w / magnitude);
+	}
+	
+	/** Inverts the rotation. */
+	public Quaternion conjugate() {
+		return new Quaternion(-x, -y, -z, w);
+	}
+	
 	public Quaternion multiply(Quaternion other) {
 		if (other == IDENTITY)
 			return this;
