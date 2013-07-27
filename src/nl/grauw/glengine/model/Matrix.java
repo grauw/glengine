@@ -62,6 +62,8 @@ public class Matrix {
 	public Matrix multiply(Matrix other) {
 		if (other.rows != columns)
 			throw new GLEngineException("Incompatible matrices for multiplication.");
+		if (other == IDENTITY)
+			return this;
 		
 		float[] product = new float[other.columns * rows];
 		
