@@ -2,15 +2,12 @@ package nl.grauw.glengine.model;
 
 public class Quaternion {
 	
+	public static final Quaternion IDENTITY = new Identity();
+	
 	private final float x;
 	private final float y;
 	private final float z;
 	private final float w;
-	
-	public Quaternion() {
-		x = y = z = 0;
-		w = 1;
-	}
 	
 	public Quaternion(float x, float y, float z, float angle) {
 		float sinAngle2 = (float)Math.sin(angle / 2);
@@ -34,6 +31,14 @@ public class Quaternion {
 	
 	public float getW() {
 		return w;
+	}
+	
+	private static final class Identity extends Quaternion {
+		
+		public Identity() {
+			super(0, 0, 0, 0);
+		}
+		
 	}
 	
 }
