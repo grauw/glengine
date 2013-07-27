@@ -127,7 +127,7 @@ public class Matrix {
 	public static class Rotation extends Matrix {
 		
 		public Rotation(float x, float y, float z, float angle) {
-			this(new Quaternion(x, y, z, angle));
+			this(new Quaternion.Axis(x, y, z, angle));
 		}
 		
 		public Rotation(Quaternion quaternion) {

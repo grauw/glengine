@@ -9,12 +9,11 @@ public class Quaternion {
 	private final float z;
 	private final float w;
 	
-	public Quaternion(float x, float y, float z, float angle) {
-		float sinAngle2 = (float)Math.sin(angle / 2);
-		this.x = x * sinAngle2;
-		this.y = y * sinAngle2;
-		this.z = z * sinAngle2;
-		this.w = (float)Math.cos(angle / 2);
+	private Quaternion(float x, float y, float z, float w) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.w = w;
 	}
 	
 	public float getX() {
@@ -33,10 +32,22 @@ public class Quaternion {
 		return w;
 	}
 	
+	public static class Axis extends Quaternion {
+		
+		public Axis(float x, float y, float z, float angle) {
+			this(x, y, z, (float)Math.sin(angle / 2), (float)Math.cos(angle / 2));
+		}
+		
+		private Axis(float x, float y, float z, float sinAngle2, float cosAngle2) {
+			super(x * sinAngle2, y * sinAngle2, z * sinAngle2, cosAngle2);
+		}
+		
+	}
+	
 	private static final class Identity extends Quaternion {
 		
 		public Identity() {
-			super(0, 0, 0, 0);
+			super(0, 0, 0, 1);
 		}
 		
 	}
