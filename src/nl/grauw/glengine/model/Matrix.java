@@ -78,7 +78,7 @@ public class Matrix {
 		return new Matrix(other.columns, rows, product);
 	}
 	
-	public static class Identity extends Matrix {
+	private static final class Identity extends Matrix {
 		
 		public Identity() {
 			super(4, 4, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
