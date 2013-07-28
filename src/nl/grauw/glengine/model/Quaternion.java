@@ -2,7 +2,7 @@ package nl.grauw.glengine.model;
 
 public class Quaternion {
 	
-	public static final Quaternion IDENTITY = new Identity();
+	public static final Identity IDENTITY = new Identity();
 	
 	private final float x;
 	private final float y;

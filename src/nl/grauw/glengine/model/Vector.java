@@ -4,8 +4,8 @@ public class Vector {
 	
 	private final float x, y, z;
 	
-	public static final Vector ZERO = new Zero();
-	public static final Vector ONE = new One();
+	public static final Zero ZERO = new Zero();
+	public static final One ONE = new One();
 	
 	public Vector(final float x, final float y, final float z) {
 		this.x = x;
