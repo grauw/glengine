@@ -1,8 +1,13 @@
 package nl.grauw.glengine.model;
 
-import nl.grauw.glengine.gl.GLEngineException;
+import java.nio.ByteBuffer;
 
-public class Color {
+import nl.grauw.glengine.gl.GLEngineException;
+import nl.grauw.glengine.model.VertexArray.AttributeInfo;
+import nl.grauw.glengine.model.VertexArray.AttributeType;
+import nl.grauw.glengine.model.VertexArray.VertexAttribute;
+
+public class Color implements VertexAttribute {
 	
 	private final float red, green, blue, alpha;
 	
@@ -14,6 +19,8 @@ public class Color {
 	public static final Color MAGENTA = new Color(1, 0, 1);
 	public static final Color YELLOW = new Color(1, 1, 0);
 	public static final Color WHITE = new Color(1, 1, 1);
+	
+	public static final AttributeInfo attributeInfo = new AttributeInfo(4, AttributeType.FLOAT);
 	
 	public Color(final float red, final float green, final float blue) {
 		this(red, green, blue, 1);
@@ -66,6 +73,19 @@ public class Color {
 			throw new GLEngineException("Percentage must be between 0 and 1.");
 		
 		return new Color(1f - (1f - red) * percentage, 1f - (1f - green) * percentage, 1f - (1f - blue) * percentage, alpha);
+	}
+	
+	@Override
+	public void write(ByteBuffer buffer) {
+		buffer.putFloat(red);
+		buffer.putFloat(green);
+		buffer.putFloat(blue);
+		buffer.putFloat(alpha);
+	}
+	
+	@Override
+	public AttributeInfo getAttributeInfo() {
+		return attributeInfo;
 	}
 	
 }

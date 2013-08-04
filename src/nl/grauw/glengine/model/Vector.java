@@ -1,11 +1,19 @@
 package nl.grauw.glengine.model;
 
-public class Vector {
+import java.nio.ByteBuffer;
+
+import nl.grauw.glengine.model.VertexArray.AttributeInfo;
+import nl.grauw.glengine.model.VertexArray.AttributeType;
+import nl.grauw.glengine.model.VertexArray.VertexAttribute;
+
+public class Vector implements VertexAttribute {
 	
 	private final float x, y, z;
 	
 	public static final Zero ZERO = new Zero();
 	public static final One ONE = new One();
+	
+	public static final AttributeInfo attributeInfo = new AttributeInfo(3, AttributeType.FLOAT);
 	
 	public Vector(final float x, final float y, final float z) {
 		this.x = x;
@@ -88,6 +96,18 @@ public class Vector {
 			y + (other.y - y) * weight,
 			z + (other.z - z) * weight
 		);
+	}
+	
+	@Override
+	public void write(ByteBuffer buffer) {
+		buffer.putFloat(x);
+		buffer.putFloat(y);
+		buffer.putFloat(z);
+	}
+	
+	@Override
+	public AttributeInfo getAttributeInfo() {
+		return attributeInfo;
 	}
 	
 	private static final class Zero extends Vector {
