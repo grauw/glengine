@@ -26,7 +26,7 @@ public abstract class Texture {
 	public void delete() {
 		if (handle == 0)
 			throw new GLEngineException("Can not delete default texture.");
-		glDeleteTextures(1, new int[] { handle }, 0);
+		Utils.glDeleteTexture(handle);
 		context.getActiveTextureUnit().signalDeletion(this);
 	}
 	

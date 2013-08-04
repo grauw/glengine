@@ -10,7 +10,7 @@ import java.nio.ShortBuffer;
 
 public class Utils {
 	
-	static IntBuffer ONE_INT_BUFFER = createIntBuffer(1);
+	private static IntBuffer ONE_INT_BUFFER = createIntBuffer(1);
 	
 	/**
 	 * A one-liner integer get call that reuses the buffer.
@@ -42,6 +42,11 @@ public class Utils {
 	static int glGenTexture() {
 		glGenTextures(1, Utils.ONE_INT_BUFFER);
 		return Utils.ONE_INT_BUFFER.get(0);
+	}
+	
+	static void glDeleteTexture(int handle) {
+		Utils.ONE_INT_BUFFER.put(0, handle);
+		glDeleteTextures(1, Utils.ONE_INT_BUFFER);
 	}
 	
 	/**
