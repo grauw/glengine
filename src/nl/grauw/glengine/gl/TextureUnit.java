@@ -4,7 +4,7 @@ import static android.opengl.GLES20.*;
 
 public class TextureUnit {
 	
-	private final Context context;
+	private final GLContext context;
 	private final int index;
 	
 	private Texture2D defaultTexture2D;
@@ -12,7 +12,7 @@ public class TextureUnit {
 	private Texture2D boundTexture2D;
 	private TextureCubeMap boundTextureCubeMap;
 	
-	TextureUnit(Context context, int index) {
+	TextureUnit(GLContext context, int index) {
 		this.context = context;
 		this.index = index;
 		

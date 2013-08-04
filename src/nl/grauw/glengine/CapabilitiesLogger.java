@@ -2,7 +2,7 @@ package nl.grauw.glengine;
 
 import java.util.Arrays;
 
-import nl.grauw.glengine.gl.Context;
+import nl.grauw.glengine.gl.GLContext;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,7 +14,7 @@ public class CapabilitiesLogger {
 	
 	JSONObject capabilities;
 	
-	public CapabilitiesLogger(Context context) throws JSONException {
+	public CapabilitiesLogger(GLContext context) throws JSONException {
 		capabilities = new JSONObject();
 		capabilities.put("vendor", context.getVendor());
 		capabilities.put("renderer", context.getRenderer());
@@ -54,7 +54,7 @@ public class CapabilitiesLogger {
 		Log.i("GLEngine", capabilities.toString(4));
 	}
 	
-	public static void log(Context context) {
+	public static void log(GLContext context) {
 		try {
 			new CapabilitiesLogger(context).log();
 		} catch (JSONException e) {

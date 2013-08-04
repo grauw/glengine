@@ -1,7 +1,7 @@
 package nl.grauw.glengine.scene;
 
-import nl.grauw.glengine.gl.Context;
-import nl.grauw.glengine.gl.Context.PrimitiveType;
+import nl.grauw.glengine.gl.GLContext;
+import nl.grauw.glengine.gl.GLContext.PrimitiveType;
 import nl.grauw.glengine.model.Matrix;
 import nl.grauw.glengine.model.Vertex;
 
@@ -23,7 +23,7 @@ public class StripPolygon extends Shape {
 	}
 	
 	@Override
-	public void draw(Context gl, Matrix transform) {
+	public void draw(GLContext gl, Matrix transform) {
 		gl.getCurrentProgram().setUniformValue("modelViewProjection", transform);
 		gl.setVertexAttribPointer("position", 3, 0, getVertexBuffer());
 		gl.setVertexAttribPointer("color", 3, 0, getColorBuffer());

@@ -2,7 +2,7 @@ package nl.grauw.glengine.scene;
 
 import java.util.ArrayList;
 
-import nl.grauw.glengine.gl.Context;
+import nl.grauw.glengine.gl.GLContext;
 import nl.grauw.glengine.model.Matrix;
 import nl.grauw.glengine.model.Transform;
 
@@ -23,7 +23,7 @@ public class Node implements Drawable {
 		return transform;
 	}
 	
-	public void draw(Context gl, Matrix transform) {
+	public void draw(GLContext gl, Matrix transform) {
 		transform = transform.multiply(this.transform.getMatrix());
 		
 		for (Drawable child : children)

@@ -15,7 +15,7 @@ import nl.grauw.glengine.model.Matrix;
 
 public class Program {
 	
-	private final Context context;
+	private final GLContext context;
 	final int handle;
 	
 	private VertexShader vertexShader = null;
@@ -23,7 +23,7 @@ public class Program {
 	private Map<String, Attribute> activeAttributes = Collections.emptyMap();
 	private Map<String, Uniform> activeUniforms = Collections.emptyMap();
 	
-	public Program(Context context) {
+	public Program(GLContext context) {
 		this.context = context;
 		handle = glCreateProgram();
 		

@@ -8,11 +8,11 @@ import android.graphics.Bitmap;
 
 public class Texture2D extends Texture {
 	
-	public Texture2D(Context context) {
+	public Texture2D(GLContext context) {
 		super(context, GL_TEXTURE_2D);
 	}
 	
-	Texture2D(Context context, int handle) {
+	Texture2D(GLContext context, int handle) {
 		super(context, GL_TEXTURE_2D, handle);
 	}
 	

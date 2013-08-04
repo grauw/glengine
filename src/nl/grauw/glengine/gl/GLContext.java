@@ -14,7 +14,7 @@ import nl.grauw.glengine.model.Size;
 /**
  * GL wrapper class that boxes some sense into OpenGL :).
  */
-public class Context {
+public class GLContext {
 	
 	private Program currentProgram = null;
 	private TextureUnit activeTextureUnit = null;
@@ -43,7 +43,7 @@ public class Context {
 	private final int[] shaderBinaryFormats;
 	private final TextureUnit[] textureUnits;
 	
-	public Context() {
+	public GLContext() {
 		vendor = glGetString(GL_VENDOR);
 		renderer = glGetString(GL_RENDERER);
 		version = glGetString(GL_VERSION);

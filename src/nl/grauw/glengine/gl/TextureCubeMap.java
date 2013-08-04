@@ -8,11 +8,11 @@ import android.graphics.Bitmap;
 
 public class TextureCubeMap extends Texture {
 	
-	public TextureCubeMap(Context context) {
+	public TextureCubeMap(GLContext context) {
 		super(context, GL_TEXTURE_CUBE_MAP);
 	}
 	
-	TextureCubeMap(Context context, int handle) {
+	TextureCubeMap(GLContext context, int handle) {
 		super(context, GL_TEXTURE_CUBE_MAP, handle);
 	}
 	

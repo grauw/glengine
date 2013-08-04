@@ -1,6 +1,6 @@
 package nl.grauw.glengine.scene;
 
-import nl.grauw.glengine.gl.Context;
+import nl.grauw.glengine.gl.GLContext;
 import nl.grauw.glengine.model.Matrix;
 
 /**
@@ -14,6 +14,6 @@ public interface Drawable {
 	 * 
 	 * @param gl The GL drawing context.
 	 */
-	public void draw(Context gl, Matrix transform);
+	public void draw(GLContext gl, Matrix transform);
 	
 }

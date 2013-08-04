@@ -1,6 +1,6 @@
 package nl.grauw.glengine.scene;
 
-import nl.grauw.glengine.gl.Context;
+import nl.grauw.glengine.gl.GLContext;
 import nl.grauw.glengine.gl.GLEngineException;
 import nl.grauw.glengine.gl.Program;
 import nl.grauw.glengine.gl.Shader.FragmentShader;
@@ -21,7 +21,7 @@ public class Material {
 		this.fragmentSource = fragmentSource;
 	}
 	
-	public void compile(Context context) {
+	public void compile(GLContext context) {
 		VertexShader vertexShader = new VertexShader();
 		vertexShader.setSource(vertexSource);
 		vertexShader.compile();

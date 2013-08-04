@@ -9,17 +9,17 @@ import android.graphics.Bitmap;
 
 public abstract class Texture {
 	
-	protected final Context context;
+	protected final GLContext context;
 	protected final int type;
 	final int handle;
 	
-	protected Texture(Context context, int type, int handle) {
+	protected Texture(GLContext context, int type, int handle) {
 		this.context = context;
 		this.type = type;
 		this.handle = handle;
 	}
 	
-	protected Texture(Context context, int type) {
+	protected Texture(GLContext context, int type) {
 		this(context, type, Utils.glGenTexture());
 	}
 	

@@ -3,14 +3,14 @@ package nl.grauw.glengine;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import nl.grauw.glengine.gl.Context;
+import nl.grauw.glengine.gl.GLContext;
 import nl.grauw.glengine.gl.GLEngineException;
 
 import android.opengl.GLSurfaceView.Renderer;
 
 public abstract class GLEngineRenderer implements Renderer {
 
-	private Context context;
+	private GLContext context;
 	
 	@Override
 	public void onDrawFrame(GL10 gl) {
@@ -21,7 +21,7 @@ public abstract class GLEngineRenderer implements Renderer {
 		context.checkError();
 	}
 	
-	abstract public void onDrawFrame(Context context);
+	abstract public void onDrawFrame(GLContext context);
 	
 	@Override
 	public void onSurfaceChanged(GL10 gl, int width, int height) {
@@ -32,17 +32,17 @@ public abstract class GLEngineRenderer implements Renderer {
 		context.checkError();
 	}
 	
-	abstract public void onSurfaceChanged(Context context, int width, int height);
+	abstract public void onSurfaceChanged(GLContext context, int width, int height);
 	
 	@Override
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-		context = new Context();
+		context = new GLContext();
 		CapabilitiesLogger.log(context);
 		onSurfaceCreated(context, config);
 		
 		context.checkError();
 	}
 	
-	abstract public void onSurfaceCreated(Context context, EGLConfig config);
+	abstract public void onSurfaceCreated(GLContext context, EGLConfig config);
 	
 }
