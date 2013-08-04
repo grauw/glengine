@@ -317,7 +317,7 @@ public class Context {
 		if (buffer instanceof ByteBuffer)
 			drawElements(type, count, (ByteBuffer)buffer);
 		else if (buffer instanceof ShortBuffer)
-			drawElements(type, count, (ByteBuffer)buffer);
+			drawElements(type, count, (ShortBuffer)buffer);
 		else
 			throw new GLEngineException("Buffer type not supported.");
 	}
