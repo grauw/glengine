@@ -277,6 +277,14 @@ public class GLContext {
 		}
 	}
 	
+	public void setVertexAttribPointer(String attributeName, AttributeInfo attributeInfo, int stride, Buffer buffer) {
+		setVertexAttribPointer(currentProgram.getAttribute(attributeName), attributeInfo, stride, buffer);
+	}
+	
+	public void setVertexAttribPointer(Attribute attribute, AttributeInfo attributeInfo, int stride, Buffer buffer) {
+		setVertexAttribPointer(attribute.getLocation(), attributeInfo, stride, buffer);
+	}
+	
 	public void setVertexAttribPointer(int attributeIndex, AttributeInfo attributeInfo, int stride, Buffer buffer) {
 		glVertexAttribPointer(attributeIndex, attributeInfo.getComponents(), attributeTypeLookup[attributeInfo.getType().ordinal()],
 			attributeInfo.isNormalized(), stride, buffer);
