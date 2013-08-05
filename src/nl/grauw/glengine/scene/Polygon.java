@@ -18,6 +18,7 @@ public class Polygon extends Shape {
 		this.vertices = vertices;
 	}
 	
+	@Override
 	public Vertex[] getVertices() {
 		return vertices;
 	}
@@ -25,9 +26,7 @@ public class Polygon extends Shape {
 	@Override
 	public void draw(GLContext gl, Matrix transform) {
 		gl.getCurrentProgram().setUniformValue("modelViewProjection", transform);
-		gl.setVertexAttribPointer("position", 3, 0, getVertexBuffer());
-		gl.setVertexAttribPointer("color", 4, 0, getColorBuffer());
-		gl.drawArrays(PrimitiveType.TRIANGLES, 0, vertices.length);
+		drawArrays(gl, PrimitiveType.TRIANGLES, "position", "color");
 	}
 	
 }

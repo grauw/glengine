@@ -16,6 +16,7 @@ public class FanPolygon extends Shape {
 		this.vertices = vertices;
 	}
 	
+	@Override
 	public Vertex[] getVertices() {
 		return vertices;
 	}
@@ -23,9 +24,7 @@ public class FanPolygon extends Shape {
 	@Override
 	public void draw(GLContext gl, Matrix transform) {
 		gl.getCurrentProgram().setUniformValue("modelViewProjection", transform);
-		gl.setVertexAttribPointer("position", 3, 0, getVertexBuffer());
-		gl.setVertexAttribPointer("color", 4, 0, getColorBuffer());
-		gl.drawArrays(PrimitiveType.TRIANGLE_FAN, 0, vertices.length);
+		drawArrays(gl, PrimitiveType.TRIANGLE_FAN, "position", "color");
 	}
 	
 }

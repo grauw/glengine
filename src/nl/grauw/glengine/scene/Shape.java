@@ -1,114 +1,105 @@
 package nl.grauw.glengine.scene;
 
-import java.nio.FloatBuffer;
+import java.nio.Buffer;
+import java.nio.ByteBuffer;
 
+import nl.grauw.glengine.gl.GLContext;
+import nl.grauw.glengine.gl.GLEngineException;
 import nl.grauw.glengine.gl.Utils;
-import nl.grauw.glengine.model.Color;
-import nl.grauw.glengine.model.Point;
-import nl.grauw.glengine.model.Vector;
-import nl.grauw.glengine.model.Vertex;
+import nl.grauw.glengine.gl.GLContext.PrimitiveType;
+import nl.grauw.glengine.model.VertexArray;
+import nl.grauw.glengine.model.VertexArray.Vertex;
+import nl.grauw.glengine.model.VertexArray.VertexInfo;
 
 public abstract class Shape implements Drawable {
 	
-	private FloatBuffer vertexBuffer;
-	private FloatBuffer colorBuffer;
-	private FloatBuffer normalBuffer;
+	private ByteBuffer vertexBuffer;
 	
 	/**
 	 * Return the vertices for this shape.
-	 * Subclasses should implement this method to benefit from the vertex- and
-	 * color-buffer conversion methods.
 	 * 
 	 * @return The array of vertices.
 	 */
 	protected abstract Vertex[] getVertices();
 	
-	/**
-	 * Return the vertex positions in a FloatBuffer, for glVertexPointer().
-	 */
-	protected FloatBuffer getVertexBuffer() {
+	protected ByteBuffer getVertexBuffer() {
 		if (vertexBuffer == null) {
 			vertexBuffer = createVertexBuffer();
 		}
 		return vertexBuffer;
 	}
 	
-	/**
-	 * Create a FloatBuffer for the vertex positions.
-	 * 
-	 * Buffers passed to glVertexPointer() must be direct, i.e., they must be
-	 * placed on the native heap where the garbage collector cannot move them.
-	 */
-	private FloatBuffer createVertexBuffer() {
+	private ByteBuffer createVertexBuffer() {
 		Vertex[] vertices = getVertices();
-		float[] vertexPositions = new float[vertices.length * 3];
-		int j = 0;
+		ByteBuffer buffer = Utils.createByteBuffer(vertices.length * vertices[0].getVertexInfo().getSize());
 		for (Vertex vertex : vertices) {
-			Point position = vertex.getPosition();
-			vertexPositions[j++] = position.getX();
-			vertexPositions[j++] = position.getY();
-			vertexPositions[j++] = position.getZ();
+			vertex.write(buffer);
 		}
-		return Utils.createFloatBuffer(vertexPositions);
+		return buffer;
 	}
 	
-	/**
-	 * Return the vertex colors in a FloatBuffer, for glColorPointer().
-	 */
-	protected FloatBuffer getColorBuffer() {
-		if (colorBuffer == null) {
-			colorBuffer = createColorBuffer();
-		}
-		return colorBuffer;
+	protected void setVertexAttribPointers(GLContext gl, String... attributeNames) {
+		int[] attributeIndices = new int[attributeNames.length];
+		for (int i = 0, length = attributeNames.length; i < length; i++)
+			attributeIndices[i] = gl.getCurrentProgram().getAttribute(attributeNames[i]).getLocation();
+		setVertexAttribPointers(gl, attributeIndices);
 	}
 	
-	/**
-	 * Create a FloatBuffer for the vertex colors.
-	 * 
-	 * Buffers passed to glColorPointer() must be direct, i.e., they must be
-	 * placed on the native heap where the garbage collector cannot move them.
-	 */
-	private FloatBuffer createColorBuffer() {
-		Vertex[] vertices = getVertices();
-		float[] vertexColours = new float[vertices.length * 4];
-		int j = 0;
-		for (Vertex vertex : vertices) {
-			Color color = vertex.getColor();
-			vertexColours[j++] = color.getRed();
-			vertexColours[j++] = color.getGreen();
-			vertexColours[j++] = color.getBlue();
-			vertexColours[j++] = color.getAlpha();
+	protected void setVertexAttribPointers(GLContext gl, int... attributeIndices) {
+		VertexInfo vertexInfo = getVertices()[0].getVertexInfo();
+		VertexArray.AttributeInfo[] attributeInfos = vertexInfo.getAttributeInfo();
+		
+//		if (attributeInfos.length != attributeIndices.length)
+//			throw new GLEngineException("Not enough or too many attribute names provided.");
+		if (attributeInfos.length < attributeIndices.length)
+			throw new GLEngineException("Too many attribute names provided.");
+		
+		ByteBuffer buffer = getVertexBuffer();
+		int offset = 0;
+		int vertexSize = vertexInfo.getSize();
+		for (int i = 0, length = attributeIndices.length; i < length; i++) {
+			buffer.position(offset);
+			gl.setVertexAttribPointer(attributeIndices[i], attributeInfos[i], vertexSize, buffer);
+			offset += attributeInfos[i].getSize();
 		}
-		return Utils.createFloatBuffer(vertexColours);
-	}
-
-	/**
-	 * Return the vertex normals in a FloatBuffer, for glNormalPointer().
-	 */
-	protected FloatBuffer getNormalBuffer() {
-		if (normalBuffer == null) {
-			normalBuffer = createNormalBuffer();
-		}
-		return normalBuffer;
 	}
 	
-	/**
-	 * Create a FloatBuffer for the vertex normals.
-	 * 
-	 * Buffers passed to glNormalPointer() must be direct, i.e., they must be
-	 * placed on the native heap where the garbage collector cannot move them.
-	 */
-	private FloatBuffer createNormalBuffer() {
-		Vertex[] vertices = getVertices();
-		float[] vertexNormals = new float[vertices.length * 3];
-		int j = 0;
-		for (Vertex vertex : vertices) {
-			Vector normal = vertex.getNormal();
-			vertexNormals[j++] = normal.getX();
-			vertexNormals[j++] = normal.getY();
-			vertexNormals[j++] = normal.getZ();
-		}
-		return Utils.createFloatBuffer(vertexNormals);
+	protected void drawArrays(GLContext gl, PrimitiveType type, String... attributeNames) {
+		int[] attributeIndices = new int[attributeNames.length];
+		for (int i = 0, length = attributeNames.length; i < length; i++)
+			attributeIndices[i] = gl.getCurrentProgram().getAttribute(attributeNames[i]).getLocation();
+		drawArrays(gl, type, attributeIndices);
+	}
+	
+	protected void drawArrays(GLContext gl, PrimitiveType type, int... attributeIndices) {
+		for (int attributeIndex : attributeIndices)
+			gl.enableVertexAttribArray(attributeIndex);
+		
+		setVertexAttribPointers(gl, attributeIndices);
+		
+		gl.drawArrays(type, 0, getVertices().length);
+		
+		for (int attributeIndex : attributeIndices)
+			gl.disableVertexAttribArray(attributeIndex);
+	}
+	
+	protected void drawElements(GLContext gl, PrimitiveType type, Buffer indexes, String... attributeNames) {
+		int[] attributeIndices = new int[attributeNames.length];
+		for (int i = 0, length = attributeNames.length; i < length; i++)
+			attributeIndices[i] = gl.getCurrentProgram().getAttribute(attributeNames[i]).getLocation();
+		drawElements(gl, type, indexes, attributeIndices);
+	}
+	
+	protected void drawElements(GLContext gl, PrimitiveType type, Buffer indexes, int... attributeIndices) {
+		for (int attributeIndex : attributeIndices)
+			gl.enableVertexAttribArray(attributeIndex);
+		
+		setVertexAttribPointers(gl, attributeIndices);
+		
+		gl.drawElements(type, indexes);
+		
+		for (int attributeIndex : attributeIndices)
+			gl.disableVertexAttribArray(attributeIndex);
 	}
 	
 }

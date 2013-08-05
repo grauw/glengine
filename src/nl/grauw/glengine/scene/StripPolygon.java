@@ -18,6 +18,7 @@ public class StripPolygon extends Shape {
 		this.vertices = vertices;
 	}
 	
+	@Override
 	public Vertex[] getVertices() {
 		return vertices;
 	}
@@ -25,9 +26,7 @@ public class StripPolygon extends Shape {
 	@Override
 	public void draw(GLContext gl, Matrix transform) {
 		gl.getCurrentProgram().setUniformValue("modelViewProjection", transform);
-		gl.setVertexAttribPointer("position", 3, 0, getVertexBuffer());
-		gl.setVertexAttribPointer("color", 3, 0, getColorBuffer());
-		gl.drawArrays(PrimitiveType.TRIANGLE_STRIP, 0, vertices.length);
+		drawArrays(gl, PrimitiveType.TRIANGLE_STRIP, "position", "color");
 	}
 	
 }

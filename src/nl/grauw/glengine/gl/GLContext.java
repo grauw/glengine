@@ -10,9 +10,7 @@ import java.nio.ShortBuffer;
 import nl.grauw.glengine.gl.GLEngineException.OpenGLException;
 import nl.grauw.glengine.gl.Variable.Attribute;
 import nl.grauw.glengine.model.Size;
-import nl.grauw.glengine.model.VertexArray;
 import nl.grauw.glengine.model.VertexArray.AttributeInfo;
-import nl.grauw.glengine.model.VertexArray.VertexInfo;
 
 /**
  * GL wrapper class that boxes some sense into OpenGL :).
@@ -251,30 +249,6 @@ public class GLContext {
 	
 	public TextureUnit getActiveTextureUnit() {
 		return activeTextureUnit;
-	}
-	
-	public void setVertexAttribPointers(VertexArray vertexArray, String... attributeNames) {
-		int[] attributeIndices = new int[attributeNames.length];
-		for (int i = 0, length = attributeNames.length; i < length; i++)
-			attributeIndices[i] = currentProgram.getAttribute(attributeNames[i]).getLocation();
-		setVertexAttribPointers(vertexArray, attributeIndices);
-	}
-	
-	public void setVertexAttribPointers(VertexArray vertexArray, int... attributeIndices) {
-		VertexInfo vertexInfo = vertexArray.getVertexInfo();
-		AttributeInfo[] attributeInfos = vertexInfo.getAttributeInfo();
-		
-		if (attributeInfos.length != attributeIndices.length)
-			throw new GLEngineException("Not enough or too many attribute names provided.");
-		
-		ByteBuffer buffer = vertexArray.getBuffer();
-		int offset = 0;
-		int vertexSize = vertexInfo.getSize();
-		for (int i = 0, length = attributeInfos.length; i < length; i++) {
-			buffer.position(offset);
-			setVertexAttribPointer(attributeIndices[i], attributeInfos[i], vertexSize, buffer);
-			offset += attributeInfos[i].getSize();
-		}
 	}
 	
 	public void setVertexAttribPointer(String attributeName, AttributeInfo attributeInfo, int stride, Buffer buffer) {
