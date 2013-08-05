@@ -3,7 +3,7 @@ package nl.grauw.glengine.scene;
 import nl.grauw.glengine.gl.GLContext;
 import nl.grauw.glengine.gl.GLContext.PrimitiveType;
 import nl.grauw.glengine.model.Matrix;
-import nl.grauw.glengine.model.Vertex;
+import nl.grauw.glengine.model.VertexArray.Vertex;
 
 public class StripPolygon extends Shape {
 	
