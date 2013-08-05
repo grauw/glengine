@@ -23,18 +23,16 @@ public abstract class Shape implements Drawable {
 	protected abstract Vertex[] getVertices();
 	
 	protected ByteBuffer getVertexBuffer() {
-		if (vertexBuffer == null) {
+		if (vertexBuffer == null)
 			vertexBuffer = createVertexBuffer();
-		}
 		return vertexBuffer;
 	}
 	
 	private ByteBuffer createVertexBuffer() {
 		Vertex[] vertices = getVertices();
 		ByteBuffer buffer = Utils.createByteBuffer(vertices.length * vertices[0].getVertexInfo().getSize());
-		for (Vertex vertex : vertices) {
+		for (Vertex vertex : vertices)
 			vertex.write(buffer);
-		}
 		return buffer;
 	}
 	
