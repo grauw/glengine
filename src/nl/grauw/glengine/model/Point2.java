@@ -1,9 +1,6 @@
 package nl.grauw.glengine.model;
 
 import java.nio.ByteBuffer;
-import nl.grauw.glengine.model.VertexArray.AttributeInfo;
-import nl.grauw.glengine.model.VertexArray.AttributeType;
-import nl.grauw.glengine.model.VertexArray.VertexAttribute;
 
 public class Point2 implements VertexAttribute {
 	

@@ -7,9 +7,9 @@ import nl.grauw.glengine.gl.GLContext;
 import nl.grauw.glengine.gl.GLEngineException;
 import nl.grauw.glengine.gl.Utils;
 import nl.grauw.glengine.gl.GLContext.PrimitiveType;
-import nl.grauw.glengine.model.VertexArray;
-import nl.grauw.glengine.model.VertexArray.Vertex;
-import nl.grauw.glengine.model.VertexArray.VertexInfo;
+import nl.grauw.glengine.model.Vertex;
+import nl.grauw.glengine.model.Vertex.VertexInfo;
+import nl.grauw.glengine.model.VertexAttribute.AttributeInfo;
 
 public abstract class Shape implements Drawable {
 	
@@ -45,7 +45,7 @@ public abstract class Shape implements Drawable {
 	
 	protected void setVertexAttribPointers(GLContext gl, int... attributeIndices) {
 		VertexInfo vertexInfo = getVertices()[0].getVertexInfo();
-		VertexArray.AttributeInfo[] attributeInfos = vertexInfo.getAttributeInfo();
+		AttributeInfo[] attributeInfos = vertexInfo.getAttributeInfo();
 		
 //		if (attributeInfos.length != attributeIndices.length)
 //			throw new GLEngineException("Not enough or too many attribute names provided.");

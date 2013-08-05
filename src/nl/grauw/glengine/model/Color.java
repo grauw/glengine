@@ -3,9 +3,6 @@ package nl.grauw.glengine.model;
 import java.nio.ByteBuffer;
 
 import nl.grauw.glengine.gl.GLEngineException;
-import nl.grauw.glengine.model.VertexArray.AttributeInfo;
-import nl.grauw.glengine.model.VertexArray.AttributeType;
-import nl.grauw.glengine.model.VertexArray.VertexAttribute;
 
 public class Color implements VertexAttribute {
 	

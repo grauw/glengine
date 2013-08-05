@@ -1,6 +1,6 @@
 package nl.grauw.glengine.scene;
 
-import nl.grauw.glengine.model.VertexArray.Vertex;
+import nl.grauw.glengine.model.Vertex;
 
 public class Triangle extends Polygon {
 	
