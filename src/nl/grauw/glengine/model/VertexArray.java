@@ -16,6 +16,8 @@ public class VertexArray {
 	public VertexArray(VertexInfo vertexInfo, int length) {
 		if (length < 1)
 			throw new GLEngineException("Vertex array length must be at least 1.");
+		if (vertexInfo == null)
+			throw new GLEngineException("Must specify vertex info.");
 		
 		this.vertexInfo = vertexInfo;
 		this.length = length;
