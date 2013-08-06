@@ -8,27 +8,65 @@ public abstract class Vertex {
 	
 	public abstract VertexInfo getVertexInfo();
 	
+	public VertexAttribute[] getAttributes() {
+		return getVertexInfo().getAttributes();
+	}
+	
 	public static class VertexInfo {
 		
 		private int size;
-		private AttributeInfo[] attributes;
+		private AttributeInfo[] attributeInfos;
+		private VertexAttribute[] attributes;
 		
-		public VertexInfo(AttributeInfo... attributes) {
-			this.attributes = attributes;
+		public VertexInfo(AttributeInfo... attributeInfos) {
+			this.attributeInfos = attributeInfos;
+			this.attributes = new VertexAttribute[attributeInfos.length];
 			
-			int size = 0;
-			for (AttributeInfo attribute : attributes)
-				size += attribute.getSize();
+			int offset = 0;
+			for (int i = 0; i < attributeInfos.length; i++) {
+				attributes[i] = new VertexAttribute(i, attributeInfos[i], offset);
+				offset += attributeInfos[i].getSize();
+			}
 			
-			this.size = size;
+			this.size = offset;
 		}
 		
 		public int getSize() {
 			return size;
 		}
 		
-		public AttributeInfo[] getAttributeInfo() {
+		public VertexAttribute[] getAttributes() {
 			return attributes;
+		}
+		
+		public AttributeInfo[] getAttributeInfo() {
+			return attributeInfos;
+		}
+		
+	}
+	
+	public static class VertexAttribute {
+		
+		private final int index;
+		private final AttributeInfo attributeInfo;
+		private final int offset;
+		
+		private VertexAttribute(int index, AttributeInfo attributeInfo, int offset) {
+			this.index = index;
+			this.attributeInfo = attributeInfo;
+			this.offset = offset;
+		}
+		
+		public int getIndex() {
+			return index;
+		}
+		
+		public AttributeInfo getAttributeInfo() {
+			return attributeInfo;
+		}
+		
+		public int getOffset() {
+			return offset;
 		}
 		
 	}
