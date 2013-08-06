@@ -5,15 +5,15 @@ import java.nio.ByteBuffer;
 
 import nl.grauw.glengine.gl.GLContext;
 import nl.grauw.glengine.gl.GLEngineException;
-import nl.grauw.glengine.gl.Utils;
 import nl.grauw.glengine.gl.GLContext.PrimitiveType;
 import nl.grauw.glengine.model.Vertex;
 import nl.grauw.glengine.model.Vertex.VertexInfo;
 import nl.grauw.glengine.model.Vertex.AttributeInfo;
+import nl.grauw.glengine.model.VertexArray;
 
 public abstract class Shape implements Drawable {
 	
-	private ByteBuffer vertexBuffer;
+	private VertexArray vertexArray;
 	
 	/**
 	 * Return the vertices for this shape.
@@ -22,18 +22,10 @@ public abstract class Shape implements Drawable {
 	 */
 	protected abstract Vertex[] getVertices();
 	
-	protected ByteBuffer getVertexBuffer() {
-		if (vertexBuffer == null)
-			vertexBuffer = createVertexBuffer();
-		return vertexBuffer;
-	}
-	
-	private ByteBuffer createVertexBuffer() {
-		Vertex[] vertices = getVertices();
-		ByteBuffer buffer = Utils.createByteBuffer(vertices.length * vertices[0].getVertexInfo().getSize());
-		for (Vertex vertex : vertices)
-			vertex.write(buffer);
-		return buffer;
+	protected VertexArray getVertexArray() {
+		if (vertexArray == null)
+			vertexArray = new VertexArray(getVertices());
+		return vertexArray;
 	}
 	
 	protected void setVertexAttribPointers(GLContext gl, String... attributeNames) {
@@ -52,7 +44,7 @@ public abstract class Shape implements Drawable {
 		if (attributeInfos.length < attributeIndices.length)
 			throw new GLEngineException("Too many attribute names provided.");
 		
-		ByteBuffer buffer = getVertexBuffer();
+		ByteBuffer buffer = getVertexArray().getBuffer();
 		int offset = 0;
 		int vertexSize = vertexInfo.getSize();
 		for (int i = 0, length = attributeIndices.length; i < length; i++) {

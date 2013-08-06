@@ -1,42 +1,12 @@
 package nl.grauw.glengine.model;
 
-import java.nio.ByteBuffer;
-
 import nl.grauw.glengine.gl.GLEngineException;
 
 public abstract class Vertex {
 	
-	public abstract void write(ByteBuffer buffer);
+	public abstract void write(VertexArray array);
 	
 	public abstract VertexInfo getVertexInfo();
-	
-	protected void writeFloat(ByteBuffer buffer, float scalar) {
-		buffer.putFloat(scalar);
-	}
-	
-	protected void writeFloat2(ByteBuffer buffer, Vector2 vector) {
-		buffer.putFloat(vector.getX());
-		buffer.putFloat(vector.getY());
-	}
-	
-	protected void writeFloat3(ByteBuffer buffer, Vector3 vector) {
-		buffer.putFloat(vector.getX());
-		buffer.putFloat(vector.getY());
-		buffer.putFloat(vector.getZ());
-	}
-	
-	protected void writeFloat4(ByteBuffer buffer, Vector4 vector) {
-		buffer.putFloat(vector.getX());
-		buffer.putFloat(vector.getY());
-		buffer.putFloat(vector.getZ());
-		buffer.putFloat(vector.getW());
-	}
-	protected void writeFloat4(ByteBuffer buffer, Color color) {
-		buffer.putFloat(color.getRed());
-		buffer.putFloat(color.getGreen());
-		buffer.putFloat(color.getBlue());
-		buffer.putFloat(color.getAlpha());
-	}
 	
 	public static class VertexInfo {
 		
@@ -62,7 +32,7 @@ public abstract class Vertex {
 		}
 		
 	}
-
+	
 	public static class AttributeInfo {
 		
 		private int components;
