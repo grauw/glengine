@@ -44,9 +44,19 @@ public class Utils {
 		return Utils.ONE_INT_BUFFER.get(0);
 	}
 	
+	static int glGenBuffer() {
+		glGenBuffers(1, Utils.ONE_INT_BUFFER);
+		return Utils.ONE_INT_BUFFER.get(0);
+	}
+	
 	static void glDeleteTexture(int handle) {
 		Utils.ONE_INT_BUFFER.put(0, handle);
 		glDeleteTextures(1, Utils.ONE_INT_BUFFER);
+	}
+	
+	static void glDeleteBuffer(int handle) {
+		Utils.ONE_INT_BUFFER.put(0, handle);
+		glDeleteBuffers(1, Utils.ONE_INT_BUFFER);
 	}
 	
 	/**
