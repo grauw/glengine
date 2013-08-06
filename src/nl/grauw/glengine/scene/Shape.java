@@ -15,16 +15,15 @@ public abstract class Shape implements Drawable {
 	
 	private VertexArray vertexArray;
 	
-	/**
-	 * Return the vertices for this shape.
-	 * 
-	 * @return The array of vertices.
-	 */
-	protected abstract Vertex[] getVertices();
+	public void setVertices(Vertex... vertices) {
+		setVertexArray(new VertexArray(vertices));
+	}
+	
+	public void setVertexArray(VertexArray vertexArray) {
+		this.vertexArray = vertexArray;
+	}
 	
 	protected VertexArray getVertexArray() {
-		if (vertexArray == null)
-			vertexArray = new VertexArray(getVertices());
 		return vertexArray;
 	}
 	

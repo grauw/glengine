@@ -7,18 +7,11 @@ import nl.grauw.glengine.model.Vertex;
 
 public class FanPolygon extends Shape {
 	
-	private final Vertex[] vertices;
-	
 	public FanPolygon(Vertex... vertices) {
 		if (vertices.length < 3)
 			throw new Error("At least three vertices required.");
 		
-		this.vertices = vertices;
-	}
-	
-	@Override
-	public Vertex[] getVertices() {
-		return vertices;
+		setVertices(vertices);
 	}
 	
 	@Override

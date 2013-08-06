@@ -7,20 +7,13 @@ import nl.grauw.glengine.model.Vertex;
 
 public class StripPolygon extends Shape {
 	
-	private final Vertex[] vertices;
-	
 	public StripPolygon(Vertex... vertices) {
 		if (vertices.length < 3)
 			throw new Error("At least three vertices required.");
 		if ((vertices.length - 3) % 2 == 0)
 			throw new Error("Vertices after the third must come in two’s.");
 		
-		this.vertices = vertices;
-	}
-	
-	@Override
-	public Vertex[] getVertices() {
-		return vertices;
+		setVertices(vertices);
 	}
 	
 	@Override
