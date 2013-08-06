@@ -24,6 +24,10 @@ public class Vector2 implements VertexAttribute {
 		this(vector.getX(), vector.getY());
 	}
 	
+	public Vector2(Vector4 vector) {
+		this(vector.getX(), vector.getY());
+	}
+	
 	public float getX() {
 		return x;
 	}
