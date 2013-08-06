@@ -2,6 +2,8 @@ package nl.grauw.glengine.model;
 
 import java.nio.ByteBuffer;
 
+import nl.grauw.glengine.gl.GLEngineException;
+
 public interface VertexAttribute {
 	
 	public void write(ByteBuffer buffer);
@@ -19,6 +21,9 @@ public interface VertexAttribute {
 		}
 		
 		protected AttributeInfo(int components, AttributeType type, boolean normalized) {
+			if (components < 1 || components > 4)
+				throw new GLEngineException("Invalid number of components.");
+			
 			this.components = components;
 			this.type = type;
 			this.normalized = normalized;
