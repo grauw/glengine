@@ -114,6 +114,10 @@ public class Program {
 		return activeAttributes.get(name);
 	}
 	
+	public boolean hasAttribute(String name) {
+		return activeAttributes.containsKey(name);
+	}
+	
 	private void updateActiveAttributes() {
 		int count = Utils.glGetProgramInteger(handle, GL_ACTIVE_ATTRIBUTES);
 		int maxNameLength = Utils.glGetProgramInteger(handle, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH);
@@ -139,6 +143,10 @@ public class Program {
 	
 	public Uniform getUniform(String name) {
 		return activeUniforms.get(name);
+	}
+	
+	public boolean hasUniform(String name) {
+		return activeUniforms.containsKey(name);
 	}
 	
 	private void updateActiveUniforms() {
