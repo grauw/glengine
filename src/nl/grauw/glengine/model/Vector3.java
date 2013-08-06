@@ -29,10 +29,6 @@ public class Vector3 implements VertexAttribute {
 		this(x, vector.getX(), vector.getY());
 	}
 	
-	public Vector3(Vector2 vector) {
-		this(vector, 0);
-	}
-	
 	public float getX() {
 		return x;
 	}
