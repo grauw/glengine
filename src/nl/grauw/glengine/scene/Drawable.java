@@ -9,6 +9,12 @@ import nl.grauw.glengine.model.Matrix;
 public interface Drawable {
 	
 	/**
+	 * Perform initialisation on the GL thread.
+	 * @param gl The GL drawing context.
+	 */
+	public void initialize(GLContext gl);
+	
+	/**
 	 * Render the drawable.
 	 * Subclasses should implement this method with the drawing code.
 	 * 

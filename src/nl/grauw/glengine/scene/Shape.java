@@ -28,6 +28,11 @@ public abstract class Shape implements Drawable {
 		return vertexArray;
 	}
 	
+	@Override
+	public void initialize(GLContext gl) {
+		
+	}
+	
 	protected void setVertexAttribPointers(GLContext gl, String... attributeNames) {
 		int[] attributeIndices = new int[attributeNames.length];
 		for (int i = 0, length = attributeNames.length; i < length; i++)

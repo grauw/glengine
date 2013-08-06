@@ -23,6 +23,12 @@ public class Node implements Drawable {
 		return transform;
 	}
 	
+	@Override
+	public void initialize(GLContext gl) {
+		for (Drawable child : children)
+			child.initialize(gl);
+	}
+	
 	public void draw(GLContext gl, Matrix transform) {
 		transform = transform.multiply(this.transform.getMatrix());
 		
