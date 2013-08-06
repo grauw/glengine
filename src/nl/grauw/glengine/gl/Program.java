@@ -82,7 +82,7 @@ public class Program {
 	public void link() {
 		glLinkProgram(handle);
 		
-		if (!getLinkStatus()) {
+		if (!isLinked()) {
 			throw new GLEngineException("Failed to link program.\n%s", getInfoLog());
 		}
 		
@@ -90,8 +90,7 @@ public class Program {
 		updateActiveUniforms();
 	}
 	
-	// XXX: rename to isLinked()?
-	public boolean getLinkStatus() {
+	public boolean isLinked() {
 		return Utils.glGetProgramInteger(handle, GL_LINK_STATUS) == GL_TRUE;
 	}
 	
