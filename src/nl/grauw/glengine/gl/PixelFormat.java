@@ -21,7 +21,7 @@ public enum PixelFormat {
 		return channels;
 	}
 	
-	public static PixelFormat getById(final int id) {
+	public static PixelFormat getById(int id) {
 		for (PixelFormat format : values())
 			if (format.id == id)
 				return format;

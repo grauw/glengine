@@ -11,7 +11,7 @@ public class Vector2 implements VertexAttribute {
 	
 	public static final AttributeInfo attributeInfo = new AttributeInfo(2, AttributeType.FLOAT);
 	
-	public Vector2(final float x, final float y) {
+	public Vector2(float x, float y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -32,19 +32,19 @@ public class Vector2 implements VertexAttribute {
 		return (float)Math.sqrt(x * x + y * y);
 	}
 	
-	public Vector2 add(final Vector2 other) {
+	public Vector2 add(Vector2 other) {
 		if (other == ZERO)
 			return this;
 		return new Vector2(x + other.x, y + other.y);
 	}
 	
-	public Vector2 subtract(final Vector2 other) {
+	public Vector2 subtract(Vector2 other) {
 		if (other == ZERO)
 			return this;
 		return new Vector2(x - other.x, y - other.y);
 	}
 	
-	public Vector2 multiply(final Vector2 other) {
+	public Vector2 multiply(Vector2 other) {
 		if (other == ONE)
 			return this;
 		if (other == ZERO)
@@ -52,7 +52,7 @@ public class Vector2 implements VertexAttribute {
 		return new Vector2(x * other.x, y * other.y);
 	}
 	
-	public Vector2 multiply(final float scalar) {
+	public Vector2 multiply(float scalar) {
 		if (scalar == 1)
 			return this;
 		return new Vector2(x * scalar, y * scalar);
@@ -65,18 +65,18 @@ public class Vector2 implements VertexAttribute {
 		return new Vector2(x / length, y / length);
 	}
 	
-	public float dot(final Vector2 other) {
+	public float dot(Vector2 other) {
 		return x * other.x + y * other.y;
 	}
 	
-	public Vector2 interpolate(final Vector2 other, final Vector2 weight) {
+	public Vector2 interpolate(Vector2 other, Vector2 weight) {
 		return new Vector2(
 			x + (other.x - x) * weight.x,
 			y + (other.y - y) * weight.y
 		);
 	}
 	
-	public Vector2 interpolate(final Vector2 other, final float weight) {
+	public Vector2 interpolate(Vector2 other, float weight) {
 		return new Vector2(
 			x + (other.x - x) * weight,
 			y + (other.y - y) * weight

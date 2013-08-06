@@ -4,11 +4,11 @@ public class Size {
 	
 	private final float width, height, depth;
 	
-	public Size(final float width, final float height) {
+	public Size(float width, float height) {
 		this(width, height, 0);
 	}
 	
-	public Size(final float width, final float height, final float depth) {
+	public Size(float width, float height, float depth) {
 		this.width = width;
 		this.height = height;
 		this.depth = depth;

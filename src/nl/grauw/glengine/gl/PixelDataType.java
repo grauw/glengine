@@ -9,11 +9,11 @@ public enum PixelDataType {
 	UNSIGNED_SHORT_5_5_5_1(GL_UNSIGNED_SHORT_5_5_5_1);
 	
 	final int id;
-	private PixelDataType(final int id) {
+	private PixelDataType(int id) {
 		this.id = id;
 	}
 	
-	public static PixelDataType getById(final int id) {
+	public static PixelDataType getById(int id) {
 		for (PixelDataType type : values())
 			if (type.id == id)
 				return type;

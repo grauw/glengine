@@ -108,7 +108,7 @@ public abstract class Texture {
 		LINEAR_MIPMAP_LINEAR(GL_LINEAR_MIPMAP_LINEAR);
 		
 		final int id;
-		private MinificationFilter(final int id) {
+		private MinificationFilter(int id) {
 			this.id = id;
 		}
 	}
@@ -118,7 +118,7 @@ public abstract class Texture {
 		LINEAR(GL_LINEAR);
 		
 		final int id;
-		private MagnificationFilter(final int id) {
+		private MagnificationFilter(int id) {
 			this.id = id;
 		}
 	}
@@ -129,7 +129,7 @@ public abstract class Texture {
 		MIRRORED_REPEAT(GL_MIRRORED_REPEAT);
 		
 		final int id;
-		private WrapMode(final int id) {
+		private WrapMode(int id) {
 			this.id = id;
 		}
 	}

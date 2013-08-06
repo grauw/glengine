@@ -55,11 +55,11 @@ public abstract class Variable {
 		SAMPLER_CUBE(GL_SAMPLER_CUBE);
 		
 		final int id;
-		private VariableType(final int id) {
+		private VariableType(int id) {
 			this.id = id;
 		}
 		
-		public static VariableType getById(final int id) {
+		public static VariableType getById(int id) {
 			for (VariableType type : values())
 				if (type.id == id)
 					return type;

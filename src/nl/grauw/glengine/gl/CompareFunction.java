@@ -13,7 +13,7 @@ public enum CompareFunction {
 	NEVER(GL_NEVER);
 	
 	final int id;
-	private CompareFunction(final int id) {
+	private CompareFunction(int id) {
 		this.id = id;
 	}
 }

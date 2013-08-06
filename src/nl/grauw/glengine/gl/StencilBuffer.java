@@ -81,7 +81,7 @@ public class StencilBuffer {
 		INVERT(GL_INVERT);
 		
 		final int id;
-		private StencilOperator(final int id) {
+		private StencilOperator(int id) {
 			this.id = id;
 		}
 	}

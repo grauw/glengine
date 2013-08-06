@@ -379,7 +379,7 @@ public class GLContext {
 		TRIANGLES(GL_TRIANGLES);
 		
 		final int id;
-		private PrimitiveType(final int id) {
+		private PrimitiveType(int id) {
 			this.id = id;
 		}
 	}

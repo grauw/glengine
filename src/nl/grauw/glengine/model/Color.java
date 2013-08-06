@@ -19,11 +19,11 @@ public class Color implements VertexAttribute {
 	
 	public static final AttributeInfo attributeInfo = new AttributeInfo(4, AttributeType.FLOAT);
 	
-	public Color(final float red, final float green, final float blue) {
+	public Color(float red, float green, float blue) {
 		this(red, green, blue, 1);
 	}
 	
-	public Color(final float red, final float green, final float blue, final float alpha) {
+	public Color(float red, float green, float blue, float alpha) {
 		this.red = red;
 		this.green = green;
 		this.blue = blue;
@@ -54,7 +54,7 @@ public class Color implements VertexAttribute {
 		return darker(0.5f);
 	}
 	
-	public Color darker(final float percentage) {
+	public Color darker(float percentage) {
 		if (percentage <= 0f || percentage >= 1f)
 			throw new GLEngineException("Percentage must be between 0 and 1.");
 		
@@ -65,7 +65,7 @@ public class Color implements VertexAttribute {
 		return lighter(0.5f);
 	}
 	
-	public Color lighter(final float percentage) {
+	public Color lighter(float percentage) {
 		if (percentage <= 0f || percentage >= 1f)
 			throw new GLEngineException("Percentage must be between 0 and 1.");
 		

@@ -165,7 +165,7 @@ public class ColorBuffer {
 		SRC_ALPHA_SATURATE(GL_SRC_ALPHA_SATURATE);
 		
 		final int id;
-		private BlendCoefficient(final int id) {
+		private BlendCoefficient(int id) {
 			this.id = id;
 		}
 	}
@@ -176,7 +176,7 @@ public class ColorBuffer {
 		REVERSE_SUBTRACT(GL_FUNC_REVERSE_SUBTRACT);
 		
 		final int id;
-		private BlendEquation(final int id) {
+		private BlendEquation(int id) {
 			this.id = id;
 		}
 	}
