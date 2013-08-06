@@ -36,7 +36,7 @@ public abstract class Shape implements Drawable {
 	}
 	
 	protected void setVertexAttribPointers(GLContext gl, int... attributeIndices) {
-		VertexInfo vertexInfo = getVertices()[0].getVertexInfo();
+		VertexInfo vertexInfo = getVertexArray().getVertexInfo();
 		AttributeInfo[] attributeInfos = vertexInfo.getAttributeInfo();
 		
 //		if (attributeInfos.length != attributeIndices.length)
