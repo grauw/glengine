@@ -72,7 +72,7 @@ public abstract class Shape implements Drawable {
 		
 		setVertexAttribPointers(gl, attributeIndices);
 		
-		gl.drawArrays(type, 0, getVertices().length);
+		gl.drawArrays(type, 0, getVertexArray().getLength());
 		
 		for (int attributeIndex : attributeIndices)
 			gl.disableVertexAttribArray(attributeIndex);
