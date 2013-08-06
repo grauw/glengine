@@ -17,6 +17,10 @@ public class Vector3 implements VertexAttribute {
 		this.z = z;
 	}
 	
+	public Vector3(float scalar) {
+		this(scalar, scalar, scalar);
+	}
+	
 	public Vector3(Vector2 vector, float z) {
 		this(vector.getX(), vector.getY(), z);
 	}
