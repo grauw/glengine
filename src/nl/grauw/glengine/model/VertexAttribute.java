@@ -4,7 +4,6 @@ import java.nio.ByteBuffer;
 
 public interface VertexAttribute {
 	
-	// XXX: writeAttribute? serialise? toByteBuffer?
 	public void write(ByteBuffer buffer);
 	
 	public AttributeInfo getAttributeInfo();

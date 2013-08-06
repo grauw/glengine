@@ -6,7 +6,6 @@ import nl.grauw.glengine.model.VertexAttribute.AttributeInfo;
 
 public interface Vertex {
 	
-	// XXX: writeVertex? serialise? toByteBuffer?
 	public void write(ByteBuffer buffer);
 	
 	public VertexInfo getVertexInfo();
