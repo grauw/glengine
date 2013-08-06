@@ -18,9 +18,7 @@ public class Vector3 implements VertexAttribute {
 	}
 	
 	public Vector3(Vector2 vector) {
-		x = vector.getX();
-		y = vector.getY();
-		z = 0;
+		this(vector.getX(), vector.getY(), 0);
 	}
 	
 	public float getX() {
