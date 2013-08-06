@@ -2,8 +2,8 @@ package nl.grauw.glengine.model;
 
 public class Transform {
 	
-	private Vector translation = Vector.ZERO;
-	private Vector scale = Vector.ONE;
+	private Vector3 translation = Vector3.ZERO;
+	private Vector3 scale = Vector3.ONE;
 	private Quaternion rotation = Quaternion.IDENTITY;
 	private Matrix matrix = Matrix.IDENTITY;
 	private boolean dirty = false;
@@ -11,34 +11,34 @@ public class Transform {
 	public Transform() {
 	}
 	
-	public Vector getTranslation() {
+	public Vector3 getTranslation() {
 		return translation;
 	}
 	
-	public void setTranslation(Vector translation) {
+	public void setTranslation(Vector3 translation) {
 		this.translation = translation;
 		dirty = true;
 	}
 	
 	public void setTranslation(float x, float y, float z) {
-		setTranslation(x == 0 && y == 0 && z == 0 ? Vector.ZERO : new Vector(x, y, z));
+		setTranslation(x == 0 && y == 0 && z == 0 ? Vector3.ZERO : new Vector3(x, y, z));
 	}
 	
-	public Vector getScale() {
+	public Vector3 getScale() {
 		return scale;
 	}
 	
-	public void setScale(Vector scale) {
+	public void setScale(Vector3 scale) {
 		this.scale = scale;
 		dirty = true;
 	}
 	
 	public void setScale(float x, float y, float z) {
-		setScale(x == 1 && y == 1 && z == 1 ? Vector.ONE : new Vector(x, y, z));
+		setScale(x == 1 && y == 1 && z == 1 ? Vector3.ONE : new Vector3(x, y, z));
 	}
 	
 	public void setScale(float scale) {
-		setScale(scale == 1 ? Vector.ONE : new Vector(scale, scale, scale));
+		setScale(scale == 1 ? Vector3.ONE : new Vector3(scale, scale, scale));
 	}
 	
 	public Quaternion getRotation() {
@@ -61,11 +61,11 @@ public class Transform {
 	public Matrix getMatrix() {
 		if (dirty) {
 			Matrix matrix = Matrix.IDENTITY;
-			if (translation != Vector.ZERO)
+			if (translation != Vector3.ZERO)
 				matrix = matrix.multiply(new Matrix.Translation(translation));
 			if (rotation != Quaternion.IDENTITY)
 				matrix = matrix.multiply(new Matrix.Rotation(rotation));
-			if (scale != Vector.ONE)
+			if (scale != Vector3.ONE)
 				matrix = matrix.multiply(new Matrix.Scale(scale));
 			this.matrix = matrix;
 		}
