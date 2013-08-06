@@ -16,11 +16,11 @@ public interface VertexAttribute {
 		private AttributeType type;
 		private boolean normalized;
 		
-		protected AttributeInfo(int components, AttributeType type) {
+		public AttributeInfo(int components, AttributeType type) {
 			this(components, type, false);
 		}
 		
-		protected AttributeInfo(int components, AttributeType type, boolean normalized) {
+		public AttributeInfo(int components, AttributeType type, boolean normalized) {
 			if (components < 1 || components > 4)
 				throw new GLEngineException("Invalid number of components.");
 			

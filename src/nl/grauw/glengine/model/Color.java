@@ -1,10 +1,8 @@
 package nl.grauw.glengine.model;
 
-import java.nio.ByteBuffer;
-
 import nl.grauw.glengine.gl.GLEngineException;
 
-public class Color implements VertexAttribute {
+public class Color {
 	
 	private final float red, green, blue, alpha;
 	
@@ -16,8 +14,6 @@ public class Color implements VertexAttribute {
 	public static final Color MAGENTA = new Color(1, 0, 1);
 	public static final Color YELLOW = new Color(1, 1, 0);
 	public static final Color WHITE = new Color(1, 1, 1);
-	
-	public static final AttributeInfo attributeInfo = new AttributeInfo(4, AttributeType.FLOAT);
 	
 	public Color(float red, float green, float blue) {
 		this(red, green, blue, 1);
@@ -70,19 +66,6 @@ public class Color implements VertexAttribute {
 			throw new GLEngineException("Percentage must be between 0 and 1.");
 		
 		return new Color(1f - (1f - red) * percentage, 1f - (1f - green) * percentage, 1f - (1f - blue) * percentage, alpha);
-	}
-	
-	@Override
-	public void write(ByteBuffer buffer) {
-		buffer.putFloat(red);
-		buffer.putFloat(green);
-		buffer.putFloat(blue);
-		buffer.putFloat(alpha);
-	}
-	
-	@Override
-	public AttributeInfo getAttributeInfo() {
-		return attributeInfo;
 	}
 	
 }

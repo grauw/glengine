@@ -1,15 +1,11 @@
 package nl.grauw.glengine.model;
 
-import java.nio.ByteBuffer;
-
-public class Vector2 implements VertexAttribute {
+public class Vector2 {
 	
 	private final float x, y;
 	
 	public static final Zero ZERO = new Zero();
 	public static final One ONE = new One();
-	
-	public static final AttributeInfo attributeInfo = new AttributeInfo(2, AttributeType.FLOAT);
 	
 	public Vector2(float x, float y) {
 		this.x = x;
@@ -93,17 +89,6 @@ public class Vector2 implements VertexAttribute {
 			x + (other.x - x) * weight,
 			y + (other.y - y) * weight
 		);
-	}
-	
-	@Override
-	public void write(ByteBuffer buffer) {
-		buffer.putFloat(x);
-		buffer.putFloat(y);
-	}
-	
-	@Override
-	public AttributeInfo getAttributeInfo() {
-		return attributeInfo;
 	}
 	
 	private static final class Zero extends Vector2 {
