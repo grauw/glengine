@@ -49,6 +49,10 @@ public class Vector3 implements VertexAttribute {
 		return (float)Math.sqrt(x * x + y * y + z * z);
 	}
 	
+	public float getLengthSquared() {
+		return x * x + y * y + z * z;
+	}
+	
 	public Vector3 add(Vector3 other) {
 		if (other == ZERO)
 			return this;

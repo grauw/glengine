@@ -63,6 +63,10 @@ public class Vector4 implements VertexAttribute {
 		return (float)Math.sqrt(x * x + y * y + z * z + w * w);
 	}
 	
+	public float getLengthSquared() {
+		return x * x + y * y + z * z + w * w;
+	}
+	
 	public Vector4 add(Vector4 other) {
 		if (other == ZERO)
 			return this;

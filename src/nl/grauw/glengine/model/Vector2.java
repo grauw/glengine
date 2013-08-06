@@ -40,6 +40,10 @@ public class Vector2 implements VertexAttribute {
 		return (float)Math.sqrt(x * x + y * y);
 	}
 	
+	public float getLengthSquared() {
+		return x * x + y * y;
+	}
+	
 	public Vector2 add(Vector2 other) {
 		if (other == ZERO)
 			return this;
