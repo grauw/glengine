@@ -9,7 +9,7 @@ import nl.grauw.glengine.gl.Utils;
 import nl.grauw.glengine.gl.GLContext.PrimitiveType;
 import nl.grauw.glengine.model.Vertex;
 import nl.grauw.glengine.model.Vertex.VertexInfo;
-import nl.grauw.glengine.model.VertexAttribute.AttributeInfo;
+import nl.grauw.glengine.model.Vertex.AttributeInfo;
 
 public abstract class Shape implements Drawable {
 	

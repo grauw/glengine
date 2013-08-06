@@ -10,7 +10,7 @@ import java.nio.ShortBuffer;
 import nl.grauw.glengine.gl.GLEngineException.OpenGLException;
 import nl.grauw.glengine.gl.Variable.Attribute;
 import nl.grauw.glengine.model.Size;
-import nl.grauw.glengine.model.VertexAttribute.AttributeInfo;
+import nl.grauw.glengine.model.Vertex.AttributeInfo;
 
 /**
  * GL wrapper class that boxes some sense into OpenGL :).
