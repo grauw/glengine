@@ -12,12 +12,14 @@ public class FanPolygon extends Shape {
 			throw new Error("At least three vertices required.");
 		
 		setVertices(vertices);
+		
+		linkAttributes("position", "color");
 	}
 	
 	@Override
 	public void draw(GLContext gl, Matrix transform) {
 		gl.getCurrentProgram().setUniformValue("modelViewProjection", transform);
-		drawArrays(gl, PrimitiveType.TRIANGLE_FAN, "position", "color");
+		drawArrays(gl, PrimitiveType.TRIANGLE_FAN);
 	}
 	
 }

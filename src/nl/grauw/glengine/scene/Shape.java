@@ -7,13 +7,14 @@ import nl.grauw.glengine.gl.GLContext;
 import nl.grauw.glengine.gl.GLEngineException;
 import nl.grauw.glengine.gl.GLContext.PrimitiveType;
 import nl.grauw.glengine.model.Vertex;
+import nl.grauw.glengine.model.Vertex.VertexAttribute;
 import nl.grauw.glengine.model.Vertex.VertexInfo;
-import nl.grauw.glengine.model.Vertex.AttributeInfo;
 import nl.grauw.glengine.model.VertexArray;
 
 public abstract class Shape implements Drawable {
 	
 	private VertexArray vertexArray;
+	private AttributeLink[] attributeLinks;
 	
 	public void setVertices(Vertex... vertices) {
 		setVertexArray(new VertexArray(vertices));
@@ -21,6 +22,7 @@ public abstract class Shape implements Drawable {
 	
 	public void setVertexArray(VertexArray vertexArray) {
 		this.vertexArray = vertexArray;
+		attributeLinks = new AttributeLink[vertexArray.getVertexInfo().getAttributes().length];
 	}
 	
 	protected VertexArray getVertexArray() {
@@ -32,68 +34,80 @@ public abstract class Shape implements Drawable {
 		
 	}
 	
-	protected void setVertexAttribPointers(GLContext gl, String... attributeNames) {
-		int[] attributeIndices = new int[attributeNames.length];
-		for (int i = 0, length = attributeNames.length; i < length; i++)
-			attributeIndices[i] = gl.getCurrentProgram().getAttribute(attributeNames[i]).getLocation();
-		setVertexAttribPointers(gl, attributeIndices);
+	public VertexInfo getVertexInfo() {
+		return getVertexArray().getVertexInfo();
 	}
 	
-	protected void setVertexAttribPointers(GLContext gl, int... attributeIndices) {
-		VertexInfo vertexInfo = getVertexArray().getVertexInfo();
-		AttributeInfo[] attributeInfos = vertexInfo.getAttributeInfo();
+	public void linkAttributes(String... shaderAttributes) {
+		VertexAttribute[] vertexAttributes = getVertexInfo().getAttributes();
+		if (shaderAttributes.length > attributeLinks.length)
+			throw new GLEngineException("Too many attributes specified.");
 		
-//		if (attributeInfos.length != attributeIndices.length)
-//			throw new GLEngineException("Not enough or too many attribute names provided.");
-		if (attributeInfos.length < attributeIndices.length)
-			throw new GLEngineException("Too many attribute names provided.");
-		
-		ByteBuffer buffer = getVertexArray().getBuffer();
-		int offset = 0;
-		int vertexSize = vertexInfo.getSize();
-		for (int i = 0, length = attributeIndices.length; i < length; i++) {
-			buffer.position(offset);
-			gl.setVertexAttribPointer(attributeIndices[i], attributeInfos[i], vertexSize, buffer);
-			offset += attributeInfos[i].getSize();
-		}
+		for (int i = 0; i < shaderAttributes.length; i++)
+			linkAttribute(vertexAttributes[i], shaderAttributes[i]);
 	}
 	
-	protected void drawArrays(GLContext gl, PrimitiveType type, String... attributeNames) {
-		int[] attributeIndices = new int[attributeNames.length];
-		for (int i = 0, length = attributeNames.length; i < length; i++)
-			attributeIndices[i] = gl.getCurrentProgram().getAttribute(attributeNames[i]).getLocation();
-		drawArrays(gl, type, attributeIndices);
+	public void linkAttribute(VertexAttribute vertexAttribute, String shaderAttribute) {
+		attributeLinks[vertexAttribute.getIndex()] = shaderAttribute == null ? null :
+			new AttributeLink(vertexAttribute, shaderAttribute);
 	}
 	
-	protected void drawArrays(GLContext gl, PrimitiveType type, int... attributeIndices) {
-		for (int attributeIndex : attributeIndices)
-			gl.enableVertexAttribArray(attributeIndex);
-		
-		setVertexAttribPointers(gl, attributeIndices);
+	protected void drawArrays(GLContext gl, PrimitiveType type) {
+		setUpDraw(gl);
 		
 		gl.drawArrays(type, 0, getVertexArray().getLength());
 		
-		for (int attributeIndex : attributeIndices)
-			gl.disableVertexAttribArray(attributeIndex);
+		tearDownDraw(gl);
 	}
 	
-	protected void drawElements(GLContext gl, PrimitiveType type, Buffer indexes, String... attributeNames) {
-		int[] attributeIndices = new int[attributeNames.length];
-		for (int i = 0, length = attributeNames.length; i < length; i++)
-			attributeIndices[i] = gl.getCurrentProgram().getAttribute(attributeNames[i]).getLocation();
-		drawElements(gl, type, indexes, attributeIndices);
-	}
-	
-	protected void drawElements(GLContext gl, PrimitiveType type, Buffer indexes, int... attributeIndices) {
-		for (int attributeIndex : attributeIndices)
-			gl.enableVertexAttribArray(attributeIndex);
-		
-		setVertexAttribPointers(gl, attributeIndices);
+	protected void drawElements(GLContext gl, PrimitiveType type, Buffer indexes) {
+		setUpDraw(gl);
 		
 		gl.drawElements(type, indexes);
 		
-		for (int attributeIndex : attributeIndices)
-			gl.disableVertexAttribArray(attributeIndex);
+		tearDownDraw(gl);
+	}
+	
+	protected void setUpDraw(GLContext gl) {
+		for (AttributeLink attributeLink : attributeLinks)
+			if (attributeLink != null)
+				attributeLink.setUp(gl);
+	}
+	
+	protected void tearDownDraw(GLContext gl) {
+		for (AttributeLink attributeLink : attributeLinks)
+			if (attributeLink != null)
+				attributeLink.tearDown(gl);
+	}
+	
+	private class AttributeLink {
+		
+		private final VertexAttribute vertexAttribute;
+		private final String shaderAttribute;
+		
+		public AttributeLink(VertexAttribute vertexAttribute, String shaderAttribute) {
+			this.vertexAttribute = vertexAttribute;
+			this.shaderAttribute = shaderAttribute;
+		}
+		
+		public void setUp(GLContext gl) {
+			if (!gl.getCurrentProgram().hasAttribute(shaderAttribute))
+				return;
+			
+			gl.enableVertexAttribArray(shaderAttribute);
+			
+			ByteBuffer buffer = getVertexArray().getBuffer();
+			buffer.position(vertexAttribute.getOffset());
+			gl.setVertexAttribPointer(shaderAttribute, vertexAttribute.getAttributeInfo(), getVertexInfo().getSize(), buffer);
+		}
+		
+		public void tearDown(GLContext gl) {
+			if (!gl.getCurrentProgram().hasAttribute(shaderAttribute))
+				return;
+			
+			gl.disableVertexAttribArray(shaderAttribute);
+		}
+		
 	}
 	
 }

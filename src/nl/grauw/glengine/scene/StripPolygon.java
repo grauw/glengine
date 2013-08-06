@@ -14,12 +14,14 @@ public class StripPolygon extends Shape {
 			throw new Error("Vertices after the third must come in two’s.");
 		
 		setVertices(vertices);
+		
+		linkAttributes("position", "color");
 	}
 	
 	@Override
 	public void draw(GLContext gl, Matrix transform) {
 		gl.getCurrentProgram().setUniformValue("modelViewProjection", transform);
-		drawArrays(gl, PrimitiveType.TRIANGLE_STRIP, "position", "color");
+		drawArrays(gl, PrimitiveType.TRIANGLE_STRIP);
 	}
 	
 }

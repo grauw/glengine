@@ -14,12 +14,14 @@ public class Polygon extends Shape {
 			throw new Error("Vertices must come in three’s.");
 		
 		setVertices(vertices);
+		
+		linkAttributes("position", "color");
 	}
 	
 	@Override
 	public void draw(GLContext gl, Matrix transform) {
 		gl.getCurrentProgram().setUniformValue("modelViewProjection", transform);
-		drawArrays(gl, PrimitiveType.TRIANGLES, "position", "color");
+		drawArrays(gl, PrimitiveType.TRIANGLES);
 	}
 	
 }
