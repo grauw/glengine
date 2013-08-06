@@ -11,7 +11,7 @@ public class StripPolygon extends Shape {
 		if (vertices.length < 3)
 			throw new Error("At least three vertices required.");
 		if ((vertices.length - 3) % 2 == 0)
-			throw new Error("Vertices after the third must come in two’s.");
+			throw new Error("Vertices after the third must come in twos.");
 		
 		setVertices(vertices);
 		

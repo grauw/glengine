@@ -11,7 +11,7 @@ public class Polygon extends Shape {
 		if (vertices.length < 3)
 			throw new Error("At least three vertices required.");
 		if (vertices.length % 3 != 0)
-			throw new Error("Vertices must come in three’s.");
+			throw new Error("Vertices must come in threes.");
 		
 		setVertices(vertices);
 		
