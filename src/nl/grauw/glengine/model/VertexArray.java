@@ -4,19 +4,38 @@ import java.nio.ByteBuffer;
 
 import nl.grauw.glengine.gl.GLEngineException;
 import nl.grauw.glengine.gl.Utils;
+import nl.grauw.glengine.model.Vertex.VertexInfo;
 
 public class VertexArray {
 	
+	private final VertexInfo vertexInfo;
+	private final int length;
+	
 	private final ByteBuffer buffer;
 	
-	public VertexArray(Vertex... vertices) {
-		if (vertices.length < 1)
-			throw new GLEngineException("Must provide at least 1 vertex.");
+	public VertexArray(VertexInfo vertexInfo, int length) {
+		if (length < 1)
+			throw new GLEngineException("Vertex array length must be at least 1.");
 		
-		buffer = Utils.createByteBuffer(vertices.length * vertices[0].getVertexInfo().getSize());
+		this.vertexInfo = vertexInfo;
+		this.length = length;
+		
+		buffer = Utils.createByteBuffer(length * vertexInfo.getSize());
+	}
+	
+	public VertexArray(Vertex... vertices) {
+		this(vertices.length > 0 ? vertices[0].getVertexInfo() : null, vertices.length);
 		
 		for (Vertex vertex : vertices)
 			vertex.write(this);
+	}
+	
+	public VertexInfo getVertexInfo() {
+		return vertexInfo;
+	}
+	
+	public int getLength() {
+		return length;
 	}
 	
 	public ByteBuffer getBuffer() {
