@@ -125,8 +125,12 @@ public class Matrix4x4 extends Matrix {
 	public static class XRotation extends Matrix4x4 {
 		
 		public XRotation(float angle) {
-			super(1, 0, 0, 0, 0, (float)Math.cos(angle), (float)Math.sin(angle), 0,
-				0, -(float)Math.sin(angle), (float)Math.cos(angle), 0, 0, 0, 0, 1);
+			super(
+				1, 0, 0, 0,
+				0, (float)Math.cos(angle), (float)Math.sin(angle), 0,
+				0, -(float)Math.sin(angle), (float)Math.cos(angle), 0,
+				0, 0, 0, 1
+			);
 		}
 		
 	}
@@ -134,8 +138,12 @@ public class Matrix4x4 extends Matrix {
 	public static class YRotation extends Matrix4x4 {
 		
 		public YRotation(float angle) {
-			super((float)Math.cos(angle), 0, -(float)Math.sin(angle), 0, 0, 1, 0, 0,
-				(float)Math.sin(angle), 0, (float)Math.cos(angle), 0, 0, 0, 0, 1);
+			super(
+				(float)Math.cos(angle), 0, -(float)Math.sin(angle), 0,
+				0, 1, 0, 0,
+				(float)Math.sin(angle), 0, (float)Math.cos(angle), 0,
+				0, 0, 0, 1
+			);
 		}
 		
 	}
@@ -143,8 +151,12 @@ public class Matrix4x4 extends Matrix {
 	public static class ZRotation extends Matrix4x4 {
 		
 		public ZRotation(float angle) {
-			super((float)Math.cos(angle), (float)Math.sin(angle), 0, 0,
-				-(float)Math.sin(angle), (float)Math.cos(angle), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+			super(
+				(float)Math.cos(angle), (float)Math.sin(angle), 0, 0,
+				-(float)Math.sin(angle), (float)Math.cos(angle), 0, 0,
+				0, 0, 1, 0,
+				0, 0, 0, 1
+			);
 		}
 		
 	}
