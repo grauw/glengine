@@ -79,8 +79,16 @@ public class Matrix4x4 extends Matrix {
 	
 	public static class Scale extends Matrix4x4 {
 		
+		public Scale(float x, float y, float z, float w) {
+			super(x, 0, 0, 0, 0, y, 0, 0, 0, 0, z, 0, 0, 0, 0, w);
+		}
+		
 		public Scale(float x, float y, float z) {
-			super(x, 0, 0, 0, 0, y, 0, 0, 0, 0, z, 0, 0, 0, 0, 1);
+			this(x, y, z, 1);
+		}
+		
+		public Scale(Vector4 vector) {
+			this(vector.getX(), vector.getY(), vector.getZ(), vector.getW());
 		}
 		
 		public Scale(Vector3 vector) {
