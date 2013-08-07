@@ -29,15 +29,15 @@ public class Vector3 extends Matrix {
 		this(vector.getX(), vector.getY(), vector.getZ());
 	}
 	
-	public float getX() {
+	public final float getX() {
 		return x;
 	}
 	
-	public float getY() {
+	public final float getY() {
 		return y;
 	}
 	
-	public float getZ() {
+	public final float getZ() {
 		return z;
 	}
 	
@@ -56,7 +56,7 @@ public class Vector3 extends Matrix {
 		return new float[] { x, y, z };
 	}
 	
-	public float getLength() {
+	public final float getLength() {
 		return (float)Math.sqrt(x * x + y * y + z * z);
 	}
 	
@@ -70,7 +70,7 @@ public class Vector3 extends Matrix {
 		return new Vector3(x + other.x, y + other.y, z + other.z);
 	}
 	
-	public Vector3 subtract(Vector3 other) {
+	public final Vector3 subtract(Vector3 other) {
 		if (other == ZERO)
 			return this;
 		return new Vector3(x - other.x, y - other.y, z - other.z);
@@ -84,20 +84,20 @@ public class Vector3 extends Matrix {
 		return new Vector3(x * other.x, y * other.y, z * other.z);
 	}
 	
-	public Vector3 multiply(float scalar) {
+	public final Vector3 multiply(float scalar) {
 		if (scalar == 1)
 			return this;
 		return new Vector3(x * scalar, y * scalar, z * scalar);
 	}
 	
-	public Vector3 normalize() {
+	public final Vector3 normalize() {
 		float length = (float)Math.sqrt(x * x + y * y + z * z);
 		if (length == 0)
 			return ZERO;
 		return new Vector3(x / length, y / length, z / length);
 	}
 	
-	public Vector3 cross(Vector3 other) {
+	public final Vector3 cross(Vector3 other) {
 		return new Vector3(
 			y * other.z - z * other.y,
 			z * other.x - x * other.z,
@@ -105,11 +105,11 @@ public class Vector3 extends Matrix {
 		);
 	}
 	
-	public float dot(Vector3 other) {
+	public final float dot(Vector3 other) {
 		return x * other.x + y * other.y + z * other.z;
 	}
 	
-	public Vector3 interpolate(Vector3 other, Vector3 weight) {
+	public final Vector3 interpolate(Vector3 other, Vector3 weight) {
 		return new Vector3(
 			x + (other.x - x) * weight.x,
 			y + (other.y - y) * weight.y,
@@ -117,7 +117,7 @@ public class Vector3 extends Matrix {
 		);
 	}
 	
-	public Vector3 interpolate(Vector3 other, float weight) {
+	public final Vector3 interpolate(Vector3 other, float weight) {
 		return new Vector3(
 			x + (other.x - x) * weight,
 			y + (other.y - y) * weight,
@@ -125,7 +125,7 @@ public class Vector3 extends Matrix {
 		);
 	}
 	
-	public boolean equals(Vector3 other) {
+	public final boolean equals(Vector3 other) {
 		return x == other.x && y == other.y && z == other.z;
 	}
 	

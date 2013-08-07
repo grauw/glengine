@@ -24,11 +24,11 @@ public class Vector2 extends Matrix {
 		this(vector.getX(), vector.getY());
 	}
 	
-	public float getX() {
+	public final float getX() {
 		return x;
 	}
 	
-	public float getY() {
+	public final float getY() {
 		return y;
 	}
 	
@@ -47,11 +47,11 @@ public class Vector2 extends Matrix {
 		return new float[] { x, y };
 	}
 	
-	public float getLength() {
+	public final float getLength() {
 		return (float)Math.sqrt(x * x + y * y);
 	}
 	
-	public float getLengthSquared() {
+	public final float getLengthSquared() {
 		return x * x + y * y;
 	}
 	
@@ -61,7 +61,7 @@ public class Vector2 extends Matrix {
 		return new Vector2(x + other.x, y + other.y);
 	}
 	
-	public Vector2 subtract(Vector2 other) {
+	public final Vector2 subtract(Vector2 other) {
 		if (other == ZERO)
 			return this;
 		return new Vector2(x - other.x, y - other.y);
@@ -75,38 +75,38 @@ public class Vector2 extends Matrix {
 		return new Vector2(x * other.x, y * other.y);
 	}
 	
-	public Vector2 multiply(float scalar) {
+	public final Vector2 multiply(float scalar) {
 		if (scalar == 1)
 			return this;
 		return new Vector2(x * scalar, y * scalar);
 	}
 	
-	public Vector2 normalize() {
+	public final Vector2 normalize() {
 		float length = (float)Math.sqrt(x * x + y * y);
 		if (length == 0)
 			return ZERO;
 		return new Vector2(x / length, y / length);
 	}
 	
-	public float dot(Vector2 other) {
+	public final float dot(Vector2 other) {
 		return x * other.x + y * other.y;
 	}
 	
-	public Vector2 interpolate(Vector2 other, Vector2 weight) {
+	public final Vector2 interpolate(Vector2 other, Vector2 weight) {
 		return new Vector2(
 			x + (other.x - x) * weight.x,
 			y + (other.y - y) * weight.y
 		);
 	}
 	
-	public Vector2 interpolate(Vector2 other, float weight) {
+	public final Vector2 interpolate(Vector2 other, float weight) {
 		return new Vector2(
 			x + (other.x - x) * weight,
 			y + (other.y - y) * weight
 		);
 	}
 	
-	public boolean equals(Vector2 other) {
+	public final boolean equals(Vector2 other) {
 		return x == other.x && y == other.y;
 	}
 	

@@ -39,19 +39,19 @@ public class Vector4 extends Matrix {
 		this(x, vector.getX(), vector.getY(), vector.getZ());
 	}
 	
-	public float getX() {
+	public final float getX() {
 		return x;
 	}
 	
-	public float getY() {
+	public final float getY() {
 		return y;
 	}
 	
-	public float getZ() {
+	public final float getZ() {
 		return z;
 	}
 	
-	public float getW() {
+	public final float getW() {
 		return w;
 	}
 	
@@ -70,11 +70,11 @@ public class Vector4 extends Matrix {
 		return new float[] { x, y, z, w };
 	}
 	
-	public float getLength() {
+	public final float getLength() {
 		return (float)Math.sqrt(x * x + y * y + z * z + w * w);
 	}
 	
-	public float getLengthSquared() {
+	public final float getLengthSquared() {
 		return x * x + y * y + z * z + w * w;
 	}
 	
@@ -84,7 +84,7 @@ public class Vector4 extends Matrix {
 		return new Vector4(x + other.x, y + other.y, z + other.z, w + other.w);
 	}
 	
-	public Vector4 subtract(Vector4 other) {
+	public final Vector4 subtract(Vector4 other) {
 		if (other == ZERO)
 			return this;
 		return new Vector4(x - other.x, y - other.y, z - other.z, w - other.w);
@@ -98,7 +98,7 @@ public class Vector4 extends Matrix {
 		return new Vector4(x * other.x, y * other.y, z * other.z, w * other.w);
 	}
 	
-	public Vector4 multiply(float scalar) {
+	public final Vector4 multiply(float scalar) {
 		if (scalar == 1)
 			return this;
 		return new Vector4(x * scalar, y * scalar, z * scalar, w * scalar);
@@ -111,11 +111,11 @@ public class Vector4 extends Matrix {
 		return new Vector4(x / length, y / length, z / length, w / length);
 	}
 	
-	public float dot(Vector4 other) {
+	public final float dot(Vector4 other) {
 		return x * other.x + y * other.y + z * other.z + w * other.w;
 	}
 	
-	public Vector4 interpolate(Vector4 other, Vector4 weight) {
+	public final Vector4 interpolate(Vector4 other, Vector4 weight) {
 		return new Vector4(
 			x + (other.x - x) * weight.x,
 			y + (other.y - y) * weight.y,
@@ -124,7 +124,7 @@ public class Vector4 extends Matrix {
 		);
 	}
 	
-	public Vector4 interpolate(Vector4 other, float weight) {
+	public final Vector4 interpolate(Vector4 other, float weight) {
 		return new Vector4(
 			x + (other.x - x) * weight,
 			y + (other.y - y) * weight,
@@ -133,7 +133,7 @@ public class Vector4 extends Matrix {
 		);
 	}
 	
-	public boolean equals(Vector4 other) {
+	public final boolean equals(Vector4 other) {
 		return x == other.x && y == other.y && z == other.z && w == other.w;
 	}
 	
