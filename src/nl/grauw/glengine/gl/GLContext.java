@@ -256,6 +256,7 @@ public final class GLContext {
 	}
 	
 	public void setVertexAttribPointer(Attribute attribute, AttributeInfo attributeInfo, int stride, Buffer buffer) {
+		checkAttribute(attribute);
 		setVertexAttribPointer(attribute.getLocation(), attributeInfo, stride, buffer);
 	}
 	
@@ -277,14 +278,17 @@ public final class GLContext {
 	}
 	
 	public void setVertexAttribPointer(Attribute attribute, int size, int stride, FloatBuffer buffer) {
+		checkAttribute(attribute);
 		setVertexAttribPointer(attribute.getLocation(), size, stride, buffer);
 	}
 	
 	public void setVertexAttribPointer(Attribute attribute, int size, int stride, boolean normalized, ByteBuffer buffer) {
+		checkAttribute(attribute);
 		setVertexAttribPointer(attribute.getLocation(), size, stride, normalized, buffer);
 	}
 	
 	public void setVertexAttribPointer(Attribute attribute, int size, int stride, boolean normalized, ShortBuffer buffer) {
+		checkAttribute(attribute);
 		setVertexAttribPointer(attribute.getLocation(), size, stride, normalized, buffer);
 	}
 	
@@ -309,10 +313,12 @@ public final class GLContext {
 	}
 	
 	public void enableVertexAttribArray(Attribute attribute) {
+		checkAttribute(attribute);
 		enableVertexAttribArray(attribute.getLocation());
 	}
 	
 	public void disableVertexAttribArray(Attribute attribute) {
+		checkAttribute(attribute);
 		disableVertexAttribArray(attribute.getLocation());
 	}
 	
@@ -322,6 +328,11 @@ public final class GLContext {
 	
 	public void disableVertexAttribArray(int index) {
 		glDisableVertexAttribArray(index);
+	}
+	
+	private void checkAttribute(Attribute attribute) {
+		if (attribute == null)
+			throw new GLEngineException("Must specify an existing attribute.");
 	}
 	
 	public void drawArrays(PrimitiveType type, int first, int count) {
