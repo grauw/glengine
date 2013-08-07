@@ -10,6 +10,10 @@ public class Matrix2x2 extends Matrix {
 		super(2, 2, elements);
 	}
 	
+	public Matrix2x2(float scalar) {
+		this(scalar, 0, 0, scalar);
+	}
+	
 	public Matrix2x2 multiply(Matrix2x2 other) {
 		if (other == IDENTITY)
 			return this;

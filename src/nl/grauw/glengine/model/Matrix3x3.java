@@ -10,6 +10,10 @@ public class Matrix3x3 extends Matrix {
 		super(3, 3, elements);
 	}
 	
+	public Matrix3x3(float scalar) {
+		this(scalar, 0, 0, 0, scalar, 0, 0, 0, scalar);
+	}
+	
 	public Matrix3x3 multiply(Matrix3x3 other) {
 		if (other == IDENTITY)
 			return this;
