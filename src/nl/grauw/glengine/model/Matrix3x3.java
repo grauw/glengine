@@ -6,13 +6,17 @@ public class Matrix3x3 extends Matrix {
 	
 	public static final Identity IDENTITY = new Identity();
 	
+	private float[] elements;
+	
 	/** Elements must be specified in column-major order. */
 	public Matrix3x3(float... elements) {
-		super(3, 3, elements);
+		if (elements.length != 9)
+			throw new GLEngineException("Number of elements does not match matrix size.");
+		this.elements = elements;
 	}
 	
 	public Matrix3x3(Matrix other) {
-		super(3, 3, other);
+		elements = copy(3, 3, other);
 	}
 	
 	public Matrix3x3(float scalar) {
@@ -23,6 +27,21 @@ public class Matrix3x3 extends Matrix {
 		if (other == IDENTITY)
 			return this;
 		return new Matrix3x3(multiply(3, 3, elements, 3, 3, other.elements));
+	}
+	
+	@Override
+	public final int getColumns() {
+		return 3;
+	}
+	
+	@Override
+	public final int getRows() {
+		return 3;
+	}
+	
+	@Override
+	public final float[] getElements() {
+		return elements;
 	}
 	
 	public Matrix3x3 transpose() {
@@ -66,7 +85,7 @@ public class Matrix3x3 extends Matrix {
 		
 		@Override
 		public Matrix multiply(Matrix other) {
-			if (other.rows != columns)
+			if (other.getRows() != 3)
 				throw new GLEngineException("Incompatible matrices for multiplication.");
 			return other;
 		}

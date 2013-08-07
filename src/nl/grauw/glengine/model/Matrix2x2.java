@@ -6,17 +6,36 @@ public class Matrix2x2 extends Matrix {
 	
 	public static final Identity IDENTITY = new Identity();
 	
+	private float[] elements;
+	
 	/** Elements must be specified in column-major order. */
 	public Matrix2x2(float... elements) {
-		super(2, 2, elements);
+		if (elements.length != 4)
+			throw new GLEngineException("Number of elements does not match matrix size.");
+		this.elements = elements;
 	}
 	
 	public Matrix2x2(Matrix other) {
-		super(2, 2, other);
+		elements = copy(2, 2, other);
 	}
 	
 	public Matrix2x2(float scalar) {
 		this(scalar, 0, 0, scalar);
+	}
+	
+	@Override
+	public final int getColumns() {
+		return 2;
+	}
+	
+	@Override
+	public final int getRows() {
+		return 2;
+	}
+	
+	@Override
+	public final float[] getElements() {
+		return elements;
 	}
 	
 	public Matrix2x2 transpose() {
@@ -65,7 +84,7 @@ public class Matrix2x2 extends Matrix {
 		
 		@Override
 		public Matrix multiply(Matrix other) {
-			if (other.rows != columns)
+			if (other.getRows() != 2)
 				throw new GLEngineException("Incompatible matrices for multiplication.");
 			return other;
 		}

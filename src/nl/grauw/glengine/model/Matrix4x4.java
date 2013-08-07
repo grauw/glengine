@@ -6,17 +6,36 @@ public class Matrix4x4 extends Matrix {
 	
 	public static final Identity IDENTITY = new Identity();
 	
+	private float[] elements;
+	
 	/** Elements must be specified in column-major order. */
 	public Matrix4x4(float... elements) {
-		super(4, 4, elements);
+		if (elements.length != 16)
+			throw new GLEngineException("Number of elements does not match matrix size.");
+		this.elements = elements;
 	}
 	
 	public Matrix4x4(Matrix other) {
-		super(4, 4, other);
+		elements = copy(4, 4, other);
 	}
 	
 	public Matrix4x4(float scalar) {
 		this(scalar, 0, 0, 0, 0, scalar, 0, 0, 0, 0, scalar, 0, 0, 0, 0, scalar);
+	}
+	
+	@Override
+	public final int getColumns() {
+		return 4;
+	}
+	
+	@Override
+	public final int getRows() {
+		return 4;
+	}
+	
+	@Override
+	public final float[] getElements() {
+		return elements;
 	}
 	
 	public Matrix4x4 transpose() {
@@ -67,7 +86,7 @@ public class Matrix4x4 extends Matrix {
 		
 		@Override
 		public Matrix multiply(Matrix other) {
-			if (other.rows != columns)
+			if (other.getRows() != 4)
 				throw new GLEngineException("Incompatible matrices for multiplication.");
 			return other;
 		}
