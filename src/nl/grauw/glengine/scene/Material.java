@@ -21,7 +21,7 @@ public class Material {
 		this.fragmentSource = fragmentSource;
 	}
 	
-	public void compile(GLContext context) {
+	public void compile(GLContext gl) {
 		VertexShader vertexShader = new VertexShader();
 		vertexShader.setSource(vertexSource);
 		vertexShader.compile();
@@ -30,7 +30,7 @@ public class Material {
 		fragmentShader.setSource(fragmentSource);
 		fragmentShader.compile();
 		
-		program = new Program(context);
+		program = new Program(gl);
 		program.attachShader(vertexShader);
 		program.attachShader(fragmentShader);
 		program.link();
