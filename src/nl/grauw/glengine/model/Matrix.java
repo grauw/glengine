@@ -93,6 +93,27 @@ public class Matrix {
 			return new Matrix4x4(multiply(4, 4, elements, 4, 4, other.elements));
 		}
 		
+		public Vector4 multiply(Vector4 vector) {
+			return new Vector4(
+				elements[0] * vector.getX() + elements[4] * vector.getY() + elements[8] * vector.getZ() + elements[12] * vector.getW(),
+				elements[1] * vector.getX() + elements[5] * vector.getY() + elements[9] * vector.getZ() + elements[13] * vector.getW(),
+				elements[2] * vector.getX() + elements[6] * vector.getY() + elements[10] * vector.getZ() + elements[14] * vector.getW(),
+				elements[3] * vector.getX() + elements[7] * vector.getY() + elements[11] * vector.getZ() + elements[15] * vector.getW()
+			);
+		}
+		
+		public Vector4 getColumn(int index) {
+			if (index < 0 || index > 3)
+				throw new GLEngineException("Column index out of range.");
+			return new Vector4(elements[index], elements[index + 1], elements[index + 2], elements[index + 3]);
+		}
+		
+		public Vector4 getRow(int index) {
+			if (index < 0 || index > 3)
+				throw new GLEngineException("Row index out of range.");
+			return new Vector4(elements[index], elements[index + 4], elements[index + 8], elements[index + 12]);
+		}
+		
 	}
 	
 	private static final class Identity extends Matrix4x4 {
