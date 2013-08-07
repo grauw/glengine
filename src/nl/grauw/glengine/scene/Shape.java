@@ -40,7 +40,7 @@ public abstract class Shape implements Drawable {
 	}
 	
 	public void setIndices(int... indices) {
-		int verticesCount = getVertexArray().getLength();
+		int verticesCount = vertexArray.getLength();
 		if (verticesCount < 128) {
 			setIndexBuffer(Utils.createByteBuffer(indices));
 		} else if (verticesCount < 32768) {
@@ -59,7 +59,7 @@ public abstract class Shape implements Drawable {
 	}
 	
 	public VertexInfo getVertexInfo() {
-		return getVertexArray().getVertexInfo();
+		return vertexArray.getVertexInfo();
 	}
 	
 	private AttributeLink[] createAttributeLinks() {
@@ -132,7 +132,7 @@ public abstract class Shape implements Drawable {
 			
 			gl.enableVertexAttribArray(shaderAttribute);
 			
-			ByteBuffer buffer = getVertexArray().getBuffer();
+			ByteBuffer buffer = vertexArray.getBuffer();
 			buffer.position(vertexAttribute.getOffset());
 			gl.setVertexAttribPointer(shaderAttribute, vertexAttribute.getAttributeInfo(), getVertexInfo().getSize(), buffer);
 		}
