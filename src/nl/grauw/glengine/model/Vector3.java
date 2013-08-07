@@ -90,13 +90,6 @@ public class Vector3 extends Matrix {
 		return new Vector3(x * scalar, y * scalar, z * scalar);
 	}
 	
-	public final Vector3 normalize() {
-		float length = (float)Math.sqrt(x * x + y * y + z * z);
-		if (length == 0)
-			return ZERO;
-		return new Vector3(x / length, y / length, z / length);
-	}
-	
 	public final Vector3 cross(Vector3 other) {
 		return new Vector3(
 			y * other.z - z * other.y,
@@ -107,6 +100,13 @@ public class Vector3 extends Matrix {
 	
 	public final float dot(Vector3 other) {
 		return x * other.x + y * other.y + z * other.z;
+	}
+	
+	public final Vector3 normalize() {
+		float length = (float)Math.sqrt(x * x + y * y + z * z);
+		if (length == 0)
+			return ZERO;
+		return new Vector3(x / length, y / length, z / length);
 	}
 	
 	public final Vector3 interpolate(Vector3 other, Vector3 weight) {

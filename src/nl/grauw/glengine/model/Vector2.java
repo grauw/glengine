@@ -81,15 +81,15 @@ public class Vector2 extends Matrix {
 		return new Vector2(x * scalar, y * scalar);
 	}
 	
+	public final float dot(Vector2 other) {
+		return x * other.x + y * other.y;
+	}
+	
 	public final Vector2 normalize() {
 		float length = (float)Math.sqrt(x * x + y * y);
 		if (length == 0)
 			return ZERO;
 		return new Vector2(x / length, y / length);
-	}
-	
-	public final float dot(Vector2 other) {
-		return x * other.x + y * other.y;
 	}
 	
 	public final Vector2 interpolate(Vector2 other, Vector2 weight) {

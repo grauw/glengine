@@ -104,15 +104,15 @@ public class Vector4 extends Matrix {
 		return new Vector4(x * scalar, y * scalar, z * scalar, w * scalar);
 	}
 	
+	public final float dot(Vector4 other) {
+		return x * other.x + y * other.y + z * other.z + w * other.w;
+	}
+	
 	public Vector4 normalize() {
 		float length = (float)Math.sqrt(x * x + y * y + z * z + w * w);
 		if (length == 0)
 			return ZERO;
 		return new Vector4(x / length, y / length, z / length, w / length);
-	}
-	
-	public final float dot(Vector4 other) {
-		return x * other.x + y * other.y + z * other.z + w * other.w;
 	}
 	
 	public final Vector4 interpolate(Vector4 other, Vector4 weight) {
