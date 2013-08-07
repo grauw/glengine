@@ -112,7 +112,7 @@ public abstract class Shape implements Drawable {
 			attributeLink.tearDown(gl);
 	}
 	
-	private class AttributeLink {
+	private final class AttributeLink {
 		
 		private final VertexAttribute vertexAttribute;
 		private String shaderAttribute;
