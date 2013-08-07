@@ -12,8 +12,6 @@ public class FanPolygon extends Shape {
 			throw new Error("At least three vertices required.");
 		
 		setVertices(vertices);
-		
-		linkAttributes("position", "color");
 	}
 	
 	@Override

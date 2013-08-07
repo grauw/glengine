@@ -14,8 +14,6 @@ public class StripPolygon extends Shape {
 			throw new Error("Vertices after the third must come in twos.");
 		
 		setVertices(vertices);
-		
-		linkAttributes("position", "color");
 	}
 	
 	@Override

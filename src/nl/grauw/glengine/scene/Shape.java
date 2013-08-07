@@ -22,7 +22,7 @@ public abstract class Shape implements Drawable {
 	
 	public void setVertexArray(VertexArray vertexArray) {
 		this.vertexArray = vertexArray;
-		attributeLinks = new AttributeLink[vertexArray.getVertexInfo().getAttributes().length];
+		attributeLinks = createAttributeLinks();
 	}
 	
 	protected VertexArray getVertexArray() {
@@ -38,6 +38,16 @@ public abstract class Shape implements Drawable {
 		return getVertexArray().getVertexInfo();
 	}
 	
+	private AttributeLink[] createAttributeLinks() {
+		VertexAttribute[] vertexAttributes = getVertexInfo().getAttributes();
+		AttributeLink[] attributeLinks = new AttributeLink[vertexAttributes.length];
+		
+		for (int i = 0; i < vertexAttributes.length; i++)
+			attributeLinks[i] = new AttributeLink(vertexAttributes[i], vertexAttributes[i].getAttributeInfo().getLinkName());
+		
+		return attributeLinks;
+	}
+	
 	public void linkAttributes(String... shaderAttributes) {
 		VertexAttribute[] vertexAttributes = getVertexInfo().getAttributes();
 		if (shaderAttributes.length > attributeLinks.length)
@@ -48,8 +58,7 @@ public abstract class Shape implements Drawable {
 	}
 	
 	public void linkAttribute(VertexAttribute vertexAttribute, String shaderAttribute) {
-		attributeLinks[vertexAttribute.getIndex()] = shaderAttribute == null ? null :
-			new AttributeLink(vertexAttribute, shaderAttribute);
+		attributeLinks[vertexAttribute.getIndex()].setShaderAttribute(shaderAttribute);
 	}
 	
 	protected void drawArrays(GLContext gl, PrimitiveType type) {
@@ -70,23 +79,25 @@ public abstract class Shape implements Drawable {
 	
 	protected void setUpDraw(GLContext gl) {
 		for (AttributeLink attributeLink : attributeLinks)
-			if (attributeLink != null)
-				attributeLink.setUp(gl);
+			attributeLink.setUp(gl);
 	}
 	
 	protected void tearDownDraw(GLContext gl) {
 		for (AttributeLink attributeLink : attributeLinks)
-			if (attributeLink != null)
-				attributeLink.tearDown(gl);
+			attributeLink.tearDown(gl);
 	}
 	
 	private class AttributeLink {
 		
 		private final VertexAttribute vertexAttribute;
-		private final String shaderAttribute;
+		private String shaderAttribute;
 		
 		public AttributeLink(VertexAttribute vertexAttribute, String shaderAttribute) {
 			this.vertexAttribute = vertexAttribute;
+			this.shaderAttribute = shaderAttribute;
+		}
+		
+		public void setShaderAttribute(String shaderAttribute) {
 			this.shaderAttribute = shaderAttribute;
 		}
 		

@@ -14,8 +14,6 @@ public class Polygon extends Shape {
 			throw new Error("Vertices must come in threes.");
 		
 		setVertices(vertices);
-		
-		linkAttributes("position", "color");
 	}
 	
 	@Override
