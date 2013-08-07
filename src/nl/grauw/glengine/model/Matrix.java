@@ -94,11 +94,15 @@ public class Matrix {
 		}
 		
 		public Vector4 multiply(Vector4 vector) {
+			return multiply(vector.getX(), vector.getY(), vector.getZ(), vector.getW());
+		}
+		
+		public Vector4 multiply(float x, float y, float z, float w) {
 			return new Vector4(
-				elements[0] * vector.getX() + elements[4] * vector.getY() + elements[8] * vector.getZ() + elements[12] * vector.getW(),
-				elements[1] * vector.getX() + elements[5] * vector.getY() + elements[9] * vector.getZ() + elements[13] * vector.getW(),
-				elements[2] * vector.getX() + elements[6] * vector.getY() + elements[10] * vector.getZ() + elements[14] * vector.getW(),
-				elements[3] * vector.getX() + elements[7] * vector.getY() + elements[11] * vector.getZ() + elements[15] * vector.getW()
+				elements[0] * x + elements[4] * y + elements[8] * z + elements[12] * w,
+				elements[1] * x + elements[5] * y + elements[9] * z + elements[13] * w,
+				elements[2] * x + elements[6] * y + elements[10] * z + elements[14] * w,
+				elements[3] * x + elements[7] * y + elements[11] * z + elements[15] * w
 			);
 		}
 		
