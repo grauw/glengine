@@ -1,6 +1,6 @@
 package nl.grauw.glengine.model;
 
-public class Vector4 {
+public class Vector4 extends Matrix {
 	
 	private final float x, y, z, w;
 	
@@ -53,6 +53,21 @@ public class Vector4 {
 	
 	public float getW() {
 		return w;
+	}
+	
+	@Override
+	public final int getColumns() {
+		return 1;
+	}
+	
+	@Override
+	public final int getRows() {
+		return 4;
+	}
+	
+	@Override
+	public final float[] getElements() {
+		return new float[] { x, y, z, w };
 	}
 	
 	public float getLength() {

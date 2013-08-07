@@ -1,6 +1,6 @@
 package nl.grauw.glengine.model;
 
-public class Vector2 {
+public class Vector2 extends Matrix {
 	
 	private final float x, y;
 	
@@ -30,6 +30,21 @@ public class Vector2 {
 	
 	public float getY() {
 		return y;
+	}
+	
+	@Override
+	public final int getColumns() {
+		return 1;
+	}
+	
+	@Override
+	public final int getRows() {
+		return 2;
+	}
+	
+	@Override
+	public final float[] getElements() {
+		return new float[] { x, y };
 	}
 	
 	public float getLength() {
