@@ -6,7 +6,7 @@ import java.nio.Buffer;
 
 import nl.grauw.glengine.model.Color;
 
-public class ColorBuffer {
+public final class ColorBuffer {
 	
 	private final int redBits;
 	private final int greenBits;

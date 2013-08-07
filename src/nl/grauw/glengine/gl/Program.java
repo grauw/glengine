@@ -13,7 +13,7 @@ import nl.grauw.glengine.gl.Variable.Uniform;
 import nl.grauw.glengine.gl.Variable.VariableType;
 import nl.grauw.glengine.model.Matrix;
 
-public class Program {
+public final class Program {
 	
 	private final GLContext context;
 	final int handle;

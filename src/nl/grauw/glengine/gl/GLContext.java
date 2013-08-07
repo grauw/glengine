@@ -15,7 +15,7 @@ import nl.grauw.glengine.model.Vertex.AttributeInfo;
 /**
  * GL wrapper class that boxes some sense into OpenGL :).
  */
-public class GLContext {
+public final class GLContext {
 	
 	private Program currentProgram = null;
 	private TextureUnit activeTextureUnit = null;

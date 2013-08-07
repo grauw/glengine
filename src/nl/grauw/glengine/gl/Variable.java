@@ -67,7 +67,7 @@ public abstract class Variable {
 		}
 	}
 	
-	public static class Attribute extends Variable {
+	public final static class Attribute extends Variable {
 		
 		public Attribute(int location, String name, int size, VariableType type) {
 			super(location, name, size, type);
@@ -75,7 +75,7 @@ public abstract class Variable {
 		
 	}
 	
-	public static class Uniform extends Variable {
+	public final static class Uniform extends Variable {
 		
 		public Uniform(int location, String name, int size, VariableType type) {
 			super(location, name, size, type);

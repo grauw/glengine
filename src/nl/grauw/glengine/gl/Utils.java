@@ -8,7 +8,7 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 
-public class Utils {
+public final class Utils {
 	
 	private static final IntBuffer ONE_INT_BUFFER = createIntBuffer(1);
 	

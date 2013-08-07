@@ -2,7 +2,7 @@ package nl.grauw.glengine.gl;
 
 import static android.opengl.GLES20.*;
 
-public class StencilBuffer {
+public final class StencilBuffer {
 	
 	private final int stencilBits;
 	

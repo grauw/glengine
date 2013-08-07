@@ -43,13 +43,13 @@ public abstract class Shader {
 		return glGetShaderInfoLog(handle);
 	}
 	
-	public static class VertexShader extends Shader {
+	public final static class VertexShader extends Shader {
 		public VertexShader() {
 			super(GL_VERTEX_SHADER);
 		}
 	}
 	
-	public static class FragmentShader extends Shader {
+	public final static class FragmentShader extends Shader {
 		public FragmentShader() {
 			super(GL_FRAGMENT_SHADER);
 		}

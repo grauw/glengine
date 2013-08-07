@@ -6,7 +6,7 @@ import java.nio.Buffer;
 
 import android.graphics.Bitmap;
 
-public class Texture2D extends Texture {
+public final class Texture2D extends Texture {
 	
 	public Texture2D(GLContext context) {
 		super(context, GL_TEXTURE_2D);

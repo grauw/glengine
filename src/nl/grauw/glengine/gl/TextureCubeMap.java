@@ -6,7 +6,7 @@ import java.nio.Buffer;
 
 import android.graphics.Bitmap;
 
-public class TextureCubeMap extends Texture {
+public final class TextureCubeMap extends Texture {
 	
 	public TextureCubeMap(GLContext context) {
 		super(context, GL_TEXTURE_CUBE_MAP);

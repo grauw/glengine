@@ -2,7 +2,7 @@ package nl.grauw.glengine.gl;
 
 import static android.opengl.GLES20.*;
 
-public class TextureUnit {
+public final class TextureUnit {
 	
 	private final GLContext context;
 	private final int index;
