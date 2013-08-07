@@ -76,7 +76,7 @@ public class Matrix4x4 extends Matrix {
 		}
 		
 	}
-
+	
 	public static class Scale extends Matrix4x4 {
 		
 		public Scale(float x, float y, float z) {
@@ -88,7 +88,7 @@ public class Matrix4x4 extends Matrix {
 		}
 		
 	}
-
+	
 	public static class Rotation extends Matrix4x4 {
 		
 		public Rotation(float x, float y, float z, float angle) {
@@ -113,7 +113,7 @@ public class Matrix4x4 extends Matrix {
 		}
 		
 	}
-
+	
 	public static class XRotation extends Matrix4x4 {
 		
 		public XRotation(float angle) {
@@ -122,7 +122,7 @@ public class Matrix4x4 extends Matrix {
 		}
 		
 	}
-
+	
 	public static class YRotation extends Matrix4x4 {
 		
 		public YRotation(float angle) {
@@ -131,7 +131,7 @@ public class Matrix4x4 extends Matrix {
 		}
 		
 	}
-
+	
 	public static class ZRotation extends Matrix4x4 {
 		
 		public ZRotation(float angle) {
@@ -140,7 +140,7 @@ public class Matrix4x4 extends Matrix {
 		}
 		
 	}
-
+	
 	public static class PerspectiveProjection extends Matrix4x4 {
 		
 		public PerspectiveProjection(float width, float height, float near, float far) {
@@ -157,7 +157,7 @@ public class Matrix4x4 extends Matrix {
 		}
 		
 	}
-
+	
 	public static class OrthographicProjection extends Matrix4x4 {
 		
 		public OrthographicProjection(float width, float height, float near, float far) {
