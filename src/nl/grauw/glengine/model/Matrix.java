@@ -10,7 +10,7 @@ public class Matrix {
 	
 	protected final int columns;
 	protected final int rows;
-	private final float[] elements;
+	protected final float[] elements;
 	
 	/** Elements must be specified in column-major order. */
 	public Matrix(int columns, int rows, float... elements) {
@@ -87,6 +87,12 @@ public class Matrix {
 			super(4, 4, elements);
 		}
 		
+		public Matrix4x4 multiply(Matrix4x4 other) {
+			if (other == IDENTITY)
+				return this;
+			return new Matrix4x4(multiply(4, 4, elements, 4, 4, other.elements));
+		}
+		
 	}
 	
 	private static final class Identity extends Matrix4x4 {
@@ -104,6 +110,10 @@ public class Matrix {
 		public Matrix multiply(Matrix other) {
 			if (other.rows != columns)
 				throw new GLEngineException("Incompatible matrices for multiplication.");
+			return other;
+		}
+		
+		public Matrix4x4 multiply(Matrix4x4 other) {
 			return other;
 		}
 		
