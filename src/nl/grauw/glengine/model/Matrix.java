@@ -70,12 +70,12 @@ public class Matrix {
 		if (columns != otherRows)
 			throw new GLEngineException("Incompatible matrices for multiplication.");
 		float[] product = new float[otherColumns * rows];
-		for (int column = 0; column < otherColumns; column++) {
-			for (int row = 0; row < rows; row++) {
-				float sum = elements[row] * otherElements[column * otherRows];
+		for (int column = 0, otherColumn = 0, productIndex = 0; column < otherColumns; column++, otherColumn += otherRows) {
+			for (int row = 0; row < rows; row++, productIndex++) {
+				float sum = elements[row] * otherElements[otherColumn];
 				for (int i = 1; i < columns; i++)
-					sum += elements[i * rows + row] * otherElements[column * otherRows + i];
-				product[column * rows + row] = sum;
+					sum += elements[i * rows + row] * otherElements[otherColumn + i];
+				product[productIndex] = sum;
 			}
 		}
 		return product;
