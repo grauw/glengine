@@ -5,7 +5,7 @@ public class Transform {
 	private Vector3 translation = Vector3.ZERO;
 	private Vector3 scale = Vector3.ONE;
 	private Quaternion rotation = Quaternion.IDENTITY;
-	private Matrix matrix = Matrix.IDENTITY;
+	private Matrix matrix = Matrix4x4.IDENTITY;
 	private boolean dirty = false;
 	
 	public Transform() {
@@ -60,13 +60,13 @@ public class Transform {
 	
 	public Matrix getMatrix() {
 		if (dirty) {
-			Matrix matrix = Matrix.IDENTITY;
+			Matrix matrix = Matrix4x4.IDENTITY;
 			if (translation != Vector3.ZERO)
-				matrix = matrix.multiply(new Matrix.Translation(translation));
+				matrix = matrix.multiply(new Matrix4x4.Translation(translation));
 			if (rotation != Quaternion.IDENTITY)
-				matrix = matrix.multiply(new Matrix.Rotation(rotation));
+				matrix = matrix.multiply(new Matrix4x4.Rotation(rotation));
 			if (scale != Vector3.ONE)
-				matrix = matrix.multiply(new Matrix.Scale(scale));
+				matrix = matrix.multiply(new Matrix4x4.Scale(scale));
 			this.matrix = matrix;
 		}
 		return matrix;
