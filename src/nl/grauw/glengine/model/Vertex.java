@@ -73,27 +73,27 @@ public abstract class Vertex {
 	
 	public static class AttributeInfo {
 		
-		private String name;
+		private String linkName;
 		private int components;
 		private AttributeType type;
 		private boolean normalized;
 		
-		public AttributeInfo(String name, int components, AttributeType type) {
-			this(name, components, type, false);
+		public AttributeInfo(String linkName, int components, AttributeType type) {
+			this(linkName, components, type, false);
 		}
 		
-		public AttributeInfo(String name, int components, AttributeType type, boolean normalized) {
-			this.name = name;
+		public AttributeInfo(String linkName, int components, AttributeType type, boolean normalized) {
 			if (components < 1 || components > 4)
 				throw new GLEngineException("Invalid number of components.");
 			
+			this.linkName = linkName;
 			this.components = components;
 			this.type = type;
 			this.normalized = normalized;
 		}
 		
-		public String getName() {
-			return name;
+		public String getLinkName() {
+			return linkName;
 		}
 		
 		public int getComponents() {
