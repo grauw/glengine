@@ -10,6 +10,10 @@ public class Matrix4x4 extends Matrix {
 		super(4, 4, elements);
 	}
 	
+	public Matrix4x4(Matrix other) {
+		super(4, 4, other);
+	}
+	
 	public Matrix4x4(float scalar) {
 		this(scalar, 0, 0, 0, 0, scalar, 0, 0, 0, 0, scalar, 0, 0, 0, 0, scalar);
 	}

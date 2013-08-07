@@ -22,6 +22,10 @@ public class Matrix {
 		this.elements = elements;
 	}
 	
+	public Matrix(int columns, int rows, Matrix other) {
+		this(columns, rows, copy(columns, rows, other.columns, other.rows, other.elements));
+	}
+	
 	public int getColumns() {
 		return columns;
 	}
@@ -74,6 +78,15 @@ public class Matrix {
 			}
 		}
 		return product;
+	}
+	
+	protected static float[] copy(int columns, int rows, int otherColumns, int otherRows, float[] otherElements) {
+		float[] copy = new float[columns * rows];
+		for (int column = 0; column < columns; column++)
+			for (int row = 0; row < rows; row++)
+				copy[column * rows + row] = column < otherColumns && row < otherRows ?
+					otherElements[column * otherRows + row] : column == row ? 1 : 0;
+		return copy;
 	}
 	
 }
