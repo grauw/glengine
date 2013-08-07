@@ -17,7 +17,7 @@ public class FanPolygon extends Shape {
 	@Override
 	public void draw(GLContext gl, Matrix transform) {
 		gl.getCurrentProgram().setUniformValue("modelViewProjection", transform);
-		drawArrays(gl, PrimitiveType.TRIANGLE_FAN);
+		draw(gl, PrimitiveType.TRIANGLE_FAN);
 	}
 	
 }

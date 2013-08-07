@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 
 import nl.grauw.glengine.gl.GLContext;
 import nl.grauw.glengine.gl.GLEngineException;
+import nl.grauw.glengine.gl.Utils;
 import nl.grauw.glengine.gl.GLContext.PrimitiveType;
 import nl.grauw.glengine.model.Vertex;
 import nl.grauw.glengine.model.Vertex.VertexAttribute;
@@ -14,6 +15,7 @@ import nl.grauw.glengine.model.VertexArray;
 public abstract class Shape implements Drawable {
 	
 	private VertexArray vertexArray;
+	private Buffer indexBuffer;
 	private AttributeLink[] attributeLinks;
 	
 	public void setVertices(Vertex... vertices) {
@@ -29,9 +31,31 @@ public abstract class Shape implements Drawable {
 		return vertexArray;
 	}
 	
-	@Override
-	public void initialize(GLContext gl) {
-		
+	public void setIndices(byte... indices) {
+		setIndexBuffer(Utils.createByteBuffer(indices));
+	}
+	
+	public void setIndices(short... indices) {
+		setIndexBuffer(Utils.createShortBuffer(indices));
+	}
+	
+	public void setIndices(int... indices) {
+		int verticesCount = getVertexArray().getLength();
+		if (verticesCount < 128) {
+			setIndexBuffer(Utils.createByteBuffer(indices));
+		} else if (verticesCount < 32768) {
+			setIndexBuffer(Utils.createShortBuffer(indices));
+		} else {
+			throw new RuntimeException("Too many vertices, index size exceeded.");
+		}
+	}
+	
+	public void setIndexBuffer(Buffer indexBuffer) {
+		this.indexBuffer = indexBuffer;
+	}
+	
+	protected Buffer getIndexBuffer() {
+		return indexBuffer;
 	}
 	
 	public VertexInfo getVertexInfo() {
@@ -61,18 +85,19 @@ public abstract class Shape implements Drawable {
 		attributeLinks[vertexAttribute.getIndex()].setShaderAttribute(shaderAttribute);
 	}
 	
-	protected void drawArrays(GLContext gl, PrimitiveType type) {
-		setUpDraw(gl);
+	@Override
+	public void initialize(GLContext gl) {
 		
-		gl.drawArrays(type, 0, getVertexArray().getLength());
-		
-		tearDownDraw(gl);
 	}
 	
-	protected void drawElements(GLContext gl, PrimitiveType type, Buffer indexes) {
+	protected void draw(GLContext gl, PrimitiveType type) {
 		setUpDraw(gl);
 		
-		gl.drawElements(type, indexes);
+		if (indexBuffer != null) {
+			gl.drawElements(type, indexBuffer);
+		} else {
+			gl.drawArrays(type, 0, vertexArray.getLength());
+		}
 		
 		tearDownDraw(gl);
 	}

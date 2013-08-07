@@ -19,7 +19,7 @@ public class Polygon extends Shape {
 	@Override
 	public void draw(GLContext gl, Matrix transform) {
 		gl.getCurrentProgram().setUniformValue("modelViewProjection", transform);
-		drawArrays(gl, PrimitiveType.TRIANGLES);
+		draw(gl, PrimitiveType.TRIANGLES);
 	}
 	
 }
