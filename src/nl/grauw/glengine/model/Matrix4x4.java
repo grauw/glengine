@@ -18,6 +18,10 @@ public class Matrix4x4 extends Matrix {
 		this(scalar, 0, 0, 0, 0, scalar, 0, 0, 0, 0, scalar, 0, 0, 0, 0, scalar);
 	}
 	
+	public Matrix4x4 transpose() {
+		return new Matrix4x4(transpose(4, 4, elements));
+	}
+	
 	public Matrix4x4 multiply(Matrix4x4 other) {
 		if (other == IDENTITY)
 			return this;

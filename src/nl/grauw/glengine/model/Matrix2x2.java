@@ -18,6 +18,10 @@ public class Matrix2x2 extends Matrix {
 		this(scalar, 0, 0, scalar);
 	}
 	
+	public Matrix2x2 transpose() {
+		return new Matrix2x2(transpose(2, 2, elements));
+	}
+	
 	public Matrix2x2 multiply(Matrix2x2 other) {
 		if (other == IDENTITY)
 			return this;

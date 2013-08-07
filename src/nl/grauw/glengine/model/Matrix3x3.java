@@ -24,6 +24,10 @@ public class Matrix3x3 extends Matrix {
 		return new Matrix3x3(multiply(3, 3, elements, 3, 3, other.elements));
 	}
 	
+	public Matrix3x3 transpose() {
+		return new Matrix3x3(transpose(3, 3, elements));
+	}
+	
 	public Vector3 multiply(Vector3 vector) {
 		return multiply(vector.getX(), vector.getY(), vector.getZ());
 	}
