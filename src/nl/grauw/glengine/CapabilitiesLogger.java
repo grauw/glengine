@@ -12,7 +12,7 @@ import android.util.Log;
 
 public class CapabilitiesLogger {
 	
-	JSONObject capabilities;
+	private final JSONObject capabilities;
 	
 	public CapabilitiesLogger(GLContext context) throws JSONException {
 		capabilities = new JSONObject();

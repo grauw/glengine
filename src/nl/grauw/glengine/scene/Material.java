@@ -8,8 +8,8 @@ import nl.grauw.glengine.gl.Shader.VertexShader;
 
 public class Material {
 	
-	private String vertexSource;
-	private String fragmentSource;
+	private final String vertexSource;
+	private final String fragmentSource;
 	
 	private Program program;
 	

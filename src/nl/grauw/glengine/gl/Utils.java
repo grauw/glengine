@@ -10,7 +10,7 @@ import java.nio.ShortBuffer;
 
 public class Utils {
 	
-	private static IntBuffer ONE_INT_BUFFER = createIntBuffer(1);
+	private static final IntBuffer ONE_INT_BUFFER = createIntBuffer(1);
 	
 	/**
 	 * A one-liner integer get call that reuses the buffer.

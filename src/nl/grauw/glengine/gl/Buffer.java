@@ -6,9 +6,9 @@ public abstract class Buffer {
 	
 	protected final GLContext context;
 	private final int target;
-	protected final int size;
-	protected final BufferUsage usage;
-	protected final int handle;
+	private final int size;
+	private final BufferUsage usage;
+	private final int handle;
 	
 	public Buffer(GLContext context, int target, int size, BufferUsage usage) {
 		this.context = context;
