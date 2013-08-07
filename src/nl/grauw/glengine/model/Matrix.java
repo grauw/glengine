@@ -60,23 +60,25 @@ public class Matrix {
 	}
 	
 	public Matrix multiply(Matrix other) {
-		if (other.rows != columns)
-			throw new GLEngineException("Incompatible matrices for multiplication.");
 		if (other == IDENTITY)
 			return this;
 		
-		float[] product = new float[other.columns * rows];
-		
-		for (int column = 0; column < other.columns; column++) {
+		return new Matrix(other.columns, rows, multiply(columns, rows, elements, other.columns, other.rows, other.elements));
+	}
+	
+	protected static float[] multiply(int columns, int rows, float[] elements, int otherColumns, int otherRows, float[] otherElements) {
+		if (columns != otherRows)
+			throw new GLEngineException("Incompatible matrices for multiplication.");
+		float[] product = new float[otherColumns * rows];
+		for (int column = 0; column < otherColumns; column++) {
 			for (int row = 0; row < rows; row++) {
-				float sum = elements[row] * other.elements[column * other.rows];
+				float sum = elements[row] * otherElements[column * otherRows];
 				for (int i = 1; i < columns; i++)
-					sum += elements[i * rows + row] * other.elements[column * other.rows + i];
+					sum += elements[i * rows + row] * otherElements[column * otherRows + i];
 				product[column * rows + row] = sum;
 			}
 		}
-		
-		return new Matrix(other.columns, rows, product);
+		return product;
 	}
 	
 	public static class Matrix4x4 extends Matrix {
