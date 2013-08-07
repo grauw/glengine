@@ -48,7 +48,7 @@ public class Matrix {
 	}
 	
 	public boolean equals(Matrix other) {
-		return this == other || columns == other.columns && rows == other.rows && Arrays.equals(elements, other.elements);
+		return this == other || columns == other.columns && Arrays.equals(elements, other.elements);
 	}
 	
 	public Matrix transpose() {
