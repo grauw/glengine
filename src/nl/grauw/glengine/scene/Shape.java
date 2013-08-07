@@ -25,6 +25,7 @@ public abstract class Shape implements Drawable {
 	public void setVertexArray(VertexArray vertexArray) {
 		this.vertexArray = vertexArray;
 		attributeLinks = createAttributeLinks();
+		indexBuffer = null;
 	}
 	
 	protected VertexArray getVertexArray() {
@@ -40,6 +41,9 @@ public abstract class Shape implements Drawable {
 	}
 	
 	public void setIndices(int... indices) {
+		if (vertexArray == null)
+			throw new GLEngineException("Must set vertex array before setting vertex indices.");
+		
 		int verticesCount = vertexArray.getLength();
 		if (verticesCount < 128) {
 			setIndexBuffer(Utils.createByteBuffer(indices));
@@ -51,6 +55,9 @@ public abstract class Shape implements Drawable {
 	}
 	
 	public void setIndexBuffer(Buffer indexBuffer) {
+		if (vertexArray == null)
+			throw new GLEngineException("Must set vertex array before setting vertex indices.");
+		
 		this.indexBuffer = indexBuffer;
 	}
 	
@@ -59,6 +66,9 @@ public abstract class Shape implements Drawable {
 	}
 	
 	public VertexInfo getVertexInfo() {
+		if (vertexArray == null)
+			throw new GLEngineException("Must set vertex array before getting vertex info.");
+		
 		return vertexArray.getVertexInfo();
 	}
 	
@@ -73,6 +83,9 @@ public abstract class Shape implements Drawable {
 	}
 	
 	public void linkAttributes(String... shaderAttributes) {
+		if (vertexArray == null)
+			throw new GLEngineException("Must set vertex array before linking attributes.");
+		
 		VertexAttribute[] vertexAttributes = getVertexInfo().getAttributes();
 		if (shaderAttributes.length > attributeLinks.length)
 			throw new GLEngineException("Too many attributes specified.");
@@ -82,6 +95,9 @@ public abstract class Shape implements Drawable {
 	}
 	
 	public void linkAttribute(VertexAttribute vertexAttribute, String shaderAttribute) {
+		if (vertexArray == null)
+			throw new GLEngineException("Must set vertex array before linking attributes.");
+		
 		attributeLinks[vertexAttribute.getIndex()].setShaderAttribute(shaderAttribute);
 	}
 	
@@ -91,6 +107,9 @@ public abstract class Shape implements Drawable {
 	}
 	
 	protected void draw(GLContext gl, PrimitiveType type) {
+		if (vertexArray == null)
+			throw new GLEngineException("Must set vertex array before drawing.");
+		
 		setUpDraw(gl);
 		
 		if (indexBuffer != null) {
