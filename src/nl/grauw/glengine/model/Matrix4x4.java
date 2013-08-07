@@ -6,6 +6,7 @@ public class Matrix4x4 extends Matrix {
 	
 	public static final Identity IDENTITY = new Identity();
 	
+	/** Elements must be specified in column-major order. */
 	public Matrix4x4(float... elements) {
 		super(4, 4, elements);
 	}

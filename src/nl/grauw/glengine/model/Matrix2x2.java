@@ -6,6 +6,7 @@ public class Matrix2x2 extends Matrix {
 	
 	public static final Identity IDENTITY = new Identity();
 	
+	/** Elements must be specified in column-major order. */
 	public Matrix2x2(float... elements) {
 		super(2, 2, elements);
 	}
