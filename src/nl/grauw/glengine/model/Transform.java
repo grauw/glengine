@@ -5,7 +5,7 @@ public class Transform {
 	private Vector3 translation = Vector3.ZERO;
 	private Vector3 scale = Vector3.ONE;
 	private Quaternion rotation = Quaternion.IDENTITY;
-	private Matrix matrix = Matrix4x4.IDENTITY;
+	private Matrix4x4 matrix = Matrix4x4.IDENTITY;
 	private boolean dirty = false;
 	
 	public Transform() {
@@ -58,9 +58,9 @@ public class Transform {
 		setRotation(x == 0 && y == 0 && z == 0 ? Quaternion.IDENTITY : new Quaternion.EulerXYZ(x, y, z));
 	}
 	
-	public Matrix getMatrix() {
+	public Matrix4x4 getMatrix() {
 		if (dirty) {
-			Matrix matrix = Matrix4x4.IDENTITY;
+			Matrix4x4 matrix = Matrix4x4.IDENTITY;
 			if (translation != Vector3.ZERO)
 				matrix = matrix.multiply(new Matrix4x4.Translation(translation));
 			if (rotation != Quaternion.IDENTITY)

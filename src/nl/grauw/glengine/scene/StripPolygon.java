@@ -2,7 +2,7 @@ package nl.grauw.glengine.scene;
 
 import nl.grauw.glengine.gl.GLContext;
 import nl.grauw.glengine.gl.GLContext.PrimitiveType;
-import nl.grauw.glengine.model.Matrix;
+import nl.grauw.glengine.model.Matrix4x4;
 import nl.grauw.glengine.model.Vertex;
 
 public class StripPolygon extends Shape {
@@ -17,7 +17,7 @@ public class StripPolygon extends Shape {
 	}
 	
 	@Override
-	public void draw(GLContext gl, Matrix transform) {
+	public void draw(GLContext gl, Matrix4x4 transform) {
 		gl.getCurrentProgram().setUniformValue("modelViewProjection", transform);
 		draw(gl, PrimitiveType.TRIANGLE_STRIP);
 	}

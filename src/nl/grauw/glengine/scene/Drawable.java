@@ -1,7 +1,7 @@
 package nl.grauw.glengine.scene;
 
 import nl.grauw.glengine.gl.GLContext;
-import nl.grauw.glengine.model.Matrix;
+import nl.grauw.glengine.model.Matrix4x4;
 
 /**
  * A drawable object; an object that can be drawn.
@@ -20,6 +20,6 @@ public interface Drawable {
 	 * 
 	 * @param gl The GL drawing context.
 	 */
-	public void draw(GLContext gl, Matrix transform);
+	public void draw(GLContext gl, Matrix4x4 transform);
 	
 }
