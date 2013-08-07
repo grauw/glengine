@@ -32,7 +32,7 @@ public class Matrix4x4 extends Matrix {
 	public Vector4 getColumn(int index) {
 		if (index < 0 || index > 3)
 			throw new GLEngineException("Column index out of range.");
-		return new Vector4(elements[index], elements[index + 1], elements[index + 2], elements[index + 3]);
+		return new Vector4(elements[index * 4], elements[index * 4 + 1], elements[index * 4 + 2], elements[index * 4 + 3]);
 	}
 	
 	public Vector4 getRow(int index) {
