@@ -185,22 +185,22 @@ public final class Program {
 	}
 	
 	public void setUniformValue(Uniform uniform, float x) {
-		checkCurrentProgram();
+		checkUniform(uniform);
 		glUniform1f(uniform.getLocation(), x);
 	}
 	
 	public void setUniformValue(Uniform uniform, float x, float y) {
-		checkCurrentProgram();
+		checkUniform(uniform);
 		glUniform2f(uniform.getLocation(), x, y);
 	}
 	
 	public void setUniformValue(Uniform uniform, float x, float y, float z) {
-		checkCurrentProgram();
+		checkUniform(uniform);
 		glUniform3f(uniform.getLocation(), x, y, z);
 	}
 	
 	public void setUniformValue(Uniform uniform, float x, float y, float z, float w) {
-		checkCurrentProgram();
+		checkUniform(uniform);
 		glUniform4f(uniform.getLocation(), x, y, z, w);
 	}
 	
@@ -209,7 +209,7 @@ public final class Program {
 	}
 	
 	public void setUniformValue(Uniform uniform, Matrix matrix) {
-		checkCurrentProgram();
+		checkUniform(uniform);
 		float[] elements = matrix.getElements();
 		if (matrix.getColumns() == 4 && matrix.getRows() == 4)
 			glUniformMatrix4fv(uniform.getLocation(), 1, false, elements, 0);
@@ -234,11 +234,13 @@ public final class Program {
 	}
 	
 	public void setUniformValue(Uniform uniform, TextureUnit unit) {
-		checkCurrentProgram();
+		checkUniform(uniform);
 		glUniform1i(uniform.getLocation(), unit.getIndex());
 	}
 	
-	private void checkCurrentProgram() {
+	private void checkUniform(Uniform uniform) {
+		if (uniform == null)
+			throw new GLEngineException("Must specify an existing uniform.");
 		if (context.getCurrentProgram() != this)
 			throw new GLEngineException("Must be current program to set uniform variable.");
 	}
