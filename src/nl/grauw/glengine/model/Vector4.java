@@ -118,6 +118,10 @@ public class Vector4 {
 		);
 	}
 	
+	public boolean equals(Vector4 other) {
+		return x == other.x && y == other.y && z == other.z && w == other.w;
+	}
+	
 	private static final class Zero extends Vector4 {
 		
 		public Zero() {

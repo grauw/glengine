@@ -91,6 +91,10 @@ public class Vector2 {
 		);
 	}
 	
+	public boolean equals(Vector2 other) {
+		return x == other.x && y == other.y;
+	}
+	
 	private static final class Zero extends Vector2 {
 		
 		public Zero() {
