@@ -11,7 +11,7 @@ public class Material {
 	private final String vertexSource;
 	private final String fragmentSource;
 	
-	private Program program;
+	protected Program program;
 	
 	public Material(String vertexSource, String fragmentSource) {
 		if (vertexSource == null || fragmentSource == null)
@@ -38,6 +38,20 @@ public class Material {
 	
 	public Program getProgram() {
 		return program;
+	}
+	
+	/** Initialization callback. */
+	public void initialize(GLContext gl) {
+		compile(gl);
+	}
+	
+	/** Per-frame update callback. */
+	public void update(int elapsed) {
+	}
+	
+	/** Pre-draw callback. */
+	public void prepareDraw(GLContext gl) {
+		gl.useProgram(program);
 	}
 	
 }
