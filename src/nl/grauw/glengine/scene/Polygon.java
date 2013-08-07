@@ -8,6 +8,8 @@ import nl.grauw.glengine.model.Vertex;
 public class Polygon extends Shape {
 	
 	public Polygon(Vertex... vertices) {
+		super(PrimitiveType.TRIANGLES);
+		
 		if (vertices.length < 3)
 			throw new Error("At least three vertices required.");
 		if (vertices.length % 3 != 0)
@@ -19,7 +21,7 @@ public class Polygon extends Shape {
 	@Override
 	public void draw(GLContext gl, Matrix4x4 transform) {
 		gl.getCurrentProgram().setUniformValue("modelViewProjection", transform);
-		draw(gl, PrimitiveType.TRIANGLES);
+		draw(gl);
 	}
 	
 }

@@ -14,9 +14,14 @@ import nl.grauw.glengine.model.VertexArray;
 
 public abstract class Shape implements Drawable {
 	
+	private final PrimitiveType primitive;
 	private VertexArray vertexArray;
 	private Buffer indexBuffer;
 	private AttributeLink[] attributeLinks;
+	
+	public Shape(PrimitiveType primitive) {
+		this.primitive = primitive;
+	}
 	
 	public void setVertices(Vertex... vertices) {
 		setVertexArray(new VertexArray(vertices));
@@ -106,16 +111,16 @@ public abstract class Shape implements Drawable {
 		
 	}
 	
-	protected void draw(GLContext gl, PrimitiveType type) {
+	protected void draw(GLContext gl) {
 		if (vertexArray == null)
 			throw new GLEngineException("Must set vertex array before drawing.");
 		
 		setUpDraw(gl);
 		
 		if (indexBuffer != null) {
-			gl.drawElements(type, indexBuffer);
+			gl.drawElements(primitive, indexBuffer);
 		} else {
-			gl.drawArrays(type, 0, vertexArray.getLength());
+			gl.drawArrays(primitive, 0, vertexArray.getLength());
 		}
 		
 		tearDownDraw(gl);

@@ -8,6 +8,8 @@ import nl.grauw.glengine.model.Vertex;
 public class FanPolygon extends Shape {
 	
 	public FanPolygon(Vertex... vertices) {
+		super(PrimitiveType.TRIANGLE_FAN);
+		
 		if (vertices.length < 3)
 			throw new Error("At least three vertices required.");
 		
@@ -17,7 +19,7 @@ public class FanPolygon extends Shape {
 	@Override
 	public void draw(GLContext gl, Matrix4x4 transform) {
 		gl.getCurrentProgram().setUniformValue("modelViewProjection", transform);
-		draw(gl, PrimitiveType.TRIANGLE_FAN);
+		draw(gl);
 	}
 	
 }
