@@ -7,6 +7,7 @@ import nl.grauw.glengine.gl.GLContext;
 import nl.grauw.glengine.gl.GLEngineException;
 import nl.grauw.glengine.gl.Utils;
 import nl.grauw.glengine.gl.GLContext.PrimitiveType;
+import nl.grauw.glengine.model.Matrix4x4;
 import nl.grauw.glengine.model.Vertex;
 import nl.grauw.glengine.model.Vertex.VertexAttribute;
 import nl.grauw.glengine.model.Vertex.VertexInfo;
@@ -122,13 +123,14 @@ public abstract class Shape implements Drawable {
 		
 	}
 	
-	protected void draw(GLContext gl) {
+	@Override
+	public void draw(GLContext gl, Matrix4x4 transform) {
 		if (vertexArray == null)
 			throw new GLEngineException("Must set vertex array before drawing.");
 		if (material == null)
 			throw new GLEngineException("Must set material before drawing.");
 		
-		setUpDraw(gl);
+		setUpDraw(gl, transform);
 		
 		if (indexBuffer != null) {
 			gl.drawElements(primitive, indexBuffer);
@@ -136,17 +138,17 @@ public abstract class Shape implements Drawable {
 			gl.drawArrays(primitive, 0, vertexArray.getLength());
 		}
 		
-		tearDownDraw(gl);
+		tearDownDraw(gl, transform);
 	}
 	
-	protected void setUpDraw(GLContext gl) {
+	protected void setUpDraw(GLContext gl, Matrix4x4 transform) {
 		material.prepareDraw(gl);
 		
 		for (AttributeLink attributeLink : attributeLinks)
 			attributeLink.setUp(gl);
 	}
 	
-	protected void tearDownDraw(GLContext gl) {
+	protected void tearDownDraw(GLContext gl, Matrix4x4 transform) {
 		for (AttributeLink attributeLink : attributeLinks)
 			attributeLink.tearDown(gl);
 	}
