@@ -15,12 +15,23 @@ import nl.grauw.glengine.model.VertexArray;
 public abstract class Shape implements Drawable {
 	
 	private final PrimitiveType primitive;
+	private Material material;
+	
 	private VertexArray vertexArray;
 	private Buffer indexBuffer;
 	private AttributeLink[] attributeLinks;
 	
 	public Shape(PrimitiveType primitive) {
 		this.primitive = primitive;
+	}
+	
+	public <M extends Material> M setMaterial(M material) {
+		this.material = material;
+		return material;
+	}
+	
+	public Material getMaterial() {
+		return material;
 	}
 	
 	public void setVertices(Vertex... vertices) {
@@ -114,6 +125,8 @@ public abstract class Shape implements Drawable {
 	protected void draw(GLContext gl) {
 		if (vertexArray == null)
 			throw new GLEngineException("Must set vertex array before drawing.");
+		if (material == null)
+			throw new GLEngineException("Must set material before drawing.");
 		
 		setUpDraw(gl);
 		
@@ -127,6 +140,8 @@ public abstract class Shape implements Drawable {
 	}
 	
 	protected void setUpDraw(GLContext gl) {
+		material.prepareDraw(gl);
+		
 		for (AttributeLink attributeLink : attributeLinks)
 			attributeLink.setUp(gl);
 	}
