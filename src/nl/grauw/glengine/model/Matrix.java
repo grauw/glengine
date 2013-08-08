@@ -20,6 +20,11 @@ public abstract class Matrix {
 		return getElements()[column * getRows() + row];
 	}
 	
+	@Override
+	public boolean equals(Object other) {
+		return other instanceof Matrix ? equals((Matrix) other) : super.equals(other);
+	}
+	
 	public final boolean equals(Matrix other) {
 		return this == other || getColumns() == other.getColumns() && Arrays.equals(getElements(), other.getElements());
 	}

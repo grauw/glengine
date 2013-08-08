@@ -134,6 +134,11 @@ public class Vector2 extends Matrix {
 		);
 	}
 	
+	@Override
+	public boolean equals(Object other) {
+		return other instanceof Vector2 ? equals((Vector2)other) : super.equals(other);
+	}
+	
 	public final boolean equals(Vector2 other) {
 		return x == other.x && y == other.y;
 	}
