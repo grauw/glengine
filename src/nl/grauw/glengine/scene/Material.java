@@ -5,6 +5,7 @@ import nl.grauw.glengine.gl.GLEngineException;
 import nl.grauw.glengine.gl.Program;
 import nl.grauw.glengine.gl.Shader.FragmentShader;
 import nl.grauw.glengine.gl.Shader.VertexShader;
+import nl.grauw.glengine.model.Matrix4x4;
 
 public class Material {
 	
@@ -50,7 +51,7 @@ public class Material {
 	}
 	
 	/** Pre-draw callback. */
-	public void prepareDraw(GLContext gl) {
+	public void prepareDraw(GLContext gl, Matrix4x4 transform) {
 		gl.useProgram(program);
 	}
 	

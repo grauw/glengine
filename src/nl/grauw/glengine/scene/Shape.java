@@ -142,7 +142,7 @@ public abstract class Shape implements Drawable {
 	}
 	
 	protected void setUpDraw(GLContext gl, Matrix4x4 transform) {
-		material.prepareDraw(gl);
+		material.prepareDraw(gl, transform);
 		
 		for (AttributeLink attributeLink : attributeLinks)
 			attributeLink.setUp(gl);
