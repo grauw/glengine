@@ -7,22 +7,29 @@ import nl.grauw.glengine.gl.GLContext;
 import nl.grauw.glengine.gl.GLEngineException;
 
 import android.opengl.GLSurfaceView.Renderer;
+import android.os.SystemClock;
 
 public abstract class GLEngineRenderer implements Renderer {
 	
 	private GLContext context;
+	
+	private long lastUpdateTime = 0;
 	
 	@Override
 	public void onDrawFrame(GL10 gl) {
 		if (context == null)
 			throw new GLEngineException("GLEngine context not available.");
 		
-		onDrawFrame(context);
+		long time = SystemClock.uptimeMillis();
+		int elapsed = lastUpdateTime == 0 ? 0 : (int) (time - lastUpdateTime);
+		lastUpdateTime = time;
+		
+		onDrawFrame(context, elapsed);
 		
 		context.checkError();
 	}
 	
-	abstract public void onDrawFrame(GLContext context);
+	abstract public void onDrawFrame(GLContext context, int elapsed);
 	
 	@Override
 	public void onSurfaceChanged(GL10 gl, int width, int height) {
