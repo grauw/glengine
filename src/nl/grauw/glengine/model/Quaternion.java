@@ -61,6 +61,15 @@ public class Quaternion {
 		);
 	}
 	
+	@Override
+	public boolean equals(Object other) {
+		return other instanceof Quaternion ? equals((Quaternion)other) : super.equals(other);
+	}
+	
+	public final boolean equals(Quaternion other) {
+		return x == other.x && y == other.y && z == other.z && w == other.w;
+	}
+	
 	public static final class Axis extends Quaternion {
 		
 		public Axis(float x, float y, float z, float angle) {
