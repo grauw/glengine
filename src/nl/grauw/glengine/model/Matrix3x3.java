@@ -95,6 +95,11 @@ public class Matrix3x3 extends Matrix {
 			return other;
 		}
 		
+		@Override
+		public Vector3 multiply(Vector3 vector) {
+			return vector;
+		}
+		
 	}
 	
 	public static class Translation extends Matrix3x3 {

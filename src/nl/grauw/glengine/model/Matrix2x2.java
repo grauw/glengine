@@ -94,6 +94,11 @@ public class Matrix2x2 extends Matrix {
 			return other;
 		}
 		
+		@Override
+		public Vector2 multiply(Vector2 vector) {
+			return vector;
+		}
+		
 	}
 	
 	public static class Translation extends Matrix2x2 {
