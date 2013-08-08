@@ -36,6 +36,10 @@ public class Quaternion {
 		return (float)Math.sqrt(x * x + y * y + z * z + w * w);
 	}
 	
+	public float getMagnitudeSquared() {
+		return x * x + y * y + z * z + w * w;
+	}
+	
 	public Quaternion normalize() {
 		float magnitude = getMagnitude();
 		return new Quaternion(x / magnitude, y / magnitude, z / magnitude, w / magnitude);
