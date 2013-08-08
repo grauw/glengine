@@ -78,4 +78,9 @@ public class Transform {
 		return matrix;
 	}
 	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[translation=" + translation + ", rotation=" + rotation + ", scale=" + scale + ", dirty=" + dirty + "]";
+	}
+	
 }

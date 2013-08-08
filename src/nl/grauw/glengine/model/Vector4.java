@@ -170,6 +170,11 @@ public class Vector4 extends Matrix {
 		return x == other.x && y == other.y && z == other.z && w == other.w;
 	}
 	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[" + x + ", " + y + ", " + z + ", " + w + "]";
+	}
+	
 	private static final class Zero extends Vector4 {
 		
 		public Zero() {

@@ -68,4 +68,9 @@ public class Color {
 		return new Color(1f - (1f - red) * percentage, 1f - (1f - green) * percentage, 1f - (1f - blue) * percentage, alpha);
 	}
 	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[" + red + ", " + green + ", " + blue + ", " + alpha + "]";
+	}
+	
 }

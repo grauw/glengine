@@ -37,6 +37,11 @@ public abstract class Matrix {
 		return this == other || getColumns() == other.getColumns() && Arrays.equals(getElements(), other.getElements());
 	}
 	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[columns=" + getColumns() + ", rows=" + getRows() + ", elements=" + Arrays.toString(getElements()) + "]";
+	}
+	
 	protected static float[] transpose(int columns, int rows, float[] elements) {
 		float[] transposed = new float[elements.length];
 		for (int column = 0; column < columns; column++)

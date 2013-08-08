@@ -143,6 +143,11 @@ public class Vector2 extends Matrix {
 		return x == other.x && y == other.y;
 	}
 	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[" + x + ", " + y + "]";
+	}
+	
 	private static final class Zero extends Vector2 {
 		
 		public Zero() {

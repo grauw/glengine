@@ -70,6 +70,11 @@ public class Quaternion {
 		return x == other.x && y == other.y && z == other.z && w == other.w;
 	}
 	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[" + x + ", " + y + ", " + z + ", " + w + "]";
+	}
+	
 	public static final class Axis extends Quaternion {
 		
 		public Axis(float x, float y, float z, float angle) {

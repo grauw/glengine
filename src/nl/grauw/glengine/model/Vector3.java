@@ -162,6 +162,11 @@ public class Vector3 extends Matrix {
 		return x == other.x && y == other.y && z == other.z;
 	}
 	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[" + x + ", " + y + ", " + z + "]";
+	}
+	
 	private static final class Zero extends Vector3 {
 		
 		public Zero() {

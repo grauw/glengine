@@ -75,4 +75,9 @@ public class VertexArray {
 		buffer.putFloat(color.getAlpha());
 	}
 	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[length=" + length + ", vertexInfo=" + vertexInfo + "]";
+	}
+	
 }

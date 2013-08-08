@@ -1,5 +1,7 @@
 package nl.grauw.glengine.model;
 
+import java.util.Arrays;
+
 import nl.grauw.glengine.gl.GLEngineException;
 
 public abstract class Vertex {
@@ -43,6 +45,11 @@ public abstract class Vertex {
 			return attributeInfos;
 		}
 		
+		@Override
+		public String toString() {
+			return getClass().getSimpleName() + "[size=" + size + ", attributes=" + Arrays.toString(attributes) + "]";
+		}
+		
 	}
 	
 	public static class VertexAttribute {
@@ -67,6 +74,11 @@ public abstract class Vertex {
 		
 		public int getOffset() {
 			return offset;
+		}
+		
+		@Override
+		public String toString() {
+			return getClass().getSimpleName() + "[index=" + index + ", attributeInfo=" + info + ", offset=" + offset + "]";
 		}
 		
 	}
@@ -110,6 +122,11 @@ public abstract class Vertex {
 		
 		public boolean isNormalized() {
 			return normalized;
+		}
+		
+		@Override
+		public String toString() {
+			return getClass().getSimpleName() + "[linkName=" + linkName + ", components=" + components + ", type=" + type + ", normalized=" + normalized + "]";
 		}
 		
 	}

@@ -26,4 +26,9 @@ public class Size {
 		return depth;
 	}
 	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[" + width + ", " + height + ", " + depth + "]";
+	}
+	
 }
