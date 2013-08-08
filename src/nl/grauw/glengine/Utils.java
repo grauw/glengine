@@ -30,7 +30,7 @@ public final class Utils {
 			
 			return text.toString();
 		} catch (IOException e) {
-			throw new GLEngineException("Error reading file", e);
+			throw new GLEngineException("Error reading file.", e);
 		}
 	}
 	
@@ -38,7 +38,7 @@ public final class Utils {
 		try {
 			return BitmapFactory.decodeStream(assets.open(path));
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			throw new GLEngineException("Error reading file", e);
 		}
 	}
 	
