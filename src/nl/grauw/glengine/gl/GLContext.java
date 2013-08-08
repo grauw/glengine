@@ -388,7 +388,7 @@ public final class GLContext {
 			case GL_INVALID_FRAMEBUFFER_OPERATION:
 				throw new OpenGLException("Invalid framebuffer operation.");
 			case GL_OUT_OF_MEMORY:
-				throw new OpenGLException("Invalid out of memory.");
+				throw new OpenGLException("Out of memory.");
 			default:
 				throw new OpenGLException("Unrecognised error %s.", flag);
 		}
