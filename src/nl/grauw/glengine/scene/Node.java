@@ -16,8 +16,9 @@ public class Node implements Drawable {
 	public Node() {
 	}
 	
-	public void add(Drawable child) {
+	public <D extends Drawable> D add(D child) {
 		children.add(child);
+		return child;
 	}
 	
 	public List<Drawable> getChildren() {
