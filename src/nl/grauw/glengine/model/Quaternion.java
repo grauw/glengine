@@ -61,6 +61,16 @@ public class Quaternion {
 		);
 	}
 	
+	public Vector3 multiply(Vector3 vector) {
+		Quaternion product = this.multiply(new Quaternion(vector.getX(), vector.getY(), vector.getZ(), 0)).multiply(this.conjugate());
+		return new Vector3(product.x, product.y, product.z);
+	}
+	
+	public Vector4 multiply(Vector4 vector) {
+		Quaternion product = this.multiply(new Quaternion(vector.getX(), vector.getY(), vector.getZ(), 0)).multiply(this.conjugate());
+		return new Vector4(product.x, product.y, product.z, vector.getW());
+	}
+	
 	@Override
 	public boolean equals(Object other) {
 		return other instanceof Quaternion ? equals((Quaternion)other) : super.equals(other);
