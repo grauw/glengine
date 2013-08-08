@@ -130,7 +130,7 @@ public abstract class Shape implements Drawable {
 		if (material == null)
 			throw new GLEngineException("Must set material before drawing.");
 		
-		setUpDraw(gl, transform);
+		prepareDraw(gl, transform);
 		
 		if (indexBuffer != null) {
 			gl.drawElements(primitive, indexBuffer);
@@ -138,19 +138,19 @@ public abstract class Shape implements Drawable {
 			gl.drawArrays(primitive, 0, vertexArray.getLength());
 		}
 		
-		tearDownDraw(gl, transform);
+		finalizeDraw(gl, transform);
 	}
 	
-	protected void setUpDraw(GLContext gl, Matrix4x4 transform) {
+	protected void prepareDraw(GLContext gl, Matrix4x4 transform) {
 		material.prepareDraw(gl, transform);
 		
 		for (AttributeLink attributeLink : attributeLinks)
-			attributeLink.setUp(gl);
+			attributeLink.prepare(gl);
 	}
 	
-	protected void tearDownDraw(GLContext gl, Matrix4x4 transform) {
+	protected void finalizeDraw(GLContext gl, Matrix4x4 transform) {
 		for (AttributeLink attributeLink : attributeLinks)
-			attributeLink.tearDown(gl);
+			attributeLink.finalize(gl);
 	}
 	
 	private final class AttributeLink {
@@ -167,7 +167,7 @@ public abstract class Shape implements Drawable {
 			this.shaderAttribute = shaderAttribute;
 		}
 		
-		public void setUp(GLContext gl) {
+		public void prepare(GLContext gl) {
 			if (!gl.getCurrentProgram().hasAttribute(shaderAttribute))
 				return;
 			
@@ -178,7 +178,7 @@ public abstract class Shape implements Drawable {
 			gl.setVertexAttribPointer(shaderAttribute, vertexAttribute.getAttributeInfo(), getVertexInfo().getSize(), buffer);
 		}
 		
-		public void tearDown(GLContext gl) {
+		public void finalize(GLContext gl) {
 			if (!gl.getCurrentProgram().hasAttribute(shaderAttribute))
 				return;
 			
