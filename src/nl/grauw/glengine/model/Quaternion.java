@@ -101,6 +101,11 @@ public class Quaternion {
 			return other;
 		}
 		
+		@Override
+		public Quaternion conjugate() {
+			return this;
+		}
+		
 	}
 	
 }
