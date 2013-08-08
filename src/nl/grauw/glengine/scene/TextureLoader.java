@@ -1,17 +1,15 @@
 package nl.grauw.glengine.scene;
 
-import java.io.IOException;
-
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
+import nl.grauw.glengine.Utils;
 import nl.grauw.glengine.gl.GLContext;
 import nl.grauw.glengine.gl.GLEngineException;
 import nl.grauw.glengine.gl.Texture;
-import nl.grauw.glengine.gl.Texture2D;
 import nl.grauw.glengine.gl.Texture.MagnificationFilter;
 import nl.grauw.glengine.gl.Texture.MinificationFilter;
+import nl.grauw.glengine.gl.Texture2D;
 
 public abstract class TextureLoader {
 	
@@ -26,11 +24,7 @@ public abstract class TextureLoader {
 	public abstract void initialize(GLContext gl);
 	
 	public Bitmap loadBitmapAsset(String path) {
-		try {
-			return BitmapFactory.decodeStream(assets.open(path));
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		return Utils.loadBitmapAsset(assets, path);
 	}
 	
 	public static class TextureLoader2D extends TextureLoader {
