@@ -20,6 +20,14 @@ public abstract class Matrix {
 		return getElements()[column * getRows() + row];
 	}
 	
+	public Matrix transpose() {
+		return new AnyMatrix(getRows(), getColumns(), transpose(getColumns(), getRows(), getElements()));
+	}
+	
+	public Matrix multiply(Matrix other) {
+		return new AnyMatrix(other.getColumns(), getRows(), multiply(getColumns(), getRows(), getElements(), other.getColumns(), other.getRows(), other.getElements()));
+	}
+	
 	@Override
 	public boolean equals(Object other) {
 		return other instanceof Matrix ? equals((Matrix) other) : super.equals(other);
@@ -27,14 +35,6 @@ public abstract class Matrix {
 	
 	public final boolean equals(Matrix other) {
 		return this == other || getColumns() == other.getColumns() && Arrays.equals(getElements(), other.getElements());
-	}
-	
-	public Matrix transpose() {
-		return new AnyMatrix(getRows(), getColumns(), transpose(getColumns(), getRows(), getElements()));
-	}
-	
-	public Matrix multiply(Matrix other) {
-		return new AnyMatrix(other.getColumns(), getRows(), multiply(getColumns(), getRows(), getElements(), other.getColumns(), other.getRows(), other.getElements()));
 	}
 	
 	protected static float[] transpose(int columns, int rows, float[] elements) {
