@@ -71,7 +71,7 @@ public class Matrix2x2 extends Matrix {
 		return new Vector2(elements[index], elements[index + 2]);
 	}
 	
-	static final class Identity extends Matrix2x2 {
+	private static final class Identity extends Matrix2x2 {
 		
 		public Identity() {
 			super(1, 0, 0, 1);
