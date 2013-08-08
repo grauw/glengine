@@ -89,6 +89,7 @@ public class Matrix2x2 extends Matrix {
 			return other;
 		}
 		
+		@Override
 		public Matrix2x2 multiply(Matrix2x2 other) {
 			return other;
 		}
