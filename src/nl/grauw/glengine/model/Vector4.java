@@ -98,7 +98,7 @@ public class Vector4 extends Matrix {
 		if (other == ONE)
 			return this;
 		if (other == ZERO)
-			return ZERO;
+			return other;
 		return new Vector4(x * other.x, y * other.y, z * other.z, w * other.w);
 	}
 	

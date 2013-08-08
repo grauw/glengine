@@ -75,7 +75,7 @@ public class Vector2 extends Matrix {
 		if (other == ONE)
 			return this;
 		if (other == ZERO)
-			return ZERO;
+			return other;
 		return new Vector2(x * other.x, y * other.y);
 	}
 	

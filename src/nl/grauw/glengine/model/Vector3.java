@@ -84,7 +84,7 @@ public class Vector3 extends Matrix {
 		if (other == ONE)
 			return this;
 		if (other == ZERO)
-			return ZERO;
+			return other;
 		return new Vector3(x * other.x, y * other.y, z * other.z);
 	}
 	
