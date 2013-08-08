@@ -16,8 +16,10 @@ public class Transform {
 	}
 	
 	public void setTranslation(Vector3 translation) {
-		this.translation = translation;
-		dirty = true;
+		if (this.translation != translation) {
+			this.translation = translation;
+			dirty = true;
+		}
 	}
 	
 	public void setTranslation(float x, float y, float z) {
@@ -29,8 +31,10 @@ public class Transform {
 	}
 	
 	public void setScale(Vector3 scale) {
-		this.scale = scale;
-		dirty = true;
+		if (this.scale != scale) {
+			this.scale = scale;
+			dirty = true;
+		}
 	}
 	
 	public void setScale(float x, float y, float z) {
@@ -46,8 +50,10 @@ public class Transform {
 	}
 	
 	public void setRotation(Quaternion rotation) {
-		this.rotation = rotation;
-		dirty = true;
+		if (this.rotation != rotation) {
+			this.rotation = rotation;
+			dirty = true;
+		}
 	}
 	
 	public void setRotation(float x, float y, float z, float angle) {
