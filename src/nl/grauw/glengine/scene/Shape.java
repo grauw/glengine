@@ -141,6 +141,10 @@ public abstract class Shape implements Drawable {
 		finalizeDraw(gl, transform);
 	}
 	
+	/**
+	 * Invoked at the beginning of a draw.
+	 * Primes the material and attribute arrays.
+	 */
 	protected void prepareDraw(GLContext gl, Matrix4x4 transform) {
 		material.prepareDraw(gl, transform);
 		
@@ -148,6 +152,10 @@ public abstract class Shape implements Drawable {
 			attributeLink.prepare(gl);
 	}
 	
+	/**
+	 * Invoked at the end of a draw.
+	 * Restores the attribute arrays to the initial state.
+	 */
 	protected void finalizeDraw(GLContext gl, Matrix4x4 transform) {
 		for (AttributeLink attributeLink : attributeLinks)
 			attributeLink.finalize(gl);
