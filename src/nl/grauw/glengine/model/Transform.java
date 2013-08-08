@@ -37,8 +37,8 @@ public class Transform {
 		setScale(x == 1 && y == 1 && z == 1 ? Vector3.ONE : new Vector3(x, y, z));
 	}
 	
-	public void setScale(float scale) {
-		setScale(scale == 1 ? Vector3.ONE : new Vector3(scale, scale, scale));
+	public void setScale(float scalar) {
+		setScale(scalar == 1 ? Vector3.ONE : new Vector3(scalar, scalar, scalar));
 	}
 	
 	public Quaternion getRotation() {
