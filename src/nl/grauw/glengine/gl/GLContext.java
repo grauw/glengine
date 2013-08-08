@@ -251,6 +251,20 @@ public final class GLContext {
 		return activeTextureUnit;
 	}
 	
+	public TextureUnit bindTexture(int textureUnitIndex, Texture2D texture) {
+		TextureUnit textureUnit = getTextureUnit(textureUnitIndex);
+		setActiveTextureUnit(textureUnit);
+		textureUnit.bind(texture);
+		return textureUnit;
+	}
+	
+	public TextureUnit bindTexture(int textureUnitIndex, TextureCubeMap texture) {
+		TextureUnit textureUnit = getTextureUnit(textureUnitIndex);
+		setActiveTextureUnit(textureUnit);
+		textureUnit.bind(texture);
+		return textureUnit;
+	}
+	
 	public void setVertexAttribPointer(String attributeName, AttributeInfo attributeInfo, int stride, Buffer buffer) {
 		setVertexAttribPointer(currentProgram.getAttribute(attributeName), attributeInfo, stride, buffer);
 	}
