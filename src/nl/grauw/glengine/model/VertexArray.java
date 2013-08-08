@@ -26,10 +26,10 @@ public class VertexArray {
 	}
 	
 	public VertexArray(Vertex... vertices) {
-		this(vertices.length > 0 ? vertices[0].getVertexInfo() : null, vertices.length);
+		this(vertices.length > 0 ? vertices[0].getInfo() : null, vertices.length);
 		
 		for (Vertex vertex : vertices) {
-			if (vertex.getVertexInfo() != vertexInfo)
+			if (vertex.getInfo() != vertexInfo)
 				throw new GLEngineException("Incompatible vertex.");
 			vertex.write(this);
 		}

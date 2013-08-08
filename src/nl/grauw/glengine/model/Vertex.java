@@ -6,10 +6,10 @@ public abstract class Vertex {
 	
 	public abstract void write(VertexArray array);
 	
-	public abstract VertexInfo getVertexInfo();
+	public abstract VertexInfo getInfo();
 	
 	public VertexAttribute[] getAttributes() {
-		return getVertexInfo().getAttributes();
+		return getInfo().getAttributes();
 	}
 	
 	public static class VertexInfo {
@@ -48,12 +48,12 @@ public abstract class Vertex {
 	public static class VertexAttribute {
 		
 		private final int index;
-		private final AttributeInfo attributeInfo;
+		private final AttributeInfo info;
 		private final int offset;
 		
 		private VertexAttribute(int index, AttributeInfo attributeInfo, int offset) {
 			this.index = index;
-			this.attributeInfo = attributeInfo;
+			this.info = attributeInfo;
 			this.offset = offset;
 		}
 		
@@ -61,8 +61,8 @@ public abstract class Vertex {
 			return index;
 		}
 		
-		public AttributeInfo getAttributeInfo() {
-			return attributeInfo;
+		public AttributeInfo getInfo() {
+			return info;
 		}
 		
 		public int getOffset() {

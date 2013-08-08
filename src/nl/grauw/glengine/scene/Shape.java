@@ -94,7 +94,7 @@ public abstract class Shape implements Drawable {
 		AttributeLink[] attributeLinks = new AttributeLink[vertexAttributes.length];
 		
 		for (int i = 0; i < vertexAttributes.length; i++)
-			attributeLinks[i] = new AttributeLink(vertexAttributes[i], vertexAttributes[i].getAttributeInfo().getLinkName());
+			attributeLinks[i] = new AttributeLink(vertexAttributes[i], vertexAttributes[i].getInfo().getLinkName());
 		
 		return attributeLinks;
 	}
@@ -183,7 +183,7 @@ public abstract class Shape implements Drawable {
 			
 			ByteBuffer buffer = vertexArray.getBuffer();
 			buffer.position(vertexAttribute.getOffset());
-			gl.setVertexAttribPointer(shaderAttribute, vertexAttribute.getAttributeInfo(), getVertexInfo().getSize(), buffer);
+			gl.setVertexAttribPointer(shaderAttribute, vertexAttribute.getInfo(), getVertexInfo().getSize(), buffer);
 		}
 		
 		public void finalize(GLContext gl) {
