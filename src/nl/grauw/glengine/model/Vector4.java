@@ -84,10 +84,22 @@ public class Vector4 extends Matrix {
 		return new Vector4(x + other.x, y + other.y, z + other.z, w + other.w);
 	}
 	
+	public final Vector4 add(float otherX, float otherY, float otherZ, float otherW) {
+		if (otherX == 0 && otherY == 0 && otherZ == 0 && otherW == 0)
+			return this;
+		return new Vector4(x + otherX, y + otherY, z + otherZ, w + otherW);
+	}
+	
 	public final Vector4 subtract(Vector4 other) {
 		if (other == ZERO)
 			return this;
 		return new Vector4(x - other.x, y - other.y, z - other.z, w - other.w);
+	}
+	
+	public final Vector4 subtract(float otherX, float otherY, float otherZ, float otherW) {
+		if (otherX == 0 && otherY == 0 && otherZ == 0 && otherW == 0)
+			return this;
+		return new Vector4(x - otherX, y - otherY, z - otherZ, w - otherW);
 	}
 	
 	public Vector4 negate() {
@@ -100,6 +112,14 @@ public class Vector4 extends Matrix {
 		if (other == ZERO)
 			return other;
 		return new Vector4(x * other.x, y * other.y, z * other.z, w * other.w);
+	}
+	
+	public final Vector4 multiply(float otherX, float otherY, float otherZ, float otherW) {
+		if (otherX == 1 && otherY == 1 && otherZ == 1 && otherW == 1)
+			return this;
+		if (otherX == 0 && otherY == 0 && otherZ == 0 && otherW == 0)
+			return ZERO;
+		return new Vector4(x * otherX, y * otherY, z * otherZ, w * otherW);
 	}
 	
 	public final Vector4 multiply(float scalar) {

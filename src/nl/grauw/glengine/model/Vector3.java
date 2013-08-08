@@ -70,10 +70,22 @@ public class Vector3 extends Matrix {
 		return new Vector3(x + other.x, y + other.y, z + other.z);
 	}
 	
+	public final Vector3 add(float otherX, float otherY, float otherZ) {
+		if (otherX == 0 && otherY == 0 && otherZ == 0)
+			return this;
+		return new Vector3(x + otherX, y + otherY, z + otherZ);
+	}
+	
 	public final Vector3 subtract(Vector3 other) {
 		if (other == ZERO)
 			return this;
 		return new Vector3(x - other.x, y - other.y, z - other.z);
+	}
+	
+	public final Vector3 subtract(float otherX, float otherY, float otherZ) {
+		if (otherX == 0 && otherY == 0 && otherZ == 0)
+			return this;
+		return new Vector3(x - otherX, y - otherY, z - otherZ);
 	}
 	
 	public Vector3 negate() {
@@ -86,6 +98,14 @@ public class Vector3 extends Matrix {
 		if (other == ZERO)
 			return other;
 		return new Vector3(x * other.x, y * other.y, z * other.z);
+	}
+	
+	public final Vector3 multiply(float otherX, float otherY, float otherZ) {
+		if (otherX == 1 && otherY == 1 && otherZ == 1)
+			return this;
+		if (otherX == 0 && otherY == 0 && otherZ == 0)
+			return ZERO;
+		return new Vector3(x * otherX, y * otherY, z * otherZ);
 	}
 	
 	public final Vector3 multiply(float scalar) {

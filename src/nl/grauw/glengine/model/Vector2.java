@@ -61,10 +61,22 @@ public class Vector2 extends Matrix {
 		return new Vector2(x + other.x, y + other.y);
 	}
 	
+	public final Vector2 add(float otherX, float otherY) {
+		if (otherX == 0 && otherY == 0)
+			return this;
+		return new Vector2(x + otherX, y + otherY);
+	}
+	
 	public final Vector2 subtract(Vector2 other) {
 		if (other == ZERO)
 			return this;
 		return new Vector2(x - other.x, y - other.y);
+	}
+	
+	public final Vector2 subtract(float otherX, float otherY) {
+		if (otherX == 0 && otherY == 0)
+			return this;
+		return new Vector2(x - otherX, y - otherY);
 	}
 	
 	public Vector2 negate() {
@@ -77,6 +89,14 @@ public class Vector2 extends Matrix {
 		if (other == ZERO)
 			return other;
 		return new Vector2(x * other.x, y * other.y);
+	}
+	
+	public final Vector2 multiply(float otherX, float otherY) {
+		if (otherX == 1 && otherY == 1)
+			return this;
+		if (otherX == 0 && otherY == 0)
+			return ZERO;
+		return new Vector2(x * otherX, y * otherY);
 	}
 	
 	public final Vector2 multiply(float scalar) {
