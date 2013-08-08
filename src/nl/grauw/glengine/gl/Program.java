@@ -91,7 +91,7 @@ public final class Program {
 	}
 	
 	public boolean isLinked() {
-		return Utils.glGetProgramInteger(handle, GL_LINK_STATUS) == GL_TRUE;
+		return GLUtils.glGetProgramInteger(handle, GL_LINK_STATUS) == GL_TRUE;
 	}
 	
 	public String getInfoLog() {
@@ -103,7 +103,7 @@ public final class Program {
 	}
 	
 	public boolean getValidateStatus() {
-		return Utils.glGetProgramInteger(handle, GL_VALIDATE_STATUS) == GL_TRUE;
+		return GLUtils.glGetProgramInteger(handle, GL_VALIDATE_STATUS) == GL_TRUE;
 	}
 	
 	public Map<String, Attribute> getActiveAttributes() {
@@ -119,8 +119,8 @@ public final class Program {
 	}
 	
 	private void updateActiveAttributes() {
-		int count = Utils.glGetProgramInteger(handle, GL_ACTIVE_ATTRIBUTES);
-		int maxNameLength = Utils.glGetProgramInteger(handle, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH);
+		int count = GLUtils.glGetProgramInteger(handle, GL_ACTIVE_ATTRIBUTES);
+		int maxNameLength = GLUtils.glGetProgramInteger(handle, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH);
 		int[] nameLengthBuffer = new int[1];
 		int[] sizeBuffer = new int[1];
 		int[] typeBuffer = new int[1];
@@ -150,8 +150,8 @@ public final class Program {
 	}
 	
 	private void updateActiveUniforms() {
-		int count = Utils.glGetProgramInteger(handle, GL_ACTIVE_UNIFORMS);
-		int maxNameLength = Utils.glGetProgramInteger(handle, GL_ACTIVE_UNIFORM_MAX_LENGTH);
+		int count = GLUtils.glGetProgramInteger(handle, GL_ACTIVE_UNIFORMS);
+		int maxNameLength = GLUtils.glGetProgramInteger(handle, GL_ACTIVE_UNIFORM_MAX_LENGTH);
 		int[] nameLengthBuffer = new int[1];
 		int[] sizeBuffer = new int[1];
 		int[] typeBuffer = new int[1];

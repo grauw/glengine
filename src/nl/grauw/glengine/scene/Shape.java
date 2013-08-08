@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 
 import nl.grauw.glengine.gl.GLContext;
 import nl.grauw.glengine.gl.GLEngineException;
-import nl.grauw.glengine.gl.Utils;
+import nl.grauw.glengine.gl.GLUtils;
 import nl.grauw.glengine.gl.GLContext.PrimitiveType;
 import nl.grauw.glengine.model.Matrix4x4;
 import nl.grauw.glengine.model.Vertex;
@@ -50,11 +50,11 @@ public abstract class Shape implements Drawable {
 	}
 	
 	public void setIndices(byte... indices) {
-		setIndexBuffer(Utils.createByteBuffer(indices));
+		setIndexBuffer(GLUtils.createByteBuffer(indices));
 	}
 	
 	public void setIndices(short... indices) {
-		setIndexBuffer(Utils.createShortBuffer(indices));
+		setIndexBuffer(GLUtils.createShortBuffer(indices));
 	}
 	
 	public void setIndices(int... indices) {
@@ -63,9 +63,9 @@ public abstract class Shape implements Drawable {
 		
 		int verticesCount = vertexArray.getLength();
 		if (verticesCount < 128) {
-			setIndexBuffer(Utils.createByteBuffer(indices));
+			setIndexBuffer(GLUtils.createByteBuffer(indices));
 		} else if (verticesCount < 32768) {
-			setIndexBuffer(Utils.createShortBuffer(indices));
+			setIndexBuffer(GLUtils.createShortBuffer(indices));
 		} else {
 			throw new RuntimeException("Too many vertices, index size exceeded.");
 		}

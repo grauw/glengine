@@ -14,10 +14,10 @@ public final class ColorBuffer {
 	private final int alphaBits;
 	
 	public ColorBuffer() {
-		redBits = Utils.glGetInteger(GL_RED_BITS);
-		greenBits = Utils.glGetInteger(GL_GREEN_BITS);
-		blueBits = Utils.glGetInteger(GL_BLUE_BITS);
-		alphaBits = Utils.glGetInteger(GL_ALPHA_BITS);
+		redBits = GLUtils.glGetInteger(GL_RED_BITS);
+		greenBits = GLUtils.glGetInteger(GL_GREEN_BITS);
+		blueBits = GLUtils.glGetInteger(GL_BLUE_BITS);
+		alphaBits = GLUtils.glGetInteger(GL_ALPHA_BITS);
 	}
 	
 	public int getRedBits() {
@@ -56,11 +56,11 @@ public final class ColorBuffer {
 	}
 	
 	public PixelFormat getImplementationColorReadFormat() {
-		return PixelFormat.getById(Utils.glGetInteger(GL_IMPLEMENTATION_COLOR_READ_FORMAT));
+		return PixelFormat.getById(GLUtils.glGetInteger(GL_IMPLEMENTATION_COLOR_READ_FORMAT));
 	}
 	
 	public PixelDataType getImplementationColorReadType() {
-		return PixelDataType.getById(Utils.glGetInteger(GL_IMPLEMENTATION_COLOR_READ_TYPE));
+		return PixelDataType.getById(GLUtils.glGetInteger(GL_IMPLEMENTATION_COLOR_READ_TYPE));
 	}
 	
 	public void setWriteMask(boolean red, boolean green, boolean blue, boolean alpha) {

@@ -20,13 +20,13 @@ public abstract class Texture {
 	}
 	
 	protected Texture(GLContext context, int type) {
-		this(context, type, Utils.glGenTexture());
+		this(context, type, GLUtils.glGenTexture());
 	}
 	
 	public void delete() {
 		if (handle == 0)
 			throw new GLEngineException("Can not delete default texture.");
-		Utils.glDeleteTexture(handle);
+		GLUtils.glDeleteTexture(handle);
 		context.getActiveTextureUnit().signalDeletion(this);
 	}
 	
@@ -62,7 +62,7 @@ public abstract class Texture {
 	
 	protected void setImage(int target, int level, Bitmap bitmap) {
 		int byteCount = bitmap.getWidth() * bitmap.getHeight() * (bitmap.getConfig() == Bitmap.Config.ARGB_8888 ? 4 : 2);
-		ByteBuffer textureBuffer = Utils.createByteBuffer(byteCount);
+		ByteBuffer textureBuffer = GLUtils.createByteBuffer(byteCount);
 		bitmap.copyPixelsToBuffer(textureBuffer);
 		textureBuffer.position(0);
 		

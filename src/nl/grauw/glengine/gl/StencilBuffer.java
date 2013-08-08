@@ -7,7 +7,7 @@ public final class StencilBuffer {
 	private final int stencilBits;
 	
 	public StencilBuffer() {
-		stencilBits = Utils.glGetInteger(GL_STENCIL_BITS);
+		stencilBits = GLUtils.glGetInteger(GL_STENCIL_BITS);
 	}
 	
 	public int getStencilBits() {

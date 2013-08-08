@@ -3,7 +3,7 @@ package nl.grauw.glengine.model;
 import java.nio.ByteBuffer;
 
 import nl.grauw.glengine.gl.GLEngineException;
-import nl.grauw.glengine.gl.Utils;
+import nl.grauw.glengine.gl.GLUtils;
 import nl.grauw.glengine.model.Vertex.VertexInfo;
 
 public class VertexArray {
@@ -22,7 +22,7 @@ public class VertexArray {
 		this.vertexInfo = vertexInfo;
 		this.length = length;
 		
-		buffer = Utils.createByteBuffer(length * vertexInfo.getSize());
+		buffer = GLUtils.createByteBuffer(length * vertexInfo.getSize());
 	}
 	
 	public VertexArray(Vertex... vertices) {

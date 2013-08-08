@@ -36,7 +36,7 @@ public abstract class Shader {
 	
 	// XXX: rename to isCompiled()?
 	public boolean getCompileStatus() {
-		return Utils.glGetShaderInteger(handle, GL_COMPILE_STATUS) == GL_TRUE;
+		return GLUtils.glGetShaderInteger(handle, GL_COMPILE_STATUS) == GL_TRUE;
 	}
 	
 	public String getInfoLog() {

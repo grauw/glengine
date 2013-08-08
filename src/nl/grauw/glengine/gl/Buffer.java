@@ -15,7 +15,7 @@ public abstract class Buffer {
 		this.target = target;
 		this.size = size;
 		this.usage = usage;
-		handle = Utils.glGenBuffer();
+		handle = GLUtils.glGenBuffer();
 	}
 	
 	public void setData(java.nio.Buffer data) {
@@ -33,7 +33,7 @@ public abstract class Buffer {
 	}
 	
 	public void delete() {
-		Utils.glDeleteBuffer(handle);
+		GLUtils.glDeleteBuffer(handle);
 	}
 	
 	public enum BufferUsage {

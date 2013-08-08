@@ -8,7 +8,7 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 
-public final class Utils {
+public final class GLUtils {
 	
 	private static final IntBuffer ONE_INT_BUFFER = createIntBuffer(1);
 	
@@ -40,23 +40,23 @@ public final class Utils {
 	}
 	
 	static int glGenTexture() {
-		glGenTextures(1, Utils.ONE_INT_BUFFER);
-		return Utils.ONE_INT_BUFFER.get(0);
+		glGenTextures(1, GLUtils.ONE_INT_BUFFER);
+		return GLUtils.ONE_INT_BUFFER.get(0);
 	}
 	
 	static int glGenBuffer() {
-		glGenBuffers(1, Utils.ONE_INT_BUFFER);
-		return Utils.ONE_INT_BUFFER.get(0);
+		glGenBuffers(1, GLUtils.ONE_INT_BUFFER);
+		return GLUtils.ONE_INT_BUFFER.get(0);
 	}
 	
 	static void glDeleteTexture(int handle) {
-		Utils.ONE_INT_BUFFER.put(0, handle);
-		glDeleteTextures(1, Utils.ONE_INT_BUFFER);
+		GLUtils.ONE_INT_BUFFER.put(0, handle);
+		glDeleteTextures(1, GLUtils.ONE_INT_BUFFER);
 	}
 	
 	static void glDeleteBuffer(int handle) {
-		Utils.ONE_INT_BUFFER.put(0, handle);
-		glDeleteBuffers(1, Utils.ONE_INT_BUFFER);
+		GLUtils.ONE_INT_BUFFER.put(0, handle);
+		glDeleteBuffers(1, GLUtils.ONE_INT_BUFFER);
 	}
 	
 	/**

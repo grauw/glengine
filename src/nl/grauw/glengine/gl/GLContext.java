@@ -56,25 +56,25 @@ public final class GLContext {
 		shadingLanguageVersion = glGetString(GL_SHADING_LANGUAGE_VERSION);
 		extensions = glGetString(GL_EXTENSIONS).split(" ");
 		
-		maxCombinedTextureImageUnits = Utils.glGetInteger(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS);
-		maxCubeMapTextureSize = Utils.glGetInteger(GL_MAX_CUBE_MAP_TEXTURE_SIZE);
-		maxFragmentUniformVectors = Utils.glGetInteger(GL_MAX_FRAGMENT_UNIFORM_VECTORS);
-		maxRenderBufferSize = Utils.glGetInteger(GL_MAX_RENDERBUFFER_SIZE);
-		maxTextureImageUnits = Utils.glGetInteger(GL_MAX_TEXTURE_IMAGE_UNITS);
-		maxTextureSize = Utils.glGetInteger(GL_MAX_TEXTURE_SIZE);
-		maxVaryingVectors = Utils.glGetInteger(GL_MAX_VARYING_VECTORS);
-		maxVertexAttribs = Utils.glGetInteger(GL_MAX_VERTEX_ATTRIBS);
-		maxVertexTextureImageUnits = Utils.glGetInteger(GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS);
-		maxVertexUniformVectors = Utils.glGetInteger(GL_MAX_VERTEX_UNIFORM_VECTORS);
+		maxCombinedTextureImageUnits = GLUtils.glGetInteger(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS);
+		maxCubeMapTextureSize = GLUtils.glGetInteger(GL_MAX_CUBE_MAP_TEXTURE_SIZE);
+		maxFragmentUniformVectors = GLUtils.glGetInteger(GL_MAX_FRAGMENT_UNIFORM_VECTORS);
+		maxRenderBufferSize = GLUtils.glGetInteger(GL_MAX_RENDERBUFFER_SIZE);
+		maxTextureImageUnits = GLUtils.glGetInteger(GL_MAX_TEXTURE_IMAGE_UNITS);
+		maxTextureSize = GLUtils.glGetInteger(GL_MAX_TEXTURE_SIZE);
+		maxVaryingVectors = GLUtils.glGetInteger(GL_MAX_VARYING_VECTORS);
+		maxVertexAttribs = GLUtils.glGetInteger(GL_MAX_VERTEX_ATTRIBS);
+		maxVertexTextureImageUnits = GLUtils.glGetInteger(GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS);
+		maxVertexUniformVectors = GLUtils.glGetInteger(GL_MAX_VERTEX_UNIFORM_VECTORS);
 		
 		int[] maxViewportDimsArray = new int[2];
 		glGetIntegerv(GL_MAX_VIEWPORT_DIMS, maxViewportDimsArray, 0);
 		maxViewportDims = new Size(maxViewportDimsArray[0], maxViewportDimsArray[1]);
 		
-		compressedTextureFormats = new int[Utils.glGetInteger(GL_NUM_COMPRESSED_TEXTURE_FORMATS)];
+		compressedTextureFormats = new int[GLUtils.glGetInteger(GL_NUM_COMPRESSED_TEXTURE_FORMATS)];
 		glGetIntegerv(GL_COMPRESSED_TEXTURE_FORMATS, compressedTextureFormats, 0);
 		
-		shaderBinaryFormats = new int[Utils.glGetInteger(GL_NUM_SHADER_BINARY_FORMATS)];
+		shaderBinaryFormats = new int[GLUtils.glGetInteger(GL_NUM_SHADER_BINARY_FORMATS)];
 		glGetIntegerv(GL_SHADER_BINARY_FORMATS, shaderBinaryFormats, 0);
 		
 		textureUnits = new TextureUnit[maxCombinedTextureImageUnits];
