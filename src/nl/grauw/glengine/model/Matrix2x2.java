@@ -52,20 +52,20 @@ public class Matrix2x2 extends Matrix {
 		return multiply(vector.getX(), vector.getY());
 	}
 	
-	public Vector2 multiply(float x, float y) {
+	public final Vector2 multiply(float x, float y) {
 		return new Vector2(
 			elements[0] * x + elements[2] * y,
 			elements[1] * x + elements[3] * y
 		);
 	}
 	
-	public Vector2 getColumn(int index) {
+	public final Vector2 getColumn(int index) {
 		if (index < 0 || index > 1)
 			throw new GLEngineException("Column index out of range.");
 		return new Vector2(elements[index * 2], elements[index * 2 + 1]);
 	}
 	
-	public Vector2 getRow(int index) {
+	public final Vector2 getRow(int index) {
 		if (index < 0 || index > 1)
 			throw new GLEngineException("Row index out of range.");
 		return new Vector2(elements[index], elements[index + 2]);
@@ -101,7 +101,7 @@ public class Matrix2x2 extends Matrix {
 		
 	}
 	
-	public static class Translation extends Matrix2x2 {
+	public static final class Translation extends Matrix2x2 {
 		
 		public Translation(float x) {
 			super(1, 0, x, 1);
@@ -109,7 +109,7 @@ public class Matrix2x2 extends Matrix {
 		
 	}
 	
-	public static class Scale extends Matrix2x2 {
+	public static final class Scale extends Matrix2x2 {
 		
 		public Scale(float x, float y) {
 			super(x, 0, 0, y);
@@ -125,7 +125,7 @@ public class Matrix2x2 extends Matrix {
 		
 	}
 	
-	public static class Rotation extends Matrix2x2 {
+	public static final class Rotation extends Matrix2x2 {
 		
 		/**
 		 * 2D rotation.

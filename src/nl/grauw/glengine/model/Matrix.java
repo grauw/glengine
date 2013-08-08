@@ -13,14 +13,14 @@ public abstract class Matrix {
 	/** Returns matrix elements array in column-major order. **/
 	public abstract float[] getElements();
 	
-	public float getElement(int column, int row) {
+	public final float getElement(int column, int row) {
 		if (column < 0 || column >= getColumns() || row < 0 || row >= getRows())
 			throw new GLEngineException("Column or row index out of bounds.");
 		
 		return getElements()[column * getRows() + row];
 	}
 	
-	public boolean equals(Matrix other) {
+	public final boolean equals(Matrix other) {
 		return this == other || getColumns() == other.getColumns() && Arrays.equals(getElements(), other.getElements());
 	}
 	
@@ -70,7 +70,7 @@ public abstract class Matrix {
 		return copy;
 	}
 	
-	public static class AnyMatrix extends Matrix {
+	public static final class AnyMatrix extends Matrix {
 		
 		protected final int columns;
 		protected final int rows;

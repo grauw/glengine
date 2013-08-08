@@ -52,7 +52,7 @@ public class Matrix4x4 extends Matrix {
 		return multiply(vector.getX(), vector.getY(), vector.getZ(), vector.getW());
 	}
 	
-	public Vector4 multiply(float x, float y, float z, float w) {
+	public final Vector4 multiply(float x, float y, float z, float w) {
 		return new Vector4(
 			elements[0] * x + elements[4] * y + elements[8] * z + elements[12] * w,
 			elements[1] * x + elements[5] * y + elements[9] * z + elements[13] * w,
@@ -61,13 +61,13 @@ public class Matrix4x4 extends Matrix {
 		);
 	}
 	
-	public Vector4 getColumn(int index) {
+	public final Vector4 getColumn(int index) {
 		if (index < 0 || index > 3)
 			throw new GLEngineException("Column index out of range.");
 		return new Vector4(elements[index * 4], elements[index * 4 + 1], elements[index * 4 + 2], elements[index * 4 + 3]);
 	}
 	
-	public Vector4 getRow(int index) {
+	public final Vector4 getRow(int index) {
 		if (index < 0 || index > 3)
 			throw new GLEngineException("Row index out of range.");
 		return new Vector4(elements[index], elements[index + 4], elements[index + 8], elements[index + 12]);
@@ -103,7 +103,7 @@ public class Matrix4x4 extends Matrix {
 		
 	}
 	
-	public static class Translation extends Matrix4x4 {
+	public static final class Translation extends Matrix4x4 {
 		
 		public Translation(float x, float y, float z) {
 			super(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, x, y, z, 1);
@@ -115,7 +115,7 @@ public class Matrix4x4 extends Matrix {
 		
 	}
 	
-	public static class Scale extends Matrix4x4 {
+	public static final class Scale extends Matrix4x4 {
 		
 		public Scale(float x, float y, float z, float w) {
 			super(x, 0, 0, 0, 0, y, 0, 0, 0, 0, z, 0, 0, 0, 0, w);
@@ -135,7 +135,7 @@ public class Matrix4x4 extends Matrix {
 		
 	}
 	
-	public static class Rotation extends Matrix4x4 {
+	public static final class Rotation extends Matrix4x4 {
 		
 		public Rotation(float x, float y, float z, float angle) {
 			this(new Quaternion.Axis(x, y, z, angle));
@@ -160,7 +160,7 @@ public class Matrix4x4 extends Matrix {
 		
 	}
 	
-	public static class XRotation extends Matrix4x4 {
+	public static final class XRotation extends Matrix4x4 {
 		
 		public XRotation(float angle) {
 			super(
@@ -173,7 +173,7 @@ public class Matrix4x4 extends Matrix {
 		
 	}
 	
-	public static class YRotation extends Matrix4x4 {
+	public static final class YRotation extends Matrix4x4 {
 		
 		public YRotation(float angle) {
 			super(
@@ -186,7 +186,7 @@ public class Matrix4x4 extends Matrix {
 		
 	}
 	
-	public static class ZRotation extends Matrix4x4 {
+	public static final class ZRotation extends Matrix4x4 {
 		
 		public ZRotation(float angle) {
 			super(
@@ -199,7 +199,7 @@ public class Matrix4x4 extends Matrix {
 		
 	}
 	
-	public static class PerspectiveProjection extends Matrix4x4 {
+	public static final class PerspectiveProjection extends Matrix4x4 {
 		
 		public PerspectiveProjection(float width, float height, float near, float far) {
 			this(width / -2f, width / 2f, height / -2f, height / 2f, near, far);
@@ -216,7 +216,7 @@ public class Matrix4x4 extends Matrix {
 		
 	}
 	
-	public static class OrthographicProjection extends Matrix4x4 {
+	public static final class OrthographicProjection extends Matrix4x4 {
 		
 		public OrthographicProjection(float width, float height, float near, float far) {
 			this(width / -2f, width / 2f, height / -2f, height / 2f, near, far);

@@ -52,7 +52,7 @@ public class Matrix3x3 extends Matrix {
 		return multiply(vector.getX(), vector.getY(), vector.getZ());
 	}
 	
-	public Vector3 multiply(float x, float y, float z) {
+	public final Vector3 multiply(float x, float y, float z) {
 		return new Vector3(
 			elements[0] * x + elements[3] * y + elements[6] * z,
 			elements[1] * x + elements[4] * y + elements[7] * z,
@@ -60,13 +60,13 @@ public class Matrix3x3 extends Matrix {
 		);
 	}
 	
-	public Vector3 getColumn(int index) {
+	public final Vector3 getColumn(int index) {
 		if (index < 0 || index > 2)
 			throw new GLEngineException("Column index out of range.");
 		return new Vector3(elements[index * 3], elements[index * 3 + 1], elements[index * 3 + 2]);
 	}
 	
-	public Vector3 getRow(int index) {
+	public final Vector3 getRow(int index) {
 		if (index < 0 || index > 2)
 			throw new GLEngineException("Row index out of range.");
 		return new Vector3(elements[index], elements[index + 3], elements[index + 6]);
@@ -102,7 +102,7 @@ public class Matrix3x3 extends Matrix {
 		
 	}
 	
-	public static class Translation extends Matrix3x3 {
+	public static final class Translation extends Matrix3x3 {
 		
 		public Translation(float x, float y) {
 			super(1, 0, 0, 0, 1, 0, x, y, 1);
@@ -114,7 +114,7 @@ public class Matrix3x3 extends Matrix {
 		
 	}
 	
-	public static class Scale extends Matrix3x3 {
+	public static final class Scale extends Matrix3x3 {
 		
 		public Scale(float x, float y, float z) {
 			super(x, 0, 0, 0, y, 0, 0, 0, z);
@@ -134,7 +134,7 @@ public class Matrix3x3 extends Matrix {
 		
 	}
 	
-	public static class Rotation extends Matrix3x3 {
+	public static final class Rotation extends Matrix3x3 {
 		
 		/**
 		 * 2D rotation (identical to ZRotation).
@@ -170,7 +170,7 @@ public class Matrix3x3 extends Matrix {
 		
 	}
 	
-	public static class XRotation extends Matrix3x3 {
+	public static final class XRotation extends Matrix3x3 {
 		
 		public XRotation(float angle) {
 			super(
@@ -182,7 +182,7 @@ public class Matrix3x3 extends Matrix {
 		
 	}
 	
-	public static class YRotation extends Matrix3x3 {
+	public static final class YRotation extends Matrix3x3 {
 		
 		public YRotation(float angle) {
 			super(
@@ -194,7 +194,7 @@ public class Matrix3x3 extends Matrix {
 		
 	}
 	
-	public static class ZRotation extends Matrix3x3 {
+	public static final class ZRotation extends Matrix3x3 {
 		
 		public ZRotation(float angle) {
 			super(
