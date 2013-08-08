@@ -140,7 +140,7 @@ public class Matrix3x3 extends Matrix {
 		 * 2D rotation (identical to ZRotation).
 		 * @param angle Rotation angle in radians.
 		 */
-		public Rotation(float angle) {
+		public Rotation(double angle) {
 			super(
 				(float)Math.cos(angle), (float)Math.sin(angle), 0,
 				-(float)Math.sin(angle), (float)Math.cos(angle), 0,
@@ -148,7 +148,7 @@ public class Matrix3x3 extends Matrix {
 			);
 		}
 		
-		public Rotation(float x, float y, float z, float angle) {
+		public Rotation(float x, float y, float z, double angle) {
 			this(new Quaternion.Axis(x, y, z, angle));
 		}
 		
@@ -172,7 +172,7 @@ public class Matrix3x3 extends Matrix {
 	
 	public static final class XRotation extends Matrix3x3 {
 		
-		public XRotation(float angle) {
+		public XRotation(double angle) {
 			super(
 				1, 0, 0,
 				0, (float)Math.cos(angle), (float)Math.sin(angle),
@@ -184,7 +184,7 @@ public class Matrix3x3 extends Matrix {
 	
 	public static final class YRotation extends Matrix3x3 {
 		
-		public YRotation(float angle) {
+		public YRotation(double angle) {
 			super(
 				(float)Math.cos(angle), 0, -(float)Math.sin(angle),
 				0, 1, 0,
@@ -196,7 +196,7 @@ public class Matrix3x3 extends Matrix {
 	
 	public static final class ZRotation extends Matrix3x3 {
 		
-		public ZRotation(float angle) {
+		public ZRotation(double angle) {
 			super(
 				(float)Math.cos(angle), (float)Math.sin(angle), 0,
 				-(float)Math.sin(angle), (float)Math.cos(angle), 0,

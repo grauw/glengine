@@ -131,7 +131,7 @@ public class Matrix2x2 extends Matrix {
 		 * 2D rotation.
 		 * @param angle Rotation angle in radians.
 		 */
-		public Rotation(float angle) {
+		public Rotation(double angle) {
 			super(
 				(float)Math.cos(angle), (float)Math.sin(angle),
 				-(float)Math.sin(angle), (float)Math.cos(angle)

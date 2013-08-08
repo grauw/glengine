@@ -137,7 +137,7 @@ public class Matrix4x4 extends Matrix {
 	
 	public static final class Rotation extends Matrix4x4 {
 		
-		public Rotation(float x, float y, float z, float angle) {
+		public Rotation(float x, float y, float z, double angle) {
 			this(new Quaternion.Axis(x, y, z, angle));
 		}
 		
@@ -162,7 +162,7 @@ public class Matrix4x4 extends Matrix {
 	
 	public static final class XRotation extends Matrix4x4 {
 		
-		public XRotation(float angle) {
+		public XRotation(double angle) {
 			super(
 				1, 0, 0, 0,
 				0, (float)Math.cos(angle), (float)Math.sin(angle), 0,
@@ -175,7 +175,7 @@ public class Matrix4x4 extends Matrix {
 	
 	public static final class YRotation extends Matrix4x4 {
 		
-		public YRotation(float angle) {
+		public YRotation(double angle) {
 			super(
 				(float)Math.cos(angle), 0, -(float)Math.sin(angle), 0,
 				0, 1, 0, 0,
@@ -188,7 +188,7 @@ public class Matrix4x4 extends Matrix {
 	
 	public static final class ZRotation extends Matrix4x4 {
 		
-		public ZRotation(float angle) {
+		public ZRotation(double angle) {
 			super(
 				(float)Math.cos(angle), (float)Math.sin(angle), 0, 0,
 				-(float)Math.sin(angle), (float)Math.cos(angle), 0, 0,

@@ -77,7 +77,7 @@ public class Quaternion {
 	
 	public static final class Axis extends Quaternion {
 		
-		public Axis(float x, float y, float z, float angle) {
+		public Axis(float x, float y, float z, double angle) {
 			this(x, y, z, (float)Math.sin(angle / 2), (float)Math.cos(angle / 2));
 		}
 		
@@ -89,7 +89,7 @@ public class Quaternion {
 	
 	public static final class EulerXYZ extends Quaternion {
 		
-		public EulerXYZ(float x, float y, float z) {
+		public EulerXYZ(double x, double y, double z) {
 			this(
 				(float)Math.sin(x / 2), (float)Math.cos(x / 2),
 				(float)Math.sin(y / 2), (float)Math.cos(y / 2),
