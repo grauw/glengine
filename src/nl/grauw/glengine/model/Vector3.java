@@ -76,6 +76,10 @@ public class Vector3 extends Matrix {
 		return new Vector3(x - other.x, y - other.y, z - other.z);
 	}
 	
+	public Vector3 negate() {
+		return new Vector3(-x, -y, -z);
+	}
+	
 	public Vector3 multiply(Vector3 other) {
 		if (other == ONE)
 			return this;
@@ -100,6 +104,10 @@ public class Vector3 extends Matrix {
 	
 	public final float dot(Vector3 other) {
 		return x * other.x + y * other.y + z * other.z;
+	}
+	
+	public Vector3 invert() {
+		return new Vector3(1 / x, 1 / y, 1 / z);
 	}
 	
 	public final Vector3 normalize() {
@@ -141,6 +149,11 @@ public class Vector3 extends Matrix {
 		}
 		
 		@Override
+		public Vector3 negate() {
+			return this;
+		}
+		
+		@Override
 		public Vector3 multiply(Vector3 other) {
 			return this;
 		}
@@ -156,6 +169,11 @@ public class Vector3 extends Matrix {
 		@Override
 		public Vector3 multiply(Vector3 other) {
 			return other;
+		}
+		
+		@Override
+		public Vector3 invert() {
+			return this;
 		}
 		
 	}

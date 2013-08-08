@@ -90,6 +90,10 @@ public class Vector4 extends Matrix {
 		return new Vector4(x - other.x, y - other.y, z - other.z, w - other.w);
 	}
 	
+	public Vector4 negate() {
+		return new Vector4(-x, -y, -z, -w);
+	}
+	
 	public Vector4 multiply(Vector4 other) {
 		if (other == ONE)
 			return this;
@@ -106,6 +110,10 @@ public class Vector4 extends Matrix {
 	
 	public final float dot(Vector4 other) {
 		return x * other.x + y * other.y + z * other.z + w * other.w;
+	}
+	
+	public Vector4 invert() {
+		return new Vector4(1 / x, 1 / y, 1 / z, 1 / w);
 	}
 	
 	public Vector4 normalize() {
@@ -149,6 +157,11 @@ public class Vector4 extends Matrix {
 		}
 		
 		@Override
+		public Vector4 negate() {
+			return this;
+		}
+		
+		@Override
 		public Vector4 multiply(Vector4 other) {
 			return this;
 		}
@@ -164,6 +177,11 @@ public class Vector4 extends Matrix {
 		@Override
 		public Vector4 multiply(Vector4 other) {
 			return other;
+		}
+		
+		@Override
+		public Vector4 invert() {
+			return this;
 		}
 		
 	}

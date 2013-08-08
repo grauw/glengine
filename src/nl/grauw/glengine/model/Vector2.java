@@ -67,6 +67,10 @@ public class Vector2 extends Matrix {
 		return new Vector2(x - other.x, y - other.y);
 	}
 	
+	public Vector2 negate() {
+		return new Vector2(-x, -y);
+	}
+	
 	public Vector2 multiply(Vector2 other) {
 		if (other == ONE)
 			return this;
@@ -83,6 +87,10 @@ public class Vector2 extends Matrix {
 	
 	public final float dot(Vector2 other) {
 		return x * other.x + y * other.y;
+	}
+	
+	public Vector2 invert() {
+		return new Vector2(1 / x, 1 / y);
 	}
 	
 	public final Vector2 normalize() {
@@ -122,6 +130,11 @@ public class Vector2 extends Matrix {
 		}
 		
 		@Override
+		public Vector2 negate() {
+			return this;
+		}
+		
+		@Override
 		public Vector2 multiply(Vector2 other) {
 			return this;
 		}
@@ -137,6 +150,11 @@ public class Vector2 extends Matrix {
 		@Override
 		public Vector2 multiply(Vector2 other) {
 			return other;
+		}
+		
+		@Override
+		public Vector2 invert() {
+			return this;
 		}
 		
 	}
