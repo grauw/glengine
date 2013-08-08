@@ -16,7 +16,7 @@ public abstract class GLEngineRenderer implements Renderer {
 	private long lastUpdateTime = 0;
 	
 	@Override
-	public void onDrawFrame(GL10 gl) {
+	public final void onDrawFrame(GL10 gl) {
 		if (context == null)
 			throw new GLEngineException("GLEngine context not available.");
 		
@@ -32,7 +32,7 @@ public abstract class GLEngineRenderer implements Renderer {
 	abstract public void onDrawFrame(GLContext context, int elapsed);
 	
 	@Override
-	public void onSurfaceChanged(GL10 gl, int width, int height) {
+	public final void onSurfaceChanged(GL10 gl, int width, int height) {
 		if (context == null)
 			throw new GLEngineException("GLEngine context not available.");
 		
@@ -44,7 +44,7 @@ public abstract class GLEngineRenderer implements Renderer {
 	abstract public void onSurfaceChanged(GLContext context, int width, int height);
 	
 	@Override
-	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+	public final void onSurfaceCreated(GL10 gl, EGLConfig config) {
 		context = new GLContext();
 		CapabilitiesLogger.log(context);
 		
