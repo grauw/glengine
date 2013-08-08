@@ -1,6 +1,7 @@
 package nl.grauw.glengine.scene;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import nl.grauw.glengine.gl.GLContext;
 import nl.grauw.glengine.model.Matrix4x4;
@@ -17,6 +18,10 @@ public class Node implements Drawable {
 	
 	public void add(Drawable child) {
 		children.add(child);
+	}
+	
+	public List<Drawable> getChildren() {
+		return children;  // May want to wrap in a Collections.unmodifiableList().
 	}
 	
 	public Transform getTransform() {
