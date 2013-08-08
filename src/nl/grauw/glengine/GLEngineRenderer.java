@@ -15,10 +15,29 @@ public abstract class GLEngineRenderer implements Renderer {
 	
 	private long lastUpdateTime = 0;
 	
+	/**
+	 * Called to draw the current frame.
+	 * 
+	 * @param context The GLEngine drawing context.
+	 * @param elapsed The time in milliseconds it took to draw the last frame.
+	 */
 	abstract public void onDrawFrame(GLContext context, int elapsed);
 	
+	/**
+	 * Called when the surface changed size.
+	 * 
+	 * @param context The GLEngine drawing context.
+	 * @param width The width of the surface.
+	 * @param height The height of the surface.
+	 */
 	abstract public void onSurfaceChanged(GLContext context, int width, int height);
 	
+	/**
+	 * Called when the surface is created or recreated.
+	 * 
+	 * @param context The GLEngine drawing context.
+	 * @param config The EGL config of the created surface.
+	 */
 	abstract public void onSurfaceCreated(GLContext context, EGLConfig config);
 	
 	@Override
