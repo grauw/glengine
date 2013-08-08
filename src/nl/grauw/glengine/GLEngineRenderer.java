@@ -15,6 +15,12 @@ public abstract class GLEngineRenderer implements Renderer {
 	
 	private long lastUpdateTime = 0;
 	
+	abstract public void onDrawFrame(GLContext context, int elapsed);
+	
+	abstract public void onSurfaceChanged(GLContext context, int width, int height);
+	
+	abstract public void onSurfaceCreated(GLContext context, EGLConfig config);
+	
 	@Override
 	public final void onDrawFrame(GL10 gl) {
 		if (context == null)
@@ -29,8 +35,6 @@ public abstract class GLEngineRenderer implements Renderer {
 		context.checkError();
 	}
 	
-	abstract public void onDrawFrame(GLContext context, int elapsed);
-	
 	@Override
 	public final void onSurfaceChanged(GL10 gl, int width, int height) {
 		if (context == null)
@@ -41,8 +45,6 @@ public abstract class GLEngineRenderer implements Renderer {
 		context.checkError();
 	}
 	
-	abstract public void onSurfaceChanged(GLContext context, int width, int height);
-	
 	@Override
 	public final void onSurfaceCreated(GL10 gl, EGLConfig config) {
 		context = new GLContext();
@@ -52,7 +54,5 @@ public abstract class GLEngineRenderer implements Renderer {
 		
 		context.checkError();
 	}
-	
-	abstract public void onSurfaceCreated(GLContext context, EGLConfig config);
 	
 }
