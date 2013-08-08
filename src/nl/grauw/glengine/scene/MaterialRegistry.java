@@ -6,8 +6,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
 import nl.grauw.glengine.gl.GLContext;
 import nl.grauw.glengine.gl.GLEngineException;
@@ -52,14 +50,6 @@ public class MaterialRegistry {
 			return text.toString();
 		} catch (IOException e) {
 			throw new GLEngineException("Error reading file", e);
-		}
-	}
-	
-	public Bitmap loadBitmapAsset(String path) {
-		try {
-			return BitmapFactory.decodeStream(assets.open(path));
-		} catch (IOException e) {
-			throw new RuntimeException(e);
 		}
 	}
 	
