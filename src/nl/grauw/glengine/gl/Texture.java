@@ -7,6 +7,8 @@ import java.nio.ByteBuffer;
 
 import android.graphics.Bitmap;
 
+import nl.grauw.glengine.Utils;
+
 public abstract class Texture {
 	
 	protected final GLContext context;
@@ -62,7 +64,7 @@ public abstract class Texture {
 	
 	protected void setImage(int target, int level, Bitmap bitmap) {
 		int byteCount = bitmap.getWidth() * bitmap.getHeight() * (bitmap.getConfig() == Bitmap.Config.ARGB_8888 ? 4 : 2);
-		ByteBuffer textureBuffer = GLUtils.createByteBuffer(byteCount);
+		ByteBuffer textureBuffer = Utils.createByteBuffer(byteCount);
 		bitmap.copyPixelsToBuffer(textureBuffer);
 		textureBuffer.position(0);
 		
