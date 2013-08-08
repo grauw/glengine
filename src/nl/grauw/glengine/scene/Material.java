@@ -1,5 +1,8 @@
 package nl.grauw.glengine.scene;
 
+import android.content.res.AssetManager;
+
+import nl.grauw.glengine.Utils;
 import nl.grauw.glengine.gl.GLContext;
 import nl.grauw.glengine.gl.GLEngineException;
 import nl.grauw.glengine.gl.Program;
@@ -20,6 +23,10 @@ public class Material {
 		
 		this.vertexSource = vertexSource;
 		this.fragmentSource = fragmentSource;
+	}
+	
+	public Material(AssetManager assets, String vertexPath, String fragmentPath) {
+		this(Utils.loadTextAsset(assets, vertexPath), Utils.loadTextAsset(assets, fragmentPath));
 	}
 	
 	public void compile(GLContext gl) {
