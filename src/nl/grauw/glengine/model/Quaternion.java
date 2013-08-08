@@ -16,27 +16,27 @@ public class Quaternion {
 		this.w = w;
 	}
 	
-	public float getX() {
+	public final float getX() {
 		return x;
 	}
 	
-	public float getY() {
+	public final float getY() {
 		return y;
 	}
 	
-	public float getZ() {
+	public final float getZ() {
 		return z;
 	}
 	
-	public float getW() {
+	public final float getW() {
 		return w;
 	}
 	
-	public float getMagnitude() {
+	public final float getMagnitude() {
 		return (float)Math.sqrt(x * x + y * y + z * z + w * w);
 	}
 	
-	public float getMagnitudeSquared() {
+	public final float getMagnitudeSquared() {
 		return x * x + y * y + z * z + w * w;
 	}
 	
@@ -61,7 +61,7 @@ public class Quaternion {
 		);
 	}
 	
-	public static class Axis extends Quaternion {
+	public static final class Axis extends Quaternion {
 		
 		public Axis(float x, float y, float z, float angle) {
 			this(x, y, z, (float)Math.sin(angle / 2), (float)Math.cos(angle / 2));
@@ -73,7 +73,7 @@ public class Quaternion {
 		
 	}
 	
-	public static class EulerXYZ extends Quaternion {
+	public static final class EulerXYZ extends Quaternion {
 		
 		public EulerXYZ(float x, float y, float z) {
 			this(
