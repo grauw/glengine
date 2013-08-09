@@ -91,6 +91,10 @@ public class Quaternion {
 	
 	public static final class Axis extends Quaternion {
 		
+		public Axis(Vector3 vector, double angle) {
+			this(vector.getX(), vector.getY(), vector.getZ(), angle);
+		}
+		
 		public Axis(float x, float y, float z, double angle) {
 			this(x, y, z, (float)Math.sin(angle / 2), (float)Math.cos(angle / 2));
 		}
