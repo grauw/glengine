@@ -72,9 +72,9 @@ public class Matrix3x3 extends Matrix {
 		return new Vector3(elements[index], elements[index + 3], elements[index + 6]);
 	}
 	
-	private static final class Identity extends Matrix3x3 {
+	public static final class Identity extends Matrix3x3 {
 		
-		public Identity() {
+		private Identity() {
 			super(1, 0, 0, 0, 1, 0, 0, 0, 1);
 		}
 		

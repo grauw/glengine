@@ -73,9 +73,9 @@ public class Matrix4x4 extends Matrix {
 		return new Vector4(elements[index], elements[index + 4], elements[index + 8], elements[index + 12]);
 	}
 	
-	private static final class Identity extends Matrix4x4 {
+	public static final class Identity extends Matrix4x4 {
 		
-		public Identity() {
+		private Identity() {
 			super(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
 		}
 		
