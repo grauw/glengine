@@ -75,15 +75,36 @@ public class Quaternion {
 	public Vector3 multiply(Vector3 vector) {
 		if (vector == Vector3.ZERO)
 			return vector;
-		Quaternion product = this.multiply(new Quaternion(vector.getX(), vector.getY(), vector.getZ(), 0)).multiply(this.conjugate());
-		return new Vector3(product.x, product.y, product.z);
+
+		float vx = vector.getX(), vy = vector.getY(), vz = vector.getZ();
+		float tx = w * vx + y * vz - z * vy;
+		float ty = w * vy + z * vx - x * vz;
+		float tz = w * vz + x * vy - y * vx;
+		float tw = -x * vx - y * vy - z * vz;
+		
+		return new Vector3(
+			tx * w - tw * x - ty * z + tz * y,
+			ty * w - tw * y - tz * x + tx * z,
+			tz * w - tw * z - tx * y + ty * x
+		);
 	}
 	
 	public Vector4 multiply(Vector4 vector) {
 		if (vector == Vector4.ZERO || vector == Vector4.ORIGIN)
 			return vector;
-		Quaternion product = this.multiply(new Quaternion(vector.getX(), vector.getY(), vector.getZ(), 0)).multiply(this.conjugate());
-		return new Vector4(product.x, product.y, product.z, vector.getW());
+		
+		float vx = vector.getX(), vy = vector.getY(), vz = vector.getZ();
+		float tx = w * vx + y * vz - z * vy;
+		float ty = w * vy + z * vx - x * vz;
+		float tz = w * vz + x * vy - y * vx;
+		float tw = -x * vx - y * vy - z * vz;
+		
+		return new Vector4(
+			tx * w - tw * x - ty * z + tz * y,
+			ty * w - tw * y - tz * x + tx * z,
+			tz * w - tw * z - tx * y + ty * x,
+			vector.getW()
+		);
 	}
 	
 	@Override
