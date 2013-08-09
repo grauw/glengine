@@ -48,6 +48,10 @@ public class Matrix2x2 extends Matrix {
 		return new Matrix2x2(multiply(2, 2, elements, 2, 2, other.elements));
 	}
 	
+	public final Matrix2x2 multiply(Identity other) {
+		return this;
+	}
+	
 	public Vector2 multiply(Vector2 vector) {
 		return multiply(vector.getX(), vector.getY());
 	}

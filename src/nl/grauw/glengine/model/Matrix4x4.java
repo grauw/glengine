@@ -48,6 +48,10 @@ public class Matrix4x4 extends Matrix {
 		return new Matrix4x4(multiply(4, 4, elements, 4, 4, other.elements));
 	}
 	
+	public final Matrix4x4 multiply(Identity other) {
+		return this;
+	}
+	
 	public Vector4 multiply(Vector4 vector) {
 		return multiply(vector.getX(), vector.getY(), vector.getZ(), vector.getW());
 	}
