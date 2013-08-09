@@ -195,13 +195,13 @@ public class Matrix3x3 extends Matrix {
 		
 		private static float[] quaternionToMatrix(Quaternion quaternion) {
 			float qx = quaternion.getX(), qy = quaternion.getY(), qz = quaternion.getZ(), qw = quaternion.getW();
+			float qwx = 2 * qw * qx, qwy = 2 * qw * qy, qwz = 2 * qw * qz;
 			float qxx = 2 * qx * qx, qxy = 2 * qx * qy, qxz = 2 * qx * qz;
-			float qxw = 2 * qx * qw, qyy = 2 * qy * qy, qyz = 2 * qy * qz;
-			float qyw = 2 * qy * qw, qzz = 2 * qz * qz, qzw = 2 * qz * qw;
+			float qyy = 2 * qy * qy, qyz = 2 * qy * qz, qzz = 2 * qz * qz;
 			return new float[] {
-				1 - qyy - qzz, qxy + qzw, qxz - qyw,
-				qxy - qzw, 1 - qxx - qzz, qyz + qxw,
-				qxz + qyw, qyz - qxw, 1 - qxx - qyy
+				1 - qyy - qzz, qxy + qwz, qxz - qwy,
+				qxy - qwz, 1 - qxx - qzz, qyz + qwx,
+				qxz + qwy, qyz - qwx, 1 - qxx - qyy
 			};
 		}
 		
