@@ -9,7 +9,7 @@ public class Quaternion {
 	private final float z;
 	private final float w;
 	
-	protected Quaternion(float x, float y, float z, float w) {
+	public Quaternion(float x, float y, float z, float w) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
