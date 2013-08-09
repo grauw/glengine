@@ -181,20 +181,20 @@ public class Matrix4x4 extends Matrix {
 		}
 		
 		public Rotation(Quaternion quaternion) {
-			this(quaternion, quaternion.getX(), quaternion.getY(), quaternion.getZ(), quaternion.getW());
+			super(quaternionToMatrix(quaternion));
 		}
 		
-		private Rotation(Quaternion quaternion, float qx, float qy, float qz, float qw) {
-			this(2 * qx * qx, 2 * qx * qy, 2 * qx * qz, 2 * qx * qw, 2 * qy * qy, 2 * qy * qz, 2 * qy * qw, 2 * qz * qz, 2 * qz * qw);
-		}
-		
-		private Rotation(float qxx, float qxy, float qxz, float qxw, float qyy, float qyz, float qyw, float qzz, float qzw) {
-			super(
+		private static float[] quaternionToMatrix(Quaternion quaternion) {
+			float qx = quaternion.getX(), qy = quaternion.getY(), qz = quaternion.getZ(), qw = quaternion.getW();
+			float qxx = 2 * qx * qx, qxy = 2 * qx * qy, qxz = 2 * qx * qz;
+			float qxw = 2 * qx * qw, qyy = 2 * qy * qy, qyz = 2 * qy * qz;
+			float qyw = 2 * qy * qw, qzz = 2 * qz * qz, qzw = 2 * qz * qw;
+			return new float[] {
 				1 - qyy - qzz, qxy + qzw, qxz - qyw, 0,
 				qxy - qzw, 1 - qxx - qzz, qyz + qxw, 0,
 				qxz + qyw, qyz - qxw, 1 - qxx - qyy, 0,
 				0, 0, 0, 1
-			);
+			};
 		}
 		
 	}
