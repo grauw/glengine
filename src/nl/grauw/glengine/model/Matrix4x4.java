@@ -123,6 +123,16 @@ public class Matrix4x4 extends Matrix {
 		}
 		
 		@Override
+		public Matrix4x4 multiply(Matrix4x4 other) {
+			return new Matrix4x4(
+				elements[12] * other.elements[3] + other.elements[0], elements[13] * other.elements[3] + other.elements[1], elements[14] * other.elements[3] + other.elements[2], other.elements[3],
+				elements[12] * other.elements[7] + other.elements[4], elements[13] * other.elements[7] + other.elements[5], elements[14] * other.elements[7] + other.elements[6], other.elements[7],
+				elements[12] * other.elements[11] + other.elements[8], elements[13] * other.elements[11] + other.elements[9], elements[14] * other.elements[11] + other.elements[10], other.elements[11],
+				elements[12] * other.elements[15] + other.elements[12], elements[13] * other.elements[15] + other.elements[13], elements[14] * other.elements[15] + other.elements[14], other.elements[15]
+			);
+		}
+		
+		@Override
 		public Vector4 multiply(float x, float y, float z, float w) {
 			return new Vector4(elements[12] * w + x, elements[13] * w + y, elements[14] * w + z, w);
 		}
@@ -145,6 +155,16 @@ public class Matrix4x4 extends Matrix {
 		
 		public Scale(Vector3 vector) {
 			this(vector.getX(), vector.getY(), vector.getZ());
+		}
+		
+		@Override
+		public Matrix4x4 multiply(Matrix4x4 other) {
+			return new Matrix4x4(
+				elements[0] * other.elements[0], elements[5] * other.elements[1], elements[10] * other.elements[2], elements[15] * other.elements[3],
+				elements[0] * other.elements[4], elements[5] * other.elements[5], elements[10] * other.elements[6], elements[15] * other.elements[7],
+				elements[0] * other.elements[8], elements[5] * other.elements[9], elements[10] * other.elements[10], elements[15] * other.elements[11],
+				elements[0] * other.elements[12], elements[5] * other.elements[13], elements[10] * other.elements[14], elements[15] * other.elements[15]
+			);
 		}
 		
 		@Override

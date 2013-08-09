@@ -117,6 +117,14 @@ public class Matrix2x2 extends Matrix {
 		}
 		
 		@Override
+		public Matrix2x2 multiply(Matrix2x2 other) {
+			return new Matrix2x2(
+				elements[2] * other.elements[1] + other.elements[0], other.elements[1],
+				elements[2] * other.elements[3] + other.elements[2], other.elements[3]
+			);
+		}
+		
+		@Override
 		public Vector2 multiply(float x, float y) {
 			return new Vector2(elements[2] * y + x, y);
 		}
@@ -135,6 +143,14 @@ public class Matrix2x2 extends Matrix {
 		
 		public Scale(Vector2 vector) {
 			this(vector.getX(), vector.getY());
+		}
+		
+		@Override
+		public Matrix2x2 multiply(Matrix2x2 other) {
+			return new Matrix2x2(
+				elements[0] * other.elements[0], elements[3] * other.elements[1],
+				elements[0] * other.elements[2], elements[3] * other.elements[3]
+			);
 		}
 		
 		@Override

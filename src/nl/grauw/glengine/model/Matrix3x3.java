@@ -122,6 +122,15 @@ public class Matrix3x3 extends Matrix {
 		}
 		
 		@Override
+		public Matrix3x3 multiply(Matrix3x3 other) {
+			return new Matrix3x3(
+				elements[6] * other.elements[2] + other.elements[0], elements[7] * other.elements[2] + other.elements[1], other.elements[2],
+				elements[6] * other.elements[5] + other.elements[3], elements[7] * other.elements[5] + other.elements[4], other.elements[5],
+				elements[6] * other.elements[8] + other.elements[6], elements[7] * other.elements[8] + other.elements[7], other.elements[8]
+			);
+		}
+		
+		@Override
 		public Vector3 multiply(float x, float y, float z) {
 			return new Vector3(elements[6] * z + x, elements[7] * z + y, z);
 		}
@@ -144,6 +153,15 @@ public class Matrix3x3 extends Matrix {
 		
 		public Scale(Vector2 vector) {
 			this(vector.getX(), vector.getY());
+		}
+		
+		@Override
+		public Matrix3x3 multiply(Matrix3x3 other) {
+			return new Matrix3x3(
+				elements[0] * other.elements[0], elements[4] * other.elements[1], elements[8] * other.elements[2],
+				elements[0] * other.elements[3], elements[4] * other.elements[4], elements[8] * other.elements[5],
+				elements[0] * other.elements[6], elements[4] * other.elements[7], elements[8] * other.elements[8]
+			);
 		}
 		
 		@Override
