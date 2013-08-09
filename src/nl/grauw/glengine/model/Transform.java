@@ -56,11 +56,11 @@ public class Transform {
 		}
 	}
 	
-	public void setRotation(float x, float y, float z, float angle) {
+	public void setRotation(float x, float y, float z, double angle) {
 		setRotation(angle == 0 ? Quaternion.IDENTITY : new Quaternion.Axis(x, y, z, angle));
 	}
 	
-	public void setRotationXYZ(float x, float y, float z) {
+	public void setRotationXYZ(double x, double y, double z) {
 		setRotation(x == 0 && y == 0 && z == 0 ? Quaternion.IDENTITY : new Quaternion.EulerXYZ(x, y, z));
 	}
 	
