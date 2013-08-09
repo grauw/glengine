@@ -195,7 +195,10 @@ public class Matrix3x3 extends Matrix {
 		
 		private static float[] createElements(Quaternion quaternion) {
 			float x = quaternion.getX(), y = quaternion.getY(), z = quaternion.getZ(), w = quaternion.getW();
-			float sx = 2 * x, sy = 2 * y, sz = 2 * z;
+			float normSquared = quaternion.getMagnitudeSquared();
+			float s = normSquared > 0 ? 2 / normSquared : 0;
+			
+			float sx = s * x, sy = s * y, sz = s * z;
 			float wx = w * sx, wy = w * sy, wz = w * sz;
 			float xx = x * sx, xy = x * sy, xz = x * sz;
 			float yy = y * sy, yz = y * sz, zz = z * sz;
