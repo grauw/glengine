@@ -181,15 +181,16 @@ public class Matrix4x4 extends Matrix {
 		}
 		
 		public Rotation(Quaternion quaternion) {
-			super(quaternionToMatrix(quaternion));
+			super(createElements(quaternion));
 		}
 		
-		private static float[] quaternionToMatrix(Quaternion quaternion) {
+		private static float[] createElements(Quaternion quaternion) {
 			float x = quaternion.getX(), y = quaternion.getY(), z = quaternion.getZ(), w = quaternion.getW();
 			float sx = 2 * x, sy = 2 * y, sz = 2 * z;
 			float wx = w * sx, wy = w * sy, wz = w * sz;
 			float xx = x * sx, xy = x * sy, xz = x * sz;
 			float yy = y * sy, yz = y * sz, zz = z * sz;
+			
 			return new float[] {
 				1 - yy - zz, xy + wz, xz - wy, 0,
 				xy - wz, 1 - xx - zz, yz + wx, 0,
@@ -242,15 +243,15 @@ public class Matrix4x4 extends Matrix {
 	public static final class TranslationRotationScale extends Matrix4x4 {
 		
 		public TranslationRotationScale(Vector3 translation, Quaternion rotation, Vector3 scale) {
-			super(quaternionToMatrix(translation, rotation, scale));
+			super(createElements(translation, rotation, scale));
 		}
 		
 		public TranslationRotationScale(Vector3 translation, Quaternion rotation) {
-			super(quaternionToMatrix(translation, rotation, Vector3.ONE));
+			super(createElements(translation, rotation, Vector3.ONE));
 		}
 		
 		public TranslationRotationScale(Quaternion rotation, Vector3 scale) {
-			super(quaternionToMatrix(Vector3.ZERO, rotation, scale));
+			super(createElements(Vector3.ZERO, rotation, scale));
 		}
 		
 		public TranslationRotationScale(Vector3 translation, Vector3 scale) {
@@ -262,7 +263,7 @@ public class Matrix4x4 extends Matrix {
 			);
 		}
 		
-		private static float[] quaternionToMatrix(Vector3 translation, Quaternion quaternion, Vector3 scale) {
+		private static float[] createElements(Vector3 translation, Quaternion quaternion, Vector3 scale) {
 			float scaleX = scale.getX(), scaleY = scale.getY(), scaleZ = scale.getZ();
 			
 			float x = quaternion.getX(), y = quaternion.getY(), z = quaternion.getZ(), w = quaternion.getW();

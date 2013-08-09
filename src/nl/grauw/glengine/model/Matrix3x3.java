@@ -190,15 +190,16 @@ public class Matrix3x3 extends Matrix {
 		}
 		
 		public Rotation(Quaternion quaternion) {
-			super(quaternionToMatrix(quaternion));
+			super(createElements(quaternion));
 		}
 		
-		private static float[] quaternionToMatrix(Quaternion quaternion) {
+		private static float[] createElements(Quaternion quaternion) {
 			float x = quaternion.getX(), y = quaternion.getY(), z = quaternion.getZ(), w = quaternion.getW();
 			float sx = 2 * x, sy = 2 * y, sz = 2 * z;
 			float wx = w * sx, wy = w * sy, wz = w * sz;
 			float xx = x * sx, xy = x * sy, xz = x * sz;
 			float yy = y * sy, yz = y * sz, zz = z * sz;
+			
 			return new float[] {
 				1 - yy - zz, xy + wz, xz - wy,
 				xy - wz, 1 - xx - zz, yz + wx,
