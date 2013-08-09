@@ -137,9 +137,9 @@ public class Quaternion {
 		
 	}
 	
-	private static final class Identity extends Quaternion {
+	public static final class Identity extends Quaternion {
 		
-		public Identity() {
+		private Identity() {
 			super(0, 0, 0, 1);
 		}
 		
