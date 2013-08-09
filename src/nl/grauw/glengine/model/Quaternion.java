@@ -50,6 +50,17 @@ public class Quaternion {
 		return new Quaternion(-x, -y, -z, w);
 	}
 	
+	public double getAngle() {
+		return Math.acos(w) * 2;
+	}
+	
+	public Vector3 getAxis() {
+		float sinAngle = (float)Math.sqrt(1 - w * w);
+		if (Math.abs(sinAngle) < 0.0005)
+			sinAngle = 1;
+		return new Vector3(x / sinAngle, y / sinAngle, z / sinAngle);
+	}
+	
 	public Quaternion multiply(Quaternion other) {
 		if (other == IDENTITY)
 			return this;
