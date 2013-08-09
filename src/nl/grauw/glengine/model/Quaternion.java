@@ -77,15 +77,14 @@ public class Quaternion {
 			return vector;
 
 		float vx = vector.getX(), vy = vector.getY(), vz = vector.getZ();
-		float tx = w * vx + y * vz - z * vy;
-		float ty = w * vy + z * vx - x * vz;
-		float tz = w * vz + x * vy - y * vx;
-		float tw = -x * vx - y * vy - z * vz;
+		float tx = 2 * (y * vz - z * vy);
+		float ty = 2 * (z * vx - x * vz);
+		float tz = 2 * (x * vy - y * vx);
 		
 		return new Vector3(
-			tx * w - tw * x - ty * z + tz * y,
-			ty * w - tw * y - tz * x + tx * z,
-			tz * w - tw * z - tx * y + ty * x
+			vx + w * tx + y * tz - z * ty,
+			vy + w * ty + z * tx - x * tz,
+			vz + w * tz + x * ty - y * tx
 		);
 	}
 	
@@ -94,15 +93,14 @@ public class Quaternion {
 			return vector;
 		
 		float vx = vector.getX(), vy = vector.getY(), vz = vector.getZ();
-		float tx = w * vx + y * vz - z * vy;
-		float ty = w * vy + z * vx - x * vz;
-		float tz = w * vz + x * vy - y * vx;
-		float tw = -x * vx - y * vy - z * vz;
+		float tx = 2 * (y * vz - z * vy);
+		float ty = 2 * (z * vx - x * vz);
+		float tz = 2 * (x * vy - y * vx);
 		
 		return new Vector4(
-			tx * w - tw * x - ty * z + tz * y,
-			ty * w - tw * y - tz * x + tx * z,
-			tz * w - tw * z - tx * y + ty * x,
+			vx + w * tx + y * tz - z * ty,
+			vy + w * ty + z * tx - x * tz,
+			vz + w * tz + x * ty - y * tx,
 			vector.getW()
 		);
 	}
