@@ -242,28 +242,15 @@ public class Matrix4x4 extends Matrix {
 	public static final class TranslationRotationScale extends Matrix4x4 {
 		
 		public TranslationRotationScale(Vector3 translation, Quaternion rotation, Vector3 scale) {
-			this(translation, rotation.getX(), rotation.getY(), rotation.getZ(), rotation.getW(), scale);
-		}
-		
-		private TranslationRotationScale(Vector3 translation, float qx, float qy, float qz, float qw, Vector3 scale) {
-			this(translation, 2 * qx * qx, 2 * qx * qy, 2 * qx * qz, 2 * qx * qw, 2 * qy * qy, 2 * qy * qz, 2 * qy * qw, 2 * qz * qz, 2 * qz * qw, scale.getX(), scale.getY(), scale.getZ());
-		}
-		
-		private TranslationRotationScale(Vector3 translation, float qxx, float qxy, float qxz, float qxw, float qyy, float qyz, float qyw, float qzz, float qzw, float scaleX, float scaleY, float scaleZ) {
-			super(
-				(1 - qyy - qzz) * scaleX, (qxy + qzw) * scaleX, (qxz - qyw) * scaleX, 0,
-				(qxy - qzw) * scaleY, (1 - qxx - qzz) * scaleY, (qyz + qxw) * scaleY, 0,
-				(qxz + qyw) * scaleZ, (qyz - qxw) * scaleZ, (1 - qxx - qyy) * scaleZ, 0,
-				translation.getX(), translation.getY(), translation.getZ(), 1
-			);
+			super(quaternionToMatrix(translation, rotation, scale));
 		}
 		
 		public TranslationRotationScale(Vector3 translation, Quaternion rotation) {
-			this(translation, rotation.getX(), rotation.getY(), rotation.getZ(), rotation.getW(), Vector3.ONE);
+			super(quaternionToMatrix(translation, rotation, Vector3.ONE));
 		}
 		
 		public TranslationRotationScale(Quaternion rotation, Vector3 scale) {
-			this(Vector3.ZERO, rotation.getX(), rotation.getY(), rotation.getZ(), rotation.getW(), scale);
+			super(quaternionToMatrix(Vector3.ZERO, rotation, scale));
 		}
 		
 		public TranslationRotationScale(Vector3 translation, Vector3 scale) {
@@ -273,6 +260,23 @@ public class Matrix4x4 extends Matrix {
 				0, 0, scale.getZ(), 0,
 				translation.getX(), translation.getY(), translation.getZ(), 1
 			);
+		}
+		
+		private static float[] quaternionToMatrix(Vector3 translation, Quaternion quaternion, Vector3 scale) {
+			float scaleX = scale.getX(), scaleY = scale.getY(), scaleZ = scale.getZ();
+			
+			float x = quaternion.getX(), y = quaternion.getY(), z = quaternion.getZ(), w = quaternion.getW();
+			float sx = 2 * x, sy = 2 * y, sz = 2 * z;
+			float wx = w * sx, wy = w * sy, wz = w * sz;
+			float xx = x * sx, xy = x * sy, xz = x * sz;
+			float yy = y * sy, yz = y * sz, zz = z * sz;
+			
+			return new float[] {
+				(1 - yy - zz) * scaleX, (xy + wz) * scaleX, (xz - wy) * scaleX, 0,
+				(xy - wz) * scaleY, (1 - xx - zz) * scaleY, (yz + wx) * scaleY, 0,
+				(xz + wy) * scaleZ, (yz - wx) * scaleZ, (1 - xx - yy) * scaleZ, 0,
+				translation.getX(), translation.getY(), translation.getZ(), 1
+			};
 		}
 		
 		/**
