@@ -50,6 +50,11 @@ public class Quaternion {
 		return new Quaternion(-x, -y, -z, w);
 	}
 	
+	public Quaternion reciprocal() {
+		float length = x * x + y * y + z * z + w * w;
+		return new Quaternion(-x / length, -y / length, -z / length, w / length);
+	}
+	
 	public double getAngle() {
 		return Math.acos(w) * 2;
 	}
