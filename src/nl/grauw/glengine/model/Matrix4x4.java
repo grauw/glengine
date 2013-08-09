@@ -186,9 +186,10 @@ public class Matrix4x4 extends Matrix {
 		
 		private static float[] quaternionToMatrix(Quaternion quaternion) {
 			float x = quaternion.getX(), y = quaternion.getY(), z = quaternion.getZ(), w = quaternion.getW();
-			float wx = 2 * w * x, wy = 2 * w * y, wz = 2 * w * z;
-			float xx = 2 * x * x, xy = 2 * x * y, xz = 2 * x * z;
-			float yy = 2 * y * y, yz = 2 * y * z, zz = 2 * z * z;
+			float sx = 2 * x, sy = 2 * y, sz = 2 * z;
+			float wx = w * sx, wy = w * sy, wz = w * sz;
+			float xx = x * sx, xy = x * sy, xz = x * sz;
+			float yy = y * sy, yz = y * sz, zz = z * sz;
 			return new float[] {
 				1 - yy - zz, xy + wz, xz - wy, 0,
 				xy - wz, 1 - xx - zz, yz + wx, 0,
