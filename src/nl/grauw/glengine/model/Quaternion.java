@@ -40,6 +40,7 @@ public class Quaternion {
 		return x * x + y * y + z * z + w * w;
 	}
 	
+	/** Returns a unit quaternion (versor). */
 	public Quaternion normalize() {
 		float magnitude = getMagnitude();
 		return new Quaternion(x / magnitude, y / magnitude, z / magnitude, w / magnitude);
