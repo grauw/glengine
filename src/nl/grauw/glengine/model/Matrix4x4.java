@@ -6,7 +6,7 @@ public class Matrix4x4 extends Matrix {
 	
 	public static final Identity IDENTITY = new Identity();
 	
-	private final float[] elements;
+	protected final float[] elements;
 	
 	/** Elements must be specified in column-major order. */
 	public Matrix4x4(float... elements) {
@@ -52,7 +52,7 @@ public class Matrix4x4 extends Matrix {
 		return multiply(vector.getX(), vector.getY(), vector.getZ(), vector.getW());
 	}
 	
-	public final Vector4 multiply(float x, float y, float z, float w) {
+	public Vector4 multiply(float x, float y, float z, float w) {
 		return new Vector4(
 			elements[0] * x + elements[4] * y + elements[8] * z + elements[12] * w,
 			elements[1] * x + elements[5] * y + elements[9] * z + elements[13] * w,
@@ -101,6 +101,11 @@ public class Matrix4x4 extends Matrix {
 			return vector;
 		}
 		
+		@Override
+		public Vector4 multiply(float x, float y, float z, float w) {
+			return new Vector4(x, y, z, w);
+		}
+		
 	}
 	
 	public static final class Translation extends Matrix4x4 {
@@ -111,6 +116,11 @@ public class Matrix4x4 extends Matrix {
 		
 		public Translation(Vector3 vector) {
 			this(vector.getX(), vector.getY(), vector.getZ());
+		}
+		
+		@Override
+		public Vector4 multiply(float x, float y, float z, float w) {
+			return new Vector4(elements[12] * w + x, elements[13] * w + y, elements[14] * w + z, w);
 		}
 		
 	}
@@ -131,6 +141,11 @@ public class Matrix4x4 extends Matrix {
 		
 		public Scale(Vector3 vector) {
 			this(vector.getX(), vector.getY(), vector.getZ());
+		}
+		
+		@Override
+		public Vector4 multiply(float x, float y, float z, float w) {
+			return new Vector4(elements[0] * x, elements[5] * y, elements[10] * z, elements[15] * w);
 		}
 		
 	}

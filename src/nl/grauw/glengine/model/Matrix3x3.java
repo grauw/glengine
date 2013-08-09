@@ -6,7 +6,7 @@ public class Matrix3x3 extends Matrix {
 	
 	public static final Identity IDENTITY = new Identity();
 	
-	private final float[] elements;
+	protected final float[] elements;
 	
 	/** Elements must be specified in column-major order. */
 	public Matrix3x3(float... elements) {
@@ -52,7 +52,7 @@ public class Matrix3x3 extends Matrix {
 		return multiply(vector.getX(), vector.getY(), vector.getZ());
 	}
 	
-	public final Vector3 multiply(float x, float y, float z) {
+	public Vector3 multiply(float x, float y, float z) {
 		return new Vector3(
 			elements[0] * x + elements[3] * y + elements[6] * z,
 			elements[1] * x + elements[4] * y + elements[7] * z,
@@ -100,6 +100,11 @@ public class Matrix3x3 extends Matrix {
 			return vector;
 		}
 		
+		@Override
+		public Vector3 multiply(float x, float y, float z) {
+			return new Vector3(x, y, z);
+		}
+		
 	}
 	
 	public static final class Translation extends Matrix3x3 {
@@ -110,6 +115,11 @@ public class Matrix3x3 extends Matrix {
 		
 		public Translation(Vector2 vector) {
 			this(vector.getX(), vector.getY());
+		}
+		
+		@Override
+		public Vector3 multiply(float x, float y, float z) {
+			return new Vector3(elements[6] * z + x, elements[7] * z + y, z);
 		}
 		
 	}
@@ -130,6 +140,11 @@ public class Matrix3x3 extends Matrix {
 		
 		public Scale(Vector2 vector) {
 			this(vector.getX(), vector.getY());
+		}
+		
+		@Override
+		public Vector3 multiply(float x, float y, float z) {
+			return new Vector3(elements[0] * x, elements[4] * y, elements[8] * z);
 		}
 		
 	}

@@ -6,7 +6,7 @@ public class Matrix2x2 extends Matrix {
 	
 	public static final Identity IDENTITY = new Identity();
 	
-	private final float[] elements;
+	protected final float[] elements;
 	
 	/** Elements must be specified in column-major order. */
 	public Matrix2x2(float... elements) {
@@ -52,7 +52,7 @@ public class Matrix2x2 extends Matrix {
 		return multiply(vector.getX(), vector.getY());
 	}
 	
-	public final Vector2 multiply(float x, float y) {
+	public Vector2 multiply(float x, float y) {
 		return new Vector2(
 			elements[0] * x + elements[2] * y,
 			elements[1] * x + elements[3] * y
@@ -99,12 +99,22 @@ public class Matrix2x2 extends Matrix {
 			return vector;
 		}
 		
+		@Override
+		public Vector2 multiply(float x, float y) {
+			return new Vector2(x, y);
+		}
+		
 	}
 	
 	public static final class Translation extends Matrix2x2 {
 		
 		public Translation(float x) {
 			super(1, 0, x, 1);
+		}
+		
+		@Override
+		public Vector2 multiply(float x, float y) {
+			return new Vector2(elements[2] * y + x, y);
 		}
 		
 	}
@@ -121,6 +131,11 @@ public class Matrix2x2 extends Matrix {
 		
 		public Scale(Vector2 vector) {
 			this(vector.getX(), vector.getY());
+		}
+		
+		@Override
+		public Vector2 multiply(float x, float y) {
+			return new Vector2(elements[0] * x, elements[3] * y);
 		}
 		
 	}
