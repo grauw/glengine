@@ -199,6 +199,44 @@ public class Matrix4x4 extends Matrix {
 		
 	}
 	
+	public static final class TranslationRotationScale extends Matrix4x4 {
+		
+		public TranslationRotationScale(Vector3 translation, Quaternion rotation, Vector3 scale) {
+			this(translation, rotation.getX(), rotation.getY(), rotation.getZ(), rotation.getW(), scale);
+		}
+		
+		private TranslationRotationScale(Vector3 translation, float qx, float qy, float qz, float qw, Vector3 scale) {
+			this(translation, 2 * qx * qx, 2 * qx * qy, 2 * qx * qz, 2 * qx * qw, 2 * qy * qy, 2 * qy * qz, 2 * qy * qw, 2 * qz * qz, 2 * qz * qw, scale.getX(), scale.getY(), scale.getZ());
+		}
+		
+		private TranslationRotationScale(Vector3 translation, float qxx, float qxy, float qxz, float qxw, float qyy, float qyz, float qyw, float qzz, float qzw, float scaleX, float scaleY, float scaleZ) {
+			super(
+				(1 - qyy - qzz) * scaleX, (qxy + qzw) * scaleX, (qxz - qyw) * scaleX, 0,
+				(qxy - qzw) * scaleY, (1 - qxx - qzz) * scaleY, (qyz + qxw) * scaleY, 0,
+				(qxz + qyw) * scaleZ, (qyz - qxw) * scaleZ, (1 - qxx - qyy) * scaleZ, 0,
+				translation.getX(), translation.getY(), translation.getZ(), 1
+			);
+		}
+		
+		public TranslationRotationScale(Vector3 translation, Quaternion rotation) {
+			this(translation, rotation.getX(), rotation.getY(), rotation.getZ(), rotation.getW(), Vector3.ONE);
+		}
+		
+		public TranslationRotationScale(Quaternion rotation, Vector3 scale) {
+			this(Vector3.ZERO, rotation.getX(), rotation.getY(), rotation.getZ(), rotation.getW(), scale);
+		}
+		
+		public TranslationRotationScale(Vector3 translation, Vector3 scale) {
+			super(
+				scale.getX(), 0, 0, 0,
+				0, scale.getY(), 0, 0,
+				0, 0, scale.getZ(), 0,
+				translation.getX(), translation.getY(), translation.getZ(), 1
+			);
+		}
+		
+	}
+	
 	public static final class PerspectiveProjection extends Matrix4x4 {
 		
 		public PerspectiveProjection(float width, float height, float near, float far) {
