@@ -235,6 +235,31 @@ public class Matrix4x4 extends Matrix {
 			);
 		}
 		
+		/**
+		 * Returns a matrix that transforms, then rotates, then scales.
+		 * Depending on the arguments it will return simpler matrices, or even the identity matrix.
+		 **/
+		public static Matrix4x4 create(Vector3 translation, Quaternion rotation, Vector3 scale) {
+			if (translation != Vector3.ZERO) {
+				if (rotation != Quaternion.IDENTITY) {
+					if (scale != Vector3.ONE)
+						return new TranslationRotationScale(translation, rotation, scale);
+					return new TranslationRotationScale(translation, rotation);
+				}
+				if (scale != Vector3.ONE)
+					return new TranslationRotationScale(translation, scale);
+				return new Translation(translation);
+			}
+			if (rotation != Quaternion.IDENTITY) {
+				if (scale != Vector3.ONE)
+					return new TranslationRotationScale(rotation, scale);
+				return new Rotation(rotation);
+			}
+			if (scale != Vector3.ONE)
+				return new Scale(scale);
+			return IDENTITY;
+		}
+		
 	}
 	
 	public static final class PerspectiveProjection extends Matrix4x4 {

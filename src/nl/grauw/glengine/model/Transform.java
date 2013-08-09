@@ -66,14 +66,7 @@ public class Transform {
 	
 	public Matrix4x4 getMatrix() {
 		if (dirty) {
-			Matrix4x4 matrix = Matrix4x4.IDENTITY;
-			if (translation != Vector3.ZERO)
-				matrix = matrix.multiply(new Matrix4x4.Translation(translation));
-			if (rotation != Quaternion.IDENTITY)
-				matrix = matrix.multiply(new Matrix4x4.Rotation(rotation));
-			if (scale != Vector3.ONE)
-				matrix = matrix.multiply(new Matrix4x4.Scale(scale));
-			this.matrix = matrix;
+			this.matrix = Matrix4x4.TranslationRotationScale.create(translation, rotation, scale);
 		}
 		return matrix;
 	}
