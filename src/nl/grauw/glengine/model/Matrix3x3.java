@@ -23,12 +23,6 @@ public class Matrix3x3 extends Matrix {
 		this(scalar, 0, 0, 0, scalar, 0, 0, 0, scalar);
 	}
 	
-	public Matrix3x3 multiply(Matrix3x3 other) {
-		if (other == IDENTITY)
-			return this;
-		return new Matrix3x3(multiply(3, 3, elements, 3, 3, other.elements));
-	}
-	
 	@Override
 	public final int getColumns() {
 		return 3;
@@ -46,6 +40,12 @@ public class Matrix3x3 extends Matrix {
 	
 	public Matrix3x3 transpose() {
 		return new Matrix3x3(transpose(3, 3, elements));
+	}
+	
+	public Matrix3x3 multiply(Matrix3x3 other) {
+		if (other == IDENTITY)
+			return this;
+		return new Matrix3x3(multiply(3, 3, elements, 3, 3, other.elements));
 	}
 	
 	public Vector3 multiply(Vector3 vector) {
