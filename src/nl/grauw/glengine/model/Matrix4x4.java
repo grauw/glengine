@@ -185,14 +185,14 @@ public class Matrix4x4 extends Matrix {
 		}
 		
 		private static float[] quaternionToMatrix(Quaternion quaternion) {
-			float qx = quaternion.getX(), qy = quaternion.getY(), qz = quaternion.getZ(), qw = quaternion.getW();
-			float qwx = 2 * qw * qx, qwy = 2 * qw * qy, qwz = 2 * qw * qz;
-			float qxx = 2 * qx * qx, qxy = 2 * qx * qy, qxz = 2 * qx * qz;
-			float qyy = 2 * qy * qy, qyz = 2 * qy * qz, qzz = 2 * qz * qz;
+			float x = quaternion.getX(), y = quaternion.getY(), z = quaternion.getZ(), w = quaternion.getW();
+			float wx = 2 * w * x, wy = 2 * w * y, wz = 2 * w * z;
+			float xx = 2 * x * x, xy = 2 * x * y, xz = 2 * x * z;
+			float yy = 2 * y * y, yz = 2 * y * z, zz = 2 * z * z;
 			return new float[] {
-				1 - qyy - qzz, qxy + qwz, qxz - qwy, 0,
-				qxy - qwz, 1 - qxx - qzz, qyz + qwx, 0,
-				qxz + qwy, qyz - qwx, 1 - qxx - qyy, 0,
+				1 - yy - zz, xy + wz, xz - wy, 0,
+				xy - wz, 1 - xx - zz, yz + wx, 0,
+				xz + wy, yz - wx, 1 - xx - yy, 0,
 				0, 0, 0, 1
 			};
 		}
