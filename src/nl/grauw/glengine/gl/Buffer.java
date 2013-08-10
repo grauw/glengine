@@ -42,8 +42,16 @@ public abstract class Buffer {
 		setData(size, null, usage);
 	}
 	
-	public void setData(java.nio.Buffer data, BufferUsage usage) {
-		setData(data.remaining() * getBufferElementSize(data), data, usage);
+	public void setData(ByteBuffer data, BufferUsage usage) {
+		setData(data.remaining() * 1, data, usage);
+	}
+	
+	public void setData(ShortBuffer data, BufferUsage usage) {
+		setData(data.remaining() * 2, data, usage);
+	}
+	
+	public void setData(FloatBuffer data, BufferUsage usage) {
+		setData(data.remaining() * 4, data, usage);
 	}
 	
 	public void setData(int size, java.nio.Buffer data, BufferUsage usage) {
@@ -76,16 +84,6 @@ public abstract class Buffer {
 	
 	public void delete() {
 		GLUtils.glDeleteBuffer(handle);
-	}
-	
-	private static int getBufferElementSize(java.nio.Buffer buffer) {
-		if (buffer instanceof ByteBuffer)
-			return 1;
-		if (buffer instanceof ShortBuffer)
-			return 2;
-		if (buffer instanceof FloatBuffer)
-			return 4;
-		throw new GLEngineException("Unsupported buffer type.");
 	}
 	
 	public enum BufferUsage {

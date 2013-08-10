@@ -3,6 +3,7 @@ package nl.grauw.glengine.gl;
 import static android.opengl.GLES20.*;
 
 import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
 import nl.grauw.glengine.gl.GLContext.ElementType;
@@ -26,6 +27,23 @@ public final class ElementBuffer extends Buffer {
 	@Override
 	public boolean isBound() {
 		return context.getBoundElementBuffer() == this;
+	}
+	
+	@Override
+	public void setData(ByteBuffer data, BufferUsage usage) {
+		type = ElementType.UNSIGNED_BYTE;
+		super.setData(data, usage);
+	}
+	
+	@Override
+	public void setData(ShortBuffer data, BufferUsage usage) {
+		type = ElementType.UNSIGNED_SHORT;
+		super.setData(data, usage);
+	}
+	
+	@Override
+	public void setData(FloatBuffer data, BufferUsage usage) {
+		throw new GLEngineException("Unsupported buffer data type.");
 	}
 	
 	@Override
