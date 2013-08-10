@@ -11,6 +11,7 @@ import nl.grauw.glengine.gl.GLEngineException.OpenGLException;
 import nl.grauw.glengine.gl.Variable.Attribute;
 import nl.grauw.glengine.model.Size;
 import nl.grauw.glengine.model.Vertex.AttributeInfo;
+import nl.grauw.glengine.model.Vertex.AttributeType;
 
 /**
  * GL wrapper class that boxes some sense into OpenGL :).
@@ -313,26 +314,22 @@ public final class GLContext {
 	}
 	
 	public void setVertexAttribPointer(int attributeIndex, AttributeInfo attributeInfo, int stride, Buffer buffer) {
-		if (boundVertexBuffer != null)
-			throw new GLEngineException("Can’t set client memory pointer when vertex buffer object is bound.");
-		glVertexAttribPointer(attributeIndex, attributeInfo.getComponents(), attributeTypeLookup[attributeInfo.getType().ordinal()],
-			attributeInfo.isNormalized(), stride, buffer);
+		setVertexAttribPointer(attributeIndex, attributeInfo.getComponents(), attributeInfo.getType(), attributeInfo.isNormalized(), stride, buffer);
 	}
 	
-	public void setVertexAttribPointer(String attributeName, int size, boolean normalized, int stride, Buffer buffer) {
-		setVertexAttribPointer(currentProgram.getAttribute(attributeName), size, normalized, stride, buffer);
+	public void setVertexAttribPointer(String attributeName, int size, AttributeType type, boolean normalized, int stride, Buffer buffer) {
+		setVertexAttribPointer(currentProgram.getAttribute(attributeName), size, type, normalized, stride, buffer);
 	}
 	
-	public void setVertexAttribPointer(Attribute attribute, int size, boolean normalized, int stride, Buffer buffer) {
+	public void setVertexAttribPointer(Attribute attribute, int size, AttributeType type, boolean normalized, int stride, Buffer buffer) {
 		checkAttribute(attribute);
-		setVertexAttribPointer(attribute.getLocation(), size, normalized, stride, buffer);
+		setVertexAttribPointer(attribute.getLocation(), size, type, normalized, stride, buffer);
 	}
 	
-	public void setVertexAttribPointer(int index, int size, boolean normalized, int stride, Buffer buffer) {
+	public void setVertexAttribPointer(int index, int size, AttributeType type, boolean normalized, int stride, Buffer buffer) {
 		if (boundVertexBuffer != null)
 			throw new GLEngineException("Can’t set client memory pointer when vertex buffer object is bound.");
-		int type = buffer instanceof FloatBuffer ? GL_FLOAT : buffer instanceof ByteBuffer ? GL_BYTE : buffer instanceof ShortBuffer ? GL_SHORT : -1;
-		glVertexAttribPointer(index, size, type, normalized, stride, buffer);
+		glVertexAttribPointer(index, size, attributeTypeLookup[type.ordinal()], normalized, stride, buffer);
 	}
 	
 	public void enableVertexAttribArray(String attributeName) {
