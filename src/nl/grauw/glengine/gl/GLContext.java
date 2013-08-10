@@ -19,6 +19,8 @@ public final class GLContext {
 	
 	private Program currentProgram = null;
 	private TextureUnit activeTextureUnit = null;
+	private VertexBuffer boundVertexBuffer = null;
+	private ElementBuffer boundElementBuffer = null;
 	
 	private final ColorBuffer colorBuffer = new ColorBuffer();
 	private final DepthBuffer depthBuffer = new DepthBuffer();
@@ -263,6 +265,42 @@ public final class GLContext {
 		setActiveTextureUnit(textureUnit);
 		textureUnit.bind(texture);
 		return textureUnit;
+	}
+	
+	public void bindVertexBuffer(VertexBuffer buffer) {
+		if (buffer == null) {
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			boundVertexBuffer = null;
+		} else {
+			glBindBuffer(GL_ARRAY_BUFFER, buffer.handle);
+			boundVertexBuffer = buffer;
+		}
+	}
+	
+	public void bindElementBuffer(ElementBuffer buffer) {
+		if (buffer == null) {
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+			boundElementBuffer = null;
+		} else {
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer.handle);
+			boundElementBuffer = buffer;
+		}
+	}
+	
+	public void unbindVertexBuffer() {
+		bindVertexBuffer(null);
+	}
+	
+	public void unbindElementBuffer() {
+		bindElementBuffer(null);
+	}
+	
+	public VertexBuffer getBoundVertexBuffer() {
+		return boundVertexBuffer;
+	}
+	
+	public ElementBuffer getBoundElementBuffer() {
+		return boundElementBuffer;
 	}
 	
 	public void setVertexAttribPointer(String attributeName, AttributeInfo attributeInfo, int stride, Buffer buffer) {
