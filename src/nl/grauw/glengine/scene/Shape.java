@@ -132,8 +132,10 @@ public abstract class Shape implements Drawable {
 		
 		prepareDraw(gl, transform);
 		
-		if (indexBuffer != null) {
-			gl.drawElements(primitive, indexBuffer);
+		if (indexBuffer instanceof ByteBuffer) {
+			gl.drawElements(primitive, (ByteBuffer)indexBuffer);
+		} else if (indexBuffer instanceof ShortBuffer) {
+			gl.drawElements(primitive, (ShortBuffer)indexBuffer);
 		} else {
 			gl.drawArrays(primitive, 0, vertexArray.getLength());
 		}

@@ -353,17 +353,12 @@ public final class GLContext {
 		glDrawArrays(type.id, first, count);
 	}
 	
-	public void drawElements(PrimitiveType type, Buffer buffer) {
-		drawElements(type, buffer.capacity(), buffer);
+	public void drawElements(PrimitiveType type, ByteBuffer buffer) {
+		drawElements(type, buffer.remaining(), buffer);
 	}
 	
-	public void drawElements(PrimitiveType type, int count, Buffer buffer) {
-		if (buffer instanceof ByteBuffer)
-			drawElements(type, count, (ByteBuffer)buffer);
-		else if (buffer instanceof ShortBuffer)
-			drawElements(type, count, (ShortBuffer)buffer);
-		else
-			throw new GLEngineException("Buffer type not supported.");
+	public void drawElements(PrimitiveType type, ShortBuffer buffer) {
+		drawElements(type, buffer.remaining(), buffer);
 	}
 	
 	public void drawElements(PrimitiveType type, int count, ByteBuffer buffer) {
