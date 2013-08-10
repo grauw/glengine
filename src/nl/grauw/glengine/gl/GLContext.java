@@ -4,7 +4,6 @@ import static android.opengl.GLES20.*;
 
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
 import nl.grauw.glengine.gl.GLEngineException.OpenGLException;
@@ -332,6 +331,34 @@ public final class GLContext {
 		glVertexAttribPointer(index, size, attributeTypeLookup[type.ordinal()], normalized, stride, buffer);
 	}
 	
+	public void setVertexAttribPointer(String attributeName, AttributeInfo attributeInfo, int stride, int offset) {
+		setVertexAttribPointer(currentProgram.getAttribute(attributeName), attributeInfo, stride, offset);
+	}
+	
+	public void setVertexAttribPointer(Attribute attribute, AttributeInfo attributeInfo, int stride, int offset) {
+		checkAttribute(attribute);
+		setVertexAttribPointer(attribute.getLocation(), attributeInfo, stride, offset);
+	}
+	
+	public void setVertexAttribPointer(int attributeIndex, AttributeInfo attributeInfo, int stride, int offset) {
+		setVertexAttribPointer(attributeIndex, attributeInfo.getComponents(), attributeInfo.getType(), attributeInfo.isNormalized(), stride, offset);
+	}
+	
+	public void setVertexAttribPointer(String attributeName, int size, AttributeType type, boolean normalized, int stride, int offset) {
+		setVertexAttribPointer(currentProgram.getAttribute(attributeName), size, type, normalized, stride, offset);
+	}
+	
+	public void setVertexAttribPointer(Attribute attribute, int size, AttributeType type, boolean normalized, int stride, int offset) {
+		checkAttribute(attribute);
+		setVertexAttribPointer(attribute.getLocation(), size, type, normalized, stride, offset);
+	}
+	
+	public void setVertexAttribPointer(int index, int size, AttributeType type, boolean normalized, int stride, int offset) {
+		if (boundVertexBuffer == null)
+			throw new GLEngineException("Can’t set buffer offset when vertex buffer object is not bound.");
+		glVertexAttribPointer(index, size, attributeTypeLookup[type.ordinal()], normalized, stride, offset);
+	}
+	
 	public void enableVertexAttribArray(String attributeName) {
 		enableVertexAttribArray(currentProgram.getAttribute(attributeName));
 	}
@@ -385,6 +412,18 @@ public final class GLContext {
 		if (boundElementBuffer != null)
 			throw new GLEngineException("Can’t set client memory pointer when element buffer object is bound.");
 		glDrawElements(type.id, count, GL_UNSIGNED_SHORT, buffer);
+	}
+	
+	public void drawElements(PrimitiveType type) {
+		if (boundElementBuffer == null)
+			throw new GLEngineException("Must specify client memory buffer when element buffer object is not bound.");
+		glDrawElements(type.id, boundElementBuffer.getElementCount(), boundElementBuffer.getType(), 0);
+	}
+	
+	public void drawElements(PrimitiveType type, int count, int offset) {
+		if (boundElementBuffer == null)
+			throw new GLEngineException("Can’t set buffer offset when element buffer object is not bound.");
+		glDrawElements(type.id, count, boundElementBuffer.getType(), offset);
 	}
 	
 	public void checkError() {
