@@ -72,6 +72,24 @@ public final class Utils {
 	}
 	
 	/**
+	 * Allocate and initialize a native byte buffer suitable for GL.
+	 */
+	public static ByteBuffer createByteBuffer(short[] content) {
+		ByteBuffer buffer = createByteBuffer(content.length * (Short.SIZE / Byte.SIZE));
+		buffer.asShortBuffer().put(content);
+		return buffer;
+	}
+	
+	/**
+	 * Allocate and initialize a native byte buffer suitable for GL.
+	 */
+	public static ByteBuffer createByteBuffer(float[] content) {
+		ByteBuffer buffer = createByteBuffer(content.length * (Float.SIZE / Byte.SIZE));
+		buffer.asFloatBuffer().put(content);
+		return buffer;
+	}
+	
+	/**
 	 * Allocate a native short buffer suitable for GL.
 	 */
 	public static ShortBuffer createShortBuffer(int size) {
