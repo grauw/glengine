@@ -145,6 +145,10 @@ public class Quaternion {
 	
 	public static final class EulerXYZ extends Quaternion {
 		
+		public EulerXYZ(Vector3 angles) {
+			this(angles.getX(), angles.getY(), angles.getZ());
+		}
+		
 		public EulerXYZ(double x, double y, double z) {
 			this(
 				(float)Math.sin(x / 2), (float)Math.cos(x / 2),
