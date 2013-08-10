@@ -159,10 +159,10 @@ public class Quaternion {
 		
 		private EulerXYZ(float sx, float cx, float sy, float cy, float sz, float cz) {
 			super(
-				sx * cy * cz + sx * cy * sz,
-				cx * sy * cz - cx * sy * sz,
-				sx * sy * sz + sx * sy * cz,
-				cx * cy * cz - cx * cy * sz
+				sx * cy * cz + cx * sy * sz,
+				cx * sy * cz - sx * cy * sz,
+				cx * cy * sz + sx * sy * cz,
+				cx * cy * cz - sx * sy * sz
 			);
 		}
 		
