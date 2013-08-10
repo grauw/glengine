@@ -5,20 +5,22 @@ import static android.opengl.GLES20.*;
 import java.nio.ByteBuffer;
 import java.nio.ShortBuffer;
 
+import nl.grauw.glengine.gl.GLContext.ElementType;
+
 public final class ElementBuffer extends Buffer {
 	
-	private int type;
+	private ElementType type;
 	
 	public ElementBuffer(GLContext context) {
 		super(context, GL_ELEMENT_ARRAY_BUFFER);
 	}
 	
-	public int getType() {
+	public ElementType getType() {
 		return type;
 	}
 	
 	public int getElementCount() {
-		return type == GL_UNSIGNED_SHORT ? getSize() / 2 : getSize();
+		return type == ElementType.UNSIGNED_SHORT ? getSize() / 2 : getSize();
 	}
 	
 	@Override
@@ -29,9 +31,9 @@ public final class ElementBuffer extends Buffer {
 	@Override
 	public void setData(int size, java.nio.Buffer data, BufferUsage usage) {
 		if (data instanceof ByteBuffer)
-			type = GL_UNSIGNED_BYTE;
+			type = ElementType.UNSIGNED_BYTE;
 		else if (data instanceof ShortBuffer)
-			type = GL_UNSIGNED_SHORT;
+			type = ElementType.UNSIGNED_SHORT;
 		else
 			throw new GLEngineException("Unsupported buffer data type.");
 		
@@ -40,7 +42,7 @@ public final class ElementBuffer extends Buffer {
 	
 	@Override
 	public void setSubData(int offset, int size, java.nio.Buffer data) {
-		if (type == GL_UNSIGNED_BYTE && !(data instanceof ByteBuffer) || type == GL_UNSIGNED_SHORT && !(data instanceof ShortBuffer))
+		if (type == ElementType.UNSIGNED_BYTE && !(data instanceof ByteBuffer) || type == ElementType.UNSIGNED_SHORT && !(data instanceof ShortBuffer))
 			throw new GLEngineException("Incompatible buffer data type.");
 		
 		super.setSubData(offset, size, data);

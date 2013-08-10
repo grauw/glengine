@@ -376,27 +376,29 @@ public final class GLContext {
 	}
 	
 	public void drawElements(PrimitiveType type, int count, ByteBuffer buffer) {
-		if (boundElementBuffer != null)
-			throw new GLEngineException("Can’t set client memory pointer when element buffer object is bound.");
-		glDrawElements(type.id, count, GL_UNSIGNED_BYTE, buffer);
+		drawElements(type, count, ElementType.UNSIGNED_BYTE, buffer);
 	}
 	
 	public void drawElements(PrimitiveType type, int count, ShortBuffer buffer) {
+		drawElements(type, count, ElementType.UNSIGNED_SHORT, buffer);
+	}
+	
+	public void drawElements(PrimitiveType type, int count, ElementType elementType, Buffer buffer) {
 		if (boundElementBuffer != null)
 			throw new GLEngineException("Can’t set client memory pointer when element buffer object is bound.");
-		glDrawElements(type.id, count, GL_UNSIGNED_SHORT, buffer);
+		glDrawElements(type.id, count, elementType.id, buffer);
 	}
 	
 	public void drawElements(PrimitiveType type) {
 		if (boundElementBuffer == null)
 			throw new GLEngineException("Must specify client memory buffer when element buffer object is not bound.");
-		glDrawElements(type.id, boundElementBuffer.getElementCount(), boundElementBuffer.getType(), 0);
+		drawElements(type, boundElementBuffer.getElementCount(), 0);
 	}
 	
 	public void drawElements(PrimitiveType type, int count, int offset) {
 		if (boundElementBuffer == null)
 			throw new GLEngineException("Can’t set buffer offset when element buffer object is not bound.");
-		glDrawElements(type.id, count, boundElementBuffer.getType(), offset);
+		glDrawElements(type.id, count, boundElementBuffer.getType().id, offset);
 	}
 	
 	public void checkError() {
@@ -430,6 +432,16 @@ public final class GLContext {
 		
 		final int id;
 		private PrimitiveType(int id) {
+			this.id = id;
+		}
+	}
+	
+	public enum ElementType {
+		UNSIGNED_BYTE(GL_UNSIGNED_BYTE),
+		UNSIGNED_SHORT(GL_UNSIGNED_SHORT);
+		
+		final int id;
+		private ElementType(int id) {
 			this.id = id;
 		}
 	}
