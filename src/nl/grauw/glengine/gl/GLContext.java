@@ -313,6 +313,8 @@ public final class GLContext {
 	}
 	
 	public void setVertexAttribPointer(int attributeIndex, AttributeInfo attributeInfo, int stride, Buffer buffer) {
+		if (boundVertexBuffer != null)
+			throw new GLEngineException("Can’t set client memory pointer when vertex buffer object is bound.");
 		glVertexAttribPointer(attributeIndex, attributeInfo.getComponents(), attributeTypeLookup[attributeInfo.getType().ordinal()],
 			attributeInfo.isNormalized(), stride, buffer);
 	}
@@ -327,6 +329,8 @@ public final class GLContext {
 	}
 	
 	public void setVertexAttribPointer(int index, int size, int stride, boolean normalized, Buffer buffer) {
+		if (boundVertexBuffer != null)
+			throw new GLEngineException("Can’t set client memory pointer when vertex buffer object is bound.");
 		int type = buffer instanceof FloatBuffer ? GL_FLOAT : buffer instanceof ByteBuffer ? GL_BYTE : buffer instanceof ShortBuffer ? GL_SHORT : -1;
 		glVertexAttribPointer(index, size, type, normalized, stride, buffer);
 	}
@@ -375,10 +379,14 @@ public final class GLContext {
 	}
 	
 	public void drawElements(PrimitiveType type, int count, ByteBuffer buffer) {
+		if (boundElementBuffer != null)
+			throw new GLEngineException("Can’t set client memory pointer when element buffer object is bound.");
 		glDrawElements(type.id, count, GL_UNSIGNED_BYTE, buffer);
 	}
 	
 	public void drawElements(PrimitiveType type, int count, ShortBuffer buffer) {
+		if (boundElementBuffer != null)
+			throw new GLEngineException("Can’t set client memory pointer when element buffer object is bound.");
 		glDrawElements(type.id, count, GL_UNSIGNED_SHORT, buffer);
 	}
 	
