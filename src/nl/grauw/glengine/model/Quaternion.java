@@ -201,4 +201,129 @@ public class Quaternion {
 		
 	}
 	
+	public static final class EulerXZY extends Quaternion {
+		
+		public EulerXZY(Vector3 angles) {
+			this(angles.getX(), angles.getY(), angles.getZ());
+		}
+		
+		public EulerXZY(double x, double y, double z) {
+			this(
+				(float)Math.sin(x / 2), (float)Math.cos(x / 2),
+				(float)Math.sin(y / 2), (float)Math.cos(y / 2),
+				(float)Math.sin(z / 2), (float)Math.cos(z / 2)
+			);
+		}
+		
+		private EulerXZY(float sx, float cx, float sy, float cy, float sz, float cz) {
+			super(
+				sx * cz * cy - cx * sz * sy,
+				cx * cz * sy - sx * sz * cy,
+				cx * sz * cy + sx * cz * sy,
+				cx * cz * cy + sx * sz * sy
+			);
+		}
+		
+	}
+	
+	public static final class EulerYXZ extends Quaternion {
+		
+		public EulerYXZ(Vector3 angles) {
+			this(angles.getX(), angles.getY(), angles.getZ());
+		}
+		
+		public EulerYXZ(double x, double y, double z) {
+			this(
+				(float)Math.sin(x / 2), (float)Math.cos(x / 2),
+				(float)Math.sin(y / 2), (float)Math.cos(y / 2),
+				(float)Math.sin(z / 2), (float)Math.cos(z / 2)
+			);
+		}
+		
+		private EulerYXZ(float sx, float cx, float sy, float cy, float sz, float cz) {
+			super(
+				cy * sx * cz + sy * cx * sz,
+				sy * cx * cz - cy * sx * sz,
+				cy * cx * sz - sy * sx * cz,
+				cy * cx * cz + sy * sx * sz
+			);
+		}
+		
+	}
+	
+	public static final class EulerYZX extends Quaternion {
+		
+		public EulerYZX(Vector3 angles) {
+			this(angles.getX(), angles.getY(), angles.getZ());
+		}
+		
+		public EulerYZX(double x, double y, double z) {
+			this(
+				(float)Math.sin(x / 2), (float)Math.cos(x / 2),
+				(float)Math.sin(y / 2), (float)Math.cos(y / 2),
+				(float)Math.sin(z / 2), (float)Math.cos(z / 2)
+			);
+		}
+		
+		private EulerYZX(float sx, float cx, float sy, float cy, float sz, float cz) {
+			super(
+				cy * cz * sx + sy * sz * cx,
+				sy * cz * cx + cy * sz * sx,
+				cy * sz * cx - sy * cz * sx,
+				cy * cz * cx - sy * sz * sx
+			);
+		}
+		
+	}
+	
+	public static final class EulerZXY extends Quaternion {
+		
+		public EulerZXY(Vector3 angles) {
+			this(angles.getX(), angles.getY(), angles.getZ());
+		}
+		
+		public EulerZXY(double x, double y, double z) {
+			this(
+				(float)Math.sin(x / 2), (float)Math.cos(x / 2),
+				(float)Math.sin(y / 2), (float)Math.cos(y / 2),
+				(float)Math.sin(z / 2), (float)Math.cos(z / 2)
+			);
+		}
+		
+		private EulerZXY(float sx, float cx, float sy, float cy, float sz, float cz) {
+			super(
+				cz * sx * cy - sz * cx * sy,
+				cz * cx * sy + sz * sx * cy,
+				sz * cx * cy + cz * sx * sy,
+				cz * cx * cy - sz * sx * sy
+			);
+		}
+		
+	}
+	
+	public static final class EulerZYX extends Quaternion {
+		
+		public EulerZYX(Vector3 angles) {
+			this(angles.getX(), angles.getY(), angles.getZ());
+		}
+		
+		public EulerZYX(double x, double y, double z) {
+			this(
+				(float)Math.sin(x / 2), (float)Math.cos(x / 2),
+				(float)Math.sin(y / 2), (float)Math.cos(y / 2),
+				(float)Math.sin(z / 2), (float)Math.cos(z / 2)
+			);
+		}
+		
+		private EulerZYX(float sx, float cx, float sy, float cy, float sz, float cz) {
+			super(
+				cz * cy * sx - sz * sy * cx,
+				cz * sy * cx + sz * cy * sx,
+				sz * cy * cx - cz * sy * sx,
+				cz * cy * cx + sz * sy * sx
+			);
+		}
+		
+	}
+	
 }
