@@ -65,9 +65,9 @@ public abstract class Shape implements Drawable {
 		
 		int verticesCount = vertexArray.getLength();
 		if (verticesCount < 128) {
-			setIndexBuffer(Utils.createByteBuffer(indices));
+			setIndexBuffer(Utils.createByteBuffer(Utils.convertIntArrayToByte(indices)));
 		} else if (verticesCount < 32768) {
-			setIndexBuffer(Utils.createShortBuffer(indices));
+			setIndexBuffer(Utils.createShortBuffer(Utils.convertIntArrayToShort(indices)));
 		} else {
 			throw new RuntimeException("Too many vertices, index size exceeded.");
 		}

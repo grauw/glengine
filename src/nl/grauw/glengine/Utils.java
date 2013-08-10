@@ -64,16 +64,6 @@ public final class Utils {
 	/**
 	 * Allocate and initialize a native byte buffer suitable for GL.
 	 */
-	public static ByteBuffer createByteBuffer(int[] content) {
-		byte[] byteContent = new byte[content.length];
-		for (int i = 0; i < content.length; i++)
-			byteContent[i] = (byte) content[i];
-		return createByteBuffer(byteContent);
-	}
-	
-	/**
-	 * Allocate and initialize a native byte buffer suitable for GL.
-	 */
 	public static ByteBuffer createByteBuffer(short[] content) {
 		ByteBuffer buffer = createByteBuffer(content.length * (Short.SIZE / Byte.SIZE));
 		buffer.asShortBuffer().put(content);
@@ -109,16 +99,6 @@ public final class Utils {
 		return buffer;
 	}
 	
-	/**
-	 * Allocate and initialize a native short buffer suitable for GL.
-	 */
-	public static ShortBuffer createShortBuffer(int[] content) {
-		short[] shortContent = new short[content.length];
-		for (int i = 0; i < content.length; i++)
-			shortContent[i] = (short) content[i];
-		return createShortBuffer(shortContent);
-	}
-
 	/**
 	 * Allocate a native int buffer suitable for GL.
 	 */
@@ -157,6 +137,26 @@ public final class Utils {
 		buffer.put(content);
 		buffer.position(0);
 		return buffer;
+	}
+	
+	/**
+	 * Returns a byte array with the integers downcast to bytes.
+	 */
+	public static byte[] convertIntArrayToByte(int[] content) {
+		byte[] byteContent = new byte[content.length];
+		for (int i = 0; i < content.length; i++)
+			byteContent[i] = (byte) content[i];
+		return byteContent;
+	}
+	
+	/**
+	 * Returns a short array with the integers downcast to bytes.
+	 */
+	public static short[] convertIntArrayToShort(int[] content) {
+		short[] shortContent = new short[content.length];
+		for (int i = 0; i < content.length; i++)
+			shortContent[i] = (short) content[i];
+		return shortContent;
 	}
 	
 }
