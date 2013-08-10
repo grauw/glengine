@@ -62,7 +62,7 @@ public class Quaternion {
 	
 	public Vector3 getAxis() {
 		float sinAngle = (float)Math.sqrt(1 - w * w);
-		if (Math.abs(sinAngle) < 0.0005)
+		if (Math.abs(sinAngle) < 0.0005f)
 			sinAngle = 1;
 		return new Vector3(x / sinAngle, y / sinAngle, z / sinAngle);
 	}
