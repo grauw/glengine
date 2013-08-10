@@ -303,19 +303,6 @@ public final class GLContext {
 		return boundElementBuffer;
 	}
 	
-	public void setVertexAttribPointer(String attributeName, AttributeInfo attributeInfo, int stride, Buffer buffer) {
-		setVertexAttribPointer(currentProgram.getAttribute(attributeName), attributeInfo, stride, buffer);
-	}
-	
-	public void setVertexAttribPointer(Attribute attribute, AttributeInfo attributeInfo, int stride, Buffer buffer) {
-		checkAttribute(attribute);
-		setVertexAttribPointer(attribute.getLocation(), attributeInfo, stride, buffer);
-	}
-	
-	public void setVertexAttribPointer(int attributeIndex, AttributeInfo attributeInfo, int stride, Buffer buffer) {
-		setVertexAttribPointer(attributeIndex, attributeInfo.getComponents(), attributeInfo.getType(), attributeInfo.isNormalized(), stride, buffer);
-	}
-	
 	public void setVertexAttribPointer(String attributeName, int size, AttributeType type, boolean normalized, int stride, Buffer buffer) {
 		setVertexAttribPointer(currentProgram.getAttribute(attributeName), size, type, normalized, stride, buffer);
 	}
@@ -329,19 +316,6 @@ public final class GLContext {
 		if (boundVertexBuffer != null)
 			throw new GLEngineException("Can’t set client memory pointer when vertex buffer object is bound.");
 		glVertexAttribPointer(index, size, attributeTypeLookup[type.ordinal()], normalized, stride, buffer);
-	}
-	
-	public void setVertexAttribPointer(String attributeName, AttributeInfo attributeInfo, int stride, int offset) {
-		setVertexAttribPointer(currentProgram.getAttribute(attributeName), attributeInfo, stride, offset);
-	}
-	
-	public void setVertexAttribPointer(Attribute attribute, AttributeInfo attributeInfo, int stride, int offset) {
-		checkAttribute(attribute);
-		setVertexAttribPointer(attribute.getLocation(), attributeInfo, stride, offset);
-	}
-	
-	public void setVertexAttribPointer(int attributeIndex, AttributeInfo attributeInfo, int stride, int offset) {
-		setVertexAttribPointer(attributeIndex, attributeInfo.getComponents(), attributeInfo.getType(), attributeInfo.isNormalized(), stride, offset);
 	}
 	
 	public void setVertexAttribPointer(String attributeName, int size, AttributeType type, boolean normalized, int stride, int offset) {

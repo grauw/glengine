@@ -10,6 +10,7 @@ import nl.grauw.glengine.gl.GLContext.PrimitiveType;
 import nl.grauw.glengine.gl.GLEngineException;
 import nl.grauw.glengine.model.Matrix4x4;
 import nl.grauw.glengine.model.Vertex;
+import nl.grauw.glengine.model.Vertex.AttributeInfo;
 import nl.grauw.glengine.model.Vertex.VertexAttribute;
 import nl.grauw.glengine.model.Vertex.VertexInfo;
 import nl.grauw.glengine.model.VertexArray;
@@ -184,9 +185,12 @@ public abstract class Shape implements Drawable {
 			
 			gl.enableVertexAttribArray(shaderAttribute);
 			
+			AttributeInfo attributeInfo = vertexAttribute.getInfo();
+			
 			ByteBuffer buffer = vertexArray.getBuffer();
 			buffer.position(vertexAttribute.getOffset());
-			gl.setVertexAttribPointer(shaderAttribute, vertexAttribute.getInfo(), getVertexInfo().getSize(), buffer);
+			gl.setVertexAttribPointer(shaderAttribute, attributeInfo.getComponents(), attributeInfo.getType(),
+				attributeInfo.isNormalized(), getVertexInfo().getSize(), buffer);
 		}
 		
 		public void finalize(GLContext gl) {
