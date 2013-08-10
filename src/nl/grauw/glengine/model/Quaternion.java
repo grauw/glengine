@@ -127,6 +127,39 @@ public class Quaternion {
 		return getClass().getSimpleName() + "[" + x + ", " + y + ", " + z + ", " + w + "]";
 	}
 	
+	public static final class Identity extends Quaternion {
+		
+		private Identity() {
+			super(0, 0, 0, 1);
+		}
+		
+		@Override
+		public Quaternion multiply(Quaternion other) {
+			return other;
+		}
+		
+		@Override
+		public Vector3 multiply(Vector3 vector) {
+			return vector;
+		}
+		
+		@Override
+		public Vector4 multiply(Vector4 vector) {
+			return vector;
+		}
+		
+		@Override
+		public Quaternion normalize() {
+			return this;
+		}
+		
+		@Override
+		public Quaternion conjugate() {
+			return this;
+		}
+		
+	}
+	
 	public static final class Axis extends Quaternion {
 		
 		public Axis(Vector3 vector, double angle) {
@@ -164,39 +197,6 @@ public class Quaternion {
 				cx * cy * sz + sx * sy * cz,
 				cx * cy * cz - sx * sy * sz
 			);
-		}
-		
-	}
-	
-	public static final class Identity extends Quaternion {
-		
-		private Identity() {
-			super(0, 0, 0, 1);
-		}
-		
-		@Override
-		public Quaternion multiply(Quaternion other) {
-			return other;
-		}
-		
-		@Override
-		public Vector3 multiply(Vector3 vector) {
-			return vector;
-		}
-		
-		@Override
-		public Vector4 multiply(Vector4 vector) {
-			return vector;
-		}
-		
-		@Override
-		public Quaternion normalize() {
-			return this;
-		}
-		
-		@Override
-		public Quaternion conjugate() {
-			return this;
 		}
 		
 	}
