@@ -3,8 +3,6 @@ package nl.grauw.glengine.gl;
 import static android.opengl.GLES20.*;
 
 import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
-import java.nio.ShortBuffer;
 
 public abstract class Buffer {
 	
@@ -43,18 +41,14 @@ public abstract class Buffer {
 	}
 	
 	public void setData(ByteBuffer data, BufferUsage usage) {
-		setData(data.remaining() * 1, data, usage);
+		setData(data.remaining(), data, usage);
 	}
 	
-	public void setData(ShortBuffer data, BufferUsage usage) {
-		setData(data.remaining() * 2, data, usage);
+	public void setData(int size, ByteBuffer data, BufferUsage usage) {
+		setData(size, data, usage);
 	}
 	
-	public void setData(FloatBuffer data, BufferUsage usage) {
-		setData(data.remaining() * 4, data, usage);
-	}
-	
-	public void setData(int size, java.nio.Buffer data, BufferUsage usage) {
+	protected void setData(int size, java.nio.Buffer data, BufferUsage usage) {
 		if (size < 0)
 			throw new GLEngineException("Size must be positive.");
 		if (!isBound())
@@ -65,7 +59,11 @@ public abstract class Buffer {
 		glBufferData(target, size, data, usage.id);
 	}
 	
-	public void setSubData(int offset, int size, java.nio.Buffer data) {
+	public void setSubData(int offset, int size, ByteBuffer data) {
+		setSubData(offset, size, data);
+	}
+	
+	protected void setSubData(int offset, int size, java.nio.Buffer data) {
 		if (offset + size > this.size)
 			throw new GLEngineException("Offset + size exceeds allocation.");
 		if (!isAllocated())

@@ -3,7 +3,6 @@ package nl.grauw.glengine.gl;
 import static android.opengl.GLES20.*;
 
 import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
 import nl.grauw.glengine.gl.GLContext.ElementType;
@@ -29,41 +28,36 @@ public final class ElementBuffer extends Buffer {
 		return context.getBoundElementBuffer() == this;
 	}
 	
-	@Override
-	public void setData(ByteBuffer data, BufferUsage usage) {
-		type = ElementType.UNSIGNED_BYTE;
-		super.setData(data, usage);
-	}
-	
-	@Override
 	public void setData(ShortBuffer data, BufferUsage usage) {
-		type = ElementType.UNSIGNED_SHORT;
-		super.setData(data, usage);
+		setData(data.remaining(), data, usage);
 	}
 	
 	@Override
-	public void setData(FloatBuffer data, BufferUsage usage) {
-		throw new GLEngineException("Unsupported buffer data type.");
-	}
-	
-	@Override
-	public void setData(int size, java.nio.Buffer data, BufferUsage usage) {
-		if (data instanceof ByteBuffer)
-			type = ElementType.UNSIGNED_BYTE;
-		else if (data instanceof ShortBuffer)
-			type = ElementType.UNSIGNED_SHORT;
-		else
-			throw new GLEngineException("Unsupported buffer data type.");
-		
+	public void setData(int size, ByteBuffer data, BufferUsage usage) {
+		type = ElementType.UNSIGNED_BYTE;
 		super.setData(size, data, usage);
 	}
 	
+	/** Note, size is specified in short units. */
+	public void setData(int size, ShortBuffer data, BufferUsage usage) {
+		type = ElementType.UNSIGNED_SHORT;
+		super.setData(size * 2, data, usage);
+	}
+	
 	@Override
-	public void setSubData(int offset, int size, java.nio.Buffer data) {
-		if (type == ElementType.UNSIGNED_BYTE && !(data instanceof ByteBuffer) || type == ElementType.UNSIGNED_SHORT && !(data instanceof ShortBuffer))
+	public void setSubData(int offset, int size, ByteBuffer data) {
+		if (type != ElementType.UNSIGNED_BYTE)
 			throw new GLEngineException("Incompatible buffer data type.");
 		
 		super.setSubData(offset, size, data);
+	}
+	
+	/** Note, offset and size are specified in short units. */
+	public void setSubData(int offset, int size, ShortBuffer data) {
+		if (type != ElementType.UNSIGNED_SHORT)
+			throw new GLEngineException("Incompatible buffer data type.");
+		
+		super.setSubData(offset * 2, size * 2, data);
 	}
 	
 }
