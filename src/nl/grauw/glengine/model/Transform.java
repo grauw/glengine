@@ -6,6 +6,7 @@ public class Transform {
 	private Vector3 scale = Vector3.ONE;
 	private Quaternion rotation = Quaternion.IDENTITY;
 	private Matrix4x4 matrix = Matrix4x4.IDENTITY;
+	private Matrix4x4 inverseMatrix;
 	private boolean dirty = false;
 	
 	public Transform() {
@@ -69,6 +70,20 @@ public class Transform {
 			this.matrix = Matrix4x4.TranslationRotationScale.create(translation, rotation, scale);
 		}
 		return matrix;
+	}
+	
+	public Matrix4x4 getInverseMatrix() {
+		if (dirty || inverseMatrix == null) {
+			Matrix4x4 matrix = Matrix4x4.IDENTITY;
+			if (scale != Vector3.ONE)
+				matrix = matrix.multiply(new Matrix4x4.Scale(scale.invert()));
+			if (rotation != Quaternion.IDENTITY)
+				matrix = matrix.multiply(new Matrix4x4.Rotation(rotation.conjugate()));
+			if (translation != Vector3.ZERO)
+				matrix = matrix.multiply(new Matrix4x4.Translation(translation.negate()));
+			this.inverseMatrix = matrix;
+		}
+		return inverseMatrix;
 	}
 	
 	@Override
