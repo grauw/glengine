@@ -2,6 +2,7 @@ package nl.grauw.glengine.scene;
 
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
+import java.nio.ShortBuffer;
 
 import nl.grauw.glengine.Utils;
 import nl.grauw.glengine.gl.GLContext;
