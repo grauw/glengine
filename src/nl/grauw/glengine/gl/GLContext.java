@@ -319,16 +319,16 @@ public final class GLContext {
 			attributeInfo.isNormalized(), stride, buffer);
 	}
 	
-	public void setVertexAttribPointer(String attributeName, int size, int stride, boolean normalized, Buffer buffer) {
-		setVertexAttribPointer(currentProgram.getAttribute(attributeName), size, stride, normalized, buffer);
+	public void setVertexAttribPointer(String attributeName, int size, boolean normalized, int stride, Buffer buffer) {
+		setVertexAttribPointer(currentProgram.getAttribute(attributeName), size, normalized, stride, buffer);
 	}
 	
-	public void setVertexAttribPointer(Attribute attribute, int size, int stride, boolean normalized, Buffer buffer) {
+	public void setVertexAttribPointer(Attribute attribute, int size, boolean normalized, int stride, Buffer buffer) {
 		checkAttribute(attribute);
-		setVertexAttribPointer(attribute.getLocation(), size, stride, normalized, buffer);
+		setVertexAttribPointer(attribute.getLocation(), size, normalized, stride, buffer);
 	}
 	
-	public void setVertexAttribPointer(int index, int size, int stride, boolean normalized, Buffer buffer) {
+	public void setVertexAttribPointer(int index, int size, boolean normalized, int stride, Buffer buffer) {
 		if (boundVertexBuffer != null)
 			throw new GLEngineException("Can’t set client memory pointer when vertex buffer object is bound.");
 		int type = buffer instanceof FloatBuffer ? GL_FLOAT : buffer instanceof ByteBuffer ? GL_BYTE : buffer instanceof ShortBuffer ? GL_SHORT : -1;
