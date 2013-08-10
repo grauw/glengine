@@ -78,6 +78,7 @@ public class Quaternion {
 		);
 	}
 	
+	/** Note that you probably want to pass a unit quaternion. */
 	public Vector3 multiply(Vector3 vector) {
 		if (vector == Vector3.ZERO)
 			return vector;
@@ -94,6 +95,7 @@ public class Quaternion {
 		);
 	}
 	
+	/** Note that you probably want to pass a unit quaternion. */
 	public Vector4 multiply(Vector4 vector) {
 		if (vector == Vector4.ZERO || vector == Vector4.ORIGIN)
 			return vector;
