@@ -45,7 +45,7 @@ public abstract class Buffer {
 	}
 	
 	public void setData(int size, ByteBuffer data, BufferUsage usage) {
-		setData(size, data, usage);
+		setData(size, (java.nio.Buffer)data, usage);
 	}
 	
 	protected void setData(int size, java.nio.Buffer data, BufferUsage usage) {
@@ -60,7 +60,7 @@ public abstract class Buffer {
 	}
 	
 	public void setSubData(int offset, int size, ByteBuffer data) {
-		setSubData(offset, size, data);
+		setSubData(offset, size, (java.nio.Buffer)data);
 	}
 	
 	protected void setSubData(int offset, int size, java.nio.Buffer data) {
